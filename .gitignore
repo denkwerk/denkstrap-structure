@@ -1,0 +1,33 @@
+# Logs
+logs
+*.log
+
+# Temporary files
+.DS_Store
+
+# Node modules
+node_modules
+
+# Sass cache
+.sass-cache
+
+# Grunt intermediate storage
+.grunt
+
+# compiled css
+src/css/
+
+# Generated distribution files
+dist
+
+# SCSS Lint test report
+test/scss-lint-report.xml
+
+# PhpStorm/Webstorm project files
+.idea
+
+# netbeans
+nbproject/private/private.properties
+nbproject/project.properties
+nbproject/project.xml
+nbproject/private/private.xml

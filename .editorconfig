@@ -1,0 +1,25 @@
+# EditorConfig helps developers maintain consistent coding styles
+# between different IDEs like indents and trailing spaces.
+# http://editorconfig.org
+
+# IDE plugins available at http://editorconfig.org/#download
+
+# Root EditorConfig file
+root = true
+
+# denkwerk coding guidelines for all files
+[*]
+
+# 4 space indentation
+indent_style = space
+indent_size = 4
+
+# Unix-style newlines with a newline ending every file
+end_of_line = lf
+insert_final_newline = true
+
+# Set default charset
+charset = utf-8
+
+# Remove any whitespace characters preceding newline characters
+trim_trailing_whitespace = true

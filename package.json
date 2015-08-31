@@ -1,0 +1,24 @@
+{
+  "name": "denkstrap-structure",
+  "description": "denkwerk default structure for new projects",
+  "version": "0.1.0",
+  "author": "Kai Wollhaupt <kai.wollhaupt@denkwerk.com",
+  "homepage": "http://www.denkwerk.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denkwerk/denkstrap-structure.git"
+  },
+  "contributors": [
+    "Kai Wollhaupt <kai.wollhaupt@denkwerk.com>"
+  ],
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-sass": "*",
+    "grunt-scss-lint": "^0.3.4",
+    "load-grunt-config": "^0.17.2",
+    "time-grunt": "*"
+  }
+}

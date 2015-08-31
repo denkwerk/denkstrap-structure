@@ -1,0 +1,5 @@
+test:
+    description: 'Testing task for grunt-sass'
+    tasks:
+        - 'scsslint:scss'
+        - 'sass:dev'
