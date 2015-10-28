@@ -14,6 +14,9 @@
   "engines": {
     "node": ">= 0.10.0"
   },
+  "scripts": {
+    "jshint": "jshint (src|grunt)/*.js Gruntfile.js"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.3",
