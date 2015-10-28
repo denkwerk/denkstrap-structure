@@ -3,3 +3,19 @@ test:
     tasks:
         - 'scsslint:scss'
         - 'sass:dev'
+
+lint:
+    description: 'Linting task for development'
+    tasks:
+        - 'jshint:grunt'
+        - 'jscs:grunt'
+        - 'scsslint:scss'
+        - 'jshint:frontend'
+        - 'jscs:frontend'
+
+lint_ci:
+    description: 'Linting task for the CI Server'
+    tasks:
+        - 'scsslint:scss'
+        - 'jshint:ci'
+        - 'jscs:ci'
