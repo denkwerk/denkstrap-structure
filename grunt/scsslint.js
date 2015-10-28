@@ -10,7 +10,7 @@ module.exports = {
     ],
 
     options: {
-        config: '<%= testPath %>.scss-lint.yml',
+        config: '.scss-lint.yml',
         reporterOutput: '<%= testResultPath %>scss-lint-report.xml',
         compact: true,
         maxBuffer: NaN
