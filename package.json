@@ -16,6 +16,7 @@
   },
   "scripts": {
     "jshint": "jshint src/ grunt/ Gruntfile.js",
+    "jscs": "jscs src/ grunt/ Gruntfile.js"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
