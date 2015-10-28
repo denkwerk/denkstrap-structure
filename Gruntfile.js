@@ -20,7 +20,8 @@ module.exports = function(grunt) {
             // Paths to src, dist and test folders
             srcPath: 'src/',
             distPath: 'dist/',
-            testPath: 'test/'
+            testPath: 'test/',
+            gruntPath: 'grunt/'
         },
 
         // use different function to merge config files

@@ -1,0 +1,2 @@
+src/**/app/vendor/**/*
+node_modules/

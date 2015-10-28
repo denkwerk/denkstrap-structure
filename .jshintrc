@@ -1,0 +1,26 @@
+{
+    "bitwise"       : true,
+    "browser"       : true,
+    "camelcase"     : true,
+    "curly"         : true,
+    "devel"         : true,
+    "eqeqeq"        : true,
+    "immed"         : true,
+    "jquery"        : true,
+    "maxcomplexity" : 15,
+    "maxdepth"      : 5,
+    "maxlen"        : 250,
+    "maxparams"     : 10,
+    "maxstatements" : 55,
+    "newcap"        : true,
+    "undef"         : true,
+    "unused"        : false,
+    "noarg"         : true,
+    "nonew"         : true,
+    "trailing"      : true,
+    "white"         : false,
+    "laxcomma"      : true,
+    "predef"        : [
+        "$", "jQuery", "_", "window", "document", "Modernizr", "module", "require", "process"
+    ]
+}

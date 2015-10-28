@@ -16,8 +16,10 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3",
     "grunt-sass": "*",
     "grunt-scss-lint": "^0.3.4",
+    "jshint": "^2.8.0",
     "load-grunt-config": "^0.17.2",
     "time-grunt": "*"
   }
