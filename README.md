@@ -26,10 +26,17 @@ section. If not, go on reading the Initializing Node.js section.
 
 Be sure to have nvm installed! Type ```nvm --version``` in your console to check. If it
 is not installed follow [the instructions](https://github.com/creationix/nvm). When you are
-using Windows try [this](https://github.com/hakobera/nvmw) or [this](https://github.com/coreybutler/nvm-windows).
+using Windows try [nvmw](https://github.com/hakobera/nvmw) or [nvm-windows](https://github.com/coreybutler/nvm-windows).
 
 Are you sure nvm is installed? Fine! Type ```nvm install``` to your terminal. Check the node.js
 version as described above.
+
+#### Windows?
+
+The description above does yet not work 100% on Windows machines. When you just type ```nvm install```
+there will not be happening as much as on POSIX systems. You have to type ```nvm install 4.2``` or
+```nvm use 4.2``` if you have node.js version 4.2 already installed. That will work fine. When
+[#63](https://github.com/hakobera/nvmw/pull/63) gets merged the description above will work on Windows machines.
 
 ### Installation
 
