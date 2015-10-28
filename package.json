@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "author": "Kai Wollhaupt <kai.wollhaupt@denkwerk.com",
   "homepage": "http://www.denkwerk.com",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/denkwerk/denkstrap-structure.git"
