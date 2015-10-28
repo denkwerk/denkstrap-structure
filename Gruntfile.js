@@ -21,7 +21,10 @@ module.exports = function( grunt ) {
             srcPath: 'src/',
             distPath: 'dist/',
             testResultPath: 'artifacts/test/',
-            gruntPath: 'grunt/'
+            gruntPath: 'grunt/',
+
+            // Livereload port
+            livereloadPort: 1337
         },
 
         // Use different function to merge config files
