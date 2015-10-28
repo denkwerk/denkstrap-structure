@@ -1,0 +1,20 @@
+{
+    "preset": "jquery",
+    "validateQuoteMarks": "'",
+    "validateLineBreaks": "LF",
+    "jsDoc": {
+        "checkParamNames": true,
+        "checkRedundantParams": true,
+        "requireParamTypes": true
+    },
+    "validateIndentation": {
+        "value": 4,
+        "includeEmptyLines": false
+    },
+    "excludeFiles": [
+        "node_modules/**",
+        "src/htdocs/js/vendor/**",
+        "src/htdocs/js/build/**"
+    ],
+    "fileExtensions": ".js"
+}
