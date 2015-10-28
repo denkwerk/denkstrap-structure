@@ -15,7 +15,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "jshint": "jshint (src|grunt)/*.js Gruntfile.js"
+    "jshint": "jshint src/ grunt/ Gruntfile.js",
   },
   "devDependencies": {
     "grunt": "^0.4.5",
