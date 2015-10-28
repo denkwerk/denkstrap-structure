@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>W3C Error Report for {{filename}}</title>
+</head>
+<body>
+    <table border='0' align='center' cellpadding='5' cellspacing='0' style='border-collapse:collapse;background-color:#fff;color:black;font-family:arial,helvetica,sans-serif; width:100%'>
+            <tbody>
+                <tr>
+                    <td colspan='6' style='padding:5px;background-color:#34C46D;color:#fff;font-size:200%;border:2px solid #34C46D;text-align:center;'>W3C Validation Report
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='6' style='padding:5px;background-color:#34C46D;color:#fff;font-size:125%;border:2px solid #34C46D;text-align:center;'>{{filename}}  | Error Count : {{error.length}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style='text-align:center;font-size:125%;border:2px solid #34C46D;white-space:nowrap;'>Error #
+                    </td>
+                    <td style='text-align:center;font-size:125%;border:2px solid #34C46D;white-space:nowrap;'>Type
+                    </td>
+                    <td style='text-align:center;font-size:125%;border:2px solid #34C46D;white-space:nowrap;'>Line #
+                    </td>
+                    <td style='text-align:center;font-size:125%;border:2px solid #34C46D;white-space:nowrap;' >Message
+                    </td>
+                    <td style='text-align:center;font-size:125%;border:2px solid #34C46D;white-space:nowrap;' >Source Code Reference
+                    </td>
+                    <td style='text-align:center;font-size:125%;border:2px solid #34C46D;white-space:nowrap;' >Explanation
+                    </td>
+                </tr>
+            {{#each error}}
+                <tr>
+                    <td style='text-align:center;font-size:100%;border:2px solid #34C46D;'>{{@index}} </td>
+                    <td style='text-align:center;font-size:100%;border:2px solid #34C46D;'>{{type}} </td>
+                    <td style='text-align:center;font-size:100%;border:2px solid #34C46D;'>{{lastLine}} </td>
+                    <td style='text-align:center;font-size:100%;border:2px solid #34C46D;'>{{message}} </td>
+                    <td style='text-align:center;font-size:100%;border:2px solid #34C46D;'><code>{{errSrcFirstPart}}{{{errSrcToHighlight}}}{{errSrcSecondPart}}</code> </td>
+                    <td style='text-align:center;font-size:100%;border:2px solid #34C46D;'>{{{explanation}}} </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</body>
+</html>

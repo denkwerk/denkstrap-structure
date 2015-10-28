@@ -1,0 +1,27 @@
+{
+    "preset": "jquery",
+    "validateQuoteMarks": "'",
+    "validateLineBreaks": null,
+    "maximumLineLength": 120,
+    "jsDoc": {
+        "checkParamNames": true,
+        "checkRedundantParams": true,
+        "requireParamTypes": true
+    },
+    "requireCapitalizedComments": false,
+    "validateIndentation": {
+        "value": 4,
+        "includeEmptyLines": false
+    },
+    "excludeFiles": [
+        "Gruntfile.js",
+        "grunt/**",
+        "dist(**",
+        "artifacts/**",
+        "node_modules/**",
+        "src/components/app/vendor/**",
+        "src/components/app/main-test.js",
+        "src/components/**/*.spec.js"
+    ],
+    "fileExtensions": ".js"
+}
