@@ -20,7 +20,6 @@ module.exports = function(grunt) {
             // Paths to src, dist and test folders
             srcPath: 'src/',
             distPath: 'dist/',
-            testPath: 'test/',
             testResultPath: 'artifacts/test/',
             gruntPath: 'grunt/'
         },
