@@ -23,9 +23,6 @@ src/css/
 # Generated distribution files
 dist
 
-# SCSS Lint test report
-test/scss-lint-report.xml
-
 # PhpStorm/Webstorm project files
 .idea
 
