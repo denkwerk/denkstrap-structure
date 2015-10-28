@@ -11,7 +11,7 @@ module.exports = {
 
     options: {
         config: '<%= testPath %>.scss-lint.yml',
-        reporterOutput: '<%= testPath %>scss-lint-report.xml',
+        reporterOutput: '<%= testResultPath %>scss-lint-report.xml',
         compact: true,
         maxBuffer: NaN
     }

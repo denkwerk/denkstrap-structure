@@ -14,7 +14,7 @@ module.exports = {
         options: {
             force: true,
             reporter: 'jslint',
-            reporterOutput: 'test/jshint-lint-report.xml'
+            reporterOutput: '<%= testResultPath %>jshint-lint-report.xml'
         },
         files: {
             src: [
