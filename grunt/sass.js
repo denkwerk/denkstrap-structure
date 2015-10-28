@@ -8,12 +8,12 @@ module.exports = {
         options: {
             sourceMap: true
         },
-        files: {'<%= srcPath %>/css/main.css': '<%= srcPath %>/scss/main.scss'}
+        files: { '<%= srcPath %>/css/main.css': '<%= srcPath %>/scss/main.scss' }
     },
     dist: {
         options: {
             outputStyle: 'compressed'
         },
-        files: {'<%= dist %>/css/main.css': '<%= distPath %>/scss/main.scss'}
+        files: { '<%= dist %>/css/main.css': '<%= distPath %>/scss/main.scss' }
     }
 };

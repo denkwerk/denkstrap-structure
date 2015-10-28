@@ -4,6 +4,7 @@
  */
 
 module.exports = {
+
     // Lint scss folder
     scss: [
         '<%= srcPath %>/scss'
