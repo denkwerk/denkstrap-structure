@@ -3,6 +3,7 @@
     "validateQuoteMarks": "'",
     "validateLineBreaks": "LF",
     "requireCamelCaseOrUpperCaseIdentifiers": true,
+    "requireParenthesesAroundIIFE": true,
     "jsDoc": {
         "checkParamNames": true,
         "checkRedundantParams": true,

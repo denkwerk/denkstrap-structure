@@ -4,7 +4,6 @@
     "curly"         : true,
     "devel"         : true,
     "eqeqeq"        : true,
-    "immed"         : true,
     "jquery"        : true,
     "maxcomplexity" : 15,
     "maxdepth"      : 5,
