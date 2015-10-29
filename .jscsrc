@@ -2,6 +2,7 @@
     "preset": "jquery",
     "validateQuoteMarks": "'",
     "validateLineBreaks": "LF",
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
     "jsDoc": {
         "checkParamNames": true,
         "checkRedundantParams": true,
