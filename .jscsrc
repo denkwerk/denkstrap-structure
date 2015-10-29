@@ -18,5 +18,6 @@
         "src/htdocs/js/vendor/**",
         "src/htdocs/js/build/**"
     ],
+    "requireCapitalizedConstructors": true,
     "fileExtensions": ".js"
 }
