@@ -1,0 +1,60 @@
+// Responsive media query breakpoint mixin
+
+@mixin breakpoint(
+    $size: default, // Breakpoint size (options: pre defined $map name, size value)
+    $inherit: true, // Inherit styles to next breakpoints (options: true, false, breakpoint name)
+    $selector: min-width, // Media query selector (options: min-width, max-width)
+    $map: $breakpoints // Sass map with breakpoints (default: $breakpoints)
+) {
+
+    // Initialize media query string
+    $query: '';
+
+    // If pre defined breakpoints name get size value from $map
+    @if map-has-key($map, $size) {
+
+        // If default breakpoint, media query is not needed
+        @if $size != default {
+            $query: '(#{$selector}: #{map-get($map, $size)})';
+        }
+
+        // If no breakpoint inherit wanted, set max width with next breakpoint
+        @if $inherit != true {
+
+            // If inherit is a breakpoint name, use breakpoint name for inherit
+            @if map-has-key($map, $inherit) {
+                $inherit-breakpoint: $inherit;
+            } @else {
+                $inherit-breakpoint: $size;
+            }
+
+            $next-breakpoint: map-get-next($map, $inherit-breakpoint);
+
+            // If next breakpoint exists
+            @if $next-breakpoint {
+
+                // Only add "and" if a query part is defined
+                // (e.g. if not default breakpoint)
+                @if $query != '' {
+                    $query: $query + 'and ';
+                }
+
+                $query: $query + '(max-width: #{$next-breakpoint - 1})';
+            }
+        }
+    } @else {
+        // Otherwise use size value for indivdual breakpoints
+        $query: '(#{$selector}: #{$size})';
+    }
+
+    // If default breakpoint, media query is not needed
+    @if $query == '' or ($size == default and $inherit == true) {
+        @content;
+    } @else {
+
+        // Otherwise generate media query
+        @media #{$query} {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,8 @@
+// Grid column width calculation function
+
+@function grid-width(
+    $number,
+    $total: map-get($grid-cols, default)
+) {
+    @return percentage(($number / $total));
+}

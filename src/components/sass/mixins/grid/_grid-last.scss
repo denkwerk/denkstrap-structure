@@ -1,0 +1,30 @@
+// Last grid column clearfix mixin
+
+@mixin grid-last(
+    $last,
+    $col-class
+) {
+
+    $last-length: length($last);
+    $last-i: 0;
+
+    @each $last-breakpoint, $last-number in $last {
+        // Index counter
+        $last-i: $last-i + 1;
+
+        // Inherit breakpoint only on last breakpoint
+        $last-inherit: false;
+        @if $last-i == $last-length {
+            $last-inherit: true;
+        }
+
+        @include breakpoint($last-breakpoint, $last-inherit) {
+            .#{$col-class} {
+                // Clearfix after each column row
+                &:nth-child(#{map-get-breakpoint($last, $last-breakpoint) + 1}) {
+                    clear: left;
+                }
+            }
+        }
+    }
+}

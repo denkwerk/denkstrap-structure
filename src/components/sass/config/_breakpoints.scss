@@ -1,0 +1,15 @@
+// Responsive breakpoints
+// mobile first
+// min-width media queries
+// mixin to use: @include breakpoint(key)
+
+$breakpoints: (
+    // key: breakpoint name
+    // value: breakpoint size
+    default: 0, // mobile portrait
+    xsmall: 370px, // large mobile portrait
+    small: 420px, // mobile landscape
+    medium: 750px, // tablet portrait
+    large: 980px, // tablet landscape / desktop
+    xlarge: 1100px // large desktop
+);

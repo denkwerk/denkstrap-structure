@@ -1,0 +1,77 @@
+// Grid column padding mixin
+
+@mixin grid-padding(
+    $width,
+    $padding,
+    $gutter,
+    $indent,
+    $indent-map,
+    $last,
+    $grid-class,
+    $col-class,
+    $gutter-reset
+) {
+
+    // Column padding and grid indent reset
+    $padding-length: length($padding);
+    $padding-i: 0;
+
+    @each $padding-breakpoint, $padding-value in $padding {
+
+        // Index counter
+        $padding-i: $padding-i + 1;
+
+        // Column padding
+        $padding-map: map-get($padding, $padding-breakpoint);
+        $padding-left: map-get($padding-map, left);
+        $padding-right: map-get($padding-map, right);
+        $padding-first-left: map-get($padding-map, first-left);
+        $padding-last-right: map-get($padding-map, last-right);
+
+        // Grid
+        @include breakpoint($padding-breakpoint) {
+            .#{$grid-class} {
+                @if $gutter and $gutter-reset {
+                    margin-right: -#{$padding-right};
+                }
+            }
+
+            // Grid column padding
+            .#{$col-class} {
+                @if $padding-left != 0 {
+                    padding-left: $padding-left;
+                }
+
+                @if $padding-right != 0 {
+                    padding-right: $padding-right;
+                }
+            }
+        }
+
+        // Inherit breakpoint only on last breakpoint
+        $padding-inherit: false;
+        @if ($padding-i == $padding-length) {
+            $padding-inherit: true;
+        }
+
+        @include breakpoint($padding-breakpoint, $padding-inherit) {
+            $last-index: map-get-breakpoint($last, $padding-breakpoint, last);
+
+            @if $padding-first-left != 0 {
+                .#{$col-class} {
+                    &:nth-child(#{$last-index}n + 1) {
+                        padding-left: $padding-first-left;
+                    }
+                }
+            }
+
+            @if $padding-last-right != 0 {
+                .#{$col-class} {
+                    &:nth-child(#{$last-index}n) {
+                        padding-right: $padding-last-right;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+// Grid padding function
+// calculates padding based on gutter and indent configuration
+// returns Sass map for breakpoints
+
+@function grid-padding(
+    $width,
+    $gutter,
+    $gutter-map,
+    $indent,
+    $indent-map,
+    $cols,
+    $debug: false
+) {
+    // Define padding map
+    $padding: ();
+
+    // Padding calculation for breakpoints
+    @each $gutter-breakpoint, $gutter-size in $gutter-map {
+        $padding-left: 0;
+        $padding-right: 0;
+        $padding-first-left: 0;
+        $padding-last-right: 0;
+
+        // Reset gutter size if no gutter
+        @if $gutter == false or map-get($width, $gutter-breakpoint) == $cols {
+            $gutter-size: 0;
+        }
+
+        // Right padding of gutter
+        $padding-right: $gutter-size;
+
+        @if type-of($indent-map) == map {
+            @if map-has-key($indent-map, $gutter-breakpoint) {
+                $indent-size: map-get($indent-map, $gutter-breakpoint);
+            } @else {
+                $indent-size: map-get($indent-map, default);
+            }
+        } @else {
+            $indent-size: 0;
+        }
+
+        // Calculate gutter with indent
+        @each $indent-side in $indent {
+            @if $indent-side == left {
+                $padding-left: $indent-size;
+            } @else if $indent-side == right {
+                $padding-right: $padding-right + $indent-size;
+            } @else if $indent-side == first-left {
+                $padding-first-left: $indent-size;
+            } @else if $indent-side == last-right {
+                $padding-last-right: $gutter-size + $indent-size;
+            }
+        }
+
+        // Add breakpoint map to $padding map
+        $padding: map-merge(
+                $padding,
+                ($gutter-breakpoint: (
+                    left: $padding-left,
+                    right: $padding-right,
+                    first-left: $padding-first-left,
+                    last-right: $padding-last-right
+                ))
+        );
+    }
+
+    // Debug padding map
+    @if $debug {
+        $debug: debug-map($padding, 'padding map');
+    }
+
+    // Return padding map
+    @return $padding;
+}

@@ -1,0 +1,15 @@
+// Grid gutter mixin
+
+@mixin grid-gutter(
+    $breakpoint,
+    $gutter: $grid-gutter
+) {
+
+    // Returns gutter padding of breakpoint with box sizing
+    @if type-of($gutter) == map {
+        @if map-has-key($gutter, $breakpoint) {
+            padding-right: map-get($gutter, $breakpoint);
+            box-sizing: border-box;
+        }
+    }
+}

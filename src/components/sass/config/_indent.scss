@@ -1,0 +1,25 @@
+// Indent configuration
+
+// Inner indent
+// Indent to separate content from surrounding container
+$indent-inner: (
+    // key: breakpoint name
+    // value: content indent size
+    default: 20px,
+    xsmall: 40px,
+    small: 30px,
+    medium: 30px,
+    large: 30px
+);
+
+// Outer indent
+// indent to separate site from window
+$indent-outer: (
+    // key: breakpoint name
+    // value: site indent size
+    default: 0,
+    xsmall: 0,
+    small: 0,
+    medium: 50px,
+    large: 68px
+);

@@ -1,0 +1,16 @@
+// Grid configuration
+
+// Grid columns
+// based on site breakpoints
+$grid-cols: (
+    default: 12
+);
+
+// Grid gutters
+// based on site breakpoints
+$grid-gutter: (
+    default: 0,
+    small: 20px,
+    medium: 20px,
+    large: 30px
+);

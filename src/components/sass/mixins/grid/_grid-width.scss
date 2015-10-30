@@ -1,0 +1,18 @@
+// Grid width mixin
+
+@mixin grid-width(
+    $width,
+    $cols,
+    $col-class
+) {
+    // Grid width breakpoints
+    @each $width-breakpoint, $width-number in $width {
+        @include breakpoint($width-breakpoint) {
+
+            // Column CSS styles
+            .#{$col-class} {
+                width: grid-width($width-number, $cols);
+            }
+        }
+    }
+}

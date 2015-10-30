@@ -1,0 +1,74 @@
+// Grid mixin
+
+@mixin grid(
+    $width: false,
+    $gutter: false,
+    $gutter-map: $grid-gutter,
+    $gutter-reset: true,
+    $indent: false,
+    $indent-map: $indent-inner,
+    $grid-class: grid,
+    $col-class: grid__col,
+    $cols: map-get($grid-cols, default),
+    $float: left,
+    $clear: left,
+    $center: false
+) {
+
+    // If width is not a list map,
+    // create one with default breakpoint
+    @if type-of($width) != map {
+        $width: (
+            default: $width
+        );
+    }
+
+    // Padding map for breakpoints
+    $padding: grid-padding($width, $gutter, $gutter-map, $indent, $indent-map, $cols);
+
+    // Last column map for breakpoints
+    $last: grid-last($width, $cols);
+
+    // Generate column width styles
+    @include grid-width(
+        $width,
+        $cols,
+        $col-class
+    );
+
+    // Generate grid padding styles
+    @include grid-padding(
+        $width,
+        $padding,
+        $gutter,
+        $indent,
+        $indent-map,
+        $last,
+        $grid-class,
+        $col-class,
+        $gutter-reset
+    );
+
+    // If clear of last column is needed
+    @if $clear == none {
+        $clear: false;
+    }
+
+    @if $clear {
+
+        // Generate last column styles
+        @include grid-last(
+            $last,
+            $col-class
+        );
+    }
+
+    // Grid style (float, center)
+    @include grid-style(
+        $width,
+        $grid-class,
+        $col-class,
+        $float,
+        $center
+    )
+}

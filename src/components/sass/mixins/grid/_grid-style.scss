@@ -1,0 +1,47 @@
+// Grid style mixin
+// float grid, center grid, reset negative gutter if only one column
+
+@mixin grid-style(
+    $width,
+    $grid-class,
+    $col-class,
+    $float,
+    $center
+) {
+
+    // Set float to false if center grid or float is none
+    @if $center or $float == none {
+        $float: false;
+    }
+
+    // Reset column float if float is used
+    @if $float {
+        .#{$grid-class} {
+            @include clearfix();
+        }
+    }
+
+    // Grid breakpoints
+    @each $width-breakpoint, $width-number in $width {
+        @include breakpoint($width-breakpoint) {
+
+            // Column styles
+            .#{$col-class} {
+
+                // Column width includes gutter padding
+                box-sizing: border-box;
+
+                // Float is needed only if more than one column is used
+                @if $float {
+                    float: $float;
+                }
+
+                // If center remove float and center column
+                // only works for single column
+                @if $center {
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+// Last grid column function
+// calculates last column of grid row based on column width and total columns
+// returns Sass map for breakpoints
+
+@function grid-last(
+    $width,
+    $cols,
+    $debug: false
+) {
+    // Define last column
+    $last: ();
+
+    // Last column calculation for breakpoints
+    @each $width-breakpoint, $width-number in $width {
+
+        // Add breakpoint map to last column map
+        $last: map-merge(
+                $last,
+                ($width-breakpoint: ceil($cols / $width-number)
+                ));
+    }
+
+    // Debug last column map
+    @if $debug {
+        $debug: debug-map($last, 'padding map');
+    }
+
+    // Return last column map
+    @return $last;
+}
