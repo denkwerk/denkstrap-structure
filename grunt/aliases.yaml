@@ -1,6 +1,7 @@
 test:
     description: 'Testing task for grunt-sass'
     tasks:
+        - 'sass_globbing'
         - 'scsslint:scss'
         - 'sass:dev'
 

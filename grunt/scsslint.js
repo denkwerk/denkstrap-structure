@@ -7,7 +7,8 @@ module.exports = {
 
     // Lint scss folder
     scss: [
-        '<%= srcPath %>/scss'
+        '<%= srcPath %>components/**/*.scss',
+        '!<%= srcPath %>components/sass/vendor/**/*.scss'
     ],
 
     options: {

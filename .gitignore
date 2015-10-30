@@ -20,6 +20,9 @@ artifacts
 # compiled css
 src/css/
 
+# sass-globbing
+src/components/sass/import
+
 # Generated distribution files
 dist
 
