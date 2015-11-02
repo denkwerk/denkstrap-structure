@@ -23,6 +23,10 @@ src/css/
 # sass-globbing
 src/components/sass/import
 
+# lodash build files
+src/components/app/vendor/lodash.build.js
+src/components/app/vendor/lodash.build.min.js
+
 # Generated distribution files
 dist
 
