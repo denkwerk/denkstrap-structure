@@ -4,13 +4,13 @@
  */
 
 module.exports = {
-    dev: {
+    development: {
         options: {
             sourceMap: true
         },
         files: { '<%= srcPath %>css/main.css': '<%= srcPath %>components/sass/main.scss' }
     },
-    dist: {
+    production: {
         options: {
             outputStyle: 'compressed'
         },

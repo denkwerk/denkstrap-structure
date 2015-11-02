@@ -1,9 +1,20 @@
-test:
-    description: 'Testing task for grunt-sass'
+test-dev:
+    description: 'Dev testing task for grunt-sass and js builds'
     tasks:
         - 'sass_globbing'
         - 'scsslint:scss'
-        - 'sass:dev'
+        - 'sass:development'
+        - 'lodashAutobuild'
+        - 'requirejs:development'
+
+test-prod:
+    description: 'Prod testing task for grunt-sass and js builds'
+    tasks:
+        - 'sass_globbing'
+        - 'scsslint:scss'
+        - 'sass:production'
+        - 'lodashAutobuild'
+        - 'requirejs:production'
 
 lint:
     description: 'Linting task for development'
@@ -20,3 +31,4 @@ lint_ci:
         - 'scsslint:scss'
         - 'jshint:ci'
         - 'jscs:ci'
+

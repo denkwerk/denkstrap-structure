@@ -23,6 +23,9 @@ module.exports = function( grunt ) {
             testResultPath: 'artifacts/test/',
             gruntPath: 'grunt/',
 
+            // Package
+            pkg: grunt.file.readJSON('package.json'),
+
             // Livereload port
             livereloadPort: 1337
         },
@@ -36,7 +39,7 @@ module.exports = function( grunt ) {
 
             pattern: 'grunt-*',
             config: require( './package.json' ),
-            scope: 'devDependencies'
+            scope: 'dependencies'
         },
 
         // Can post process config object before it gets passed to grunt

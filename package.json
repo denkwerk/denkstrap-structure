@@ -19,17 +19,21 @@
     "jshint": "jshint src/ grunt/ Gruntfile.js",
     "jscs": "jscs src/ grunt/ Gruntfile.js"
   },
-  "devDependencies": {
+  "dependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jscs": "^2.2.0",
+    "grunt-lodash": "^0.5.0",
+    "grunt-lodash-autobuild": "^0.3.0",
     "grunt-sass": "*",
     "grunt-sass-globbing": "^1.4.0",
     "grunt-scss-lint": "^0.3.4",
     "jscs": "^2.4.0",
     "jshint": "^2.8.0",
     "load-grunt-config": "^0.17.2",
+    "lodash-cli": "^3.10.1",
     "time-grunt": "*"
   }
 }
