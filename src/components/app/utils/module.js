@@ -129,7 +129,8 @@
                         : function() {};
                 } );
 
-                if ( args[0] && args[0].jquery ) {
+                if ( ( args[0] && args[0].jquery ) ||
+                     ( args[0] && $.zepto && $.zepto.isZ( args[0] ) ) ) {
                     element = args[ 0 ];
                 }
 
