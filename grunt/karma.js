@@ -10,7 +10,7 @@ module.exports = function( grunt, options ) {
             singleRun: true,
             reporters: [ 'jenkins' ],
             jenkinsReporter: {
-                outputFile: '../<%= artifacts %>/reports/unit/test-results.xml',
+                outputFile: '../<%= testResultPath %>karma-tests.xml',
                 suite: 'deka-if6-modules'
             }
         }
