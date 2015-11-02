@@ -273,7 +273,10 @@
                             _.each( moduleObject.extensions, function( extensionName, index ) {
                                 extensionIndexInArg = _.indexOf( moduleNames, extensionName );
 
-                                if ( _.contains( args[ extensionIndexInArg ].extend, moduleName ) ) {
+                                if ( _.contains(
+                                        args[ extensionIndexInArg ].extend,
+                                        moduleName
+                                    ) ) {
                                     extensions.push( args[ extensionIndexInArg ] );
                                 }
                             } );
