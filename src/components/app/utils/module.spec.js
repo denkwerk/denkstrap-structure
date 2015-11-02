@@ -18,11 +18,11 @@
             it( 'should extend from an object literal', function( done ) {
 
                 require( [ 'utils/module' ], function( Module ) {
-                    var Class = Module.extend( {
+                    var FakeClass = Module.extend( {
                             test: 'test',
                             testFunction: function() {}
                         } ),
-                        instance = new Class();
+                        instance = new FakeClass();
 
                     expect( instance ).to.have.property( 'test' );
                     expect( instance.testFunction ).to.be.a( 'function' );
@@ -39,8 +39,8 @@
                     mock = sinon.mock( fakeModule );
 
                 require( [ 'utils/module' ], function( Module ) {
-                    var Class = Module.extend( fakeModule ),
-                        instance = new Class();
+                    var FakeClass = Module.extend( fakeModule ),
+                        instance = new FakeClass();
 
                     mock.expects( 'ready' ).once();
                     mock.expects( 'events' ).once();
@@ -56,8 +56,8 @@
                     mock = sinon.mock( fakeModule );
 
                 require( [ 'utils/module' ], function( Module ) {
-                    var Class = Module.extend( fakeModule ),
-                        instance = new Class();
+                    var FakeClass = Module.extend( fakeModule ),
+                        instance = new FakeClass();
 
                     mock.expects( 'testConstructor' ).once();
                     done();
@@ -73,8 +73,8 @@
                     testArgumentTwo = {};
 
                 require( [ 'utils/module' ], function( Module ) {
-                    var Class = Module.extend( fakeModule ),
-                        instance = new Class( testArgumentOne, testArgumentTwo );
+                    var FakeClass = Module.extend( fakeModule ),
+                        instance = new FakeClass( testArgumentOne, testArgumentTwo );
 
                     mock.expects( 'ready' ).once().withArgs( testArgumentOne, testArgumentTwo );
                     done();
@@ -91,12 +91,12 @@
                     };
 
                 require( [ 'utils/module' ], function( Module ) {
-                    var Class = Module.extend( fakeModule ),
-                        SecondClass = Class.extend( fakeExtension );
+                    var FakeClass = Module.extend( fakeModule ),
+                        SecondClass = FakeClass.extend( fakeExtension );
 
-                    expect( Class ).not.to.be.equal( SecondClass );
-                    expect( Class.prototype.ready ).not.to.be.equal( SecondClass.prototype.ready );
-                    expect( Class.prototype.test ).to.be.equal( SecondClass.prototype.test );
+                    expect( FakeClass ).not.to.be.equal( SecondClass );
+                    expect( FakeClass.prototype.ready ).not.to.be.equal( SecondClass.prototype.ready );
+                    expect( FakeClass.prototype.test ).to.be.equal( SecondClass.prototype.test );
 
                     done();
                 } );
@@ -109,13 +109,13 @@
                     fakeElement = $( '<div></div>' );
 
                 require( [ 'utils/module' ], function( Module ) {
-                    var Class = Module.extend( fakeModule );
+                    var FakeClass = Module.extend( fakeModule );
 
                     fakeElement.one( 'beforeInit', function() {
                         done();
                     } );
 
-                    var instance = new Class( fakeElement );
+                    var instance = new FakeClass( fakeElement );
                 } );
             } );
 
@@ -126,13 +126,13 @@
                     fakeElement = $( '<div></div>' );
 
                 require( [ 'utils/module' ], function( Module ) {
-                    var Class = Module.extend( fakeModule );
+                    var FakeClass = Module.extend( fakeModule );
 
                     fakeElement.one( 'afterInit', function() {
                         done();
                     } );
 
-                    var instance = new Class( fakeElement );
+                    var instance = new FakeClass( fakeElement );
                 } );
             } );
 
