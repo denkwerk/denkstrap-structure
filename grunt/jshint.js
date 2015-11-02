@@ -10,6 +10,9 @@ module.exports = {
         '<%= gruntPath %>**/*.js',
         'Gruntfile.js'
     ],
+    karma: [
+        'karma-conf.js'
+    ],
     ci: {
         options: {
             force: true,

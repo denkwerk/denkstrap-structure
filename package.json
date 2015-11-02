@@ -16,8 +16,9 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "jshint": "jshint src/ grunt/ Gruntfile.js",
-    "jscs": "jscs src/ grunt/ Gruntfile.js"
+    "jshint": "jshint src/ grunt/ Gruntfile.js karma-conf.js",
+    "jscs": "jscs src/ grunt/ Gruntfile.js karma-conf.js",
+    "karma": "karma start"
   },
   "dependencies": {
     "grunt": "^0.4.5",
@@ -35,5 +36,19 @@
     "load-grunt-config": "^0.17.2",
     "lodash-cli": "^3.10.1",
     "time-grunt": "*"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "grunt-karma": "^0.12.1",
+    "karma": "^0.13.14",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.0",
+    "karma-mocha-reporter": "^1.1.1",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-requirejs": "^0.2.2",
+    "karma-sinon": "^1.0.4",
+    "mocha": "^2.3.3",
+    "phantomjs": "^1.9.18",
+    "sinon": "^1.17.2"
   }
 }

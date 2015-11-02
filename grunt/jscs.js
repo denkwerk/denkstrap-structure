@@ -14,6 +14,9 @@ module.exports = {
         '<%= gruntPath %>**/*.js',
         'Gruntfile.js'
     ],
+    karma: [
+        'karma-conf.js'
+    ],
     ci: {
         options: {
             fix: false,
@@ -25,7 +28,8 @@ module.exports = {
             src: [
                 '<%= srcPath %>**/*.js',
                 '<%= gruntPath %>**/*.js',
-                'Gruntfile.js'
+                'Gruntfile.js',
+                'karma-conf.js'
             ]
         }
     }
