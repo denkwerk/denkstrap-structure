@@ -134,7 +134,7 @@
                 }
 
                 /**
-                 * beforeInit Event
+                 * BeforeInit Event
                  * @event beforeInit
                  * @event beforeInit:namespace
                  */
@@ -175,7 +175,7 @@
                 promise.then( _.bind( function() {
 
                     /**
-                     * afterInit Event
+                     * AfterInit Event
                      *
                      * @event afterInit
                      * @event afterInit:namespace

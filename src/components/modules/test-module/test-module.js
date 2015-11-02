@@ -20,4 +20,4 @@
         };
     } );
 
-}( this, this.define, this.require ));
+}( this, this.define, this.require ) );

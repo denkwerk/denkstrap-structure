@@ -35,7 +35,7 @@
             //jquery:         '../vendor/jquery-2.1.3'
 
             // For IE8 support use jquery 1.11.X
-            jquery:             'vendor/jquery-1.11.3',
+            jquery:             'vendor/jquery-1.11.3'
 
         },
 
@@ -48,6 +48,7 @@
         // Example for a module package
         packages: [
             {
+
                 // This module can now be required by "modules/test-module"
                 // instead of "modules/test-module/test-module"
                 name: 'modules/test-module',
