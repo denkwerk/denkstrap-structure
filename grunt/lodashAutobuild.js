@@ -3,7 +3,7 @@
  * https://github.com/jjt/grunt-lodash-autobuild
  */
 
-module.exports = function ( grunt, options ) {
+module.exports = function( grunt, options ) {
     return {
         app: {
             src: [

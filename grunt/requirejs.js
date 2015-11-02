@@ -3,7 +3,7 @@
  * https://github.com/gruntjs/grunt-contrib-requirejs
  */
 
-module.exports = function ( grunt, options ) {
+module.exports = function( grunt, options ) {
 
     return {
         development: {
@@ -42,6 +42,7 @@ module.exports = function ( grunt, options ) {
                 removeCombined: false,
 
                 paths: {
+
                     // Use production config for production build
                     config: 'config/production'
                 },
@@ -50,6 +51,7 @@ module.exports = function ( grunt, options ) {
                     {
                         name: 'main',
                         include: [
+
                             // Change to your chosen event dispatcher
                             'utils/event_jquery'
                         ]

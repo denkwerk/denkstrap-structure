@@ -3,7 +3,7 @@
  * https://github.com/lodash/grunt-lodash
  */
 
-module.exports = function ( grunt, options ) {
+module.exports = function( grunt, options ) {
     return {
         build: {
             modifier: 'none',

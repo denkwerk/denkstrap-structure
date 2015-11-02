@@ -24,7 +24,7 @@ module.exports = function( grunt ) {
             gruntPath: 'grunt/',
 
             // Package
-            pkg: grunt.file.readJSON('package.json'),
+            pkg: grunt.file.readJSON( 'package.json' ),
 
             // Livereload port
             livereloadPort: 1337
