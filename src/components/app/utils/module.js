@@ -129,7 +129,7 @@
                         : function() {};
                 } );
 
-                if ( args[ 0 ] instanceof $ ) {
+                if ( args[0] && args[0].jquery ) {
                     element = args[ 0 ];
                 }
 
@@ -141,7 +141,7 @@
                 if ( !_.isNull( element ) ) {
                     element
                         .trigger( EVENT_BEFORE_INIT + '.^', [ element ] )
-                        .trigger( EVENT_AFTER_INIT + '.' + this.name, [ element ] );
+                        .trigger( EVENT_BEFORE_INIT + '.' + this.name, [ element ] );
                 }
 
                 /**
