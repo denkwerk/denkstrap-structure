@@ -15,8 +15,7 @@
     },
     "excludeFiles": [
         "node_modules/**",
-        "src/htdocs/js/vendor/**",
-        "src/htdocs/js/build/**"
+        "src/components/app/vendor/**"
     ],
     "requireCapitalizedConstructors": true,
     "fileExtensions": ".js"

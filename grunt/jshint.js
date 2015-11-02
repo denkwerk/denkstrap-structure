@@ -11,7 +11,7 @@ module.exports = {
         'Gruntfile.js'
     ],
     karma: [
-        'karma-conf.js'
+        'karma.conf.js'
     ],
     ci: {
         options: {
