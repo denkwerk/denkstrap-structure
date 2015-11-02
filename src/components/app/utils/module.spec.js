@@ -102,6 +102,31 @@
                 } );
             } );
 
+            it( 'should be named "module" by default', function ( done ) {
+                var fakeModule = {};
+
+                require( [ 'utils/module' ], function( Module ) {
+                    var FakeClass = Module.extend( fakeModule ),
+                        instance = new FakeClass();
+
+                    expect( instance.name ).to.be.equal( 'module' );
+                    done();
+                } );
+            } );
+
+            it( 'should have a name given in the constructor', function( done ) {
+                var fakeModule = {},
+                    testname = 'test';
+
+                require( [ 'utils/module' ], function( Module ) {
+                    var FakeClass = Module.extend( fakeModule ),
+                        instance = new FakeClass( null, {}, testname);
+
+                    expect( instance.name ).to.be.equal( testname );
+                    done();
+                } );
+            } );
+
             it( 'should trigger an event before initialized', function( done ) {
                 var fakeModule = {
                         ready: function() {}
@@ -119,6 +144,24 @@
                 } );
             } );
 
+            it( 'should trigger a namespaced event before initialized', function( done ) {
+                var fakeModule = {
+                        ready: function() {}
+                    },
+                    fakeModuleName = 'test',
+                    fakeElement = $( '<div></div>' );
+
+                require( [ 'utils/module' ], function( Module ) {
+                    var FakeClass = Module.extend( fakeModule );
+
+                    fakeElement.one( 'beforeInit.' + fakeModuleName, function() {
+                        done();
+                    } );
+
+                    var instance = new FakeClass( fakeElement, {}, fakeModuleName );
+                } );
+            } );
+
             it( 'should trigger an event after being initialized', function( done ) {
                 var fakeModule = {
                         ready: function() {}
@@ -133,6 +176,24 @@
                     } );
 
                     var instance = new FakeClass( fakeElement );
+                } );
+            } );
+
+            it( 'should trigger a namespaced event after being initialized', function( done ) {
+                var fakeModule = {
+                        ready: function() {}
+                    },
+                    fakeModuleName = 'test',
+                    fakeElement = $( '<div></div>' );
+
+                require( [ 'utils/module' ], function( Module ) {
+                    var FakeClass = Module.extend( fakeModule );
+
+                    fakeElement.one( 'afterInit.' + fakeModuleName, function() {
+                        done();
+                    } );
+
+                    var instance = new FakeClass( fakeElement, {}, fakeModuleName );
                 } );
             } );
 
