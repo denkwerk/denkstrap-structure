@@ -39,7 +39,7 @@ module.exports = function( grunt ) {
 
             pattern: 'grunt-*',
             config: require( './package.json' ),
-            scope: 'dependencies'
+            scope: [ 'dependencies', 'devDependencies' ]
         },
 
         // Can post process config object before it gets passed to grunt
