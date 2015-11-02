@@ -14,6 +14,6 @@ module.exports = {
         options: {
             outputStyle: 'compressed'
         },
-        files: { '<%= dist %>/css/main.css': '<%= srcPath %>components/sass/main.scss' }
+        files: { '<%= distPath %>css/main.css': '<%= srcPath %>components/sass/main.scss' }
     }
 };
