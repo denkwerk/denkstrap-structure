@@ -94,15 +94,20 @@
                     var FakeClass = Module.extend( fakeModule ),
                         SecondClass = FakeClass.extend( fakeExtension );
 
-                    expect( FakeClass ).not.to.be.equal( SecondClass );
-                    expect( FakeClass.prototype.ready ).not.to.be.equal( SecondClass.prototype.ready );
-                    expect( FakeClass.prototype.test ).to.be.equal( SecondClass.prototype.test );
+                    expect( FakeClass )
+                        .not.to.be.equal( SecondClass );
+
+                    expect( FakeClass.prototype.ready )
+                        .not.to.be.equal( SecondClass.prototype.ready );
+
+                    expect( FakeClass.prototype.test )
+                        .to.be.equal( SecondClass.prototype.test );
 
                     done();
                 } );
             } );
 
-            it( 'should be named "module" by default', function ( done ) {
+            it( 'should be named "module" by default', function( done ) {
                 var fakeModule = {};
 
                 require( [ 'utils/module' ], function( Module ) {
@@ -120,7 +125,7 @@
 
                 require( [ 'utils/module' ], function( Module ) {
                     var FakeClass = Module.extend( fakeModule ),
-                        instance = new FakeClass( null, {}, testname);
+                        instance = new FakeClass( null, {}, testname );
 
                     expect( instance.name ).to.be.equal( testname );
                     done();
