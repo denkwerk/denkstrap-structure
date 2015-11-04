@@ -53,7 +53,7 @@ module.exports = function( grunt, options ) {
                         include: [
 
                             // Change to your chosen event dispatcher
-                            'utils/event_jquery'
+                            'utils/event'
                         ]
                     }
                 ]
