@@ -141,11 +141,15 @@
 
                 source: element.data( 'module' ) ?
                     element.data( 'module' ).replace( / /g, '' ).split( ',' )
+                    : element.data( 'modules' ) ?
+                    element.data( 'modules' ).replace( / /g, '' ).split( ',' )
                     : [],
 
                 options: element.data( 'options' ),
 
-                extensions: element.data( 'extensions' ) ?
+                extensions: element.data( 'extension' ) ?
+                    element.data( 'extension' ).replace( / /g, '' ).split( ',' )
+                    : element.data( 'extensions' ) ?
                     element.data( 'extensions' ).replace( / /g, '' ).split( ',' )
                     : [],
 
