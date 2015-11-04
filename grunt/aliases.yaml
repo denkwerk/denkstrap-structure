@@ -4,6 +4,7 @@ test-dev:
         - 'sass_globbing'
         - 'scsslint:scss'
         - 'sass:development'
+        - 'autoprefixer:development'
         - 'lodashAutobuild'
         - 'requirejs:development'
 
@@ -13,6 +14,7 @@ test-prod:
         - 'sass_globbing'
         - 'scsslint:scss'
         - 'sass:production'
+        - 'autoprefixer:production'
         - 'lodashAutobuild'
         - 'requirejs:production'
 
