@@ -24,12 +24,12 @@ section. If not, go on reading the Initializing Node.js section.
 
 ### Initializing Node.js
 
-Be sure to have nvm installed! Type ```nvm --version``` in your console to check. If it
-is not installed follow [the instructions](https://github.com/creationix/nvm). When you are
-using Windows try [nvmw](https://github.com/hakobera/nvmw) or [nvm-windows](https://github.com/coreybutler/nvm-windows).
+Be sure to have nvm installed! Switch to bash by entering ```bash``` in the console. 
+Then type ```nvm --version``` in your console to check. 
 
-Are you sure nvm is installed? Fine! Type ```nvm install``` to your terminal. Check the node.js
-version as described above.
+If it is not installed use [these instructions](https://github.com/creationix/nvm#user-content-install-script). When you are using Windows try [nvmw](https://github.com/hakobera/nvmw) or [nvm-windows](https://github.com/coreybutler/nvm-windows).
+
+Are you sure nvm is installed? Fine! Type ```nvm install 4.2``` to your terminal.
 
 #### Windows?
 
@@ -41,7 +41,7 @@ there will not be happening as much as on POSIX systems. You have to type ```nvm
 ### Installation
 
 There are some prequites for this project template to be installed. Type ```npm install`` to
-install all JavaScript modules.
+install all Grunt modules.
 
 The second thing you have to install is [scss-lint](https://github.com/brigade/scss-lint). Install
 this module by typing ```gem install scss_lint``` into your console.
