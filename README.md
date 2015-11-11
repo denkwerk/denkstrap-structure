@@ -24,8 +24,8 @@ section. If not, go on reading the Initializing Node.js section.
 
 ### Initializing Node.js
 
-Be sure to have nvm installed! Switch to bash by entering ```bash``` in the console. 
-Then type ```nvm --version``` in your console to check. 
+Be sure to have nvm installed! Switch to bash by entering ```bash``` in the console.
+Then type ```nvm --version``` in your console to check.
 
 If it is not installed use [these instructions](https://github.com/creationix/nvm#user-content-install-script). When you are using Windows try [nvmw](https://github.com/hakobera/nvmw) or [nvm-windows](https://github.com/coreybutler/nvm-windows).
 
@@ -49,6 +49,6 @@ this module by typing ```gem install scss_lint``` into your console.
 ## Documentations
 
 There are a few more Documentations:
-- [JavaScript API (german)](readme-javascript.md)
+- [JavaScript API (german)](docs/javascript.md)
 
 Happy Coding!
