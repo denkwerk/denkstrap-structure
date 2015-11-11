@@ -49,10 +49,10 @@ this module by typing ```gem install scss_lint``` into your console.
 ## Build
 
 When you have all requirements installed, run the following grunt tasks to build the frontend:
-    
+
 `grunt development` or `grunt dev` for a development build with uncompressed sources
 
-`grunt production` or `grunt prod` for a production build with compressed sources  
+`grunt production` or `grunt prod` for a production build with compressed sources
 
 Additionally you can run the `grunt lint` task to ensure all sources are bug-free and follow the coding guidelines. Have a look at our test-stack documentation for advenced javascript testing.
 
@@ -61,5 +61,6 @@ Additionally you can run the `grunt lint` task to ensure all sources are bug-fre
 There are a few more Documentations:
 - [JavaScript API (german)](docs/javascript.md)
 - [Components structure (german)](docs/komponenten.md)
+- [JavaScript Testing (german)](docs/javascript-testing.md)
 
 Happy Coding!
