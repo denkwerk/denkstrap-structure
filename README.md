@@ -46,4 +46,9 @@ install all Grunt modules.
 The second thing you have to install is [scss-lint](https://github.com/brigade/scss-lint). Install
 this module by typing ```gem install scss_lint``` into your console.
 
+## Documentations
+
+There are a few more Documentations:
+- [JavaScript API (german)](readme-javascript.md)
+
 Happy Coding!

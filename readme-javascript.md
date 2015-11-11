@@ -1,4 +1,4 @@
-# denkstrap: Modulstruktur
+# denkstrap-structure JavaScript API
 
 ### Inhalt
 - [Module](#module)

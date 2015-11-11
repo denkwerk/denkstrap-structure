@@ -11,9 +11,9 @@
         };
 
         /**
-         * BASE Config
+         * PRODUCTION Config
          *
-         * Globale config Settings.
+         * This config file will be used on production build
          *
          * @module config
          * @class App.config
