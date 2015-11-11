@@ -1,7 +1,7 @@
 {
   "name": "denkstrap-structure",
   "description": "denkwerk default structure for new projects",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Kai Wollhaupt <kai.wollhaupt@denkwerk.com",
   "homepage": "http://www.denkwerk.com",
   "license": "MIT",
