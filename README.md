@@ -40,7 +40,7 @@ there will not be happening as much as on POSIX systems. You have to type ```nvm
 
 ### Installation
 
-There are some prequites for this project template to be installed. Type ```npm install`` to
+There are some prequites for this project template to be installed. Type ```npm install``` to
 install all Grunt modules.
 
 The second thing you have to install is [scss-lint](https://github.com/brigade/scss-lint). Install
