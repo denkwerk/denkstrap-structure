@@ -46,6 +46,15 @@ install all Grunt modules.
 The second thing you have to install is [scss-lint](https://github.com/brigade/scss-lint). Install
 this module by typing ```gem install scss_lint``` into your console.
 
+## Build
+
+When you have all requirements installed, run the following grunt tasks to build the frontend:
+    
+`grunt development` or `grunt dev` for an development build with uncompressed sources
+`grunt production` or `grunt prod` for and production build with compressed sources  
+
+Additionally you can run the `grunt lint` task to ensure all sources are bug-free and follow the coding guidelines. Have a look at our test-stack documentation for advenced javascript testing.
+
 ## Documentations
 
 There are a few more Documentations:
