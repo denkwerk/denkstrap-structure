@@ -4,10 +4,11 @@
     var document = window.document;
 
     define( [
+        'require',
         'jquery',
         'lodash',
         'utils/module'
-    ], function( $, _, Module ) {
+    ], function( require, $, _, Module ) {
 
         /**
          * Module Loader
@@ -38,6 +39,7 @@
          * @param {jQuery/Zepto} [options.elementScope] DOM element scope
          * @param {Boolean} [options.autoInit] Unless 'false' the Loader will automatically
          * initialize all Modules in Scope
+         * @param {Function} requireContext The require.js context for the Loader instance
          * @returns {
          *    {
          *      initLocal: initLocalModule,
@@ -46,11 +48,29 @@
          *    }
          * }
          */
-        function Loader ( options ) {
+        function Loader ( options, requireContext ) {
 
             this.elementScope = options.elementScope || $( document );
             this.globalScope   = _.isObject( options.globalScope ) ? options.globalScope : {};
             this.options = options;
+            this.requireContext = requireContext || require;
+            this.promise = $.Deferred();
+            this.pendingModules = {
+                major: 0,
+                minor: 0
+            };
+
+            this.promise.progress( _.bind( function(  type ) {
+
+                if ( type && this.pendingModules.hasOwnProperty( type ) ) {
+                    this.pendingModules[ type ]--;
+                }
+
+                if ( !this.pendingModules.major && !this.pendingModules.minor ) {
+                    this.promise.resolve();
+                }
+
+            }, this ) );
 
             if ( options.autoInit !== false ) {
                 this.initModules();
@@ -66,7 +86,9 @@
          * @function initModules
          * @memberof Loader
          * @param {jQuery/Zepto} [element] Optionally an jQuery/Zepto element can be passed
-         * wich will be used as scope
+         *                                 wich will be used as scope
+         * @returns {Promise} The returned Promise will be resolved when all local modules
+         *                    are initialized
          */
         Loader.prototype.initModules = function( element ) {
             var elementScope = element || this.elementScope;
@@ -112,7 +134,7 @@
                 .value();
 
             if ( moduleNames.major.length ) {
-                this.loadModules( moduleNames.major, modules.major );
+                this.loadModules( moduleNames.major, modules.major, 'major' );
             }
 
             moduleNames.minor = _.chain( modules.minor )
@@ -123,8 +145,14 @@
                 .value();
 
             if ( moduleNames.minor.length ) {
-                this.loadModules( moduleNames.minor, modules.minor );
+                this.loadModules( moduleNames.minor, modules.minor, 'minor' );
             }
+
+            if ( !moduleNames.minor.length && !moduleNames.major.length ) {
+                this.promise.notify();
+            }
+
+            return this.promise;
         };
 
         /**
@@ -189,6 +217,8 @@
                     }
                 }
             } );
+
+            this.promise.notify( options.type );
         };
 
         /**
@@ -217,7 +247,8 @@
                 module: ModuleClass,
                 element: options.element,
                 options: options.options,
-                moduleName: options.moduleName
+                moduleName: options.moduleName,
+                type: options.type
             } );
         };
 
@@ -238,7 +269,12 @@
             // For testing purposes attach module to element
             options.element.data(
                 options.moduleName,
-                new options.module( options.element, options.options, options.moduleName )
+                new options.module(
+                    options.element,
+                    options.options,
+                    options.moduleName,
+                    this.promise, options.type
+                )
             );
         };
 
@@ -250,9 +286,29 @@
          * @param {Array} moduleNames List of modules names
          * @param {Array} modules List of module objects
          */
-        Loader.prototype.loadModules = function( moduleNames, modules ) {
-            require( moduleNames, _.bind( function() {
+        Loader.prototype.loadModules = function( moduleNames, modules, type ) {
+
+            this.requireContext( moduleNames, _.bind( function() {
                 var args = arguments;
+
+                // PendingModules has to be updated BEFORE the initializing process has been started
+                // TODO: Optimize
+                _.each( modules, _.bind( function( moduleObject ) {
+
+                    _.each( moduleObject.source, _.bind( function( moduleName ) {
+
+                        var indexInArg = _.indexOf( moduleNames, moduleName );
+                        var module = args[ indexInArg ];
+
+                        //Var isLocal = !module.isGlobal;
+                        //if ( isLocal ) {
+                        this.pendingModules[ type ]++;
+
+                        //}
+
+                    }, this ) );
+
+                }, this ) );
 
                 _.each( modules, _.bind( function( moduleObject ) {
 
@@ -271,7 +327,7 @@
                         var extensionIndexInArg;
 
                         /**
-                         * Searches related extensions and pushes them into an array
+                         * Searchs related extensions and pushes them into an array
                          */
                         if ( isLocal && moduleObject.extensions.length ) {
                             _.each( moduleObject.extensions, function( extensionName, index ) {
@@ -294,7 +350,8 @@
                             element: moduleObject.element,
                             options: moduleObject.options,
                             moduleName: moduleName,
-                            extensions: extensions
+                            extensions: extensions,
+                            type: type
                         } );
                     }, this ) );
                 }, this ) );

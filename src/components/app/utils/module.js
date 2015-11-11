@@ -69,29 +69,29 @@
                  */
 
                 if ( typeof props[ name ] === 'function' &&
-                      typeof _super[ name ] === 'function' &&
-                      fnTest.test( props[ name ] ) ) {
+                    typeof _super[ name ] === 'function' &&
+                    fnTest.test( props[ name ] ) ) {
 
                     proto[ name ] = ( function( name, fn ) {
-                         return function() {
-                             var tmp = this._super;
+                        return function() {
+                            var tmp = this._super;
 
-                             /**
-                              * Add a new ._super() method that is the same method
-                              * but on the super-class
-                              */
-                             this._super = _super[ name ];
+                            /**
+                             * Add a new ._super() method that is the same method
+                             * but on the super-class
+                             */
+                            this._super = _super[ name ];
 
-                             /**
-                              * The method only need to be bound temporarily, so we
-                              * remove it when we're done executing
-                              */
-                             var ret = fn.apply( this, arguments );
-                             this._super = tmp;
+                            /**
+                             * The method only need to be bound temporarily, so we
+                             * remove it when we're done executing
+                             */
+                            var ret = fn.apply( this, arguments );
+                            this._super = tmp;
 
-                             return ret;
-                         };
-                     } )( name, props[ name ] );
+                            return ret;
+                        };
+                    } )( name, props[ name ] );
 
                 } else if ( typeof props[ name ] === 'object' ) {
 
@@ -117,20 +117,25 @@
 
                 var element = $( {} );
                 var methods = {};
+                var loaderPromise = ( args[ 3 ] && args[ 3 ].resolve ) ?
+                    args [ 3 ] :
+                    undefined;
+                var type = ( loaderPromise && typeof args[ 4 ] === 'string' ) ?
+                    args[ 4 ] :
+                    undefined;
 
                 /**
-                 * Assignment of the constructor functions
+                 * Assignment of the contructor functions
                  */
                 _.each( constructors, function( method ) {
                     methods[ method ] = typeof proto[ method ] === 'function' ?
                         proto.hasOwnProperty( method ) ?
-                        proto[ method ]
-                        : _super[ method ]
+                            proto[ method ]
+                            : _super[ method ]
                         : function() {};
                 } );
 
-                if ( ( args[ 0 ] && args[ 0 ].jquery ) ||
-                     ( args[ 0 ] && $.zepto && $.zepto.isZ( args[ 0 ] ) ) ) {
+                if ( args[ 0 ] && args[ 0 ].jquery ) {
                     element = args[ 0 ];
                 }
 
@@ -166,8 +171,11 @@
                     }
 
                     promise = promise.then( _.bind( function() {
+                        var initArgs = Array.prototype.slice.call( args, 0, 2 );
+                        initArgs = initArgs.concat( Array.prototype.slice.call( arguments ) );
+
                         return $.when(
-                            methods[ cName ].apply( this, Array.prototype.slice.call( args, 0, 2 ) )
+                            methods[ cName ].apply( this, initArgs )
                         );
                     }, this ) );
 
@@ -185,6 +193,10 @@
                         element
                             .trigger( EVENT_AFTER_INIT + '.^', [ element ] )
                             .trigger( EVENT_AFTER_INIT + '.' + this.name, [ element ] );
+                    }
+
+                    if ( loaderPromise && type ) {
+                        loaderPromise.notify( type );
                     }
 
                 }, this ) );
