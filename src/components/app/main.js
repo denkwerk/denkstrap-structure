@@ -11,7 +11,7 @@
         paths: {
 
             // Config will be switched on build
-            config:             'config/production',
+            config:             'config/development',
 
             // App
             vendor:             'vendor',
