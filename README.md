@@ -50,5 +50,6 @@ this module by typing ```gem install scss_lint``` into your console.
 
 There are a few more Documentations:
 - [JavaScript API (german)](docs/javascript.md)
+- [Components structure (german)](docs/komponenten.md)
 
 Happy Coding!
