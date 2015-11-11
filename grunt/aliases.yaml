@@ -1,22 +1,32 @@
-test-dev:
-    description: 'Dev testing task for grunt-sass and js builds'
+development:
+    description: 'Development build task'
     tasks:
         - 'sass_globbing'
-        - 'scsslint:scss'
         - 'sass:development'
         - 'autoprefixer:development'
+        - 'lint'
         - 'lodashAutobuild'
         - 'requirejs:development'
 
-test-prod:
-    description: 'Prod testing task for grunt-sass and js builds'
+dev:
+    description: 'Shortcut für development task'
+    tasks:
+        - 'development'
+
+production:
+    description: 'Production build task'
     tasks:
         - 'sass_globbing'
-        - 'scsslint:scss'
         - 'sass:production'
         - 'autoprefixer:production'
+        - 'lint'
         - 'lodashAutobuild'
         - 'requirejs:production'
+
+prod:
+    description: 'Shortcut für production task'
+    tasks:
+        - 'production'
 
 lint:
     description: 'Linting task for development'
@@ -28,9 +38,8 @@ lint:
         - 'jscs:frontend'
 
 lint_ci:
-    description: 'Linting task for the CI Server'
+    description: 'Linting task for the CI server'
     tasks:
         - 'scsslint:scss'
         - 'jshint:ci'
         - 'jscs:ci'
-
