@@ -20,7 +20,7 @@
     - [globalScope](#globalscope)
     - [autoInitSelector](#autoinitselector)
     - [autoInit](#autoinit)
-  - [loadModules](#loadmodules)
+  - [initModules](#initmodules)
   - [Beispiel](#beispiel)
 - [Abhängigkeiten](#abhangigkeiten)
 - [TODOs](#todos)
