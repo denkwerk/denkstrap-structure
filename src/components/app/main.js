@@ -20,7 +20,7 @@
             // Components
             components:         '../',
             modules:            '../modules',
-            pattern:            '../pattern',
+            patterns:            '../patterns',
             site:               '../site',
 
             // Plugins
