@@ -22,6 +22,7 @@ src/css/
 
 # compiled markup
 src/pages/
+src/styleguide/
 
 # sass-globbing
 src/components/sass/import

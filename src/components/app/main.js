@@ -48,6 +48,7 @@
         // Example for a module package
         packages: [
             {
+
                 // This module can now be required by "modules/test-module"
                 // instead of "modules/test-module/test-module"
                 name: 'modules/test-module',
@@ -68,6 +69,7 @@
 
         require( [
             'config'
+
             // Extend with global dependencies
         ], function( config ) {
 
