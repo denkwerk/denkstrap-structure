@@ -72,7 +72,10 @@
                     if ( this.currentBreakpoint !== breakpoint ) {
                         this.currentBreakpoint = breakpoint;
                         Event.trigger( EVENT_BREAKPOINT_CHANGE, [ breakpoint ] );
-                        $( this.settings.selector ).trigger( EVENT_BREAKPOINT_CHANGE, [ breakpoint ] );
+                        $( this.settings.selector ).trigger(
+                            EVENT_BREAKPOINT_CHANGE,
+                            [ breakpoint ]
+                        );
                     }
                 }, this ) );
             },
