@@ -18,7 +18,9 @@ module.exports = function( grunt, options ) {
                 '<%= srcPath %>components/sass/import/patterns.scss':
                     '<%= srcPath %>components/patterns/**/*.scss',
                 '<%= srcPath %>components/sass/import/modules.scss':
-                    '<%= srcPath %>components/modules/**/*.scss'
+                    '<%= srcPath %>components/modules/**/*.scss',
+                '<%= srcPath %>components/sass/import/helper.scss':
+                    '<%= srcPath %>components/sass/helper/**/*.scss'
             },
             options: {
                 useSingleQuotes: true

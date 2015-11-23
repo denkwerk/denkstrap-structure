@@ -1,0 +1,13 @@
+@each $name, $value in $breakpoints {
+    @include breakpoint($name) {
+        body {
+            &:after {
+                content: "#{$name}";
+                visibility: hidden;
+                display: block;
+                width: 0;
+                height: 0;
+            }
+        }
+    }
+}

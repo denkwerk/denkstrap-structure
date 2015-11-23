@@ -67,7 +67,8 @@
         } );
 
         require( [
-            'config'
+            'config',
+            'load!utils/breakpoints:init'
             // Extend with global dependencies
         ], function( config ) {
 
