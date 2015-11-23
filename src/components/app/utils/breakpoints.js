@@ -10,6 +10,9 @@
         /**
          * Global Breakpoint system
          */
+
+        var EVENT_BREAKPOINT_CHANGE = 'Breakpoint/change';
+
         return {
 
             isGlobal: true,
@@ -35,7 +38,8 @@
                     var breakpoint = this.get();
                     if ( this.currentBreakpoint !== breakpoint ) {
                         this.currentBreakpoint = breakpoint;
-                        Event.trigger( 'Breakpoint/change', [ breakpoint ] );
+                        Event.trigger( EVENT_BREAKPOINT_CHANGE, [ breakpoint ] );
+                        $( this.settings.selector ).trigger( EVENT_BREAKPOINT_CHANGE, [ breakpoint ] );
                     }
                 }, this ) );
             },
