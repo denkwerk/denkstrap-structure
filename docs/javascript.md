@@ -58,6 +58,17 @@ Der Grundaufbau beider Modultypen ist prinzipiell gleich. Die Methoden `ready` u
 ```
 
 ### Einbindung im HTML
+Zunächst muss `require.js` mit der entsprechenden `main.js` am Ende des `<body>` geladen werden:
+
+```html
+<body>
+<!-- content -->
+<script type="text/javascript" data-main="/components/app/main.js" src="/components/app/vendor/require.js"></script>
+</body>
+```
+
+Dann können die Module innerhalb des Markups angegeben werden. Durch den Loader werden sie automatisch nachgeladen und initialisiert, wenn sie benötigt werden:
+
 ```html
 <div class="auto-init" data-module="modules/example" data-options='{"foo": "bar"}'></div>
 ```
