@@ -6,6 +6,7 @@
 
 {% for pattern in pattern %}
 
+    <h2>{{ pattern | patternName }}</h2>
     <div id="#{{ pattern | patternName }}">
         {% include pattern %}
     </div>
