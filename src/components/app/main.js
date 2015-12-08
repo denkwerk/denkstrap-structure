@@ -4,9 +4,6 @@
         enforceDefine: false,
         optimize: 'uglify2',
         waitSeconds: 0,
-        catchError: {
-            define: true
-        },
 
         paths: {
 
