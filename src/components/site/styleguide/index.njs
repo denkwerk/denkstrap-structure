@@ -17,7 +17,7 @@
 
     <ul>
     {% for pattern in pattern %}
-        <li><a href="/styleguide/pattern/pattern.html#{{ pattern }}">{{ pattern }}</a></li>
+        <li><a href="/styleguide/pattern.html#{{ pattern }}">{{ pattern }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}
