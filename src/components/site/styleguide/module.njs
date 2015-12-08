@@ -3,7 +3,7 @@
 {% block pageTitle %}Module: {{ moduleName }}{% endblock %}
 
 {% block content %}
-    <h1>Module: {{ moduleName }}</h1>
+    <h1>Module: {{ module | moduleName }}</h1>
 
-    {% include moduleTemplate %}
+    {% include template %}
 {% endblock %}

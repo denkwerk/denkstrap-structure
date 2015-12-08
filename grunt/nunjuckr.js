@@ -102,9 +102,15 @@ module.exports = function( grunt, options ) {
                     appPath: '<%= srcPath %>components/app/',
                     srcPath: '<%= srcPath %>'
                 },
+                setUp: function( env ) {
+                    env.addFilter( 'moduleName', function( patternPath ) {
+                        return patternPath.match( /^[\w\/]+components\/modules\/([\w\-]+)\/([\w\-]+)\.njs$/ )[ 1 ];
+                    } );
+                    return env;
+                },
                 preprocessData: function( data, file ) {
-                    data.moduleName = file;
-                    data.moduleTemplate = file;
+                    data.module = file;
+                    data.template = file;
 
                     return data;
                 },
