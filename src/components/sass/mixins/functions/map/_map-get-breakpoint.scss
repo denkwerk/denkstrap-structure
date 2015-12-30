@@ -1,0 +1,33 @@
+// Map get breakpoint function
+// with fallback option if breakpoint is not available in map
+// returns breakpoint value of map
+
+@function map-get-breakpoint(
+    $map,
+    $breakpoint: default, // Default key
+    $fallback: first // Fallback if breakpoint is not available in map (options: first, last)
+) {
+
+    // If breakpoint is defined in map use breakpoint value
+    @if map-has-key($map, $breakpoint) {
+        @return map-get($map, $breakpoint);
+    } @else {
+
+        // Otherwise search fallback in map
+        $i: 0;
+        @each $key, $value in $map {
+            // Update counter
+            $i: $i + 1;
+
+            // If fallback is first
+            @if $i == 1 and $fallback == first {
+                @return $value;
+            }
+
+            // If fallback is last
+            @if $i == length($map) and $fallback == last {
+                @return $value;
+            }
+        }
+    }
+}

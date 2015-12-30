@@ -2,13 +2,16 @@
 
 @mixin grid-width(
     $width,
-    $cols,
+    $cols-map,
     $col-class
 ) {
     // Grid width breakpoints
     @each $width-breakpoint, $width-number in $width {
-        @include breakpoint($width-breakpoint) {
 
+        // Get total columns amount for every breakpoint
+        $cols: grid-columns($cols-map, $width-breakpoint);
+
+        @include breakpoint($width-breakpoint) {
             // Column CSS styles
             .#{$col-class} {
                 width: grid-width($width-number, $cols);

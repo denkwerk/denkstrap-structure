@@ -1,0 +1,69 @@
+// Indent mixin
+
+@mixin indent(
+    $side: left right, // Indent side (options: left, right, left right (= both), default: left right)
+    $property: padding, // CSS property (options: margin, padding, default: padding)
+    $map: $indent-inner, // List map with indents based on breakpoints (default: $indent-inner)
+    $negative: false, // Negative indent (options: true, false, default: false)
+    $offset: false // List map with breakpoints or amount of pixels that should be added to or removed from the $side values
+) {
+
+    // Size multiplier to generate negative indent
+    @if $negative {
+        $size-multiplier: -1;
+    } @else {
+        $size-multiplier: 1;
+    }
+
+    // If indent map contains different maps for breakpoints
+    @if type-of(map-get($map, default)) == map {
+        $indent-map: map-get($map, default);
+        $indent-map-breakpoints: $map;
+    } @else {
+        $indent-map: $map;
+        $indent-map-breakpoints: false;
+    }
+
+    // Breakpoints defined in $map
+    @each $breakpoint, $size in $indent-map {
+
+        // If offset is defined add it to size value
+        @if $offset != false {
+            @if type-of($offset) == map {
+
+                // If breakpoint key exists use key
+                @if map-has-key($offset, $breakpoint) {
+                    $offset-value: map-get($offset, $breakpoint);
+                } @else {
+
+                    // Otherwise get previous breakpoint key
+                    $offset-value: map-get-prev($offset, $breakpoint, 0);
+                }
+            } @else {
+                $offset-value: $offset;
+            }
+
+            $size: $size + $offset-value;
+        }
+
+        @if $indent-map-breakpoints {
+            @each $indent-map-breakpoints-key, $indent-map-breakpoints-value in $indent-map-breakpoints {
+                @if $indent-map-breakpoints-key == $breakpoint {
+                    $size: map-get($indent-map-breakpoints-value, $indent-map-breakpoints-key);
+                }
+            }
+        }
+
+        // Use breakpoint mixin for media queries
+        @include breakpoint($breakpoint) {
+
+            // Create style for every side
+            @each $direction in $side {
+
+                // Example: padding-left: 30px;
+                #{$property}-#{$direction}: $size * $size-multiplier;
+            }
+        }
+    }
+    
+}

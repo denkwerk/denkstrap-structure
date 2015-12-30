@@ -1,0 +1,21 @@
+// Example grid pattern with two different sized columns
+// only a example to show grid, please use mixin instead
+
+.grid-example {
+
+    // Column 1 (4 of 12 width)
+    @include grid(
+        $width: 4,
+        $gutter: true,
+        $clear: false, // to remove nth-child clearfix
+        $col-class: grid__col-1
+    );
+
+    // Column 2 (8 of 12 width)
+    @include grid(
+        $width: 8,
+        $gutter: true,
+        $clear: false, // to remove nth-child clearfix
+        $col-class: grid__col-2
+    );
+}

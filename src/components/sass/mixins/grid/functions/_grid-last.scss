@@ -4,7 +4,7 @@
 
 @function grid-last(
     $width,
-    $cols,
+    $cols-map,
     $debug: false
 ) {
     // Define last column
@@ -13,11 +13,14 @@
     // Last column calculation for breakpoints
     @each $width-breakpoint, $width-number in $width {
 
+        // Get total columns amount for every breakpoint
+        $cols: grid-columns($cols-map, $width-breakpoint);
+
         // Add breakpoint map to last column map
         $last: map-merge(
-                $last,
-                ($width-breakpoint: ceil($cols / $width-number)
-                ));
+            $last,
+            ($width-breakpoint: ceil($cols / $width-number)
+        ));
     }
 
     // Debug last column map

@@ -9,9 +9,9 @@
     $indent-map: $indent-inner,
     $grid-class: grid,
     $col-class: grid__col,
-    $cols: map-get($grid-cols, default),
+    $cols-map: $grid-cols,
     $float: left,
-    $clear: left,
+    $clear: left, // nth-child clearfix to avoid float problem with different height columns
     $center: false
 ) {
 
@@ -24,15 +24,15 @@
     }
 
     // Padding map for breakpoints
-    $padding: grid-padding($width, $gutter, $gutter-map, $indent, $indent-map, $cols);
+    $padding: grid-padding($width, $gutter, $gutter-map, $indent, $indent-map, $cols-map);
 
     // Last column map for breakpoints
-    $last: grid-last($width, $cols);
+    $last: grid-last($width, $cols-map);
 
     // Generate column width styles
     @include grid-width(
         $width,
-        $cols,
+        $cols-map,
         $col-class
     );
 

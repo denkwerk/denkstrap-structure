@@ -4,7 +4,8 @@
     $size: default, // Breakpoint size (options: pre defined $map name, size value)
     $inherit: true, // Inherit styles to next breakpoints (options: true, false, breakpoint name)
     $selector: min-width, // Media query selector (options: min-width, max-width)
-    $map: $breakpoints // Sass map with breakpoints (default: $breakpoints)
+    $map: $breakpoints, // Sass map with breakpoints (default: $breakpoints)
+    $additional-query: '' // Additional query that is added with 'and' after the size query
 ) {
 
     // Initialize media query string
@@ -47,8 +48,19 @@
         $query: '(#{$selector}: #{$size})';
     }
 
+    // Add additional query with 'and'
+    @if $additional-query != '' {
+
+        // Set and only if needed
+        @if $query != '' {
+            $additional-query: ' and ' + $additional-query;
+        }
+
+        $query: $query + $additional-query;
+    }
+
     // If default breakpoint, media query is not needed
-    @if $query == '' or ($size == default and $inherit == true) {
+    @if $query == '' or ($size == default and $inherit == true and $additional-query == '') {
         @content;
     } @else {
 

@@ -1,0 +1,27 @@
+// Sass map debug function
+
+@function debug-map-children($map) {
+    $debug: '';
+
+    @each $key, $value in $map {
+        $debug: $debug + $key + ': ' + $value + ', ';
+    }
+
+    @return $debug;
+}
+
+@function debug-map($map, $label: false) {
+    $debug: '';
+
+    @each $key, $value in $map {
+        $debug: $debug + '[' +  $key + ': ' + debug-map-children($value) + '] ';
+    }
+
+    @if $label {
+        $debug: $label + ' >> ' + $debug;
+    }
+
+    @warn $debug;
+
+    @return $debug;
+}

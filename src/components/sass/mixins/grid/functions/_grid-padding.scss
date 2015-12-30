@@ -8,7 +8,7 @@
     $gutter-map,
     $indent,
     $indent-map,
-    $cols,
+    $cols-map,
     $debug: false
 ) {
     // Define padding map
@@ -21,8 +21,11 @@
         $padding-first-left: 0;
         $padding-last-right: 0;
 
+        // Get total columns amount for every breakpoint
+        $cols: grid-columns($cols-map, $gutter-breakpoint);
+
         // Reset gutter size if no gutter
-        @if $gutter == false or map-get($width, $gutter-breakpoint) == $cols {
+        @if $gutter == false {
             $gutter-size: 0;
         }
 

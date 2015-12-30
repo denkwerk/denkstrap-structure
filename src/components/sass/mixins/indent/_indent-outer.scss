@@ -1,0 +1,14 @@
+// Outer indent mixin
+
+@mixin indent-outer(
+    $side: left right, // Indent side (options: left, right, left right (= both), default: left right)
+    $property: margin, // CSS property (options: margin, padding, default: margin)
+    $map: $indent-outer, // Sass map with indents based on breakpoints (default: $indent-outer)
+    $negative: false, // Negative indent (options: true, false, default: false)
+    $offset: false // List map with breakpoints or amount of pixels that should be added to or removed from the $side values
+) {
+
+    // Use indent mixin
+    // with pre configuration for outer indent
+    @include indent($side, $property, $map, $negative, $offset);
+}

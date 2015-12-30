@@ -1,0 +1,22 @@
+// Get total columns amount for a breakpoint
+
+@function grid-columns(
+    $cols-map,
+    $breakpoint
+) {
+
+    $cols: 0 !default;
+
+    // Detect if cols map is a map with breakpoints or only a literal
+    @if type-of($cols-map) == map {
+        @if map-has-key($cols-map, $breakpoint) {
+            $cols: map-get($cols-map, $breakpoint);
+        } @else {
+            $cols: map-get-prev($cols-map, $breakpoint);
+        }
+    } @else {
+        $cols: $cols-map;
+    }
+
+    @return $cols;
+}

@@ -1,0 +1,15 @@
+// Reset indent mixin
+// includes indent mixin
+
+@mixin indent-reset(
+    $side: left right, // Indent side (options: left, right, left right (= both), default: left right)
+    $map: $indent-outer, // Sass map with indents based on breakpoints (default: $indent-outer)
+    $offset: false // List map with breakpoints or amount of pixels that should be added to or removed from the $side values
+) {
+    $property: margin;
+    $negative: true;
+
+    // Use indent mixin
+    // with pre configuration for reset
+    @include indent($side, $property, $map, $negative, $offset);
+};
