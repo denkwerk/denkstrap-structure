@@ -7,6 +7,7 @@ development:
         - 'lint'
         - 'lodashAutobuild'
         - 'requirejs:development'
+        - 'nunjuckr:development'
 
 dev:
     description: 'Shortcut für development task'
@@ -22,6 +23,7 @@ production:
         - 'lint'
         - 'lodashAutobuild'
         - 'requirejs:production'
+        - 'nunjuckr:production'
 
 prod:
     description: 'Shortcut für production task'
