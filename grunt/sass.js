@@ -8,7 +8,7 @@ module.exports = {
         options: {
             sourceMap: true
         },
-        files: { '<%= srcPath %>css/main.css': '<%= srcPath %>components/sass/main.scss' }
+        files: { '<%= distPath %>css/main.css': '<%= srcPath %>components/sass/main.scss' }
     },
     production: {
         options: {

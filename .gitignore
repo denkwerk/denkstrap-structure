@@ -17,12 +17,6 @@ node_modules
 # Artifacts folder with generated content
 artifacts
 
-# compiled css
-src/css/
-
-# compiled markup
-src/pages/
-
 # sass-globbing
 src/components/sass/import
 
