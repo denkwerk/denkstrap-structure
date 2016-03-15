@@ -1,7 +1,7 @@
 {
     "preset": "jquery",
     "validateQuoteMarks": "'",
-    "validateLineBreaks": "LF",
+    "validateLineBreaks": null,
     "requireCamelCaseOrUpperCaseIdentifiers": true,
     "requireParenthesesAroundIIFE": true,
     "jsDoc": {
