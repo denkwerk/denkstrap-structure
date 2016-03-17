@@ -4,7 +4,7 @@
 
 ## Requirements
 
-There are a few prequites for this repository:
+There are a few prerequisites for this repository:
 
 - [nvm](https://github.com/creationix/nvm) on Mac and Linux, [nvmw](https://github.com/hakobera/nvmw) or [nvm-windows](https://github.com/coreybutler/nvm-windows) on Windows
 - As an alternative you have node.js version 4.2 as your systems default node.js version
@@ -40,11 +40,15 @@ there will not be happening as much as on POSIX systems. You have to type ```nvm
 
 ### Installation
 
-There are some prequites for this project template to be installed. Type ```npm install``` to
+There are some prerequisites for this project template to be installed. Type ```npm install``` to
 install all Grunt modules.
 
 The second thing you have to install is [scss-lint](https://github.com/brigade/scss-lint). Install
 this module by typing ```gem install scss_lint``` into your console.
+
+### Update
+
+When someone changed in the project the required Node modules, run the command ```npm update```.
 
 ## Build
 
