@@ -11,7 +11,7 @@
     {% block content %}
     {% endblock %}
 
-    <script type="text/javascript" data-main="/components/app/main.js" src="/components/app/vendor/require.js"></script>
+    <script type="text/javascript" data-main="/js/app/main.js" src="/js/app/vendor/require.js"></script>
 
 </body>
 </html>
