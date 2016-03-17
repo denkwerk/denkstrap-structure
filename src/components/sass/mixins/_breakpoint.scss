@@ -21,12 +21,10 @@
 
         // If no breakpoint inherit wanted, set max width with next breakpoint
         @if $inherit != true {
-
+            $inherit-breakpoint: $size;
             // If inherit is a breakpoint name, use breakpoint name for inherit
             @if map-has-key($map, $inherit) {
                 $inherit-breakpoint: $inherit;
-            } @else {
-                $inherit-breakpoint: $size;
             }
 
             $next-breakpoint: map-get-next($map, $inherit-breakpoint);
@@ -44,7 +42,7 @@
             }
         }
     } @else {
-        // Otherwise use size value for indivdual breakpoints
+        // Otherwise use size value for individual breakpoints
         $query: '(#{$selector}: #{$size})';
     }
 
