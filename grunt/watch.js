@@ -12,7 +12,7 @@ module.exports = {
             '<%= srcPath %>**/*.scss'
         ],
         tasks: [
-            'sass:dev'
+            'sass:development'
         ],
         options: {
             atBegin: true
