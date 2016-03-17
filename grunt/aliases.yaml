@@ -4,9 +4,9 @@ development:
         - 'clean:dist'
         - 'sass_globbing'
         - 'sass:development'
-        - 'copy:lodashRestore'
+        - 'autoprefixer:development'
         - 'lint'
-        - 'lodashAutobuild'
+        - 'copy:lodashRestore'
         - 'requirejs:development'
         - 'nunjuckr:development'
 
