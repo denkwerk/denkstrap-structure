@@ -1,9 +1,10 @@
 development:
     description: 'Development build task'
     tasks:
+        - 'clean:dist'
         - 'sass_globbing'
         - 'sass:development'
-        - 'autoprefixer:development'
+        - 'copy:lodashRestore'
         - 'lint'
         - 'lodashAutobuild'
         - 'requirejs:development'
@@ -17,6 +18,7 @@ dev:
 production:
     description: 'Production build task'
     tasks:
+        - 'clean:dist'
         - 'sass_globbing'
         - 'sass:production'
         - 'autoprefixer:production'

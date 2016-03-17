@@ -11,7 +11,7 @@ module.exports = function( grunt, options ) {
                 appDir: '<%= srcPath %>components',
                 baseUrl: './app',
                 mainConfigFile: '<%= srcPath %>components/app/main.js',
-                dir: '<%= distPath %>components',
+                dir: '<%= distPath %>js',
 
                 fileExclusionRegExp: /\.(njs|scss|gitkeep)/,
 
@@ -33,7 +33,7 @@ module.exports = function( grunt, options ) {
                 appDir: '<%= srcPath %>components',
                 baseUrl: './app',
                 mainConfigFile: '<%= srcPath %>components/app/main.js',
-                dir: '<%= distPath %>components',
+                dir: '<%= distPath %>js',
 
                 fileExclusionRegExp: /\.(njs|scss|gitkeep)/,
 
