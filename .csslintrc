@@ -6,37 +6,40 @@
 
     // Possible Errors
     "box-model": false,
-    "display-property-grouping": true,
-    "duplicate-properties": true,
-    "empty-rules": true,
-    "known-properties": true, // intern css parser, ignores prefix !ATTENTION doesn"t know svg properties
+    "display-property-grouping": 2, //test if it works above media queries
+    "duplicate-properties": 2,
+    "empty-rules": 2,
+    "known-properties": false, // intern css parser, ignores prefix !ATTENTION doesn"t know svg
+    // properties
 
     // Compatibility
     "adjoining-classes": false,
     "box-sizing": false,
     "compatible-vendor-prefixes": false, // use of autoprefix
-    "gradients": true,
-    "text-indent": true, // no negative text-indent to hide elements (text-indent: -1em;) is ok
-    "vendor-prefix": true, // standard property must be after vendor
-    "fallback-colors": true,
-    "star-property-hack": true, // disallow <IE8 Hack *width: 100px;
-    "underscore-property-hack": true, // disallow IE7 Hack _width:100px
-    "bulletproof-font-face": true,
+    "gradients": false,
+    "text-indent": false, // no negative text-indent to hide elements (text-indent: -1em;) is ok
+    "vendor-prefix": false, // standard property must be after vendor
+    "fallback-colors": false,
+    "star-property-hack": 2, // disallow <IE8 Hack *width: 100px;
+    "underscore-property-hack": 2, // disallow IE7 Hack _width:100px
+    "bulletproof-font-face": false,
 
     // Performance
-    "font-faces": true, //no more then 5 Font Faces
-    "import": true, // disallow css import -> instead use SCSS @import
-    "regex-selectors": true, // disallow regex in a attr selector ex .mybox[class~=xxx]
-    "universal-selector": true, // disallow astrix selector as key
-    "unqualified-attributes": true, // .class [type=text]
-    "zero-units": true, // warning when 0 has a unit ex 0px => 0
-    "overqualified-elements": true, // disallow div.myclass, but allows div.myclass { color: blue } && p.myclass [ color:red }
-    "shorthand": true, // margin-t r b l or padding-t r b l is set, than shorten to one property margin or padding
-    "duplicate-background-images": true,
+    "font-faces": false, //no more then 5 Font Faces
+    "import": false, // disallow css import -> instead use SCSS @import
+    "regex-selectors": false, // disallow regex in a attr selector ex .mybox[class~=xxx]
+    "universal-selector": false, // disallow astrix selector as key
+    "unqualified-attributes": false, // .class [type=text]
+    "zero-units": 2, // warning when 0 has a unit ex 0px => 0
+    "overqualified-elements": 2, // disallow div.myclass, but allows div.myclass { color: blue }
+    // && p.myclass [ color:red }
+    "shorthand": 2, // margin-t r b l or padding-t r b l is set, than shorten to one property
+    // margin or padding
+    "duplicate-background-images": false,
     "floats": false, // warn when more than 10 floats, could throw error with our grid
     //@BUG 2 still be just a warning
-    "font-sizes": true, // no more than 10 different sizes
-    "ids": true,
+    "font-sizes": false, // no more than 10 different sizes
+    "ids": false,
     "important": false,
 
     // Accessibility

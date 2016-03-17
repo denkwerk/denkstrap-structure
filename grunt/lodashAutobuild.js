@@ -8,6 +8,7 @@ module.exports = function( grunt, options ) {
         app: {
             src: [
                 '<%= srcPath %>components/**/*.js',
+                '!<%= srcPath %>components/app/vendor/*.js',
                 '!<%= srcPath %>components/app/vendor/*.js'
             ],
             options: {
