@@ -8,7 +8,7 @@ module.exports = function( grunt, options ) {
             browsers: [ 'last 2 versions', 'ie >= 8', 'Firefox >= 12', 'ios >= 7', 'android >= 4' ]
         },
         development: {
-            src: '<%= srcPath %>css/**/*.css'
+            src: '<%= distPath %>css/**/*.css'
         },
         production: {
             src: '<%= distPath %>css/**/*.css'
