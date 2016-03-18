@@ -27,7 +27,7 @@ module.exports = function( grunt ) {
             pkg: grunt.file.readJSON( 'package.json' ),
 
             // Livereload port
-            livereloadPort: 1337
+            liveReloadPort: 1337
         },
 
         // Use different function to merge config files

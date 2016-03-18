@@ -37,7 +37,8 @@ module.exports = function( grunt, options ) {
                     patternPath: '<%= srcPath %>components/pattern/',
                     appPath: '<%= srcPath %>components/app/',
                     srcPath: '<%= srcPath %>',
-                    production: false
+                    production: false,
+                    liveReloadPort: '<%= liveReloadPort %>'
                 }
             },
             files: [

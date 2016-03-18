@@ -5,7 +5,7 @@
 module.exports = {
     options: {
         nospawn: false,
-        livereload: '<%= livereloadPort %>'
+        livereload: '<%= liveReloadPort %>'
     },
     sass: {
         files: [
@@ -13,6 +13,18 @@ module.exports = {
         ],
         tasks: [
             'sass:development'
+        ],
+        options: {
+            atBegin: true
+        }
+    },
+
+    html: {
+        files: [
+            '<%= srcPath %>components/**/*.njs'
+        ],
+        tasks: [
+            'nunjuckr:development'
         ],
         options: {
             atBegin: true
