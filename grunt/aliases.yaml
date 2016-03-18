@@ -38,6 +38,7 @@ lint:
         - 'jshint:grunt'
         - 'jscs:grunt'
         - 'scsslint:scss'
+        - 'csslint:development'
         - 'jshint:frontend'
         - 'jscs:frontend'
 
@@ -45,5 +46,6 @@ lint_ci:
     description: 'Linting task for the CI server'
     tasks:
         - 'scsslint:scss'
+        - 'csslint:production'
         - 'jshint:ci'
         - 'jscs:ci'
