@@ -11,14 +11,14 @@
             config:             'config/development',
 
             // App
-            vendor:             'vendor/',
-            utils:              'utils/',
+            vendor:             'vendor',
+            utils:              'utils',
 
             // Components
             components:         '../',
-            modules:            '../modules/',
-            patterns:            '../patterns/',
-            site:               '../site/',
+            modules:            '../modules',
+            patterns:            '../patterns',
+            site:               '../site',
 
             // Plugins
             load:               'vendor/plugins/load',
