@@ -4,6 +4,9 @@
     "validateLineBreaks": "LF",
     "requireCamelCaseOrUpperCaseIdentifiers": true,
     "requireParenthesesAroundIIFE": true,
+    "disallowNewlineBeforeBlockStatements": true,
+    "requireCapitalizedComments": false,
+    "requirePaddingNewLinesBeforeLineComments": false,
     "jsDoc": {
         "checkParamNames": true,
         "checkRedundantParams": true,
