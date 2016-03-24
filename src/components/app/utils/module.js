@@ -114,9 +114,11 @@
                 this.uid = this.uid || _.uniqueId( this.name + '_' );
 
                 var constructors = this.constructors || [ 'ready', 'events' ];
+                var errorMethodName = this.failMethod || 'fail';
 
                 var element = $( {} );
                 var methods = {};
+                var errorMethod = null;
                 var loaderPromise = ( args[ 3 ] && args[ 3 ].resolve ) ?
                     args [ 3 ] :
                     undefined;
@@ -134,6 +136,16 @@
                             : _super[ method ]
                         : function() {};
                 } );
+
+                /**
+                 * Assignment of the error method
+                 * @type {Function}
+                 */
+                errorMethod = typeof proto[ errorMethodName ] === 'function' ?
+                    proto.hasOwnProperty( errorMethodName ) ?
+                        proto[ errorMethodName ]
+                        : _super[ errorMethodName ]
+                    : function() {};
 
                 if ( args[ 0 ] && args[ 0 ].jquery ) {
                     element = args[ 0 ];
@@ -180,6 +192,17 @@
                     }, this ) );
 
                 }, this );
+
+                if ( typeof errorMethod === 'function' ) {
+
+                    promise.fail( _.bind( function() {
+                        var initArgs = Array.prototype.slice.call( args, 0, 2 );
+                        initArgs = initArgs.concat( Array.prototype.slice.call( arguments ) );
+
+                        errorMethod.apply( this, initArgs );
+                    }, this ) );
+
+                }
 
                 promise.then( _.bind( function() {
 

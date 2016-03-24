@@ -202,6 +202,69 @@
                 } );
             } );
 
+            it( 'should call the fail method when a promise fails', function( done ) {
+                var fakeModule = {
+                        ready: function() {
+                            var def = $.Deferred();
+                            def.reject();
+                            return def;
+                        },
+                        fail: function() {
+                            done();
+                        }
+                    },
+                    fakeModuleName = 'test',
+                    fakeElement = $( '<div></div>' );
+
+                require( [ 'utils/module' ], function( Module ) {
+                    var FakeClass = Module.extend( fakeModule );
+                    var instance = new FakeClass( fakeElement, {}, fakeModuleName );
+                } );
+            } );
+
+            it( 'should call the fail method when a promise fails and pass data', function( done ) {
+                var fakeModule = {
+                        ready: function() {
+                            var def = $.Deferred();
+                            def.reject( { error: true } );
+                            return def;
+                        },
+                        fail: function( el, opt, err ) {
+                            if ( err.error === true ) {
+                                done();
+                            }
+                        }
+                    },
+                    fakeModuleName = 'test',
+                    fakeElement = $( '<div></div>' );
+
+                require( [ 'utils/module' ], function( Module ) {
+                    var FakeClass = Module.extend( fakeModule );
+                    var instance = new FakeClass( fakeElement, {}, fakeModuleName );
+                } );
+            } );
+
+            it( 'should call the defined fail method when a promise', function( done ) {
+                var fakeModule = {
+                        failMethod: 'readyFailed',
+                        ready: function() {
+                            var def = $.Deferred();
+                            def.reject();
+                            return def;
+                        },
+                        readyFailed: function() {
+                            done();
+                        }
+                    },
+                    fakeModuleName = 'test',
+                    fakeElement = $( '<div></div>' );
+
+                require( [ 'utils/module' ], function( Module ) {
+                    var FakeClass = Module.extend( fakeModule );
+                    var instance = new FakeClass( fakeElement, {}, fakeModuleName );
+                } );
+            } );
+
         } );
 
     } );

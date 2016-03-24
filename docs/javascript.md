@@ -183,6 +183,8 @@ Lokale Module besitzen zusätzliche Eigenschaften. Jedes Modul bekommt eine eind
 ```
 ##### Promise
 Wird in einer Konstruktor-Methode ein `Promise` (aktuell werden nur jQuery Promises unterstützt: [jQuery Deferred Dokumentation](https://api.jquery.com/jquery.deferred/)) zurückgegeben, werden die darauffolgenden Konstruktor-Methoden erst ausgeführt, sobald das Promise resolved ist.
+###### Fail
+Über die Eigenschaft `failMethod` kann der Name einer Methode definiert werden, die im Fehlerfall ausgeführt wird. Standardmäßig lautet der Name dieser Methode `fail`.
 ##### Events
 Des weiteren werden beim Initialisieren lokaler Module einige standardisierte Events auf den DOM-Elementen gefeuert. Jedes Event wird zusätzlich einmal mit dem Modulnamen (`this.name`) als Namespace gefeuert. Falls auf einem DOM-Element mehrere Module geladen werden, kann so zwischen den gefeuerten Events unterschieden werden.
 ###### beforeInit
@@ -223,6 +225,11 @@ Dieses Event wird nach dem Ausführen der Konstruktor-Methoden gefeuert. Wenn di
                 element.on('afterInit.modules/foo', function () {
                     // Wird ausgeführt, wenn modules/foo fertig initialisiert wurde
                 });
+            },
+            
+            // Wird ausgeführt wenn der AJAX Request fehlschlägt
+            fail: function ( element, options, jqXHR, textStatus, errorThrown ) {
+                // tuwas
             }
 
         };
