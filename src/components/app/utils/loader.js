@@ -6,9 +6,8 @@
     define( [
         'require',
         'jquery',
-        'lodash',
         'utils/module'
-    ], function( require, $, _, Module ) {
+    ], function( require, $, Module ) {
 
         /**
          * Module Loader
@@ -18,7 +17,6 @@
          *
          * Used lodash methods
          * (is required for the grunt lodashAutobuild Task which is not able to parse chains)
-         * _.chain _.map _.unique _.flatten _.matchesProperty _.union
          *
          * @example Example
          * var loader = new Loader(element);
@@ -51,7 +49,9 @@
         function Loader ( options, requireContext ) {
 
             this.elementScope = options.elementScope || $( document );
-            this.globalScope   = _.isObject( options.globalScope ) ? options.globalScope : {};
+            this.globalScope   = ( typeof options.globalScope === 'object' ) ?
+                options.globalScope :
+                {};
             this.options = options;
             this.requireContext = requireContext || require;
             this.promise = $.Deferred();
@@ -60,7 +60,7 @@
                 minor: 0
             };
 
-            this.promise.progress( _.bind( function(  type ) {
+            this.promise.progress( function(  type ) {
 
                 if ( type && this.pendingModules.hasOwnProperty( type ) ) {
                     this.pendingModules[ type ]--;
@@ -70,7 +70,7 @@
                     this.promise.resolve();
                 }
 
-            }, this ) );
+            }.bind( this ) );
 
             if ( options.autoInit !== false ) {
                 this.initModules();
@@ -112,12 +112,12 @@
              * Creates array with module objects
              */
 
-            _.each( moduleElements, _.bind( function( element, index ) {
+            moduleElements.each( function( index, element ) {
                 module = this.getModule( moduleElements.eq( index ) );
                 target = module.priority ? modules.major : modules.minor;
 
                 target.push( module );
-            }, this ) );
+            }.bind( this ) );
 
             /**
              * Creates Lists with all modules and extensions to load in a
@@ -126,23 +126,31 @@
              * TODO: Optimize union
              */
 
-            moduleNames.major = _.chain( modules.major )
-                .map( 'source' )
-                .union( _.map( modules.major, 'extensions' ) )
-                .flatten()
-                .unique()
-                .value();
+            var generateModulesArray = function( inputArray ) {
+                var result = inputArray.map( function( module ) { // map sources
+                        return module.source;
+                    } ).concat( inputArray.map( function( module ) { // concatenate with extensionsf
+                        return module.extensions;
+                    } ) ).reduce( function( acc, items ) { // flatten array
+                        return acc.concat( items );
+                    }, [] ).reduce( function( acc, item ) { // uniuqe entries
+                        /* jshint bitwise: false */
+                        if ( !acc.length || !~acc.indexOf( item ) ) {
+                            /* jshint bitwise: true */
+                            acc.push( item );
+                        }
+                        return acc;
+                    }, [] );
+                return result;
+            };
+
+            moduleNames.major = generateModulesArray( modules.major );
 
             if ( moduleNames.major.length ) {
                 this.loadModules( moduleNames.major, modules.major, 'major' );
             }
 
-            moduleNames.minor = _.chain( modules.minor )
-                .map( 'source' )
-                .union( _.map( modules.minor, 'extensions' ) )
-                .flatten()
-                .unique()
-                .value();
+            moduleNames.minor = generateModulesArray( modules.minor );
 
             if ( moduleNames.minor.length ) {
                 this.loadModules( moduleNames.minor, modules.minor, 'minor' );
@@ -204,8 +212,8 @@
 
             this.globalScope[ name ] = options.module;
 
-            _.each( methods, function( method, index ) {
-                if ( _.isFunction( options.module[ method ] ) ) {
+            methods.forEach( function( method, index ) {
+                if ( typeof options.module[ method ] === 'function' ) {
                     try {
                         options.module[ method ].call(
                             options.module,
@@ -238,7 +246,7 @@
             var ModuleInstance;
 
             if ( options.extensions.length ) {
-                _.each( options.extensions, function( extension ) {
+                options.extensions.forEach( function( extension ) {
                     ModuleClass = ModuleClass.extend( extension );
                 } );
             }
@@ -288,16 +296,16 @@
          */
         Loader.prototype.loadModules = function( moduleNames, modules, type ) {
 
-            this.requireContext( moduleNames, _.bind( function() {
+            this.requireContext( moduleNames, function() {
                 var args = arguments;
 
                 // PendingModules has to be updated BEFORE the initializing process has been started
                 // TODO: Optimize
-                _.each( modules, _.bind( function( moduleObject ) {
+                modules.forEach( function( moduleObject ) {
 
-                    _.each( moduleObject.source, _.bind( function( moduleName ) {
+                    moduleObject.source.forEach( function( moduleName ) {
 
-                        var indexInArg = _.indexOf( moduleNames, moduleName );
+                        var indexInArg = moduleNames.indexOf( moduleName );
                         var module = args[ indexInArg ];
 
                         //Var isLocal = !module.isGlobal;
@@ -306,17 +314,17 @@
 
                         //}
 
-                    }, this ) );
+                    }, this );
 
-                }, this ) );
+                }, this );
 
-                _.each( modules, _.bind( function( moduleObject ) {
+                modules.forEach( function( moduleObject ) {
 
-                    _.each( moduleObject.source, _.bind( function( moduleName ) {
-                        var indexInArg = _.indexOf( moduleNames, moduleName );
+                    moduleObject.source.forEach( function( moduleName ) {
+                        var indexInArg = moduleNames.indexOf( moduleName );
                         var module = args[ indexInArg ];
                         var isLocal = !module.isGlobal;
-                        var isFunction = _.isFunction( module );
+                        var isFunction = typeof module === 'function';
                         var initFunction = isFunction ?
                             this.initLocalClass
                             : isLocal ?
@@ -330,13 +338,14 @@
                          * Searchs related extensions and pushes them into an array
                          */
                         if ( isLocal && moduleObject.extensions.length ) {
-                            _.each( moduleObject.extensions, function( extensionName, index ) {
-                                extensionIndexInArg = _.indexOf( moduleNames, extensionName );
+                            moduleObject.extensions.forEach( function( extensionName, index ) {
+                                extensionIndexInArg = moduleNames.indexOf( extensionName );
 
-                                if ( _.contains(
-                                        args[ extensionIndexInArg ].extend,
+                                /* jshint bitwise: false */
+                                if ( !!~args[ extensionIndexInArg ].extend.indexOf(
                                         moduleName
                                     ) ) {
+                                    /* jshint bitwise: true */
                                     extensions.push( args[ extensionIndexInArg ] );
                                 }
                             } );
@@ -353,9 +362,9 @@
                             extensions: extensions,
                             type: type
                         } );
-                    }, this ) );
-                }, this ) );
-            }, this ) );
+                    }, this );
+                }, this );
+            }.bind( this ) );
         };
 
         return Loader;

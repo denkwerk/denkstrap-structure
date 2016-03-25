@@ -265,6 +265,24 @@
                 } );
             } );
 
+            it( 'should have a unique id', function( done ) {
+                var fakeModule = {
+                        ready: function() {
+                        }
+                    },
+                    fakeModuleName = 'test',
+                    fakeElement = $( '<div></div>' );
+
+                require( [ 'utils/module' ], function( Module ) {
+                    var FakeClass = Module.extend( fakeModule );
+                    var instanceA = new FakeClass( fakeElement, {}, fakeModuleName );
+                    var instanceB = new FakeClass( fakeElement, {}, fakeModuleName );
+
+                    expect( instanceA.uid ).not.equal( instanceB.uid );
+                    done();
+                } );
+            } );
+
         } );
 
     } );

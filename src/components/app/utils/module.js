@@ -2,10 +2,11 @@
     'use strict';
 
     define( [
-        'lodash',
         'jquery',
         'vendor/polyfills/object.create'
-    ], function( _, $ ) {
+    ], function( $ ) {
+
+        var _lastId = 0;
 
         /**
          * Module Class
@@ -111,7 +112,7 @@
                 var args = arguments;
 
                 this.name = args[ 2 ] || 'module';
-                this.uid = this.uid || _.uniqueId( this.name + '_' );
+                this.uid = this.uid || this.name + '_' + _lastId++;
 
                 var constructors = this.constructors || [ 'ready', 'events' ];
                 var errorMethodName = this.failMethod || 'fail';
@@ -129,7 +130,7 @@
                 /**
                  * Assignment of the contructor functions
                  */
-                _.each( constructors, function( method ) {
+                constructors.forEach( function( method ) {
                     methods[ method ] = typeof proto[ method ] === 'function' ?
                         proto.hasOwnProperty( method ) ?
                             proto[ method ]
@@ -156,7 +157,7 @@
                  * @event beforeInit
                  * @event beforeInit:namespace
                  */
-                if ( !_.isNull( element ) ) {
+                if ( element !== null ) {
                     element
                         .trigger( EVENT_BEFORE_INIT + '.^', [ element ] )
                         .trigger( EVENT_BEFORE_INIT + '.' + this.name, [ element ] );
@@ -176,35 +177,35 @@
                     methods[ constructors[ 0 ] ].apply( this, args )
                 );
 
-                _.each( constructors, function( cName, index ) {
+                constructors.forEach( function( cName, index ) {
 
                     if ( index === 0 ) {
                         return;
                     }
 
-                    promise = promise.then( _.bind( function() {
+                    promise = promise.then( function() {
                         var initArgs = Array.prototype.slice.call( args, 0, 2 );
                         initArgs = initArgs.concat( Array.prototype.slice.call( arguments ) );
 
                         return $.when(
                             methods[ cName ].apply( this, initArgs )
                         );
-                    }, this ) );
+                    }.bind( this ) );
 
                 }, this );
 
                 if ( typeof errorMethod === 'function' ) {
 
-                    promise.fail( _.bind( function() {
+                    promise.fail( function() {
                         var initArgs = Array.prototype.slice.call( args, 0, 2 );
                         initArgs = initArgs.concat( Array.prototype.slice.call( arguments ) );
 
                         errorMethod.apply( this, initArgs );
-                    }, this ) );
+                    }.bind( this ) );
 
                 }
 
-                promise.then( _.bind( function() {
+                promise.then( function() {
 
                     /**
                      * AfterInit Event
@@ -212,7 +213,7 @@
                      * @event afterInit
                      * @event afterInit:namespace
                      */
-                    if ( !_.isNull( element ) ) {
+                    if ( element !== null ) {
                         element
                             .trigger( EVENT_AFTER_INIT + '.^', [ element ] )
                             .trigger( EVENT_AFTER_INIT + '.' + this.name, [ element ] );
@@ -222,7 +223,7 @@
                         loaderPromise.notify( type );
                     }
 
-                }, this ) );
+                }.bind( this ) );
 
             };
 
