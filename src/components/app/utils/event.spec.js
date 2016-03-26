@@ -6,7 +6,7 @@
         'jquery'
     ], function( require, $ ) {
 
-        describe( 'jQuery Event Dispatcher', function() {
+        describe( 'Event Dispatcher', function() {
 
             var EVENT_TEST_1    = '/testrunner/1';
             var EVENT_TEST_2    = '/testrunner/2';
@@ -58,15 +58,29 @@
                     var testArg = 'testString';
 
                     Event.on( EVENT_TEST_3, function( e, param ) {
-                        if ( param === testArg ) {
-                            done();
-                        }
+                        expect( param ).to.be.equal( testArg );
+                        done();
                     } );
 
                     Event.trigger( EVENT_TEST_3, [ testArg ] );
 
                 } );
 
+            } );
+
+            it( 'should trigger an event with custom scope', function( done ) {
+                require( [ 'utils/event' ], function( Event ) {
+
+                    var testScope = {};
+
+                    Event.on( EVENT_TEST_3, function( e, param ) {
+                        expect( this ).to.be.equal( testScope );
+                        done();
+                    } );
+
+                    Event.trigger( EVENT_TEST_3, [], testScope );
+
+                } );
             } );
 
             it( 'should be possible to unregister an event', function( done ) {
