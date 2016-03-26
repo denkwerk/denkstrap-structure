@@ -12,6 +12,7 @@
                 requirejs.undef( 'utils/module' );
                 requirejs.undef( 'jquery' );
                 requirejs.undef( 'test' );
+                requirejs.undef( 'test-priority' );
             } );
 
             afterEach( function() {
@@ -19,6 +20,7 @@
                 requirejs.undef( 'utils/module' );
                 requirejs.undef( 'jquery' );
                 requirejs.undef( 'test' );
+                requirejs.undef( 'test-priority' );
             } );
 
             it( 'should initialize with document as default scope', function( done ) {
@@ -106,6 +108,35 @@
 
                     setTimeout( function() {
                         expect( fakeModule.ready.calledTwice ).to.be.equal( true );
+                        done();
+                    }, 100 );
+                } );
+            } );
+
+            it( 'should initialize priorized modules first', function( done ) {
+                var fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-priority="false" data-module="test"></div>' +
+                        '<div class="auto-init" data-priority="true" data-module="test-priority">' +
+                        '</div>' +
+                    '</div>' ),
+                    fakeModule = {
+                        ready: sinon.spy()
+                    },
+                    fakePriority = {
+                        ready: sinon.spy()
+                    };
+
+                define( 'test', fakeModule );
+                define( 'test-priority', fakePriority );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: fakeElement
+                    } );
+
+                    setTimeout( function() {
+                        expect( fakePriority.ready.calledBefore( fakeModule.ready ) )
+                            .to.be.equal( true );
                         done();
                     }, 100 );
                 } );
