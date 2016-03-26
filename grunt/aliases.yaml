@@ -6,7 +6,6 @@ development:
         - 'sass:development'
         - 'autoprefixer:development'
         - 'lint'
-        - 'copy:lodashRestore'
         - 'requirejs:development'
         - 'nunjuckr:development'
 
@@ -23,7 +22,6 @@ production:
         - 'sass:production'
         - 'autoprefixer:production'
         - 'lint'
-        - 'lodashAutobuild'
         - 'requirejs:production'
         - 'nunjuckr:production'
 

@@ -30,8 +30,6 @@
     "grunt-contrib-watch": "0.6.1",
     "grunt-contrib-csslint": "0.5.0",
     "grunt-jscs": "2.3.0",
-    "grunt-lodash": "0.5.0",
-    "grunt-lodash-autobuild": "0.3.0",
     "grunt-nunjuckr": "0.1.1",
     "grunt-sass": "1.1.0",
     "grunt-sass-globbing": "1.4.0",
@@ -39,7 +37,6 @@
     "jscs": "2.5.0",
     "jshint": "2.8.0",
     "load-grunt-config": "0.17.2",
-    "lodash-cli": "3.10.1",
     "time-grunt": "1.2.2",
     "requirejs": "2.1.20"
   },
