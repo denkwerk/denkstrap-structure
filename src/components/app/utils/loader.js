@@ -5,9 +5,17 @@
 
     define( [
         'require',
-        'jquery',
-        'utils/module'
-    ], function( require, $, Module ) {
+        'utils/module',
+        'vendor/polyfills/promise'
+    ], function( require, Module ) {
+
+        /*
+         * Extends NodeList prototype with Array.prototype.forEach function. Does not work in
+         * IE < 8. For this case you better use the jQuery version of this library.
+         *
+         * TODO: Move all native extensions to a single file.
+         */
+        NodeList.prototype.forEach = Array.prototype.forEach;
 
         /**
          * Module Loader
@@ -34,7 +42,7 @@
          * @constructs Loader
          * @param {Object} options
          * @param {Object} [options.globalScope] Scope on which the global modules will be attached
-         * @param {jQuery/Zepto} [options.elementScope] DOM element scope
+         * @param {jQuery/Zepto/HTMLElement} [options.elementScope] DOM element scope
          * @param {Boolean} [options.autoInit] Unless 'false' the Loader will automatically
          * initialize all Modules in Scope
          * @param {Function} requireContext The require.js context for the Loader instance
@@ -48,29 +56,32 @@
          */
         function Loader ( options, requireContext ) {
 
-            this.elementScope = options.elementScope || $( document );
+            this.elementScope = ( options.elementScope && options.elementScope.jquery ) ?
+                options.elementScope.get( 0 ) :
+                options.elementScope || document;
             this.globalScope   = ( typeof options.globalScope === 'object' ) ?
                 options.globalScope :
                 {};
             this.options = options;
             this.requireContext = requireContext || require;
-            this.promise = $.Deferred();
+            this.promise = new Promise( function( resolve, reject ) {
+                this.resolve = resolve;
+                this.reject = reject;
+            }.bind( this ) );
             this.pendingModules = {
                 major: 0,
                 minor: 0
             };
 
-            this.promise.progress( function(  type ) {
-
+            this.moduleLoaded = function( type ) {
                 if ( type && this.pendingModules.hasOwnProperty( type ) ) {
                     this.pendingModules[ type ]--;
                 }
 
                 if ( !this.pendingModules.major && !this.pendingModules.minor ) {
-                    this.promise.resolve();
+                    this.resolve();
                 }
-
-            }.bind( this ) );
+            }.bind( this );
 
             if ( options.autoInit !== false ) {
                 this.initModules();
@@ -85,14 +96,16 @@
          *
          * @function initModules
          * @memberof Loader
-         * @param {jQuery/Zepto} [element] Optionally an jQuery/Zepto element can be passed
-         *                                 wich will be used as scope
+         * @param {jQuery/Zepto/HTMLElement} [element] Optionally an jQuery/Zepto element can be
+         *                                             passed wich will be used as scope
          * @returns {Promise} The returned Promise will be resolved when all local modules
          *                    are initialized
          */
         Loader.prototype.initModules = function( element ) {
-            var elementScope = element || this.elementScope;
-            var moduleElements = elementScope.find(
+            var elementScope = ( element && element.jquery ) ?
+                element.get( 0 ) :
+                element || this.elementScope;
+            var moduleElements = elementScope.querySelectorAll(
                 this.options.autoInitSelector ||
                 autoInitSelector
             );
@@ -112,8 +125,8 @@
              * Creates array with module objects
              */
 
-            moduleElements.each( function( index, element ) {
-                module = this.getModule( moduleElements.eq( index ) );
+            moduleElements.forEach( function( element, index ) {
+                module = this.getModule( moduleElements.item( index ) );
                 target = module.priority ? modules.major : modules.minor;
 
                 target.push( module );
@@ -157,7 +170,7 @@
             }
 
             if ( !moduleNames.minor.length && !moduleNames.major.length ) {
-                this.promise.notify();
+                this.moduleLoaded();
             }
 
             return this.promise;
@@ -168,29 +181,29 @@
          *
          * @function getModule
          * @memberof Loader
-         * @param {jQuery/Zepto} element
-         * @returns {{element: jQuery/Zepto, source: Array, options: Object, extensions: Array}}
+         * @param {jQuery/Zepto/HTMLElement} element
+         * @returns {{element: HTMLElement, source: Array, options: Object, extensions: Array}}
          */
         Loader.prototype.getModule = function( element ) {
             return {
                 element: element,
 
-                source: element.data( 'module' ) ?
-                    element.data( 'module' ).replace( / /g, '' ).split( ',' )
-                    : element.data( 'modules' ) ?
-                    element.data( 'modules' ).replace( / /g, '' ).split( ',' )
+                source: element.getAttribute( 'data-module' ) ?
+                    element.getAttribute( 'data-module' ).replace( / /g, '' ).split( ',' )
+                    : element.getAttribute( 'data-modules' ) ?
+                    element.getAttribute( 'data-modules' ).replace( / /g, '' ).split( ',' )
                     : [],
 
-                options: element.data( 'options' ),
+                options: JSON.parse( element.getAttribute( 'data-options' ) ),
 
-                extensions: element.data( 'extension' ) ?
-                    element.data( 'extension' ).replace( / /g, '' ).split( ',' )
-                    : element.data( 'extensions' ) ?
-                    element.data( 'extensions' ).replace( / /g, '' ).split( ',' )
+                extensions: element.getAttribute( 'data-extension' ) ?
+                    element.getAttribute( 'data-extension' ).replace( / /g, '' ).split( ',' )
+                    : element.getAttribute( 'data-extensions' ) ?
+                    element.getAttribute( 'data-extensions' ).replace( / /g, '' ).split( ',' )
                     : [],
 
-                priority: element.data( 'priority' ) ?
-                    element.data( 'priority' )
+                priority: element.getAttribute( 'data-priority' ) ?
+                    JSON.parse( element.getAttribute( 'data-priority' ) )
                     : false
             };
         };
@@ -202,7 +215,7 @@
          * @memberof Loader
          * @param {Object} options
          * @param {Object} options.module
-         * @param {jQuery/Zepto} options.element
+         * @param {jQuery/Zepto/HTMLElement} options.element
          * @param {Object} options.options
          * @param {String} options.moduleName
          */
@@ -226,7 +239,7 @@
                 }
             } );
 
-            this.promise.notify( options.type );
+            this.moduleLoaded( options.type );
         };
 
         /**
@@ -236,7 +249,7 @@
          * @memberof Loader
          * @param {Object} options
          * @param {Object} options.module
-         * @param {jQuery/Zepto} options.element
+         * @param {jQuery/Zepto/HTMLElement} options.element
          * @param {Object} options.options
          * @param {Array} options.extensions
          * @param {String} options.moduleName
@@ -267,22 +280,17 @@
          * @memberof Loader
          * @param {Object} options
          * @param {Object} options.module
-         * @param {jQuery/Zepto} options.element
+         * @param {jQuery/Zepto/HTMLElement} options.element
          * @param {Object} options.options
          * @param {Array} options.extensions
          * @param {String} options.moduleName
          */
         Loader.prototype.initLocalClass = function( options ) {
-
-            // For testing purposes attach module to element
-            options.element.data(
+            return new options.module(
+                options.element,
+                options.options,
                 options.moduleName,
-                new options.module(
-                    options.element,
-                    options.options,
-                    options.moduleName,
-                    this.promise, options.type
-                )
+                this.moduleLoaded, options.type
             );
         };
 

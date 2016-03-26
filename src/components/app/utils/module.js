@@ -2,9 +2,10 @@
     'use strict';
 
     define( [
-        'jquery',
-        'vendor/polyfills/object.create'
-    ], function( $ ) {
+        'vendor/polyfills/object.create',
+        'vendor/polyfills/promise',
+        'vendor/polyfills/custom-event'
+    ], function() {
 
         var _lastId = 0;
 
@@ -117,13 +118,13 @@
                 var constructors = this.constructors || [ 'ready', 'events' ];
                 var errorMethodName = this.failMethod || 'fail';
 
-                var element = $( {} );
+                var element = document.createElement( 'div' );
                 var methods = {};
                 var errorMethod = null;
-                var loaderPromise = ( args[ 3 ] && args[ 3 ].resolve ) ?
+                var loadedCallback = ( typeof args[ 3 ] === 'function' ) ?
                     args [ 3 ] :
                     undefined;
-                var type = ( loaderPromise && typeof args[ 4 ] === 'string' ) ?
+                var type = ( loadedCallback && typeof args[ 4 ] === 'string' ) ?
                     args[ 4 ] :
                     undefined;
 
@@ -149,6 +150,8 @@
                     : function() {};
 
                 if ( args[ 0 ] && args[ 0 ].jquery ) {
+                    element = args[ 0 ].get( 0 );
+                } else if ( args[ 0 ] && args[ 0 ] instanceof HTMLElement ) {
                     element = args[ 0 ];
                 }
 
@@ -158,9 +161,14 @@
                  * @event beforeInit:namespace
                  */
                 if ( element !== null ) {
-                    element
-                        .trigger( EVENT_BEFORE_INIT + '.^', [ element ] )
-                        .trigger( EVENT_BEFORE_INIT + '.' + this.name, [ element ] );
+                    var beforeInitEvent = new CustomEvent( EVENT_BEFORE_INIT, {} ),
+                        beforeInitEventNS = new CustomEvent(
+                            EVENT_BEFORE_INIT + '.' + this.name,
+                            {}
+                        );
+
+                    element.dispatchEvent( beforeInitEvent );
+                    element.dispatchEvent( beforeInitEventNS );
                 }
 
                 /**
@@ -169,13 +177,15 @@
                  * If a deferred object is passed by the constructor functions return
                  * value the afterInit events will be fired when the deferred objects
                  * are resolved
-                 *
-                 * TODO: Support für ES6 Promises
                  */
 
-                var promise = $.when(
-                    methods[ constructors[ 0 ] ].apply( this, args )
-                );
+                var promise = methods[ constructors[ 0 ] ].apply( this, args );
+
+                if ( !promise || typeof promise.then !== 'function' ) {
+                    promise = new Promise( function( resolve, reject ) {
+                        resolve( promise );
+                    } );
+                }
 
                 constructors.forEach( function( cName, index ) {
 
@@ -183,25 +193,29 @@
                         return;
                     }
 
+                    var initArgs = Array.prototype.slice.call( args, 0, 2 );
+
                     promise = promise.then( function() {
-                        var initArgs = Array.prototype.slice.call( args, 0, 2 );
                         initArgs = initArgs.concat( Array.prototype.slice.call( arguments ) );
 
-                        return $.when(
-                            methods[ cName ].apply( this, initArgs )
-                        );
+                        return methods[ cName ].apply( this, initArgs );
                     }.bind( this ) );
 
                 }, this );
 
                 if ( typeof errorMethod === 'function' ) {
-
-                    promise.fail( function() {
+                    var catchMethod = function() {
                         var initArgs = Array.prototype.slice.call( args, 0, 2 );
                         initArgs = initArgs.concat( Array.prototype.slice.call( arguments ) );
 
                         errorMethod.apply( this, initArgs );
-                    }.bind( this ) );
+                    }.bind( this );
+
+                    if ( typeof promise.catch === 'function' ) {
+                        promise.catch( catchMethod );
+                    } else if ( typeof promise.fail === 'function' ) {
+                        promise.fail( catchMethod );
+                    }
 
                 }
 
@@ -214,13 +228,18 @@
                      * @event afterInit:namespace
                      */
                     if ( element !== null ) {
-                        element
-                            .trigger( EVENT_AFTER_INIT + '.^', [ element ] )
-                            .trigger( EVENT_AFTER_INIT + '.' + this.name, [ element ] );
+                        var afterInitEvent = new CustomEvent( EVENT_AFTER_INIT, {} ),
+                            afterInitEventNS = new CustomEvent(
+                                EVENT_AFTER_INIT + '.' + this.name,
+                                {}
+                            );
+
+                        element.dispatchEvent( afterInitEvent );
+                        element.dispatchEvent( afterInitEventNS );
                     }
 
-                    if ( loaderPromise && type ) {
-                        loaderPromise.notify( type );
+                    if ( loadedCallback && type ) {
+                        loadedCallback( type );
                     }
 
                 }.bind( this ) );
