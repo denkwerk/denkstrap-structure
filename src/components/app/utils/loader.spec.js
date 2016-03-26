@@ -27,13 +27,13 @@
                 require( [ 'utils/loader' ], function( Loader ) {
                     var loader = new Loader( {} );
 
-                    expect( loader.elementScope.is( document ) ).to.be.deep.equal( true );
+                    expect( loader.elementScope ).to.be.deep.equal( document );
                     done();
                 } );
             } );
 
             it( 'should initialize with an element scope', function( done ) {
-                var fakeElement = $( '<div></div>' );
+                var fakeElement = document.createElement( 'div' );
 
                 require( [ 'utils/loader' ], function( Loader ) {
                     var loader = new Loader( {
@@ -41,6 +41,19 @@
                     } );
 
                     expect( loader.elementScope ).to.be.equal( fakeElement );
+                    done();
+                } );
+            } );
+
+            it( 'should accept a jquery element as its scope', function( done ) {
+                var fakeElement = $( '<div></div>' );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: fakeElement
+                    } );
+
+                    expect( loader.elementScope ).to.be.equal( fakeElement.get( 0 ) );
                     done();
                 } );
             } );
@@ -189,6 +202,31 @@
                         expect( fakeModule.ready.calledOnce ).to.be.equal( true );
                         done();
                     }, 100 );
+                } );
+            } );
+
+            it( 'should resolve a promise when all modules are loaded', function( done ) {
+                var fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-module="test"></div>' +
+                        '<div class="auto-init" data-module="test"></div>' +
+                    '</div>' ),
+                    fakeModule = {
+                        ready: sinon.spy()
+                    };
+
+                define( 'test', fakeModule );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: fakeElement,
+                        autoInit: false
+                    } );
+
+                    loader.initModules().then( function() {
+                        expect( fakeModule.ready.calledTwice )
+                            .to.be.equal( true );
+                        done();
+                    } );
                 } );
             } );
 
