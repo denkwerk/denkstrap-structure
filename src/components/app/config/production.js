@@ -3,8 +3,8 @@
 
     define( [
         'utils/core',
-        'lodash'
-    ], function( App, _ ) {
+        'utils/helper'
+    ], function( App, helper ) {
 
         var moduleOptions = {
             example: 'foo'
@@ -33,7 +33,7 @@
             }
         };
 
-        _.extend( App, { config: config } );
+        helper.extend( App, { config: config } );
 
         return App.config;
     } );
