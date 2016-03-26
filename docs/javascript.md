@@ -28,9 +28,12 @@
 ***
 
 ## Module
+
 Zwei Modultypen stehen zur Verfügung: *globale* und *lokale* Module. Ein globales Modul wird einem Objektliteral hinzugefügt (z.B. `window.App`). Wenn mehrere Module des selben Typs initialisiert werden, teilen sie sich den selben Scope im Objektliteral. Das bewirkt unter Umständen, dass sich diese Module während der Laufzeit teilweise gegenseitig überschreiben. Ein lokales Modul wird beim initialisieren instanziert. Jedes lokale Modul besitzt seinen eigenen Scope. Desweiteren können lokale Module mit Extensions erweitert werden und besitzen diverse weitere Eigenschaften.
+
 ### Aufbau eines Moduls
-Der Grundaufbau beider Modultypen ist prinzipiell gleich. Die Methoden `ready` und `events` dienen als Konstruktor-Methoden, werden beim Initialisieren durch den **Loader** ausgeführt und bekommen als Argumente das zugehörige DOM-Element (jQuery) sowie die Options übergeben. Die Konstruktor-Methoden können jedoch auch manuell festgelegt werden (siehe [Konstruktor-Methoden](#konstruktor-methoden)).
+
+Der Grundaufbau beider Modultypen ist prinzipiell gleich. Die Methoden `ready` und `events` dienen als Konstruktor-Methoden, werden beim Initialisieren durch den **Loader** ausgeführt und bekommen als Argumente das zugehörige DOM-Element ([HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)) sowie die Options übergeben. Die Konstruktor-Methoden können jedoch auch manuell festgelegt werden (siehe [Konstruktor-Methoden](#konstruktor-methoden)).
 
 ```javascript
 (function ( window, define, require, undefined ) {
@@ -182,7 +185,9 @@ Lokale Module besitzen zusätzliche Eigenschaften. Jedes Modul bekommt eine eind
 }( this, this.define, this.require ));
 ```
 ##### Promise
-Wird in einer Konstruktor-Methode ein `Promise` (aktuell werden nur jQuery Promises unterstützt: [jQuery Deferred Dokumentation](https://api.jquery.com/jquery.deferred/)) zurückgegeben, werden die darauffolgenden Konstruktor-Methoden erst ausgeführt, sobald das Promise resolved ist.
+
+Wird in einer Konstruktor-Methode ein `Promise` (aktuell werden sowohl [jQuery Promises](https://api.jquery.com/jquery.deferred/) als auch [ES6 Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) unterstützt) zurückgegeben, werden die darauffolgenden Konstruktor-Methoden erst ausgeführt, sobald das Promise resolved ist.
+
 ###### Fail
 Über die Eigenschaft `failMethod` kann der Name einer Methode definiert werden, die im Fehlerfall ausgeführt wird. Standardmäßig lautet der Name dieser Methode `fail`.
 ##### Events
@@ -365,9 +370,11 @@ Für literale Objekte z.B. Funktionssammlungen ist es nicht notwendig als Grundl
 ```
 
 ## Events
-Der Event-Dispatcher basiert auf dem jQuery Eventsystem. Er bietet alle Vor- und Nachteile die das jQuery Eventsystem mit sich bringt.
+
+Der Event-Dispatcher basiert auf dem API des jQuery Eventsystems, funktioniert dennoch etwas anders. Die beiden Systeme sind zueinander kompatibel. Das mitgelieferte System bringt aber den vorteil mit, dass dem Event auch ein Scope mitgegeben werden kann.
 
 **modules/event_example1**
+
 ```javascript
 (function ( window, define, require, undefined ) {
     'use strict';
@@ -381,7 +388,7 @@ Der Event-Dispatcher basiert auf dem jQuery Eventsystem. Er bietet alle Vor- und
         return {
 
             ready: function ( element, options ) {
-            	Event.trigger('ready', [element]);
+            	Event.trigger('ready', [element], this);
             }
 
         };
@@ -474,7 +481,7 @@ Wird mit dem Element, in dem die zu ladenden Module enthalten sind als Argument 
                 return $.ajax( {
                     url: '/ajax/async-carousel.html',
                     success: function( html ) {
-                        element.append( html );
+                        element.appendChild( html.get( 0 ) );
                     }
                 } )
             },
