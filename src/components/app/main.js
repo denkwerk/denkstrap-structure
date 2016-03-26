@@ -55,9 +55,8 @@
     } );
 
     define( [
-        'lodash',
         'utils/core'
-    ], function( _, App ) {
+    ], function( App ) {
 
         // Scope for load plugin
         require.config( {

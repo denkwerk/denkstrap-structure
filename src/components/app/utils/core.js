@@ -2,9 +2,8 @@
     'use strict';
 
     define( [
-        'lodash',
         'utils/loader'
-    ], function( _, Loader ) {
+    ], function( Loader ) {
 
         /**
          * Core Module
