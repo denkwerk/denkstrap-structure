@@ -61,6 +61,7 @@ Der Grundaufbau beider Modultypen ist prinzipiell gleich. Die Methoden `ready` u
 ```
 
 ### Einbindung im HTML
+
 Zunächst muss `require.js` mit der entsprechenden `main.js` am Ende des `<body>` geladen werden:
 
 ```html
@@ -77,12 +78,15 @@ Dann können die Module innerhalb des Markups angegeben werden. Durch den Loader
 ```
 
 Es besteht die Möglichkeit ein Modul priorisiert zu laden. Priorisiert ausgezeichnete Module werden in einem separaten require-Call vor allen anderen *gewöhnlichen* Modulen geladen.
+
 ```html
 <div class="auto-init" data-module="modules/example" data-options='{"foo": "bar"}' data-priority="true"></div>
 ```
 
 ### Verwendung im JavaScript
+
 Wenn ein Modul **ohne Loader** geladen werden soll, kann im `define` Block ein `load!` vorangestellt werden. Soll es zudem initialisiert werden, kann ein `:init` hinten angestellt werden, nun werden die Konstruktor-Methoden  mit den Argumenten `element = $({})` und `options = {}` ausgeführt.
+
 > **Wichtig**
 > Hierfür muss das require-Plugin (`src/js/vendor/load.js`) in der require Config im Path Objekt definiert werden. Zudem muss für globale Module in der require Config der `globalScope` definiert werden. (Siehe `main.js`)
 
@@ -96,6 +100,7 @@ define([
 ```
 
 ### Konstruktor-Methoden
+
 Über die Eigenschaft `constructors` kann ein Array übergeben werden, um die Konstruktor-Methoden zu definieren. Die Methoden werden in der im Array definierten Reihenfolge ausgeführt. Wird die Eigenschaft nicht gesetzt, werden die `ready` und `events` Methoden ausgeführt.
 
 ```javascript
@@ -126,7 +131,9 @@ define([
 ```
 
 ### Modul Typen
+
 #### Globale Module
+
 Damit ein Modul vom Loader als ein globales erkannt wird, muss die Property `isGlobal` auf `true` gesetzt werden:
 
 ```javascript
@@ -157,6 +164,7 @@ Damit ein Modul vom Loader als ein globales erkannt wird, muss die Property `isG
 ```
 
 #### Lokale Module
+
 Lokale Module besitzen zusätzliche Eigenschaften. Jedes Modul bekommt eine eindeutige ID (`uid`) sowie den Modulnamen (`name`) zugewiesen. Über das `this` Keyword besteht innerhalb der Module Zugriff auf diese Eigenschaften.
 
 ```javascript
@@ -184,19 +192,29 @@ Lokale Module besitzen zusätzliche Eigenschaften. Jedes Modul bekommt eine eind
 
 }( this, this.define, this.require ));
 ```
+
 ##### Promise
 
 Wird in einer Konstruktor-Methode ein `Promise` (aktuell werden sowohl [jQuery Promises](https://api.jquery.com/jquery.deferred/) als auch [ES6 Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) unterstützt) zurückgegeben, werden die darauffolgenden Konstruktor-Methoden erst ausgeführt, sobald das Promise resolved ist.
 
 ###### Fail
+
 Über die Eigenschaft `failMethod` kann der Name einer Methode definiert werden, die im Fehlerfall ausgeführt wird. Standardmäßig lautet der Name dieser Methode `fail`.
+
 ##### Events
+
 Des weiteren werden beim Initialisieren lokaler Module einige standardisierte Events auf den DOM-Elementen gefeuert. Jedes Event wird zusätzlich einmal mit dem Modulnamen (`this.name`) als Namespace gefeuert. Falls auf einem DOM-Element mehrere Module geladen werden, kann so zwischen den gefeuerten Events unterschieden werden.
+
 ###### beforeInit
+
 Dieses Event wird vor dem Ausführen der Konstruktor-Methoden gefeuert.
+
 ###### afterInit
+
 Dieses Event wird nach dem Ausführen der Konstruktor-Methoden gefeuert. Wenn diese `Promises` zurückgegeben, wird das `afterInit` Event erst gefeuert, sobald diese resolved sind.
+
 ##### Beispiele
+
 ```html
 <div class="auto-init" data-module="modules/example, modules/foo"></div>
 ```
@@ -231,7 +249,7 @@ Dieses Event wird nach dem Ausführen der Konstruktor-Methoden gefeuert. Wenn di
                     // Wird ausgeführt, wenn modules/foo fertig initialisiert wurde
                 });
             },
-            
+
             // Wird ausgeführt wenn der AJAX Request fehlschlägt
             fail: function ( element, options, jqXHR, textStatus, errorThrown ) {
                 // tuwas
@@ -242,6 +260,7 @@ Dieses Event wird nach dem Ausführen der Konstruktor-Methoden gefeuert. Wenn di
 
 }( this, this.define, this.require ));
 ```
+
 **modules/foo**
 ```javascript
 (function ( window, define, require, undefined ) {
@@ -275,6 +294,7 @@ Dieses Event wird nach dem Ausführen der Konstruktor-Methoden gefeuert. Wenn di
 ```
 
 ## Extensions
+
 Lokale Module können durch Extensions erweitert werden. Eine Extension kann ein bestehendes Modul vor dem initialisieren modifizieren. Innerhalb Funktionen der Extension kann über `this._super()` auf das Original der erweiterten Funktion zugegriffen werden.
 
 ```html
@@ -284,6 +304,7 @@ Lokale Module können durch Extensions erweitert werden. Eine Extension kann ein
 Damit die im Beispiel geladene Extension nur das Modul `modules/example` erweitert und nicht auch das Modul `modules/foo`, muss in der Extension in einem Array die zu erweiternden Module definiert werden.
 
 **extensions/example**
+
 ```javascript
 (function ( window, define, require, undefined ) {
     'use strict';
@@ -317,7 +338,7 @@ Damit die im Beispiel geladene Extension nur das Modul `modules/example` erweite
 
 ## Funktionssammlungen
 Für literale Objekte z.B. Funktionssammlungen ist es nicht notwendig als Grundlage auf die Module zurück zu greifen. Für diesen Zweck reicht es ein Objekt mit den entsprechenden Methoden zurück zu geben.
-  
+
 **modules/funktionssammlung**
 ```javascript
 (function ( window, define, require, undefined ) {
@@ -331,11 +352,11 @@ Für literale Objekte z.B. Funktionssammlungen ist es nicht notwendig als Grundl
         return {
 
             method1: function () {
-            
+
             },
-            
+
             method2: function () {
-            
+
             }
 
         };
@@ -343,8 +364,9 @@ Für literale Objekte z.B. Funktionssammlungen ist es nicht notwendig als Grundl
 
 }( this, this.define, this.require ));
 ```
-  
+
 **modules/example**
+
 ```javascript
 (function ( window, define, require, undefined ) {
     'use strict';
@@ -358,9 +380,9 @@ Für literale Objekte z.B. Funktionssammlungen ist es nicht notwendig als Grundl
         return {
 
             ready: function ( element, options ) {
-          
+
                 funktionssammlung.method1();
-          
+
             }
 
         };
@@ -398,6 +420,7 @@ Der Event-Dispatcher basiert auf dem API des jQuery Eventsystems, funktioniert d
 ```
 
 **modules/event_example2**
+
 ```javascript
 (function ( window, define, require, undefined ) {
     'use strict';
@@ -423,21 +446,27 @@ Der Event-Dispatcher basiert auf dem API des jQuery Eventsystems, funktioniert d
 ```
 
 ## Loader
+
 Wenn Module per JavaScript initialisiert werden müssen (zum Beispiel per AJAX nachgeladene Module), kann in einem Modul eine Instanz des Loaders angelegt und entsprechend konfiguriert werden:
 
 ### Konfiguration
+
 Die Konfiguration des Loaders erfolgt durch ein Objekt beim Erzeugen der Instanz. Folgende Eigenschaften sind konfigurierbar:
 
 #### globalScope
+
 Bestimmt das Objekt, dem globale Module beim initilaisieren hinzugefügt werden. Beispiel: Wenn als Objekt `App` definiert wird, ist ein globales Modul mit dem Namen `modules/globalExample` nach dem initialisieren mit `App.globalExample` zugänglich.
 
 #### autoInitSelector
+
 Definiert mit welchem Selector zu initialisierende Module gefunden werden.
 
 #### autoInit
+
 Legt fest, ob der Loader beim Erzeugen einer Instanz automatisch die initModules Methode ausführt
 
 ### initModules
+
 Wird mit dem Element, in dem die zu ladenden Module enthalten sind als Argument ausgeführt. Von der `initModules` Methode wird ein Promise zurück gegeben, das resolved wird sobald alle Module fertig initialisiert wurden.
 
 ### Beispiel
@@ -493,8 +522,8 @@ Wird mit dem Element, in dem die zu ladenden Module enthalten sind als Argument 
                 // Lädt in Element enthaltene Module mit der Klasse 'xhr-init'
                 return this.loader.initModules( element );
             },
-            
-            // Wird ausgeführt sobald das vom Loader zurückgegebene Promise resolved wurde, 
+
+            // Wird ausgeführt sobald das vom Loader zurückgegebene Promise resolved wurde,
             // also alle Module initialisiert wurden
             events: function () {
                 // Tu was
