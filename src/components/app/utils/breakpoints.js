@@ -2,10 +2,10 @@
     'use strict';
 
     define( [
-        'jquery',
-        'lodash',
-        'utils/event'
-    ], function( $, _, Event ) {
+        'utils/helper',
+        'utils/event',
+        'vendor/polyfills/custom-event'
+    ], function( helper, Event ) {
 
         /**
          * Global Breakpoint system
@@ -52,7 +52,7 @@
              * @param {Object} options The options
              */
             ready: function( element, options ) {
-                this.settings = _.extend( this.defaults(), options );
+                this.settings = helper.extend( this.defaults(), options );
 
                 this.currentBreakpoint = this.get();
             },
@@ -65,19 +65,27 @@
              * @param {Object} options The options
              */
             events: function( element, options ) {
-                this.settings = _.extend( this.defaults(), options );
+                this.settings = helper.extend( this.defaults(), options );
 
-                $( window ).on( 'resize', _.bind( function() {
+                window.addEventListener( 'resize', function() {
                     var breakpoint = this.get();
                     if ( this.currentBreakpoint !== breakpoint ) {
                         this.currentBreakpoint = breakpoint;
                         Event.trigger( EVENT_BREAKPOINT_CHANGE, [ breakpoint ] );
-                        $( this.settings.selector ).trigger(
-                            EVENT_BREAKPOINT_CHANGE,
-                            [ breakpoint ]
-                        );
+
+                        var breakpointEvent = new CustomEvent(
+                                EVENT_BREAKPOINT_CHANGE,
+                                {
+                                    breakpoint: breakpoint
+                                }
+                            ),
+                            targets = document.querySelectorAll( this.settings.selector );
+
+                        targets.forEach( function( target ) {
+                            target.dispatchEvent( breakpointEvent );
+                        } );
                     }
-                }, this ) );
+                }.bind( this ) );
             },
 
             /**
