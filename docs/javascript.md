@@ -96,6 +96,27 @@ define([
 }
 ```
 
+Sollen bei der Initialisierung Argumente übergeben werden, muss das `:init` entfallen und das Modul manuell mithilfe des `load` Plugins initialisiert werden. Hierfür muss das `load`Plugin im define Block separat definiert werden, anschließend kann die `init` Methode zum initialisieren der Module eingesetzt werden.
+
+```javascript
+define([
+    'load',
+    'load!modules/global-module',
+    'load!modules/local-module'
+], function ( load, global, local ) {
+
+  var arg1, arg2;
+
+  load.init( global, arg1, arg2 );
+  load.init( local,  arg1, arg2 );
+  
+  // Variablenzuweisung ist ebenfalls möglich
+  var globalModule = load.init( global, arg1, arg2 );
+  var localModule  = load.init( local,  arg1, arg2 );
+
+}
+```
+
 ### Konstruktor-Methoden
 
 Über die Eigenschaft `constructors` kann ein Array übergeben werden, um die Konstruktor-Methoden zu definieren. Die Methoden werden in der im Array definierten Reihenfolge ausgeführt. Wird die Eigenschaft nicht gesetzt, werden die `ready` und `events` Methoden ausgeführt.

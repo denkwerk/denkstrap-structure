@@ -36,36 +36,49 @@
                         var Class;
 
                         if ( value.isGlobal && typeof config.globalScope === 'object' ) {
-                            var methods    = value.constructors || [ 'ready', 'events' ];
                             var moduleName = parsedName.name.split( '/' ).pop();
                             Class = config.globalScope[moduleName] = value;
-
-                            if ( parsedName.init ) {
-                                methods.forEach( function( method ) {
-                                    if ( typeof value[method] === 'function' ) {
-                                        try {
-                                            value[method].call( value, null, {} );
-                                        } catch ( error ) {
-                                            throw error;
-                                        }
-                                    }
-                                } );
-                            }
-
                         } else {
                             Class = Module.extend( value );
-                            if ( parsedName.init ) {
-                                Class = new Class( $( {} ), {}, parsedName.name );
-                            }
+                        }
+
+                        if ( parsedName.init ) {
+                            this.init( value, $( {} ), {} );
                         }
 
                         onload( Class );
 
                         require.undef( plugin.id + '!' + mname );
 
-                    } );
-                } );
+                    }.bind( this ) );
+                }.bind( this ) );
 
+            },
+
+            init: function( module ) {
+
+                if ( module.isGlobal ) {
+                    var args = Array.prototype.splice.call( arguments, 1 );
+                    var methods = module.constructors || [ 'ready', 'events' ];
+
+                    methods.forEach( function( method ) {
+                        if ( typeof module[method] === 'function' ) {
+                            try {
+                                module[method].apply( module, args );
+                            } catch ( error ) {
+                                throw error;
+                            }
+                        }
+                    } );
+
+                } else {
+                    // Applies bind to module and passes arguments before creating an instance.
+                    // Note that the first argument in the arguments array is the module itself, so it gets
+                    // bind to the module and passes the other arguments.
+                    module = new ( Function.prototype.bind.apply( module, arguments ) );
+                }
+
+                return module;
             }
         };
 
