@@ -266,6 +266,42 @@
 
             } );
 
+            it( 'should disable the conditions load method after the first call', function( done ) {
+                var spy = sinon.spy(),
+                    fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-module="test" data-condition=\'{"test": "test"}\'></div>' +
+                        '</div>' ),
+                    fakeModule = {
+                        ready: sinon.spy()
+                    },
+                    fakeCondition = {
+                        test: function( load, element ) {
+                            spy();
+                            load();
+                            load();
+                            setTimeout(function() {
+                                expect( fakeModule.ready.calledOnce )
+                                    .to.be.equal( true );
+                                done();
+                            }, 100);
+                        }
+                    };
+
+                define( 'test', fakeModule );
+
+                define( 'utils/conditions', fakeCondition );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: fakeElement,
+                        autoInit: false
+                    } );
+
+                    loader.initModules();
+                } );
+
+            } );
+
         } );
 
     } );
