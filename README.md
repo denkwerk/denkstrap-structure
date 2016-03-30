@@ -2,6 +2,8 @@
 
 > denkwerk standard project structure
 
+***WARNING:*** Version 2 is **NOT** compatible with modules from previous versions.
+
 ## Requirements
 
 There are a few prerequisites for this repository:

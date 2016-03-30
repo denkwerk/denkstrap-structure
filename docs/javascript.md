@@ -15,6 +15,7 @@
 - [Extensions](#extensions)
 - [Funktionssammlungen](#funktionssammlungen)
 - [Events](#events-1)
+- [Conditions](#conditions)
 - [Loader](#loader)
   - [Konfiguration](#konfiguration)
     - [globalScope](#globalscope)
@@ -23,7 +24,6 @@
   - [initModules](#initmodules)
   - [Beispiel](#beispiel)
 - [Abhängigkeiten](#abhangigkeiten)
-- [TODOs](#todos)
 
 ***
 
@@ -77,15 +77,23 @@ Dann können die Module innerhalb des Markups angegeben werden. Durch den Loader
 <div class="auto-init" data-module="modules/example" data-options='{"foo": "bar"}'></div>
 ```
 
+#### Priorisierung
 Es besteht die Möglichkeit ein Modul priorisiert zu laden. Priorisiert ausgezeichnete Module werden in einem separaten require-Call vor allen anderen *gewöhnlichen* Modulen geladen.
 
 ```html
 <div class="auto-init" data-module="modules/example" data-options='{"foo": "bar"}' data-priority="true"></div>
 ```
 
+#### Bedingungen / Conditions
+Wenn ein Modul nur unter einer bestimmten Bedingung geladen werden soll, kann diese im `data-condition` Attribut definiert werden. Jedem Modul des Elements kann eine eigene Bedingung zugewiesen werden. Mehr dazu unter [**Conditions**](#conditions)
+
+```html
+<div class="auto-init" data-module="modules/example" data-options='{"foo": "bar"}' data-condition='{"modules/example": "in-viewport"}'></div>
+```
+
 ### Verwendung im JavaScript
 
-Wenn ein Modul **ohne Loader** geladen werden soll, kann im `define` Block ein `load!` vorangestellt werden. Soll es zudem initialisiert werden, kann ein `:init` hinten angestellt werden, nun werden die Konstruktor-Methoden  mit den Argumenten `element = $({})` und `options = {}` ausgeführt.
+Wenn ein Modul **ohne Loader** geladen werden soll, kann im `define` Block ein `load!` vorangestellt werden. Soll es zudem initialisiert werden, kann ein `:init` hinten angestellt werden, nun werden die Konstruktor-Methoden  mit den Argumenten `element = null` und `options = {}` ausgeführt.
 
 > **Wichtig**
 > Hierfür muss das require-Plugin (`src/js/vendor/load.js`) in der require Config im Path Objekt definiert werden. Zudem muss für globale Module in der require Config der `globalScope` definiert werden. (Siehe `main.js`)
@@ -241,6 +249,7 @@ Dieses Event wird nach dem Ausführen der Konstruktor-Methoden gefeuert. Wenn di
 ```
 
 **modules/example**
+
 ```javascript
 (function ( window, define, require, undefined ) {
     'use strict';
@@ -283,6 +292,7 @@ Dieses Event wird nach dem Ausführen der Konstruktor-Methoden gefeuert. Wenn di
 ```
 
 **modules/foo**
+
 ```javascript
 (function ( window, define, require, undefined ) {
     'use strict';
@@ -361,6 +371,7 @@ Damit die im Beispiel geladene Extension nur das Modul `modules/example` erweite
 Für literale Objekte z.B. Funktionssammlungen ist es nicht notwendig als Grundlage auf die Module zurück zu greifen. Für diesen Zweck reicht es ein Objekt mit den entsprechenden Methoden zurück zu geben.
 
 **modules/funktionssammlung**
+
 ```javascript
 (function ( window, define, require, undefined ) {
     'use strict';
@@ -465,6 +476,60 @@ Der Event-Dispatcher basiert auf dem API des jQuery Eventsystems, funktioniert d
 
 }( this, this.define, this.require ));
 ```
+
+## Conditions
+
+Um Module nur unter bestimmten Bedingungen zu laden, können Conditions angelegt werden. Eine [Funktionssammlung](#funktionssammlungen) mit vorgefertigten Conditions befindet sich im `app/utils` Verzeichnis. Diese kann nach belieben erweitert werden und ist wie folgt aufgebaut:
+
+```javascript
+( function( window, define, require, undefined ) {
+    'use strict';
+
+    define( [], function() {
+
+        return {
+
+            'in-viewport': function( load, element ) { ... },
+            'is-visible' : function( load, element ) { ... }
+            
+        };
+    } );
+
+}( this, this.define, this.require ) );
+```
+
+###Funktionsweise
+
+Wenn ein Modul mit einer Condition verknüpft wird (siehe [Einbindung im HTML](#einbindung-im-html)), bestimmt diese den Zeitpunkt der Initialisierung. Dafür bekommt die Condition die beiden Argumente `load` und `element` übergeben. Die Funktion `load` initialisiert das Modul. `element` beinhaltet das HTMLElement, auf dem das Modul initialisiert werden soll. 
+
+> **Wichtig:** Wird in der Condition die load-Funktion nicht ausgeführt, wird das Modul nicht initialisiert.
+
+**Erläuterung der Funktionsweise anhand der `in-viewport` Condition**
+
+```javascript
+'in-viewport': function( load, element ) {
+
+    // Überprüft ob sich das Modul innerhalb des Viewports befindet
+    function check () { ... }
+
+    // Listener wird initial und beim Scroll-Event ausgeführt
+    function listener () {
+    
+        if ( check() ) {
+            // Bei positiver Überprüfung wird der Scroll-Eventlistener gelöscht
+            // und das Modul initialisiert
+            window.removeEventListener( 'scroll', listener );
+            load();
+        }
+    }
+
+    window.addEventListener( 'scroll', listener );
+
+    listener();
+
+}
+```
+
 
 ## Loader
 
