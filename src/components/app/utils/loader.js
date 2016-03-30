@@ -154,6 +154,9 @@
          * @returns {{element: HTMLElement, source: Array, options: Object, extensions: Array, condition: Object}}
          */
         Loader.prototype.getModule = function( element ) {
+
+            var condition  = element.getAttribute( 'data-condition' );
+
             return {
                 element: element,
 
@@ -175,7 +178,9 @@
                     JSON.parse( element.getAttribute( 'data-priority' ) )
                     : false,
 
-                condition: JSON.parse( element.getAttribute( 'data-condition' ) )
+                condition: ( typeof condition === 'string' && condition.indexOf( '{' ) !== -1 ) ?
+                    JSON.parse( condition )
+                    : condition
             };
         };
 
@@ -279,10 +284,20 @@
 
                 moduleObject.source.forEach( function( source ) {
 
-                    if ( moduleObject.condition && moduleObject.condition.hasOwnProperty( source ) ) {
+                    if (
+                        moduleObject.condition &&
+                        (
+                            typeof moduleObject.condition === 'string' ||
+                            moduleObject.condition.hasOwnProperty( source )
+                        )
+                    ) {
+
+                        var condition =  ( typeof moduleObject.condition === 'string' ) ?
+                            moduleObject.condition :
+                            moduleObject.condition[ source ];
 
                         try {
-                            conditions[ moduleObject.condition[ source ] ].call(
+                            conditions[ condition ].call(
                                 this,
                                 helper.once( this.loadModule.bind( this, source, moduleObject, type ) ),
                                 moduleObject.element

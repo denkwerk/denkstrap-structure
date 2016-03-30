@@ -236,7 +236,41 @@
                 var spy = sinon.spy(),
                     fakeElement = $( '<div>' +
                         '<div class="auto-init" data-module="test" data-condition=\'{"test": "test"}\'></div>' +
-                        '</div>' ),
+                    '</div>' ),
+                    fakeModule = {
+                        ready: function(  ) {
+                            expect( spy.calledOnce )
+                                .to.be.equal( true );
+                            done();
+                        }
+                    },
+                    fakeCondition = {
+                        test: function( load, element ) {
+                            spy();
+                            load();
+                        }
+                    };
+
+                define( 'test', fakeModule );
+
+                define( 'utils/conditions', fakeCondition );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: fakeElement,
+                        autoInit: false
+                    } );
+
+                    loader.initModules();
+                } );
+
+            } );
+
+            it( 'should load a module when a condition is fired (simple form)', function( done ) {
+                var spy = sinon.spy(),
+                    fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-module="test" data-condition="test"></div>' +
+                    '</div>' ),
                     fakeModule = {
                         ready: function(  ) {
                             expect( spy.calledOnce )
@@ -270,7 +304,7 @@
                 var spy = sinon.spy(),
                     fakeElement = $( '<div>' +
                         '<div class="auto-init" data-module="test" data-condition=\'{"test": "test"}\'></div>' +
-                        '</div>' ),
+                    '</div>' ),
                     fakeModule = {
                         ready: sinon.spy()
                     },
@@ -279,11 +313,11 @@
                             spy();
                             load();
                             load();
-                            setTimeout(function() {
+                            setTimeout( function() {
                                 expect( fakeModule.ready.calledOnce )
                                     .to.be.equal( true );
                                 done();
-                            }, 100);
+                            }, 100 );
                         }
                     };
 

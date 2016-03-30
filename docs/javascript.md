@@ -85,10 +85,14 @@ Es besteht die Möglichkeit ein Modul priorisiert zu laden. Priorisiert ausgezei
 ```
 
 #### Bedingungen / Conditions
-Wenn ein Modul nur unter einer bestimmten Bedingung geladen werden soll, kann diese im `data-condition` Attribut definiert werden. Jedem Modul des Elements kann eine eigene Bedingung zugewiesen werden. Mehr dazu unter [**Conditions**](#conditions)
+Wenn ein Modul nur unter einer bestimmten Bedingung geladen werden soll, kann diese im `data-condition` Attribut definiert werden. Es kann eine Bedingung definiert werden, die für         alle Module auf dem Element angewandt wird, oder für jedes Modul separat. Wie Bedingungen verfasst werden, ist unter [**Conditions**](#conditions) beschrieben.
 
 ```html
-<div class="auto-init" data-module="modules/example" data-options='{"foo": "bar"}' data-condition='{"modules/example": "in-viewport"}'></div>
+<!-- Condition für alle Module: -->
+<div class="auto-init" data-module="modules/foo" data-options='{"foo": "bar"}' data-condition="in-viewport"></div>
+
+<!-- Condition für einzelnes Modul: -->
+<div class="auto-init" data-module="modules/foo, modules/bar" data-options='{"foo": "bar"}' data-condition='{"modules/foo": "in-viewport"}'></div>
 ```
 
 ### Verwendung im JavaScript
