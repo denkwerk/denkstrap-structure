@@ -12,14 +12,14 @@
     </p>
 
     {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
-    {{ example.macro() }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
+    {{ example.macro(true) }}
 {% endblock %}
