@@ -10,7 +10,7 @@
             // constructors: [ 'ready', 'events' ],
 
             ready: function( element, options ) {
-
+                element.style.color = 'red';
             },
 
             events: function( element, options ) {
