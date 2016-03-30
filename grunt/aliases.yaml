@@ -6,7 +6,7 @@ development:
         - 'sass:development'
         - 'autoprefixer:development'
         - 'lint'
-        - 'requirejs:development'
+        - 'copy:js'
         - 'nunjuckr:development'
 
 dev:
