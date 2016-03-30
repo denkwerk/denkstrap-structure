@@ -43,7 +43,7 @@
                         }
 
                         if ( parsedName.init ) {
-                            this.init( value, $( {} ), {} );
+                            this.init( value, null, {} );
                         }
 
                         onload( Class );
