@@ -7,6 +7,7 @@
     "disallowNewlineBeforeBlockStatements": true,
     "requireCapitalizedComments": false,
     "requirePaddingNewLinesBeforeLineComments": false,
+    "maximumLineLength": 120,
     "jsDoc": {
         "checkParamNames": true,
         "checkRedundantParams": true,
