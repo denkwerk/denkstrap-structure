@@ -6,16 +6,10 @@
     define( [
         'require',
         'utils/module',
+        'utils/helper',
+        'utils/conditions',
         'vendor/polyfills/promise'
-    ], function( require, Module ) {
-
-        /*
-         * Extends NodeList prototype with Array.prototype.forEach function. Does not work in
-         * IE < 8. For this case you better use the jQuery version of this library.
-         *
-         * TODO: Move all native extensions to a single file.
-         */
-        NodeList.prototype.forEach = Array.prototype.forEach;
+    ], function( require, Module, helper, conditions ) {
 
         /**
          * Module Loader
@@ -42,7 +36,7 @@
          * @constructs Loader
          * @param {Object} options
          * @param {Object} [options.globalScope] Scope on which the global modules will be attached
-         * @param {jQuery/Zepto/HTMLElement} [options.elementScope] DOM element scope
+         * @param {jQuery/HTMLElement} [options.elementScope] DOM element scope
          * @param {Boolean} [options.autoInit] Unless 'false' the Loader will automatically
          * initialize all Modules in Scope
          * @param {Function} requireContext The require.js context for the Loader instance
@@ -59,15 +53,20 @@
             this.elementScope = ( options.elementScope && options.elementScope.jquery ) ?
                 options.elementScope.get( 0 ) :
                 options.elementScope || document;
+
             this.globalScope   = ( typeof options.globalScope === 'object' ) ?
                 options.globalScope :
                 {};
+
             this.options = options;
+
             this.requireContext = requireContext || require;
+
             this.promise = new Promise( function( resolve, reject ) {
                 this.resolve = resolve;
                 this.reject = reject;
             }.bind( this ) );
+
             this.pendingModules = {
                 major: 0,
                 minor: 0
@@ -96,7 +95,7 @@
          *
          * @function initModules
          * @memberof Loader
-         * @param {jQuery/Zepto/HTMLElement} [element] Optionally an jQuery/Zepto element can be
+         * @param {jQuery/HTMLElement} [element] Optionally an jQuery element can be
          *                                             passed wich will be used as scope
          * @returns {Promise} The returned Promise will be resolved when all local modules
          *                    are initialized
@@ -105,6 +104,7 @@
             var elementScope = ( element && element.jquery ) ?
                 element.get( 0 ) :
                 element || this.elementScope;
+
             var moduleElements = elementScope.querySelectorAll(
                 this.options.autoInitSelector ||
                 autoInitSelector
@@ -116,60 +116,29 @@
                 major: []
             };
 
-            var moduleNames = {
-                minor: [],
-                major: []
-            };
-
             /**
              * Creates array with module objects
              */
 
-            moduleElements.forEach( function( element, index ) {
-                module = this.getModule( moduleElements.item( index ) );
-                target = module.priority ? modules.major : modules.minor;
+            Array.prototype.forEach.call(
+                moduleElements,
+                function( element, index ) {
+                    module = this.getModule( moduleElements.item( index ) );
+                    target = module.priority ? modules.major : modules.minor;
 
-                target.push( module );
-            }.bind( this ) );
+                    target.push( module );
+                }.bind( this )
+            );
 
-            /**
-             * Creates Lists with all modules and extensions to load in a
-             * single require Call per priority
-             *
-             * TODO: Optimize union
-             */
-
-            var generateModulesArray = function( inputArray ) {
-                var result = inputArray.map( function( module ) { // map sources
-                        return module.source;
-                    } ).concat( inputArray.map( function( module ) { // concatenate with extensionsf
-                        return module.extensions;
-                    } ) ).reduce( function( acc, items ) { // flatten array
-                        return acc.concat( items );
-                    }, [] ).reduce( function( acc, item ) { // uniuqe entries
-                        /* jshint bitwise: false */
-                        if ( !acc.length || !~acc.indexOf( item ) ) {
-                            /* jshint bitwise: true */
-                            acc.push( item );
-                        }
-                        return acc;
-                    }, [] );
-                return result;
-            };
-
-            moduleNames.major = generateModulesArray( modules.major );
-
-            if ( moduleNames.major.length ) {
-                this.loadModules( moduleNames.major, modules.major, 'major' );
+            if ( modules.major.length ) {
+                this.loadModules( modules.major, 'major' );
             }
 
-            moduleNames.minor = generateModulesArray( modules.minor );
-
-            if ( moduleNames.minor.length ) {
-                this.loadModules( moduleNames.minor, modules.minor, 'minor' );
+            if ( modules.minor.length ) {
+                this.loadModules( modules.minor, 'minor' );
             }
 
-            if ( !moduleNames.minor.length && !moduleNames.major.length ) {
+            if ( !modules.minor.length && !modules.major.length ) {
                 this.moduleLoaded();
             }
 
@@ -177,12 +146,12 @@
         };
 
         /**
-         * Extracts module data from DOM-Element (jQuery/Zepto)
+         * Extracts module data from DOM-Element (jQuery)
          *
          * @function getModule
          * @memberof Loader
-         * @param {jQuery/Zepto/HTMLElement} element
-         * @returns {{element: HTMLElement, source: Array, options: Object, extensions: Array}}
+         * @param {jQuery/HTMLElement} element
+         * @returns {{element: HTMLElement, source: Array, options: Object, extensions: Array, condition: Object}}
          */
         Loader.prototype.getModule = function( element ) {
             return {
@@ -204,7 +173,9 @@
 
                 priority: element.getAttribute( 'data-priority' ) ?
                     JSON.parse( element.getAttribute( 'data-priority' ) )
-                    : false
+                    : false,
+
+                condition: JSON.parse( element.getAttribute( 'data-condition' ) )
             };
         };
 
@@ -215,7 +186,7 @@
          * @memberof Loader
          * @param {Object} options
          * @param {Object} options.module
-         * @param {jQuery/Zepto/HTMLElement} options.element
+         * @param {jQuery/HTMLElement} options.element
          * @param {Object} options.options
          * @param {String} options.moduleName
          */
@@ -249,7 +220,7 @@
          * @memberof Loader
          * @param {Object} options
          * @param {Object} options.module
-         * @param {jQuery/Zepto/HTMLElement} options.element
+         * @param {jQuery/HTMLElement} options.element
          * @param {Object} options.options
          * @param {Array} options.extensions
          * @param {String} options.moduleName
@@ -280,7 +251,7 @@
          * @memberof Loader
          * @param {Object} options
          * @param {Object} options.module
-         * @param {jQuery/Zepto/HTMLElement} options.element
+         * @param {jQuery/HTMLElement} options.element
          * @param {Object} options.options
          * @param {Array} options.extensions
          * @param {String} options.moduleName
@@ -295,84 +266,99 @@
         };
 
         /**
-         * Loads modules in array and call initialize functions
+         * Iterates through all passed modules and initializes them respectively registers a condition if necessary.
          *
          * @function loadModules
          * @memberof Loader
-         * @param {Array} moduleNames List of modules names
          * @param {Array} modules List of module objects
+         * @param {String} type Describes if its a minor or major type module
          */
-        Loader.prototype.loadModules = function( moduleNames, modules, type ) {
+        Loader.prototype.loadModules = function( modules, type ) {
 
-            this.requireContext( moduleNames, function() {
-                var args = arguments;
+            modules.forEach( function( moduleObject ) {
 
-                // PendingModules has to be updated BEFORE the initializing process has been started
-                // TODO: Optimize
-                modules.forEach( function( moduleObject ) {
+                moduleObject.source.forEach( function( source ) {
 
-                    moduleObject.source.forEach( function( moduleName ) {
+                    if ( moduleObject.condition && moduleObject.condition.hasOwnProperty( source ) ) {
 
-                        var indexInArg = moduleNames.indexOf( moduleName );
-                        var module = args[ indexInArg ];
-
-                        //Var isLocal = !module.isGlobal;
-                        //if ( isLocal ) {
-                        this.pendingModules[ type ]++;
-
-                        //}
-
-                    }, this );
-
-                }, this );
-
-                modules.forEach( function( moduleObject ) {
-
-                    moduleObject.source.forEach( function( moduleName ) {
-                        var indexInArg = moduleNames.indexOf( moduleName );
-                        var module = args[ indexInArg ];
-                        var isLocal = !module.isGlobal;
-                        var isFunction = typeof module === 'function';
-                        var initFunction = isFunction ?
-                            this.initLocalClass
-                            : isLocal ?
-                            this.initLocalModule
-                            : this.initGlobalModule;
-                        var extensions = [];
-
-                        var extensionIndexInArg;
-
-                        /**
-                         * Searchs related extensions and pushes them into an array
-                         */
-                        if ( isLocal && moduleObject.extensions.length ) {
-                            moduleObject.extensions.forEach( function( extensionName, index ) {
-                                extensionIndexInArg = moduleNames.indexOf( extensionName );
-
-                                /* jshint bitwise: false */
-                                if ( !!~args[ extensionIndexInArg ].extend.indexOf(
-                                        moduleName
-                                    ) ) {
-                                    /* jshint bitwise: true */
-                                    extensions.push( args[ extensionIndexInArg ] );
-                                }
-                            } );
+                        try {
+                            conditions[ moduleObject.condition[ source ] ].call(
+                                this,
+                                helper.once( this.loadModule.bind( this, source, moduleObject, type ) ),
+                                moduleObject.element
+                            );
+                        } catch ( error ) {
+                            console.warn( 'The condition "' + moduleObject.condition[ source ] + '" doesn\'t exist.' );
                         }
 
-                        /**
-                         * Initialize Module
-                         */
-                        initFunction.call( this, {
-                            module: module,
-                            element: moduleObject.element,
-                            options: moduleObject.options,
-                            moduleName: moduleName,
-                            extensions: extensions,
-                            type: type
-                        } );
-                    }, this );
-                }, this );
+                    } else {
+                        this.pendingModules[ type ]++;
+                        this.loadModule.call( this, source, moduleObject, type );
+                    }
+
+                }.bind( this ) );
+
             }.bind( this ) );
+
+        };
+
+        /**
+         * Requires a module and initializes it with all extensions
+         *
+         * @function loadModule
+         * @memberof Loader
+         * @param {String} source Modulename
+         * @param {Object} moduleObject
+         * @param {String} type Describes if its a minor or major type module
+         */
+        Loader.prototype.loadModule = function( source, moduleObject, type ) {
+
+            this.requireContext( [ source ], function( module ) {
+
+                var isLocal = !module.isGlobal;
+                var isFunction = typeof module === 'function';
+                var initFunction = isFunction ?
+                    this.initLocalClass
+                    : isLocal ?
+                    this.initLocalModule
+                    : this.initGlobalModule;
+                var extensions = [];
+
+                /**
+                 * Searchs related extensions and pushes them into an array
+                 */
+                if ( isLocal && moduleObject.extensions.length ) {
+
+                    moduleObject.extensions.forEach( function( extensionName, index ) {
+
+                        this.requireContext( extensionName, function( extension ) {
+
+                            /* jshint bitwise: false */
+                            if ( !!~extension.extend.indexOf( source ) ) {
+                                extensions.push( extension );
+                            }
+                            /* jshint bitwise: true */
+
+                        }.bind( this ) );
+
+                    }.bind( this ) );
+
+                }
+
+                /**
+                 * Initialize Module
+                 */
+                initFunction.call( this, {
+                    module: module,
+                    element: moduleObject.element,
+                    options: moduleObject.options,
+                    moduleName: source,
+                    extensions: extensions,
+                    type: type
+                } );
+
+            }.bind( this ) );
+
         };
 
         return Loader;
