@@ -74,7 +74,7 @@
                 } else {
                     // Applies bind to module and passes arguments before creating an instance.
                     // Note that the first argument in the arguments array is the module itself, so it gets
-                    // bind to the module and passes the other arguments.
+                    // bound to the module and passes the other arguments.
                     module = new ( Function.prototype.bind.apply( module, arguments ) );
                 }
 

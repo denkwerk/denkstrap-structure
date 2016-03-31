@@ -6,7 +6,9 @@
         /**
          * CONDITIONS
          *
-         * This file contains all init conditions usable by the loader
+         * This file contains all init conditions usable by the loader.
+         * Missing a useful condition? Feel free to contribute by
+         * submitting them for the default package! ¯\_(ツ)_/¯
          *
          * @returns {Object} conditions
          */
