@@ -227,7 +227,6 @@
          */
         Loader.prototype.initLocalModule = function( options ) {
             var ModuleClass = Module.extend( options.module );
-            var ModuleInstance;
 
             if ( options.extensions.length ) {
                 options.extensions.forEach( function( extension ) {
