@@ -40,13 +40,7 @@
          * @param {Boolean} [options.autoInit] Unless 'false' the Loader will automatically
          * initialize all Modules in Scope
          * @param {Function} requireContext The require.js context for the Loader instance
-         * @returns {
-         *    {
-         *      initLocal: initLocalModule,
-         *      initGlobal: initGlobalModule,
-         *      loadModules: loadModules, modules: Array
-         *    }
-         * }
+         * @returns {this}
          */
         function Loader ( options, requireContext ) {
 
@@ -194,6 +188,7 @@
          * @param {jQuery/HTMLElement} options.element
          * @param {Object} options.options
          * @param {String} options.moduleName
+         * @param {String} options.type
          */
         Loader.prototype.initGlobalModule = function( options ) {
             var methods = options.module.constructors || [ 'ready', 'events' ];
