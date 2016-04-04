@@ -8,7 +8,7 @@ module.exports = {
         formatters: [
             {
                 id: 'checkstyle-xml',
-                dest: 'artifacts/test/csslint.xml'
+                dest: '<%= testResultPath %>csslint.xml'
             },
             {
                 id: 'text'
