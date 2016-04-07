@@ -36,6 +36,7 @@
     "grunt-sass": "1.1.0",
     "grunt-sass-globbing": "1.4.0",
     "grunt-scss-lint": "0.3.8",
+    "jit-grunt": "^0.10.0",
     "jscs": "2.5.0",
     "jshint": "2.8.0",
     "load-grunt-config": "0.17.2",

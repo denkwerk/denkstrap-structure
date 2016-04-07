@@ -7,6 +7,10 @@ module.exports = function( grunt ) {
     // Load all grunt tasks listed in package.json and load grunt configs
     require( 'load-grunt-config' )( grunt, {
 
+        jitGrunt: {
+            jitGrunt: true
+        },
+
         // Path to task.js files, defaults to grunt dir
         configPath: path.join( process.cwd(), 'grunt' ),
 
