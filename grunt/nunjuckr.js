@@ -6,11 +6,11 @@
 module.exports = function( grunt, options ) {
     return {
         options: {
-            data: {
+            globals: {
                 basePath: '<%= srcPath %>components/',
                 templatePath: '<%= srcPath %>components/site/layout/',
-                modulePath: '<%= srcPath %>components/modules/',
-                patternPath: '<%= srcPath %>components/pattern/',
+                modulesPath: '<%= srcPath %>components/modules/',
+                patternsPath: '<%= srcPath %>components/patterns/',
                 appPath: '<%= srcPath %>components/app/',
                 srcPath: '<%= srcPath %>',
                 production: true
@@ -30,11 +30,11 @@ module.exports = function( grunt, options ) {
         },
         development: {
             options: {
-                data: {
+                globals: {
                     basePath: '<%= srcPath %>components/',
                     templatePath: '<%= srcPath %>components/site/layout/',
-                    modulePath: '<%= srcPath %>components/modules/',
-                    patternPath: '<%= srcPath %>components/pattern/',
+                    modulesPath: '<%= srcPath %>components/modules/',
+                    patternsPath: '<%= srcPath %>components/patterns/',
                     appPath: '<%= srcPath %>components/app/',
                     srcPath: '<%= srcPath %>',
                     production: false,
