@@ -8,7 +8,10 @@ module.exports = function( grunt ) {
     require( 'load-grunt-config' )( grunt, {
 
         jitGrunt: {
-            jitGrunt: true
+            jitGrunt: true,
+            staticMappings: {
+                scsslint: 'grunt-scss-lint'
+            }
         },
 
         // Path to task.js files, defaults to grunt dir
