@@ -19,7 +19,6 @@ production:
         - 'sass_globbing'
         - 'sass:production'
         - 'autoprefixer:production'
-        - 'lint'
         - 'lodashAutobuild'
         - 'requirejs:production'
 
@@ -40,6 +39,5 @@ lint:
 lint_ci:
     description: 'Linting task for the CI server'
     tasks:
-        - 'scsslint:scss'
         - 'jshint:ci'
         - 'jscs:ci'
