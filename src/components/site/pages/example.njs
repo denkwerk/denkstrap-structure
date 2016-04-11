@@ -1,4 +1,4 @@
-{% import modulePath + "example-module/example-module.njs" as example %}
+{% import modulesPath + "example-module/example-module.njs" as example %}
 
 {% extends templatePath + "default.njs" %}
 
