@@ -1,3 +1,7 @@
+scss_files: 'src/**/*.scss'
+
+exclude: 'src/components/sass/vendor/**'
+
 linters:
   BangFormat:
     enabled: true
