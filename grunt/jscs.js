@@ -22,7 +22,7 @@ module.exports = {
             fix: false,
             force: true,
             reporter: 'checkstyle',
-            reporterOutput: '<%= testResultPath %>jscs-lint-report.xml'
+            reporterOutput: '<%= testResultPath %>jscs-lint-report.checkstyle.xml'
         },
         files: {
             src: [
