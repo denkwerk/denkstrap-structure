@@ -19,7 +19,7 @@
     "jshint": "jshint src/ grunt/ Gruntfile.js karma-conf.js",
     "jscs": "jscs src/ grunt/ Gruntfile.js karma-conf.js",
     "karma": "karma start",
-    "test": "grunt lint_ci && scss-lint --require=scss_lint_reporter_checkstyle --format=Checkstyle src/ -o artifacts/test/scss-lint-report.checkstyle.xml && grunt karma:ci && grunt production"
+    "test": "grunt production && grunt lint_ci && scss-lint --require=scss_lint_reporter_checkstyle --format=Checkstyle src/ -o artifacts/test/scss-lint-report.checkstyle.xml && grunt karma:ci"
   },
   "dependencies": {
     "grunt": "^0.4.5",
