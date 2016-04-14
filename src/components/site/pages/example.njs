@@ -1,4 +1,5 @@
-{% import modulesPath + "example-module/example-module.njs" as example %}
+{% import 'modules' as modules %}
+{% import 'patterns' as patterns %}
 
 {% extends templatePath + "default.njs" %}
 
@@ -11,15 +12,15 @@
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum repudiandae esse dolores quos minus perspiciatis laboriosam magni ipsum, optio sed quae aliquid sequi consectetur eaque vel, est ducimus similique illum. Debitis ea dolorum temporibus doloremque ratione, nesciunt aspernatur. Velit saepe dicta ipsa minus iusto odit ex, obcaecati temporibus, sint deserunt.
     </p>
 
-    {{ example.macro() }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
-    {{ example.macro(true) }}
+    {{ modules.exampleModule.macro() }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
+    {{ modules.exampleModule.macro(true) }}
 {% endblock %}
