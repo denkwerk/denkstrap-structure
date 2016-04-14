@@ -6,7 +6,7 @@
   - [Integration in the HTML](#integration-in-the-html)
   - [Usage in the JavaScript](#usage-in-the-javascript)
   - [Constructors](#constructors)
-  - [Module tyoes](#module-types)
+  - [Module types](#module-types)
     - [Global modules](#global-modules)
     - [Local module](#local-modules)
       - [Promises](#promises)
@@ -15,7 +15,7 @@
 - [Extensions](#extensions)
 - [Collections](#collections)
 - [Events](#events-1)
-- [Conditions](#conditions)
+- [Conditions](#conditions-1)
 - [Loader](#loader)
   - [Configuration](#configuration)
     - [globalScope](#globalscope)
@@ -87,7 +87,7 @@ It's possible to mark modules as important. Important modules will be loaded and
 
 #### Conditions
 
-You can also load modules just under a certain condition. In order to do this, define the condition in the `data-condition` attribute. It's possible to define a condition, that is applied on all modules on the HTMLElement and for a specific module as well. To find out which conditions are available and how to create your own have a look at: [Conditions](#conditions2)
+You can also load modules just under a certain condition. In order to do this, define the condition in the `data-condition` attribute. It's possible to define a condition, that is applied on all modules on the HTMLElement and for a specific module as well. To find out which conditions are available and how to create your own have a look at: [Conditions](#conditions-1)
 
 ```html
 <!-- Condition for all modules on this element: -->
@@ -198,7 +198,7 @@ If you want to initialize a module globally, make sure the property `isGlobal` i
 }( this, this.define, this.require ));
 ```
 
-#### Locale Modules
+#### Local Modules
 
 Local modules own some additional properties. Each module has an unique ID `uid` and a it's `name`. Both are accessible through the `this` keyword.
 
