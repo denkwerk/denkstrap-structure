@@ -65,7 +65,7 @@ Additionally you can run the `grunt lint` task to ensure all sources are bug-fre
 ## Documentations
 
 There are a few more Documentations:
-- [JavaScript API (german)](docs/javascript.md)
+- [JavaScript API](docs/javascript_en.md) [[DE](docs/javascript.md)]
 - [Components structure (german)](docs/komponenten.md)
 - [JavaScript Testing (german)](docs/javascript-testing.md)
 
