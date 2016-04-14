@@ -24,6 +24,8 @@
     "test": "grunt lint_ci && scss-lint --require=scss_lint_reporter_checkstyle --format=Checkstyle src/ -o artifacts/test/scss-lint-report.checkstyle.xml && grunt karma:ci && grunt production"
   },
   "dependencies": {
+    "camelcase": "^2.1.1",
+    "glob": "^7.0.3",
     "grunt": "0.4.5",
     "grunt-autoprefixer": "3.0.3",
     "grunt-contrib-clean": "0.7.0",
@@ -33,7 +35,7 @@
     "grunt-contrib-requirejs": "0.4.4",
     "grunt-contrib-watch": "0.6.1",
     "grunt-jscs": "2.3.0",
-    "grunt-nunjuckr": "1.4.0",
+    "grunt-nunjuckr": "^1.5.0",
     "grunt-sass": "1.1.0",
     "grunt-sass-globbing": "1.4.0",
     "grunt-scss-lint": "0.3.8",
