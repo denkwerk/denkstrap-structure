@@ -1,7 +1,7 @@
 # denkstrap-structure JavaScript API
 
-### Inhalt
-- [Module](#module)
+### Contents
+- [Modules](#modules)
   - [Structure of a module](#structure-of-a-module)
   - [Integration in the HTML](#integration-in-the-html)
   - [Usage in the JavaScript](#usage-in-the-javascript)
