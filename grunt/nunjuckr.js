@@ -4,6 +4,8 @@
  */
 
 module.exports = function( grunt, options ) {
+    var ComponentsLoader = require( './nunjucks/components-loader.js' );
+
     return {
         options: {
             globals: {
@@ -15,6 +17,7 @@ module.exports = function( grunt, options ) {
                 srcPath: '<%= srcPath %>',
                 production: true
             },
+            loader: new ComponentsLoader( options.srcPath ),
             ext: '.html'
         },
         production: {
