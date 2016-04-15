@@ -28,7 +28,7 @@
 
 ## Modules
 
-There are two types of modules: *global* and *local* ones. A global module is attached to an object literal, e.g. `window.App`. When you initialize several global modules from the same type, they share the same scope in the object literal. This possibly causes an overwriting of properties in the object at runtime. When you initialize a local module an instance of this module will be automatically created. So each local module has its own scope, even when you initalize multiple modules from the same type. In addition they have some other neat features and its actually possible to extend them.
+There are two types of modules: *global* and *local* ones. A global module is attached to an object literal, e.g. `window.App`. When you initialize several global modules of the same type, they share the same scope in the object literal. This possibly causes an overrides of properties in the object at runtime. When you initialize a local module an instance of this module will automatically be created. Because of this behaviour each local module has its own scope, even you initalizing multiple modules of the same type. In addition there are some other neat features and its actually possible to extend them.
 
 ### Structure of a module
 
@@ -59,7 +59,7 @@ The base structure of both module types is basically the same. By default the me
 }( this, this.define, this.require ));
 ```
 
-### Integration in the HTML
+### Integrating with HTML
 
 First you have to load `require.js` at the end of the `<body>` and define your `main.js` in the `data-main` attribute:
 
@@ -87,7 +87,7 @@ It's possible to mark modules as important. Important modules will be loaded and
 
 #### Conditions
 
-You can also load modules just under a certain condition. In order to do this, define the condition in the `data-condition` attribute. It's possible to define a condition, that is applied on all modules on the HTMLElement and for a specific module as well. To find out which conditions are available and how to create your own have a look at: [Conditions](#conditions-1)
+You can also load modules just under a certain condition. In order to do this, define the condition in the `data-condition` attribute. It's possible to define a condition applied to all modules on the HTMLElement or for a specific module as well. To find out which conditions are available and how to create your own have a look at: [Conditions](#conditions-1)
 
 ```html
 <!-- Condition for all modules on this element: -->
@@ -97,7 +97,7 @@ You can also load modules just under a certain condition. In order to do this, d
 <div class="auto-init" data-module="modules/foo, modules/bar" data-options='{"foo": "bar"}' data-condition='{"modules/foo": "in-viewport"}'></div>
 ```
 
-### Usage in the JavaScript
+### Usage in JavaScript
 
 If you want to load a module **without the Loader**, add a `load!` ahead the modules name in the define statement. When the module should also be initialized, add a `:init` behind the modules name to execute all constructors with the arguments `null` (instead of an HTMLElement) and `{}` (instead of the options).
 
@@ -110,7 +110,7 @@ define([
     'load!modules/test-module/test-module:init'
 ], function ( foo, bar ) {
     // do something
-}
+});
 ```
 
 Sometimes it's necessary to define the arguments by your own. If so, remove the `:init` and initialize the module with the `load` plugin manually. Therefor you have to add the plugin by itself to the define statement and assign it to a variable. Now you can call the `init` method, pass your module as the first argument and subsequently all your further arguments.
@@ -131,12 +131,12 @@ define([
   var globalModule = load.init( global, arg1, arg2 );
   var localModule  = load.init( local,  arg1, arg2 );
 
-}
+});
 ```
 
 ### Constructors
 
-With the property `constructors` you can overwrite the default methods (`ready` and `events`) with an array of method names executed on module construction. The methods will be executed in the arrays order.
+The property `constructors` overrides the default methods (`ready` and `events`) with an array of method names executed on module construction. The methods will be executed in the arrays order.
 
 ```javascript
 (function ( window, define, require, undefined ) {
@@ -200,7 +200,7 @@ If you want to initialize a module globally, make sure the property `isGlobal` i
 
 #### Local Modules
 
-Local modules own some additional properties. Each module has an unique ID `uid` and a it's `name`. Both are accessible through the `this` keyword.
+Local modules own some additional properties. Each module has an unique ID `uid` and a it's `name`. Both are accessible via the `this` keyword.
 
 ```javascript
 (function ( window, define, require, undefined ) {
@@ -246,7 +246,7 @@ This event gets fired before the constructors are executed.
 
 ###### afterInit
 
-This event gets fired when all constructors has been executed. If you work with promises, this event wont be fired until these are resolved.
+This event gets fired when all constructors have been executed. If you work with promises, this event won't be fired until these are resolved.
 
 ##### Examples
 
@@ -271,7 +271,7 @@ This event gets fired when all constructors has been executed. If you work with 
 
 				// the jQuery AJAX Method returns a $.Deferred.promise
                 return $.ajax({
-                    url: '/beispiel/url'
+                    url: '/example/url'
                 });
 
             },
@@ -327,7 +327,7 @@ This event gets fired when all constructors has been executed. If you work with 
 
 ## Extensions
 
-Its possible to extend local modules. An extension can modify an existing module before it gets initialized. Within functions of the extensions you can access the original functions via `this.super()`.
+It is possible to extend local modules. An extension modifies an existing module before it gets initialized. Within functions of the extensions you can access the original functions via `this._super()`.
 
 ```html
 <div class="auto-init" data-module="modules/example, modules/foo" data-extensions="extensions/example"></div>
@@ -409,13 +409,13 @@ Its not necessary to create a module for a collection of functions. For this cas
         'jquery',
         'lodash',
         'modules/collection'
-    ], function ( $, _, funktionssammlung ) {
+    ], function ( $, _, collection ) {
 
         return {
 
             ready: function ( element, options ) {
 
-                funktionssammlung.method1();
+                collection.method1();
 
             }
 
@@ -427,7 +427,7 @@ Its not necessary to create a module for a collection of functions. For this cas
 
 ## Events
 
-The event dispatcher is based on the jquery event api but acts a bit different. In addition it is possible to define a scope in which the callback function will be called.
+The event dispatcher is based on the jquery event api but acts a little different. In addition it is possible to define a scope in which the callback function will be executed.
 
 **modules/event_example1**
 
@@ -481,7 +481,7 @@ The event dispatcher is based on the jquery event api but acts a bit different. 
 
 ## Conditions
 
-If you want to specify when a module should be loaded, you can create a condition and link it with the module. You can find a [collection](#collection) with some predefined conditions here: `app/utils/conditions.js`. Feel free to add your own conditions.
+If you want to specify under what circumstances a module is loaded you can create a condition and link it to the module. You can find a [collection](#collection) with some predefined conditions here: `app/utils/conditions.js`. Feel free to add your own conditions.
 
 ```javascript
 ( function( window, define, require, undefined ) {
@@ -500,9 +500,9 @@ If you want to specify when a module should be loaded, you can create a conditio
 }( this, this.define, this.require ) );
 ```
 
-When a module is linked to a condition (see [Integration in the HTML](#integration-in-the-html)), the condition is responsible to kick off the load process. In order to do this the `load` function and the `HTMLElement` are passed as arguments into the condition. To start the load process simply call the load function.
+When a module is linked to a condition (see [Integrating with HTML](#integrating-with-html)), the condition is responsible to trigger the load process. In order to do this the `load` function and the `HTMLElement` are passed as arguments into the condition. To start the load process simply call the load function.
 
-> **Important:** When the `load` function doesn't get called, the module will never be initialized. So make sure your condition works proper.
+> **Important:** When the `load` function doesn't get called, the module will never be initialized. So make sure your condition works properly.
 
 **Let's clarify this with the `in-viewport` condition**
 
