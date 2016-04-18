@@ -46,7 +46,7 @@ There are some prerequisites for this project template to be installed. Type ```
 install all Grunt modules.
 
 The second thing you have to install is [scss-lint](https://github.com/brigade/scss-lint). Install
-this module by typing ```gem install scss_lint``` into your console.
+this module by typing ```gem install scss-lint -v 0.32.0``` into your console.
 
 ### Update
 
