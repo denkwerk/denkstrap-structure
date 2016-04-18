@@ -113,7 +113,6 @@
             /**
              * Creates array with module objects
              */
-
             Array.prototype.forEach.call(
                 moduleElements,
                 function( element, index ) {
@@ -224,6 +223,7 @@
          * @param {Object} options.options
          * @param {Array} options.extensions
          * @param {String} options.moduleName
+         * @param {String} options.type
          */
         Loader.prototype.initLocalModule = function( options ) {
             var ModuleClass = Module.extend( options.module );
@@ -249,7 +249,7 @@
          * @function initLocalClass
          * @memberof Loader
          * @param {Object} options
-         * @param {Object} options.module
+         * @param {Function} options.module
          * @param {jQuery/HTMLElement} options.element
          * @param {Object} options.options
          * @param {Array} options.extensions
