@@ -29,6 +29,13 @@ prod:
     tasks:
         - 'production'
 
+styleguide:
+    description: 'A task for generating a styleguide'
+    tasks:
+        - 'nunjuckr:styleguide-development-overview'
+        - 'nunjuckr:styleguide-development-modules'
+        - 'nunjuckr:styleguide-development-pattern'
+
 lint:
     description: 'Linting task for development'
     tasks:

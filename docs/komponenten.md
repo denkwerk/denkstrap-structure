@@ -45,3 +45,24 @@ Aus dieser Aufteilung der Module in Pattern ergibt sich bei uns folgende Ordners
 
 Ggf. können noch Zwischenebenen eingeführt werden, dass bspw. alle Headlines,
 alle Buttons oder alle Teaser einem Ordner abgelegt sind.
+
+### Implementierung
+
+Wenn die einzelnen Komponenten als nunjucks-Macros angelegt werden, dann gilt es folgendes
+zu beachten: Innerhalb der Macro-Bibliothek sollten die entsprechenden Macros einmal
+aufgerufen werden.
+
+Beispiel:
+
+```html
+{% macro test() %}
+<!-- contents of macro -->
+{% endmacro %}
+
+{{ test() }}
+```
+
+Das sorgt dafür, dass die einzelnen Komponenten im Styleguide sichtbar werden. Im normalen
+Gebrauch über die `import`-Funktion von nunjucks ist dieser Bereich allerdings nicht sichtbar.
+Somit kann die Komponentenbibliothek als Macro-Sammlung gepflegt werden und ist gleichzeitig
+im Styleguide sichtbar.
