@@ -14,7 +14,7 @@
     $debug: '';
 
     @each $key, $value in $map {
-        $debug: $debug + '[' +  $key + ': ' + debug-map-children($value) + '] ';
+        $debug: $debug + '[' + $key + ': ' + debug-map-children($value) + '] ';
     }
 
     @if $label {
