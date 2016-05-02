@@ -81,7 +81,7 @@
                             ),
                             targets = document.querySelectorAll( this.settings.selector );
 
-                        targets.forEach( function( target ) {
+                        Array.prototype.forEach.call( targets, function( target ) {
                             target.dispatchEvent( breakpointEvent );
                         } );
                     }
