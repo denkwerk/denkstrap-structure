@@ -4,7 +4,7 @@ development:
         - 'clean:dist'
         - 'sass_globbing'
         - 'sass:development'
-        - 'autoprefixer:development'
+        - 'postcss:autoprefixer'
         - 'lint'
         - 'copy:js'
         - 'nunjuckr:development'
@@ -20,7 +20,7 @@ production:
         - 'clean:dist'
         - 'sass_globbing'
         - 'sass:production'
-        - 'autoprefixer:production'
+        - 'postcss:autoprefixer'
         - 'requirejs:production'
         - 'nunjuckr:production'
 
