@@ -188,6 +188,36 @@
 
                 } );
 
+            it( 'should be possible to unregister a namespaced event ' +
+                'more then one time', function( done ) {
+
+                    require( [ 'utils/event' ], function( Event ) {
+
+                        var counter = 0;
+
+                        Event.on( EVENT_TEST_5, function( e ) {
+                            counter += 1;
+                        } );
+
+                        Event.on( EVENT_TEST_5_NS, function( e ) {
+                            counter += 1;
+                        } );
+
+                        Event.trigger( EVENT_TEST_5 );
+
+                        Event.off( EVENT_TEST_5_NS );
+                        Event.off( EVENT_TEST_5_NS );
+
+                        Event.trigger( EVENT_TEST_5 );
+
+                        if ( counter === 3 ) {
+                            done();
+                        }
+
+                    } );
+
+                } );
+
         } );
 
     } );

@@ -137,13 +137,15 @@
                         events[ index ] = null;
                     }
                 } );
+
+                events = events.filter( function( event ) {
+                    return !!event;
+                } );
+
+                this._events[ name.name ] = events;
             } else {
                 delete this._events[ name.name ];
             }
-
-            events = events.filter( function( event ) {
-                return !!event;
-            } );
         };
 
         /**
