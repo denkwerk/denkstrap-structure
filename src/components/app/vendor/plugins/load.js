@@ -2,8 +2,9 @@
     'use strict';
 
     define( [
-        'module'
-    ], function( plugin ) {
+        'module',
+        'lodash'
+    ], function( plugin, _ ) {
 
         var buildMap = {};
 
@@ -41,7 +42,7 @@
                             Class = config.globalScope[moduleName] = value;
 
                             if ( parsedName.init ) {
-                                methods.forEach( function( method ) {
+                                _.each( methods, function( method ) {
                                     if ( typeof value[method] === 'function' ) {
                                         try {
                                             value[method].call( value, null, {} );
