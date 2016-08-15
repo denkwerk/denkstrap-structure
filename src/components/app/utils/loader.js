@@ -332,39 +332,50 @@
                     this.initLocalModule
                     : this.initGlobalModule;
                 var extensions = [];
+                var promise = new Promise( function( resolve ) {
 
-                /**
-                 * Searchs related extensions and pushes them into an array
-                 */
-                if ( isLocal && moduleObject.extensions.length ) {
+                    /**
+                     * Searchs related extensions and pushes them into an array
+                     */
+                    if ( isLocal && moduleObject.extensions.length ) {
 
-                    moduleObject.extensions.forEach( function( extensionName, index ) {
+                        this.requireContext( moduleObject.extensions, function() {
 
-                        this.requireContext( extensionName, function( extension ) {
+                            Array.prototype.forEach.call( arguments, function( extension ) {
 
-                            /* jshint bitwise: false */
-                            if ( !!~extension.extend.indexOf( source ) ) {
-                                extensions.push( extension );
-                            }
-                            /* jshint bitwise: true */
+                                /* jshint bitwise: false */
+                                if ( !!~extension.extends.indexOf( source ) ) {
+                                    extensions.push( extension );
+                                }
+                                /* jshint bitwise: true */
 
-                        }.bind( this ) );
+                            } );
 
-                    }.bind( this ) );
+                            resolve();
 
-                }
+                        } );
+
+                    } else {
+                        resolve();
+                    }
+
+                }.bind( this ) );
 
                 /**
                  * Initialize Module
                  */
-                initFunction.call( this, {
-                    module: module,
-                    element: moduleObject.element,
-                    options: moduleObject.options,
-                    moduleName: source,
-                    extensions: extensions,
-                    type: type
-                } );
+                promise.then( function() {
+
+                    initFunction.call( this, {
+                        module: module,
+                        element: moduleObject.element,
+                        options: moduleObject.options,
+                        moduleName: source,
+                        extensions: extensions,
+                        type: type
+                    } );
+
+                }.bind( this ) );
 
             }.bind( this ) );
 
