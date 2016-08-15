@@ -13,6 +13,11 @@
                 requirejs.undef( 'utils/conditions' );
                 requirejs.undef( 'jquery' );
                 requirejs.undef( 'test' );
+                requirejs.undef( 'test1' );
+                requirejs.undef( 'test2' );
+                requirejs.undef( 'test-extension' );
+                requirejs.undef( 'test-extension1' );
+                requirejs.undef( 'test-extension2' );
                 requirejs.undef( 'test-priority' );
             } );
 
@@ -22,6 +27,11 @@
                 requirejs.undef( 'utils/conditions' );
                 requirejs.undef( 'jquery' );
                 requirejs.undef( 'test' );
+                requirejs.undef( 'test1' );
+                requirejs.undef( 'test2' );
+                requirejs.undef( 'test-extension' );
+                requirejs.undef( 'test-extension1' );
+                requirejs.undef( 'test-extension2' );
                 requirejs.undef( 'test-priority' );
             } );
 
@@ -202,6 +212,160 @@
 
                     setTimeout( function() {
                         expect( fakeModule.ready.calledOnce ).to.be.equal( true );
+                        done();
+                    }, 100 );
+                } );
+            } );
+
+            it( 'should init modules with extension on a custom element', function( done ) {
+                var scopeElement = $( '<div></div>' ),
+                    fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-module="test" data-extension="test-extension"></div>' +
+                    '</div>' ),
+                    fakeModule = {
+                        ready: sinon.spy()
+                    },
+                    fakeExtension = {
+                        extends: [ 'test' ],
+                        ready: function() {
+                            this._super();
+                            this.test();
+                        },
+                        test: sinon.spy()
+                    };
+
+                define( 'test', fakeModule );
+                define( 'test-extension', fakeExtension );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: scopeElement
+                    } );
+
+                    loader.initModules( fakeElement );
+
+                    setTimeout( function() {
+                        expect( fakeModule.ready.calledOnce ).to.be.equal( true );
+                        expect( fakeExtension.test.calledOnce ).to.be.equal( true );
+                        done();
+                    }, 100 );
+                } );
+            } );
+
+            it( 'should extend just the spedified module', function( done ) {
+                var scopeElement = $( '<div></div>' ),
+                    fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-module="test1, test2" data-extension="test-extension"></div>' +
+                    '</div>' ),
+                    fakeModule1 = {
+                        ready: sinon.spy()
+                    },
+                    fakeModule2 = {
+                        ready: sinon.spy()
+                    },
+                    fakeExtension = {
+                        extends: [ 'test1' ],
+                        ready: sinon.spy()
+                    };
+
+                define( 'test1', fakeModule1 );
+                define( 'test2', fakeModule2 );
+                define( 'test-extension', fakeExtension );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: scopeElement
+                    } );
+
+                    loader.initModules( fakeElement );
+
+                    setTimeout( function() {
+                        expect( fakeModule1.ready.callCount ).to.be.equal( 0 );
+                        expect( fakeModule2.ready.calledOnce ).to.be.equal( true );
+                        expect( fakeExtension.ready.calledOnce ).to.be.equal( true );
+                        done();
+                    }, 100 );
+                } );
+            } );
+
+            it( 'should extend multiple spedified modules', function( done ) {
+                var scopeElement = $( '<div></div>' ),
+                    fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-module="test1, test2" data-extension="test-extension"></div>' +
+                    '</div>' ),
+                    fakeModule1 = {
+                        ready: sinon.spy()
+                    },
+                    fakeModule2 = {
+                        ready: sinon.spy()
+                    },
+                    fakeExtension = {
+                        extends: [ 'test1', 'test2' ],
+                        ready: sinon.spy()
+                    };
+
+                define( 'test1', fakeModule1 );
+                define( 'test2', fakeModule2 );
+                define( 'test-extension', fakeExtension );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: scopeElement
+                    } );
+
+                    loader.initModules( fakeElement );
+
+                    setTimeout( function() {
+                        expect( fakeModule1.ready.callCount ).to.be.equal( 0 );
+                        expect( fakeModule2.ready.callCount ).to.be.equal( 0 );
+                        expect( fakeExtension.ready.calledTwice ).to.be.equal( true );
+                        done();
+                    }, 100 );
+                } );
+            } );
+
+            it( 'should extend multiple extensions on the spedified module', function( done ) {
+                var scopeElement = $( '<div></div>' ),
+                    fakeElement = $( '<div>' +
+                        '<div class="auto-init" ' +
+                        'data-module="test" ' +
+                        'data-extension="test-extension1, test-extension2"></div>' +
+                    '</div>' ),
+                    fakeModule = {
+                        ready: sinon.spy()
+                    },
+                    fakeExtension1 = {
+                        extends: [ 'test' ],
+                        ready: function() {
+                            this._super();
+                            this.spy1();
+                        },
+                        spy1: sinon.spy()
+                    },
+                    fakeExtension2 = {
+                        extends: [ 'test' ],
+                        ready: function() {
+                            this._super();
+                            this.spy2();
+                        },
+                        spy2: sinon.spy()
+                    };
+
+                define( 'test', fakeModule );
+                define( 'test-extension1', fakeExtension1 );
+                define( 'test-extension2', fakeExtension2 );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: scopeElement
+                    } );
+
+                    loader.initModules( fakeElement );
+
+                    setTimeout( function() {
+                        expect( fakeModule.ready.calledOnce ).to.be.equal( true );
+                        expect( fakeExtension1.spy1.calledOnce ).to.be.equal( true );
+                        expect( fakeExtension2.spy2.calledOnce ).to.be.equal( true );
                         done();
                     }, 100 );
                 } );
