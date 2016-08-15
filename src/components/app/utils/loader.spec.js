@@ -13,6 +13,7 @@
                 requirejs.undef( 'utils/conditions' );
                 requirejs.undef( 'jquery' );
                 requirejs.undef( 'test' );
+                requirejs.undef( 'test-extension' );
                 requirejs.undef( 'test-priority' );
             } );
 
@@ -22,6 +23,7 @@
                 requirejs.undef( 'utils/conditions' );
                 requirejs.undef( 'jquery' );
                 requirejs.undef( 'test' );
+                requirejs.undef( 'test-extension' );
                 requirejs.undef( 'test-priority' );
             } );
 
@@ -202,6 +204,41 @@
 
                     setTimeout( function() {
                         expect( fakeModule.ready.calledOnce ).to.be.equal( true );
+                        done();
+                    }, 100 );
+                } );
+            } );
+
+            it( 'should init modules with extension on a custom element', function( done ) {
+                var scopeElement = $( '<div></div>' ),
+                    fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-module="test" data-extension="test-extension"></div>' +
+                    '</div>' ),
+                    fakeModule = {
+                        ready: sinon.spy()
+                    },
+                    fakeExtension = {
+                        extends: ['test'],
+                        ready: function () {
+                            this._super();
+                            this.test();
+                        },
+                        test: sinon.spy()
+                    };
+
+                define( 'test', fakeModule );
+                define( 'test-extension', fakeExtension );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: scopeElement
+                    } );
+
+                    loader.initModules( fakeElement );
+
+                    setTimeout( function() {
+                        expect( fakeModule.ready.calledOnce ).to.be.equal( true );
+                        expect( fakeExtension.test.calledOnce ).to.be.equal( true );
                         done();
                     }, 100 );
                 } );
