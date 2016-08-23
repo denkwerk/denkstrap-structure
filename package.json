@@ -52,6 +52,7 @@
     "grunt-karma": "0.12.1",
     "karma": "0.13.22",
     "karma-chai": "0.1.0",
+    "karma-coverage": "^1.1.1",
     "karma-jenkins-reporter": "0.0.2",
     "karma-mocha": "0.2.0",
     "karma-mocha-reporter": "1.1.1",
