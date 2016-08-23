@@ -226,7 +226,7 @@
                         ready: sinon.spy()
                     },
                     fakeExtension = {
-                        extends: [ 'test' ],
+                        extend: [ 'test' ],
                         ready: function() {
                             this._super();
                             this.test();
@@ -264,7 +264,7 @@
                         ready: sinon.spy()
                     },
                     fakeExtension = {
-                        extends: [ 'test1' ],
+                        extend: [ 'test1' ],
                         ready: sinon.spy()
                     };
 
@@ -300,7 +300,7 @@
                         ready: sinon.spy()
                     },
                     fakeExtension = {
-                        extends: [ 'test1', 'test2' ],
+                        extend: [ 'test1', 'test2' ],
                         ready: sinon.spy()
                     };
 
@@ -335,7 +335,7 @@
                         ready: sinon.spy()
                     },
                     fakeExtension1 = {
-                        extends: [ 'test' ],
+                        extend: [ 'test' ],
                         ready: function() {
                             this._super();
                             this.spy1();
@@ -343,7 +343,7 @@
                         spy1: sinon.spy()
                     },
                     fakeExtension2 = {
-                        extends: [ 'test' ],
+                        extend: [ 'test' ],
                         ready: function() {
                             this._super();
                             this.spy2();
