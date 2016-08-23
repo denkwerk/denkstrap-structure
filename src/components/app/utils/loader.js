@@ -344,7 +344,7 @@
                             Array.prototype.forEach.call( arguments, function( extension ) {
 
                                 /* jshint bitwise: false */
-                                if ( !!~extension.extends.indexOf( source ) ) {
+                                if ( !!~extension.extend.indexOf( source ) ) {
                                     extensions.push( extension );
                                 }
                                 /* jshint bitwise: true */
