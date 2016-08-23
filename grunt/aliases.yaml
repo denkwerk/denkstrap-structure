@@ -2,7 +2,6 @@ development:
     description: 'Development build task'
     tasks:
         - 'clean:dist'
-        - 'sass_globbing'
         - 'sass:development'
         - 'postcss:autoprefixer'
         - 'lint'
@@ -18,7 +17,6 @@ production:
     description: 'Production build task'
     tasks:
         - 'clean:dist'
-        - 'sass_globbing'
         - 'sass:production'
         - 'postcss:autoprefixer'
         - 'requirejs:production'

@@ -4,6 +4,9 @@
  */
 
 module.exports = {
+    options: {
+        importer: require( 'node-sass-globbing' )
+    },
     development: {
         options: {
             sourceMap: true

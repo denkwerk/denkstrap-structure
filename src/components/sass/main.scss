@@ -1,23 +1,23 @@
 // Config variables/maps
-@import 'import/config';
+@import 'config/**/*';
 
 // Variables
-@import 'import/variables';
+@import 'variables/**/*';
 
 // Mixins
-@import 'import/mixins';
+@import 'mixins/**/*';
 
 // Vendor styles
-@import 'import/vendor';
+@import 'vendor/**/*';
 
 // Site styles
-@import 'import/site';
+@import 'site/**/*';
 
 // Pattern styles
-@import 'import/patterns';
+@import '../patterns/**/*';
 
 // Module styles
-@import 'import/modules';
+@import '../modules/**/*';
 
 // Helper styles
-@import 'import/helper';
+@import 'helper/**/*';
