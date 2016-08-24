@@ -8,7 +8,7 @@ module.exports = function( grunt, options ) {
         ci: {
             configFile: 'karma.conf.js',
             singleRun: true,
-            reporters: [ 'jenkins' ],
+            reporters: [ 'jenkins', 'coverage' ],
             jenkinsReporter: {
                 outputFile: '../<%= testResultPath %>karma-tests.junit.xml',
                 suite: 'deka-if6-modules'
