@@ -1,12 +1,11 @@
 /**
  * Grunt postcss plugin
  * https://github.com/nDmitry/grunt-postcss
+ *
+ * Rules and Example Config for stylelint
+ * https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md
+ * https://github.com/stylelint/stylelint/blob/master/docs/user-guide/example-config.md
  */
-
-// https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md
-// https://github.com/stylelint/stylelint/blob/master/docs/user-guide/example-config.md
-// https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/linter/README.md
-
 
 module.exports = function( grunt, options ) {
     return {
@@ -25,7 +24,7 @@ module.exports = function( grunt, options ) {
                 processors: [
                     require( 'stylelint' )( {} )
                 ],
-                syntax: require('postcss-scss'),
+                syntax: require( 'postcss-scss' ),
 
                 extends: [
                     'stylelintrc'
@@ -34,8 +33,7 @@ module.exports = function( grunt, options ) {
 
             src: [
                 '<%= srcPath %>components/**/**/*.scss',
-                '!<%= srcPath %>components/sass/vendor/**/*.scss',
-                '!<%= srcPath %>components/sass/mixins/grid/**/*.scss'
+                '!<%= srcPath %>components/sass/vendor/**/*.scss'
             ]
         }
     };

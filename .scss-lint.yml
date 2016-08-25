@@ -1,3 +1,7 @@
+# DEPRECATED!
+# new linter: stylelint
+# Missing configs for stylelint are marked with > !!!
+
 scss_files: 'src/**/*.scss'
 
 exclude: 'src/components/sass/vendor/**'
@@ -38,9 +42,9 @@ linters:
     style: lowercase
   HexValidation:
     enabled: true
-  IdSelector:
+  !!! IdSelector:
     enabled: true
-  ImportPath:
+  !!! ImportPath:
     enabled: true
     leading_underscore: false
     filename_extension: false
@@ -54,20 +58,19 @@ linters:
   !!! MergeableSelector:
     enabled: false
     force_nesting: false
-    _________
-  NameFormat:
+  !!! NameFormat:
     enabled: true
     convention: hyphenated_lowercase
     allow_leading_underscore: true
   NestingDepth:
     enabled: true
     max_depth: 3
-  PlaceholderInExtend:
+  !!! PlaceholderInExtend:
     enabled: true
-  PropertySortOrder:
+  !!! PropertySortOrder:
     enabled: false
     ignore_unspecified: false
-  PropertySpelling:
+  !!! PropertySpelling:
     enabled: true
     extra_properties: []
   QualifyingElement:
@@ -75,10 +78,10 @@ linters:
     allow_element_with_attribute: false
     allow_element_with_class: false
     allow_element_with_id: false
-  SelectorDepth:
+  !!! SelectorDepth:
     enabled: true
     max_depth: 3
-  SelectorFormat:
+  !!! SelectorFormat:
     enabled: false
     convention: hyphenated_lowercase
     class_convention: '^(?:u|is|has)\-[a-z][a-zA-Z0-9]*$|^(?!u|is|has)[a-zA-Z][a-zA-Z0-9]*(?:\-[a-z][a-zA-Z0-9]*)?(?:\-\-[a-z][a-zA-Z0-9]*)?$'
@@ -112,7 +115,7 @@ linters:
     enabled: true
   UnnecessaryMantissa:
     enabled: true
-  UnnecessaryParentReference:
+  !!! UnnecessaryParentReference:
     enabled: true
   UrlFormat:
     enabled: false
