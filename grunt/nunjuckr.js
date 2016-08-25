@@ -10,7 +10,7 @@ module.exports = function( grunt, options ) {
                 basePath: '<%= srcPath %>components/',
                 templatePath: '<%= srcPath %>components/site/layout/',
                 modulePath: '<%= srcPath %>components/modules/',
-                patternPath: '<%= srcPath %>components/pattern/',
+                patternPath: '<%= srcPath %>components/patterns/',
                 appPath: '<%= srcPath %>components/app/',
                 srcPath: '<%= srcPath %>',
                 production: true
@@ -34,7 +34,7 @@ module.exports = function( grunt, options ) {
                     basePath: '<%= srcPath %>components/',
                     templatePath: '<%= srcPath %>components/site/layout/',
                     modulePath: '<%= srcPath %>components/modules/',
-                    patternPath: '<%= srcPath %>components/pattern/',
+                    patternPath: '<%= srcPath %>components/patterns/',
                     appPath: '<%= srcPath %>components/app/',
                     srcPath: '<%= srcPath %>',
                     production: false,
