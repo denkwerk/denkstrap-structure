@@ -1,0 +1,13 @@
+'rules': {
+    'declaration-bang-space-before': 'always',
+    'declaration-bang-space-after': 'never',
+    'color-no-hex': 'false',
+    'declaration-block-no-duplicate-properties': 'false',
+    'declaration-empty-line-before': 'always',
+    'color-hex-length': 'short',
+    'color-hex-case': 'lower',
+    'color-no-invalid-hex': 'true',
+    'selector-no-id': 'true',
+    'indentation': '4',
+    'number-leading-zero': 'always'
+}

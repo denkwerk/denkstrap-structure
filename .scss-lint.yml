@@ -7,27 +7,27 @@ linters:
     enabled: true
     space_before_bang: true
     space_after_bang: false
-  BorderZero:
+  !!! BorderZero:
     enabled: true
   ColorKeyword:
     enabled: false
-  Comment:
+  !!! Comment:
     enabled: false
-  DebugStatement:
+  !!! DebugStatement:
     enabled: true
-  DeclarationOrder:
+  !!! DeclarationOrder:
     enabled: true
   DuplicateProperty:
     enabled: false
-  ElsePlacement:
+  !!! ElsePlacement:
     enabled: true
     style: same_line
   EmptyLineBetweenBlocks:
     enabled: true
     ignore_single_line_blocks: false
-  EmptyRule:
+  !!! EmptyRule:
     enabled: true
-  FinalNewline:
+  !!! FinalNewline:
     enabled: true
     present: true
   HexLength:
@@ -51,9 +51,10 @@ linters:
   LeadingZero:
     enabled: true
     style: include_zero
-  MergeableSelector:
+  !!! MergeableSelector:
     enabled: false
     force_nesting: false
+    _________
   NameFormat:
     enabled: true
     convention: hyphenated_lowercase
