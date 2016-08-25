@@ -9,19 +9,19 @@
 ) {
 
     // Size multiplier to generate negative indent
+    $size-multiplier: 1;
+
     @if $negative {
         $size-multiplier: -1;
-    } @else {
-        $size-multiplier: 1;
     }
+
+    $indent-map: $map;
+    $indent-map-breakpoints: false;
 
     // If indent map contains different maps for breakpoints
     @if type-of(map-get($map, default)) == map {
         $indent-map: map-get($map, default);
         $indent-map-breakpoints: $map;
-    } @else {
-        $indent-map: $map;
-        $indent-map-breakpoints: false;
     }
 
     // Breakpoints defined in $map
@@ -29,6 +29,9 @@
 
         // If offset is defined add it to size value
         @if $offset != false {
+
+            $offset-value: $offset;
+
             @if type-of($offset) == map {
 
                 // If breakpoint key exists use key
@@ -39,8 +42,6 @@
                     // Otherwise get previous breakpoint key
                     $offset-value: map-get-prev($offset, $breakpoint, 0);
                 }
-            } @else {
-                $offset-value: $offset;
             }
 
             $size: $size + $offset-value;
@@ -65,5 +66,4 @@
             }
         }
     }
-    
 }
