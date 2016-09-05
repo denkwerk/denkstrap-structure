@@ -38,7 +38,7 @@ module.exports = function( grunt, options ) {
 };
 
 
-// new added configs
+// new added configs for stylelint : to discuss
 //
 // declaration-no-important
 // // Disallow !important within declarations.
