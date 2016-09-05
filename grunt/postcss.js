@@ -2,9 +2,8 @@
  * Grunt postcss plugin
  * https://github.com/nDmitry/grunt-postcss
  *
- * Rules and Example Config for stylelint
+ * Rules for stylelint
  * https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md
- * https://github.com/stylelint/stylelint/blob/master/docs/user-guide/example-config.md
  */
 
 module.exports = function( grunt, options ) {
@@ -19,13 +18,12 @@ module.exports = function( grunt, options ) {
             },
             src: '<%= distPath %>css/**/*.css'
         },
-        stylelint: {
+        lintscss: {
             options: {
                 processors: [
                     require( 'stylelint' )( {} )
                 ],
                 syntax: require( 'postcss-scss' ),
-
                 extends: [
                     'stylelintrc'
                 ]
@@ -38,3 +36,24 @@ module.exports = function( grunt, options ) {
         }
     };
 };
+
+
+// new added configs
+//
+// declaration-no-important
+// // Disallow !important within declarations.
+//
+// declaration-block-no-duplicate-properties
+// // Disallow duplicate properties within declaration blocks.
+//
+// declaration-block-no-ignored-properties
+// // Disallow property values that are ignored due to another property value in the same rule.
+//
+// declaration-block-semicolon-newline-after
+// // Require a newline or disallow whitespace after the semicolons of declaration blocks.
+//
+// no-extra-semicolons
+// // Disallow extra semicolons.
+//
+// no-unsupported-browser-features
+// // Disallow features that are unsupported by the browsers that you are targeting.

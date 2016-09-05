@@ -32,7 +32,7 @@ lint:
     tasks:
         - 'jshint:grunt'
         - 'jscs:grunt'
-        - 'postcss:stylelint'
+        - 'postcss:lintscss'
         - 'csslint:development'
         - 'jshint:frontend'
         - 'jscs:frontend'
