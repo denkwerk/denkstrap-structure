@@ -35,7 +35,7 @@
     "grunt-contrib-requirejs": "0.4.4",
     "grunt-contrib-watch": "0.6.1",
     "grunt-jscs": "2.3.0",
-    "grunt-nunjuckr": "^1.5.0",
+    "grunt-nunjuckr": "^1.5.1",
     "grunt-postcss": "^0.8.0",
     "grunt-sass": "1.1.0",
     "grunt-scss-lint": "0.3.8",
@@ -44,6 +44,7 @@
     "jshint": "2.8.0",
     "load-grunt-config": "0.17.2",
     "node-sass-globbing": "0.0.23",
+    "nunjucks": "^2.4.2",
     "requirejs": "2.1.20",
     "time-grunt": "1.2.2"
   },
