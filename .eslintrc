@@ -1,0 +1,36 @@
+{
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "sourceType": "script"
+    },
+    "env": {
+        "node": true,
+        "browser": true,
+        "amd": true,
+        "mocha": true,
+        "jquery": true
+    },
+    "globals": {
+        "sinon": true,
+        "expect": true,
+        "Promise": true
+    },
+    "rules": {
+        "eqeqeq": "error",
+        "curly": "error",
+        "complexity": ["error", 15],
+        "max-depth": ["error", 5],
+        "max-params": ["error", 10],
+        "max-statements": ["error", 55],
+        "no-unused-vars": "off",
+        "no-extra-boolean-cast": "off",
+        "no-console": "off",
+        "no-bitwise": ["error", {"allow": ["~"] }],
+        "no-new": "error",
+        "no-caller": "error",
+        "semi": ["error", "always"],
+        "no-loop-func": "error",
+        "no-undef": "error"
+    }
+}
