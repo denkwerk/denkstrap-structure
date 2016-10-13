@@ -620,3 +620,9 @@ Registers [conditions](#conditions) or loads all modules within the defined `HTM
 
 }( this, this.define, this.require ) );
 ```
+
+### Pending Modules
+
+The loader has a property called `pendingModules`. Here the amount of modules pending to load is stored. They are grouped by their priority (major/minor). When the loader is finished the numbers are equals to 0.
+
+You can access this property within the `dev`-configuration of the app in the global scope via `App.loader.pendingModules`.

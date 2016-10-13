@@ -624,3 +624,9 @@ Wird mit dem Element, in dem die zu ladenden Module enthalten sind als Argument 
 
 }( this, this.define, this.require ) );
 ```
+
+### Pending Modules
+
+Der Loader hat eine `pendingModules`-Eigenschaft. Hier wird die Anzahl der noch zu ladenden Module nach Priorität (major/minor) festgehalten. Sind alle Module geladen, dann sind beie Zahlen gleich 0.
+
+Diese Eigenschaft kann in der `dev`-Konfiguration der App auch global über `App.loader.pendingModules` abgerufen werden.
