@@ -32,7 +32,9 @@
          * MIT Licensed.
          */
         /* jshint ignore: start */
+        /* eslint-disable */
         var fnTest = /xyz/.test( function() {xyz;} ) ? /\b_super\b/ : /.*/;
+        /* eslint-enable */
         /* jshint ignore: end */
 
         /**
