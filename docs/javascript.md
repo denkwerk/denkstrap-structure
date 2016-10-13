@@ -23,6 +23,7 @@
     - [autoInit](#autoinit)
   - [initModules](#initmodules)
   - [Beispiel](#beispiel)
+  - [Pending Modules](#pending-modules)
 - [Abhängigkeiten](#abhangigkeiten)
 
 ***
