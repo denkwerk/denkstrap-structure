@@ -16,7 +16,8 @@ module.exports = {
     ci: {
         options: {
             format: 'checkstyle',
-            outputFile: '<%= testResultPath %>eslint-lint-report.checkstyle.xml'
+            outputFile: '<%= testResultPath %>eslint-lint-report.checkstyle.xml',
+            quiet: true
         },
         files: {
             src: [
