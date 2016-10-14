@@ -15,8 +15,8 @@ module.exports = {
     ],
     ci: {
         options: {
-            format: 'jslint-xml',
-            outputFile: '<%= testResultPath %>eslint-lint-report.jslint.xml'
+            format: 'checkstyle',
+            outputFile: '<%= testResultPath %>eslint-lint-report.checkstyle.xml'
         },
         files: {
             src: [
