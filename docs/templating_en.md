@@ -44,3 +44,6 @@ with just one `import` statement.
 
 Modules can be imported with `{% import 'modules' as modules %}` into the variable `modules`. Afterwards they can be used
 with `{{ modules.ordnername.macroname() }}`. Pattern can be imported and used in a similar way (`{% import 'patterns' as patterns %}`).
+
+> __Warning:__ Be careful when importing a module into another module. Importing all modules into a module leads to an infinite loop.
+This breaks the template rendering. The same applies for pattern.

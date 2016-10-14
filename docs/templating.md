@@ -45,3 +45,6 @@ importieren und somit weniger `import`-Statements in einer Datei angeben zu müs
 Module können einfach mit `{% import 'modules' as modules %}` in die Variable `modules` importiert werden. Danach kann einfach über
 `{{ modules.ordnername.macroname() }}` auf das Modul zugegriffen werden. Für Pattern existiert ein analoger Mechanismus
 (`{% import 'patterns' as patterns %}`).
+
+> __Achtung:__ Werden alle Module in einem Modul importiert entsteht eine unendliche Rekursion und das Templating funktioniert
+nicht mehr. Gleiches gilt für Pattern.
