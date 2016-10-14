@@ -95,7 +95,7 @@
 
                             return ret;
                         };
-                    } )( name, props[ name ] );
+                    }( name, props[ name ] ) );
 
                 } else if ( typeof props[ name ] === 'object' ) {
 
@@ -136,9 +136,9 @@
                 constructors.forEach( function( method ) {
                     methods[ method ] = typeof proto[ method ] === 'function' ?
                         proto.hasOwnProperty( method ) ?
-                            proto[ method ]
-                            : _super[ method ]
-                        : function() {};
+                            proto[ method ] :
+                            _super[ method ] :
+                        function() {};
                 } );
 
                 /**
@@ -147,9 +147,9 @@
                  */
                 errorMethod = typeof proto[ errorMethodName ] === 'function' ?
                     proto.hasOwnProperty( errorMethodName ) ?
-                        proto[ errorMethodName ]
-                        : _super[ errorMethodName ]
-                    : function() {};
+                        proto[ errorMethodName ] :
+                        _super[ errorMethodName ] :
+                    function() {};
 
                 if ( args[ 0 ] && args[ 0 ].jquery ) {
                     element = args[ 0 ].get( 0 );

@@ -13,7 +13,7 @@
          * @constructor
          */
 
-        function Event ( name, namespace, callback, once ) {
+        function Event( name, namespace, callback, once ) {
             this.type       = name;
             this.namespace  = namespace;
             this.callback   = callback;
@@ -69,7 +69,7 @@
          * Dispatcher
          * @constructor
          */
-        function Dispatcher () {
+        function Dispatcher() {
             this._events = {};
         }
 
@@ -184,4 +184,4 @@
         return new Dispatcher();
     } );
 
-} )( this, this.define, this.require, this.requirejs );
+}( this, this.define, this.require, this.requirejs ) );
