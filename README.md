@@ -69,4 +69,21 @@ There are a few more Documentations:
 - [Components structure (german)](docs/komponenten.md)
 - [JavaScript Testing (german)](docs/javascript-testing.md)
 
+## Node.js dependencies
+
+You may wonder why some of the packages are in the dev-dependencies. There is a reason for that: the core modules get improved constantly. There are two different kinds of dependencies:
+
+- `dependencies`
+- `devDependencies`
+
+These two dependencies have different goals.
+
+### `dependencies`
+
+Here all dependencies needed for the basic project setup are defined. This is kind of the _production_ mode of this repository.
+
+### `devDependencies`
+
+In this property all you can find all dependencies that are additionaly needed for extending the core modules. This is why all unit-testing libraries and frameworks are in here. Usually you won't need those dependecies on a normal project, so delete them from the `package.json` before installing all node-modules.
+
 Happy Coding!
