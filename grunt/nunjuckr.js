@@ -15,7 +15,10 @@ module.exports = function( grunt, options ) {
                 patternsPath: '<%= srcPath %>components/patterns/',
                 appPath: '<%= srcPath %>components/app/',
                 srcPath: '<%= srcPath %>',
-                production: true
+                production: true,
+                append: function( targetObj, key, data ) {
+                    targetObj[ key ] = data;
+                }
             },
             loader: new ComponentsLoader( options.srcPath ),
             ext: '.html'
@@ -41,7 +44,10 @@ module.exports = function( grunt, options ) {
                     appPath: '<%= srcPath %>components/app/',
                     srcPath: '<%= srcPath %>',
                     production: false,
-                    liveReloadPort: '<%= liveReloadPort %>'
+                    liveReloadPort: '<%= liveReloadPort %>',
+                    append: function( targetObj, key, data ) {
+                        targetObj[ key ] = data;
+                    }
                 }
             },
             files: [
