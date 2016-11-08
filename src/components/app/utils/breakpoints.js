@@ -36,6 +36,7 @@
              * Returns the default configuration
              *
              * @method defaults
+             * @return {Object} The default options
              */
             defaults: function() {
                 return {
@@ -74,11 +75,10 @@
                         Event.trigger( EVENT_BREAKPOINT_CHANGE, [ breakpoint ] );
 
                         var breakpointEvent = new CustomEvent(
-                                EVENT_BREAKPOINT_CHANGE,
-                                {
-                                    breakpoint: breakpoint
-                                }
-                            ),
+                            EVENT_BREAKPOINT_CHANGE,
+                            {
+                                breakpoint: breakpoint
+                            } ),
                             targets = document.querySelectorAll( this.settings.selector );
 
                         Array.prototype.forEach.call( targets, function( target ) {
@@ -109,4 +109,4 @@
         };
     } );
 
-} )( this, this.define, this.require, this.requirejs );
+}( this, this.define, this.require, this.requirejs ) );

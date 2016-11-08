@@ -4,9 +4,9 @@
  */
 module.exports = {
     options: {
-            config: '.jscsrc',
-            fix: true
-        },
+        config: '.jscsrc',
+        fix: true
+    },
     frontend: [
         '<%= srcPath %>**/*.js'
     ],

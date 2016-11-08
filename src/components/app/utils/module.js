@@ -32,7 +32,9 @@
          * MIT Licensed.
          */
         /* jshint ignore: start */
+        /* eslint-disable */
         var fnTest = /xyz/.test( function() {xyz;} ) ? /\b_super\b/ : /.*/;
+        /* eslint-enable */
         /* jshint ignore: end */
 
         /**
@@ -93,7 +95,7 @@
 
                             return ret;
                         };
-                    } )( name, props[ name ] );
+                    }( name, props[ name ] ) );
 
                 } else if ( typeof props[ name ] === 'object' ) {
 
@@ -174,9 +176,9 @@
                 constructors.forEach( function( method ) {
                     methods[ method ] = typeof proto[ method ] === 'function' ?
                         proto.hasOwnProperty( method ) ?
-                            proto[ method ]
-                            : _super[ method ]
-                        : function() {};
+                            proto[ method ] :
+                            _super[ method ] :
+                        function() {};
                 } );
 
                 /**
@@ -185,9 +187,9 @@
                  */
                 errorMethod = typeof proto[ errorMethodName ] === 'function' ?
                     proto.hasOwnProperty( errorMethodName ) ?
-                        proto[ errorMethodName ]
-                        : _super[ errorMethodName ]
-                    : function() {};
+                        proto[ errorMethodName ] :
+                        _super[ errorMethodName ] :
+                    function() {};
 
                 element = extractElement( args[ 0 ], element );
 

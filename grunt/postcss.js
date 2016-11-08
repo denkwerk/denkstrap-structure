@@ -1,4 +1,4 @@
-/**
+/*
  * Grunt postcss plugin
  * https://github.com/nDmitry/grunt-postcss
  */

@@ -38,4 +38,4 @@
         return App;
     } );
 
-} )( this, this.define, this.require, this.requirejs );
+}( this, this.define, this.require, this.requirejs ) );

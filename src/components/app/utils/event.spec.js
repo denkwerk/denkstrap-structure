@@ -109,7 +109,8 @@
 
             it( 'should be possible to unregister a namespaced event ' +
                 'without unregistering an other same named event ' +
-                'without namespace', function( done ) {
+                'without namespace',
+                function( done ) {
 
                     require( [ 'utils/event' ], function( Event ) {
 
@@ -138,7 +139,8 @@
                 } );
 
             it( 'should be possible to unregister a all ' +
-                'same named events, even namespaced', function( done ) {
+                'same named events, even namespaced',
+                function( done ) {
 
                     require( [ 'utils/event' ], function( Event ) {
 
@@ -167,7 +169,8 @@
                 } );
 
             it( 'should be possible to register an event that is ' +
-                'only called once', function( done ) {
+                'only called once',
+                function( done ) {
 
                     require( [ 'utils/event' ], function( Event ) {
 
@@ -189,7 +192,8 @@
                 } );
 
             it( 'should be possible to unregister a namespaced event ' +
-                'more then one time', function( done ) {
+                'more then one time',
+                function( done ) {
 
                     require( [ 'utils/event' ], function( Event ) {
 

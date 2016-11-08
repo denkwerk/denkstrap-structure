@@ -17,14 +17,15 @@
 
             /**
              * in-viewport condition
+             *
              * Initialize a module when it appears in the viewport
+             *
              * @param {Function} load Use to load module
              * @param {HTMLElement} element
-             * @type Function
              */
             'in-viewport': function( load, element ) {
 
-                function check () {
+                function check() {
 
                     var rect = element.getBoundingClientRect();
 
@@ -46,7 +47,7 @@
                     );
                 }
 
-                function listener () {
+                function listener() {
                     if ( check() ) {
                         window.removeEventListener( 'scroll', listener );
                         load();

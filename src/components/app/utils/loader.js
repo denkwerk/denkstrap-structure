@@ -42,7 +42,7 @@
          * @param {Function} requireContext The require.js context for the Loader instance
          * @returns {this}
          */
-        function Loader ( options, requireContext ) {
+        function Loader( options, requireContext ) {
 
             this.elementScope = ( options.elementScope && options.elementScope.jquery ) ?
                 options.elementScope.get( 0 ) :
@@ -110,7 +110,7 @@
                 major: []
             };
 
-            /**
+            /*
              * Creates array with module objects
              */
             Array.prototype.forEach.call(
@@ -154,26 +154,26 @@
                 element: element,
 
                 source: element.getAttribute( 'data-module' ) ?
-                    element.getAttribute( 'data-module' ).replace( / /g, '' ).split( ',' )
-                    : element.getAttribute( 'data-modules' ) ?
-                    element.getAttribute( 'data-modules' ).replace( / /g, '' ).split( ',' )
-                    : [],
+                    element.getAttribute( 'data-module' ).replace( / /g, '' ).split( ',' ) :
+                    element.getAttribute( 'data-modules' ) ?
+                    element.getAttribute( 'data-modules' ).replace( / /g, '' ).split( ',' ) :
+                        [],
 
                 options: JSON.parse( element.getAttribute( 'data-options' ) ),
 
                 extensions: element.getAttribute( 'data-extension' ) ?
-                    element.getAttribute( 'data-extension' ).replace( / /g, '' ).split( ',' )
-                    : element.getAttribute( 'data-extensions' ) ?
-                    element.getAttribute( 'data-extensions' ).replace( / /g, '' ).split( ',' )
-                    : [],
+                    element.getAttribute( 'data-extension' ).replace( / /g, '' ).split( ',' ) :
+                    element.getAttribute( 'data-extensions' ) ?
+                    element.getAttribute( 'data-extensions' ).replace( / /g, '' ).split( ',' ) :
+                        [],
 
                 priority: element.getAttribute( 'data-priority' ) ?
-                    JSON.parse( element.getAttribute( 'data-priority' ) )
-                    : false,
+                    JSON.parse( element.getAttribute( 'data-priority' ) ) :
+                    false,
 
                 condition: ( typeof condition === 'string' && condition.indexOf( '{' ) !== -1 ) ?
-                    JSON.parse( condition )
-                    : condition
+                    JSON.parse( condition ) :
+                    condition
             };
         };
 
@@ -254,6 +254,7 @@
          * @param {Object} options.options
          * @param {Array} options.extensions
          * @param {String} options.moduleName
+         * @return {Module}
          */
         Loader.prototype.initLocalClass = function( options ) {
             return new options.module(
@@ -327,10 +328,10 @@
                 var isLocal = !module.isGlobal;
                 var isFunction = typeof module === 'function';
                 var initFunction = isFunction ?
-                    this.initLocalClass
-                    : isLocal ?
-                    this.initLocalModule
-                    : this.initGlobalModule;
+                    this.initLocalClass :
+                    isLocal ?
+                    this.initLocalModule :
+                        this.initGlobalModule;
                 var extensions = [];
                 var promise = new Promise( function( resolve ) {
 

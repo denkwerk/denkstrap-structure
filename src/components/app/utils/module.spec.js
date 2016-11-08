@@ -287,4 +287,4 @@
 
     } );
 
-} )( this, this.define, this.requirejs );
+}( this, this.define, this.requirejs ) );
