@@ -4,7 +4,8 @@
  */
 module.exports = {
     frontend: [
-        '<%= srcPath %>**/*.js'
+        '<%= srcPath %>**/*.js',
+        '!<%= srcPath %>components/app/vendor/**/*.js'
     ],
     grunt: [
         '<%= gruntPath %>**/*.js',
@@ -23,6 +24,7 @@ module.exports = {
             src: [
                 '<%= srcPath %>**/*.js',
                 '<%= gruntPath %>**/*.js',
+                '!<%= srcPath %>components/app/vendor/**/*.js',
                 'Gruntfile.js'
             ]
         }
