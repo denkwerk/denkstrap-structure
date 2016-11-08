@@ -109,6 +109,46 @@
             }
             /* jshint ignore: end */
 
+            /**
+             * Extracts element
+             *
+             * Checks for jquery or HTMLElement and returns the corresponding HTMLElement
+             *
+             * @param {HTMLElement|jQuery} value The value from which to extract
+             * @param {HTMLElement} extractedElement The extracted element
+             * @returns {HTMLElement}
+             * @private
+             */
+            var extractElement = function( value, extractedElement ) {
+                if ( value && value.jquery ) {
+                    extractedElement = value.get( 0 );
+                } else if ( value && value instanceof HTMLElement ) {
+                    extractedElement = value;
+                }
+                return extractedElement;
+            };
+
+            /**
+             * Fire a Custom DOM event
+             *
+             * @param {HTMLElement} element The element
+             * @param {String} event The name of the event
+             * @param {String} name The namespace
+             * @private
+             */
+            var fireDOMEvent = function( element, event, name ) {
+                if ( element !== null ) {
+                    var beforeInitEvent = new CustomEvent( event, {} ),
+                        beforeInitEventNS = new CustomEvent(
+                            event + '.' + name,
+                            {}
+                        );
+
+                    element.dispatchEvent( beforeInitEvent );
+                    element.dispatchEvent( beforeInitEventNS );
+                }
+            };
+
             var newClass = function Module() {
                 var args = arguments;
 
@@ -149,27 +189,14 @@
                         : _super[ errorMethodName ]
                     : function() {};
 
-                if ( args[ 0 ] && args[ 0 ].jquery ) {
-                    element = args[ 0 ].get( 0 );
-                } else if ( args[ 0 ] && args[ 0 ] instanceof HTMLElement ) {
-                    element = args[ 0 ];
-                }
+                element = extractElement( args[ 0 ], element );
 
                 /**
                  * BeforeInit Event
                  * @event beforeInit
                  * @event beforeInit:namespace
                  */
-                if ( element !== null ) {
-                    var beforeInitEvent = new CustomEvent( EVENT_BEFORE_INIT, {} ),
-                        beforeInitEventNS = new CustomEvent(
-                            EVENT_BEFORE_INIT + '.' + this.name,
-                            {}
-                        );
-
-                    element.dispatchEvent( beforeInitEvent );
-                    element.dispatchEvent( beforeInitEventNS );
-                }
+                fireDOMEvent( element, EVENT_BEFORE_INIT, this.name );
 
                 /**
                  * Initialization of constructor functions
@@ -227,16 +254,7 @@
                      * @event afterInit
                      * @event afterInit:namespace
                      */
-                    if ( element !== null ) {
-                        var afterInitEvent = new CustomEvent( EVENT_AFTER_INIT, {} ),
-                            afterInitEventNS = new CustomEvent(
-                                EVENT_AFTER_INIT + '.' + this.name,
-                                {}
-                            );
-
-                        element.dispatchEvent( afterInitEvent );
-                        element.dispatchEvent( afterInitEventNS );
-                    }
+                    fireDOMEvent( element, EVENT_AFTER_INIT, this.name );
 
                     if ( loadedCallback && type ) {
                         loadedCallback( type );
