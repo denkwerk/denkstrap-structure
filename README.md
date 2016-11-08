@@ -84,6 +84,6 @@ Here all dependencies needed for the basic project setup are defined. This is ki
 
 ### `devDependencies`
 
-In this property all you can find all dependencies that are additionaly needed for extending the core modules and writing unit tests. If you don't need those dependecies in your project delete them from the `package.json` before installing all node-modules. __Only delete those dependencies when you surely know there will be nu unit tests needed.__
+In this property all you can find all dependencies that are additionaly needed for extending the core modules and writing unit tests. If you don't need those dependecies in your project delete them from the `package.json` before installing all node-modules. __Only delete those dependencies when you surely know there will be no unit tests needed.__
 
 Happy Coding!
