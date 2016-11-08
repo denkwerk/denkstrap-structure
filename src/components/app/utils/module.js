@@ -114,9 +114,9 @@
              *
              * Checks for jquery or HTMLElement and returns the corresponding HTMLElement
              *
-             * @param value The value from which to extract
-             * @param extractedElement The extracted element
-             * @returns {*}
+             * @param {HTMLElement|jQuery} value The value from which to extract
+             * @param {HTMLElement} extractedElement The extracted element
+             * @returns {HTMLElement}
              * @private
              */
             var extractElement = function( value, extractedElement ) {
@@ -131,9 +131,9 @@
             /**
              * Fire a Custom DOM event
              *
-             * @param element The element
-             * @param event The name of the event
-             * @param name The namespace
+             * @param {HTMLElement} element The element
+             * @param {String} event The name of the event
+             * @param {String} name The namespace
              * @private
              */
             var fireDOMEvent = function( element, event, name ) {
