@@ -14,6 +14,7 @@
       - [Examples](#examples)
 - [Extensions](#extensions)
 - [Collections](#collections)
+- [Configuration](#configuration)
 - [Events](#events-1)
 - [Conditions](#conditions-1)
 - [Loader](#loader)
@@ -425,6 +426,52 @@ Its not necessary to create a module for a collection of functions. For this cas
 
 }( this, this.define, this.require ));
 ```
+
+## Configuration
+
+It is possible to provide different configurations for different environments. This is archieved using the require.js build. All configuration files are in the `app/config` folder. Here you can provide configs for a specific module or global configs. You can get and set those via the `get` and `set` methods. 
+
+The configurations are loaded via `config` in the define-block. E.g.:
+ 
+ ```javascript
+ define( [ 'config' ], function( config ) {
+   // get configs for module foo
+   var fooConfig = config.get( 'foo' );  
+ } );
+ ```
+ 
+ ### Require.js error handler
+ 
+ There is a function called `requireError` in the global block of the configs. With this function you can implement a special error handling for errors during script loading from require.js. You can use this to track if scripts loaded from a CDN can be loaded. If not you can implement an error handler pushing an event to your analytics or your logging tool. Then you can see the error really early.
+ 
+  ```javascript
+  ( function( window, define, require, undefined ) {
+      'use strict';
+      
+      /*
+       * ...
+       */
+  
+          var config = {
+              /*
+               * ...
+               */
+              
+              requireError: function( err ) {
+                  // Error-Handling
+              }
+              
+              /*
+               * ...
+               */
+          };
+  
+    /*
+     * ...
+     */
+  
+  }( this, this.define, this.require ) );
+  ```
 
 ## Events
 

@@ -14,6 +14,7 @@
       - [Beispiele](#beispiele)
 - [Extensions](#extensions)
 - [Funktionssammlungen](#funktionssammlungen)
+- [Konfiguration](#konfiguration)
 - [Events](#events-1)
 - [Conditions](#conditions)
 - [Loader](#loader)
@@ -427,6 +428,52 @@ Für literale Objekte z.B. Funktionssammlungen ist es nicht notwendig als Grundl
 
 }( this, this.define, this.require ));
 ```
+
+## Konfiguration
+
+Eine Konfiguration für verschiedene Umgebungen ist durch den require.js Build möglich. Die entsprechenden Dateien liegen im `app/config` Ordner. Hier können Optionen pro Modul bzw. globale Optionen hinterlegt werden. Über die Methoden `get` und `set` können sie entsprechend abgerufen und gesetzt werden.
+
+Die Konfiguration ist über `config` im define-Block zu laden. Beispiel:
+ 
+ ```javascript
+ define( [ 'config' ], function( config ) {
+   // Holt die Konfiguration für das Modul foo
+   var fooConfig = config.get( 'foo' );  
+ } );
+ ```
+ 
+ ### Require.js Error Handler
+ 
+ Im globalen Block der Config-Datei kann eine Funktion mit dem Namen `requireError` hinterlegt werden. Damit können spezielle Fehlerbehandlungen für Fehler beim Laden implementiert werden. Dies kann genutzt werden, wenn bestimmte Scripte aus einem CDN geladen werden. Passiert hier ein Fehler und ein Script wird nicht geladen, dann kann der Fehler direkt im Analytics- oder Log-Tool gespeichert werden und ein eventueller Fehler wird schneller entdeckt.
+  
+  ```javascript
+  ( function( window, define, require, undefined ) {
+      'use strict';
+      
+      /*
+       * ...
+       */
+  
+          var config = {
+              /*
+               * ...
+               */
+              
+              requireError: function( err ) {
+                  // Error-Handling
+              }
+              
+              /*
+               * ...
+               */
+          };
+  
+    /*
+     * ...
+     */
+  
+  }( this, this.define, this.require ) );
+  ```
 
 ## Events
 
