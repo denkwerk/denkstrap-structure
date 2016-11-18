@@ -25,7 +25,7 @@
             text:               'vendor/plugins/text',
 
             // Libraries
-            lodash:             'vendor/lodash.build',
+            lodash:             'vendor/lodash',
 
             // If it is not necessary to support IE8 its recommended to
             // use jQuery 2.X.X
