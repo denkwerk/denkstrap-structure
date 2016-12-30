@@ -1,5 +1,6 @@
 // Grid column padding mixin
 
+/* stylelint-disable */
 @mixin grid-padding(
     $width,
     $padding,
@@ -75,3 +76,4 @@
         }
     }
 }
+/* stylelint-enable */

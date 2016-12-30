@@ -57,13 +57,9 @@
 
         // Add breakpoint map to $padding map
         $padding: map-merge(
-                $padding,
-                ($gutter-breakpoint: (
-                    left: $padding-left,
-                    right: $padding-right,
-                    first-left: $padding-first-left,
-                    last-right: $padding-last-right
-                ))
+            $padding, ($gutter-breakpoint: (
+                left: $padding-left, right: $padding-right, first-left: $padding-first-left, last-right: $padding-last-right
+            ))
         );
     }
 

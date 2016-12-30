@@ -37,23 +37,9 @@ module.exports = function( grunt, options ) {
     };
 };
 
+// add to .stylelintrc if needed
+// http://stylelint.io/user-guide/rules/no-unsupported-browser-features/
 
-// new added configs for stylelint : to discuss
-//
-// declaration-no-important
-// // Disallow !important within declarations.
-//
-// declaration-block-no-duplicate-properties
-// // Disallow duplicate properties within declaration blocks.
-//
-// declaration-block-no-ignored-properties
-// // Disallow property values that are ignored due to another property value in the same rule.
-//
-// declaration-block-semicolon-newline-after
-// // Require a newline or disallow whitespace after the semicolons of declaration blocks.
-//
-// no-extra-semicolons
-// // Disallow extra semicolons.
-//
-// no-unsupported-browser-features
-// // Disallow features that are unsupported by the browsers that you are targeting.
+// 'no-unsupported-browser-features': [ true, {
+//     browsers: [ 'last 2 versions', 'ie > 8', 'Firefox >= 12', 'ios >= 7', 'android >= 4' ]
+// }]

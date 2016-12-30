@@ -37,10 +37,7 @@
         'declaration-block-no-duplicate-properties': true,
         'declaration-block-no-ignored-properties': true,
         'declaration-block-semicolon-newline-after': 'always',
-        'no-extra-semicolons': true,
-        'no-unsupported-browser-features': [ true, {
-          browsers: [ 'last 2 versions', 'ie > 8', 'Firefox >= 12', 'ios >= 7', 'android >= 4' ]
-        }]
+        'no-extra-semicolons': true
     },
     {
     'extends': 'stylelint-scss',

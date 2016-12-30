@@ -18,8 +18,7 @@
 
         // Add breakpoint map to last column map
         $last: map-merge(
-            $last,
-            ($width-breakpoint: ceil($cols / $width-number)
+            $last, ($width-breakpoint: ceil($cols / $width-number)
         ));
     }
 
