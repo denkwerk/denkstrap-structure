@@ -11,7 +11,7 @@ module.exports = function( grunt, options ) {
             reporters: [ 'jenkins', 'coverage' ],
             jenkinsReporter: {
                 outputFile: '../<%= testResultPath %>karma-tests.junit.xml',
-                suite: 'deka-if6-modules'
+                suite: 'denkstrap-structure'
             }
         }
     };
