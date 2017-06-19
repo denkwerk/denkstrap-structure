@@ -51,6 +51,20 @@ module.exports = function( grunt, options ) {
                     src: '**/*.njs',
                     dest: '<%= distPath %>',
                     ext: '.html'
+                },
+                {
+                    expand: true,
+                    cwd: '<%= srcPath %>components/modules/',
+                    src: '**/*.njs',
+                    dest: '<%= distPath %>/tmp/modules',
+                    ext: '.html'
+                },
+                {
+                    expand: true,
+                    cwd: '<%= srcPath %>components/patterns/',
+                    src: '**/*.njs',
+                    dest: '<%= distPath %>/tmp/patterns',
+                    ext: '.html'
                 }
             ]
         }

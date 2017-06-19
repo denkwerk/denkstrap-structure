@@ -43,3 +43,11 @@ lint_ci:
         - 'csslint:production'
         - 'jshint:ci'
         - 'jscs:ci'
+
+
+styleguide:
+    description: 'styleguide generation'
+    tasks:
+        - 'dev'
+        - 'dw-styleguide'
+        - 'sass:styleguide'

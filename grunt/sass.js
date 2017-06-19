@@ -18,5 +18,11 @@ module.exports = {
             outputStyle: 'compressed'
         },
         files: { '<%= distPath %>css/main.css': '<%= srcPath %>components/sass/main.scss' }
+    },
+    styleguide: {
+        options: {
+            // sourceMap: true
+        },
+        files: { '<%= distPath %>styleguide/css/sg-custom.css': '<%= srcPath %>components/sass/sg-custom.scss' }
     }
 };
