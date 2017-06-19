@@ -1,1 +1,92 @@
-// Styleguide CSS here
+/* Variables */
+
+$white:             #fefefe;
+$light-grey:        #ddd;
+$black:             #111; 
+$green:             #48C876;
+
+$body-bg-color:     $white;
+$nav-bg-color:      $light-grey;
+
+
+$unit:              30px;
+
+
+
+/* Custom styles */
+
+body {
+    background: $body-bg-color;
+}
+
+
+/* Navigation */
+
+// container
+.sg-sidebar {
+    background: $nav-bg-color;
+    
+    padding: $unit 0;   
+}
+
+// navigation-list
+.sg-sidebar ul ul { //reset
+    margin: 0!important;
+    color: $black;
+}
+
+.sg-nav-group {
+    color: $black;
+}
+
+// navigation-list-item
+.sg-nav-group {
+    margin: 0;
+
+    li {
+        margin: 0;
+    }
+    
+    &:first-child {
+        border-top: 1px solid $black;
+
+        > li {
+            border-bottom: 1px solid $black;
+        }
+    }
+    
+    .sg-nav-group {
+        > li:not(:last-child) {
+            padding-bottom: $unit / 2;
+        }
+        
+        .sg-nav-group {
+            li {
+                padding-bottom: 0;
+            }
+        }
+
+    }
+
+}
+
+
+// navigation-item-link
+.sg-h3 {
+    /* if this would be a h3 inside a Link instead h3 only, or even just a link,
+    ** the nav would be accesible. Also via keys.
+    ** -jL
+    */
+    line-height: $unit;
+    margin: 0;
+    padding: 0 ($unit / 2);
+}
+
+.sg-nav-group { //reset
+    a {
+        color: $black;
+        font-size: 1em;
+        line-height: $unit;
+    }
+}
+
