@@ -729,6 +729,7 @@ body {
     .fa-code {
         font-size: 18px;
         -webkit-font-smoothing: inherit;
+         
     }
 
     .fa-times {
@@ -744,6 +745,14 @@ body {
     .fa-arrow-left {
         font-size: 19px;
         line-height: 15px;
+    }
+}
+
+
+// Safari fix for icons in buttons (weren't centered)
+button {
+    i {
+        width: 100%; 
     }
 }
 
