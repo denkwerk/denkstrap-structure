@@ -916,9 +916,31 @@ button {
 }
 
 .markdown-body { 
+    h1,
+    h2,
+    h3 {
+        border: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    blockquote {
+        padding: 0 0 0 1em;
+        color: $text-color;
+        border-left: 0.25em solid $green;
+    }
+
     p {
         font-size: 1em;
         margin: 0;
+    }
+
+    pre,
+    code {
+        background: $grey;
     }
 }
 

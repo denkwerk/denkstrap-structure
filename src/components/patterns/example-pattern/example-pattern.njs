@@ -1,1 +1,1 @@
-examlpe pattern here
+Pattern here
