@@ -226,23 +226,6 @@ body {
     }
 }
 
-/* .sg-section-group {
-padding-bottom: 32px; // For older browsers
-padding-bottom: 2rem;
-} */
-
-.sg-section {
-    margin-bottom: $unit;
-
-    @media screen and (max-width: 1024px) { 
-        padding-top: 50px;
-    }
-
-    @media screen and (min-width: 1025px) {
-        padding-top: $unit;
-    }
-}
-
 
 /* -------------------------------------------------------------------------
  Navigation
@@ -627,15 +610,36 @@ padding-bottom: 2rem;
  SG Sections
  ---------------------------------------------------------------------------- */
 
+.sg-section {
+    margin-bottom: $unit;   
+}
+
+/* Section Anchor
+---------------------------------------------------------------------------- */
+
+.sg-section-anchor {
+    border-bottom: 1px solid $content-border-color;
+    display: block;
+    width: 100%;
+
+    @media screen and (max-width: 1024px) { 
+        height: 50px;
+    }
+
+    @media screen and (min-width: 1025px) {
+        height: $unit;
+    }
+}
+
+
 /* Section Header
 ---------------------------------------------------------------------------- */
 
 .sg-section-header {
+    background: $body-bg-color;
     border-bottom: 1px solid $content-border-color;
-    border-top: 1px solid $content-border-color;
 
     &.fixed {
-        background: $body-bg-color;
         box-sizing: border-box;
         position: fixed;
             top: 0;

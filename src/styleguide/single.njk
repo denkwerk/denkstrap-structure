@@ -1,28 +1,28 @@
 {% macro render( element ) -%}
-
-    <article class="sg-section" id="{{ element.name }}">
+    <article class="sg-section">
 
         <header class="sg-section-header">
+            <a id="{{ element.name }}" class="sg-section-anchor"></a>
             <h2 class="sg-h2 sg-section-title">{{ element.name }}</h2>
                 
-                <div class="sg-button-container">
-                    
-                    <button type="button" class="sg-btn btn-back" onClick="history.go(-1);return true;">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                    </button>
+            <div class="sg-button-container">
+                
+                <button type="button" class="sg-btn btn-back" onClick="history.go(-1);return true;">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </button>
 
-                    <a class="sg-btn btn-expand" href="{{element.path}}" title="single view">
-                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                    </a>
-                    
-                    <button type="button" class="sg-btn sg-btn--source" title="view source">
-                        <i class="fa fa-code" aria-hidden="true"></i>
-                    </button>
+                <a class="sg-btn btn-expand" href="{{element.path}}" title="single view">
+                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                </a>
+                
+                <button type="button" class="sg-btn sg-btn--source" title="view source">
+                    <i class="fa fa-code" aria-hidden="true"></i>
+                </button>
 
-                    <a class="sg-btn sg-btn--top" href="#top" title="back to top">
-                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                    </a>
-                </div>
+                <a class="sg-btn sg-btn--top" href="#top" title="back to top">
+                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                </a>
+            </div>
         </header>
         
         <div class="sg-code">
