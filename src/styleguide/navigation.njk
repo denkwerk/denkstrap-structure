@@ -1,0 +1,26 @@
+
+{% macro navigation(tree, level = 0) %}
+
+<ul class="sg-nav-group sg-nav-list sg-nav-lv-{{ level }}">
+    {% for item in tree %}
+    <li class="sg-nav-item">
+        {{ navigationItem(item, level) }}
+    </li>
+    {% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro navigationItem(item, level) %}
+    {% if item.children %}
+        <h3 class="sg-nav-link sg-nav-link-lv-{{ level }} sg-h3">
+            <i class="fa fa-plus" aria-hidden="true"></i> 
+            <span class="sg-nav-text">{{ item.name }}</span>
+        </h3>
+        {{ navigation(item.children, level + 1)}}
+    {% else %}
+        <a class="sg-nav-link sg-nav-link-lv-{{ level }}" href="#{{ item.hash }}">
+            <span class="sg-nav-text">{{ item.hash}}</span>
+        </a>
+    {% endif %}
+
+{% endmacro %}

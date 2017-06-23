@@ -11,8 +11,10 @@ module.exports = function( grunt, options ) {
                     '/styleguide/css/sg-custom.css'
                 ],
                 footerScripts: [
-                    '/js/app/main.js'
-                ]
+                    '/js/app/main.js',
+                    '/styleguide/js/sg-custom.js'
+                ],
+                templatesPath: '<%= srcPath %>styleguide'
             }
         }
     };

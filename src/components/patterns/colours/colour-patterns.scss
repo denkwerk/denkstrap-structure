@@ -1,0 +1,30 @@
+.styleguide__list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.styleguide__element {
+    margin: 0 0.75em 1.5em;
+}
+
+.styleguide__colorbox {
+    display: block;
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid transparent;
+    color: #fff;
+}
+
+.styleguide__definition {
+    margin: 0.5em 0;
+    list-style: none;
+    color: #7a7a7a;
+    line-height: 1.2em;
+    padding: 0;
+    font-size: 14px;
+}
+

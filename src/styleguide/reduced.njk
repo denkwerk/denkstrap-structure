@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Style Guide Boilerplate Styles -->
+        <link rel="stylesheet" href="{{ webPath }}/css/sg-custom.css">
+        <!--[if lt IE 9]><link rel="stylesheet" href="{{ webPath }}/css/sg-style-old-ie.css"><![endif]-->
+
+        <!-- https://github.com/sindresorhus/github-markdown-css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- prism Syntax Highlighting Styles -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
+
+        <!-- Replace below stylesheet with your own stylesheet -->
+        {# {% for stylesheet in stylesheets %}
+            <link rel="stylesheet" href="{{ stylesheet }}">
+        {% endfor %} #}
+
+        {% for script in headerScripts %}
+            <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+    </head>
+   
+    <body class="styleguide-single">
+        <main class="sg-main">
+            {% import "single.njk" as singleView %}
+            {{ singleView.render( element ) }}
+        </main>
+
+        <!--[if gt IE 8]><!-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-markup.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-css.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-clike.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-javascript.min.js"></script>
+        <!--<![endif]-->
+
+        <script src="{{ webPath }}/js/sg-scripts.js"></script>
+
+        {% for script in footerScripts %}
+            <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+    </body>
+</html>

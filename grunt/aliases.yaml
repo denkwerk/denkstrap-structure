@@ -51,3 +51,4 @@ styleguide:
         - 'dev'
         - 'dw-styleguide'
         - 'sass:styleguide'
+        - 'copy:styleguide'

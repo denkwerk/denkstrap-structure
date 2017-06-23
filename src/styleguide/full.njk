@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Style Guide Boilerplate Styles -->
+        <link rel="stylesheet" href="{{ webPath }}/css/sg-custom.css">
+        <!--[if lt IE 9]><link rel="stylesheet" href="{{ webPath }}/css/sg-style-old-ie.css"><![endif]-->
+
+        <!-- https://github.com/sindresorhus/github-markdown-css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- prism Syntax Highlighting Styles -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
+
+        <!-- Replace below stylesheet with your own stylesheet -->
+        {# {% for stylesheet in stylesheets %}
+            <link rel="stylesheet" href="{{ stylesheet }}">
+        {% endfor %} #}
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+        {% for script in headerScripts %}
+            <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+    </head>
+    <body class="styleguide-full">
+        
+        <div class="sg-nav-toggle-container">
+            <button class="sg-nav-toggle" title="toggle navigation">
+                <i class="fa fa-navicon" aria-hidden="true"></i>
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav class="sg-sidebar">
+            {% import "navigation.njk" as nav %}
+            {{ nav.navigation(navigation) }}
+        </nav>
+
+        <main class="sg-main">
+
+            {% import "single.njk" as singleView %}
+            {% for element in elements %}
+                {{ singleView.render( element ) }}
+            {% endfor %}
+
+        </main>
+
+        <!--[if gt IE 8]><!-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-markup.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-css.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-clike.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-javascript.min.js"></script>
+        <!--<![endif]-->
+
+        <script>
+            // add folding and switching icons to groups
+
+            // this opens all navigation levels at once
+            // -jLaz
+            /*$('.sg-nav-group h3').click(function () {
+                $(this).siblings().children().toggle();
+                $(this).children().toggleClass('fa-minus').toggleClass('fa-plus');
+                $(this).siblings('h3 i').toggleClass('fa-minus').toggleClass('fa-plus');
+            });*/
+
+            $(document).on('click', '.sg-nav-list h3', function() {
+
+                // this opens just the next level
+                // -jLaz
+                $(this).parent().find('.sg-nav-item').toggle();
+                $(this).children('i').toggleClass('fa-plus fa-minus');  
+
+                // adding an active class to the item
+                $(this).toggleClass('active');
+
+                // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
+                // -jLaz
+                if( $(this).hasClass('sg-nav-link-lv-0') ) {
+                    $(this).addClass('sg-nav-opened');
+                }
+
+                // detect if nav-text has more than one line
+                // -jLaz
+                var $navText = $('.sg-nav-text');
+                $navText.each(function(){
+                    if ($(this).height() > 30) {
+                        $(this).parent().addClass('multiline');
+                    }
+                });
+            });
+
+            // extra class in action: using this to find all fa-mius Icons
+            // to resolve the bug where lv1 items were still on fa-minus even when closed 
+            // b/c of that, the next toggle gave them fa-plus but they were then open 
+            // so it was the opposite way around.
+            // also remove all active classes.
+            // -jLaz
+            $(document).on('click', '.sg-nav-opened', function() {
+
+                $(this).parent().find('.fa-minus').removeClass('fa-minus').addClass('fa-plus');
+                $(this).parent().find('.active').removeClass('active');
+                $(this).removeClass('sg-nav-opened');
+            });
+
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                // highlight active pattern in navi
+                $(".sg-section").mouseenter(function () {
+                    var id = $(this).attr('id');
+                    $('a').removeClass('active');
+                    $("[href=#" + id + "]").addClass('active');
+                });
+
+                // collapse navi
+                $('.sg-sidebar .sg-nav-group li h3').siblings().children().toggle();
+            
+            });
+        </script>
+
+        <script>
+            // Instagram-Like sticky headers 
+            // https://codepen.io/sales/pen/oxqzOe
+            // with modifications (comments)
+            // -jLaz
+
+            var stickyHeaders = (function() {
+
+                var $window = $(window),
+                    $stickies;
+
+                var load = function(stickies) {
+
+                    if (typeof stickies === "object" && stickies instanceof jQuery && stickies.length > 0) {
+
+                        $stickies = stickies.each(function() {
+
+                            var $thisSticky = $(this).wrap('<div class="followWrap" />');
+
+                            $thisSticky
+                                .data('originalPosition', $thisSticky.offset().top)
+                                .data('originalHeight', $thisSticky.outerHeight())
+                                .parent()
+                                .height($thisSticky.outerHeight()) ;  
+                        });
+
+                        $window.off("scroll.stickies").on("scroll.stickies", function() {
+                          _whenScrolling();     
+                        });
+                    }
+                };
+                
+                var _whenScrolling = function() {
+
+                    $stickies.each(function(i) {            
+
+                        var $thisSticky = $(this),
+                            $stickyPosition = $thisSticky.data('originalPosition');
+
+                        // get the original width
+                        var $width = $(this).width();
+
+                        if ($stickyPosition <= $window.scrollTop()) {        
+
+                            var $nextSticky = $stickies.eq(i + 1),
+                                $nextStickyPosition = $nextSticky.data('originalPosition') - $thisSticky.data('originalHeight');
+
+                            // $thisSticky.addClass("fixed").css('width', $width);
+                            // Add the width to overwrite the standard 100% width of a fixed element
+                            $thisSticky.addClass("fixed").css('width', $width);
+                            
+                            if ($nextSticky.length > 0 && $thisSticky.offset().top >= $nextStickyPosition) {
+
+                                $thisSticky.addClass("absolute").css("top", $nextStickyPosition);
+                            }
+
+                        } else {
+
+                            var $prevSticky = $stickies.eq(i - 1);
+
+                            $thisSticky.removeClass("fixed");
+
+                            if ($prevSticky.length > 0 && $window.scrollTop() <= $thisSticky.data('originalPosition') - $thisSticky.data('originalHeight')) {
+
+                                //$prevSticky.removeClass("absolute").removeAttr("style");
+                                // We still need the style attribute here b/c the element is still fixed
+                                // and we don't want 100% width again. But since the Attribute was removed to get
+                                // rid of the top value, we set top to zero
+                                $prevSticky.removeClass("absolute").css('top', 0);
+                            }
+                        }
+                    });
+                };
+
+                return {
+                load: load
+                };
+            })();
+
+            // because we're responsive, we need to update the width value on the sticky headers
+            $(window).on('resize', function () {
+                $('.sg-section-header').width( $('.sg-section').width() );
+            });
+
+            // make it so!
+            $(function() {
+                stickyHeaders.load($('.sg-section-header'));
+            });
+
+            
+        </script>
+
+        {% for script in footerScripts %}
+            <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+    </body>
+</html>
