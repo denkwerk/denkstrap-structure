@@ -13,22 +13,34 @@ $secondary-color:           $light-grey;
 
 $body-bg-color:             $white;
 $text-color:                $black;
+$text-color-inverted:       $white;
 
-$nav-bg-color:              $secondary-color;
-$nav-border-color:          $dark-grey;
 $content-border-color:      $dark-grey;
 
-$nav-link-hover-bg-color:       $primary-color;
-$nav-link-hover-text-color:     $white;
-$nav-btn-hover-bg-color:        $mid-grey;
-$nav-btn-hover-text-color:      $primary-color;
+$nav-bg-color:              $secondary-color;
+$nav-text-color:            $secondary-color;
+$nav-border-color:          $dark-grey;
 
-$btn-bg-color:                  transparent;
-$btn-hover-bg-color:            transparent;
-$btn-hover-text-color:          $green;
+$nav-parent-hover-bg-color:             $mid-grey;
+$nav-parent-hover-text-color:           $primary-color;
+$nav-parent-mobile-hover-bg-color:      $secondary-color;
+$nav-parent-mobile-hover-text-color:    $primary-color;
+$nav-link-hover-bg-color:               $primary-color;
+$nav-link-hover-text-color:             $text-color-inverted;
+
+$nav-mobile-bg-color:                   $primary-color;
+$nav-mobile-text-color:                 $text-color-inverted;
+$nav-link-mobile-hover-bg-color:        $secondary-color;
+$nav-link-mobile-hover-text-color:      $text-color-inverted;
+
+$btn-bg-color:              transparent;
+$btn-hover-bg-color:        transparent;
+$btn-hover-text-color:      $primary-color;
 
 
 $unit:              30px;
+$content-width:     75%;
+$nav-width:         25%;
 
 
 
@@ -204,20 +216,10 @@ body {
     margin-left: 20%;
 }
 
-/* .sg-wrapper {
-  position: relative; // Used to help sidebar height go all the way down the page 
-  } */
-
 .sg-main {
     margin-bottom: $unit * 2;
 
-    @media screen and (min-width: 1025px) { 
-        padding-top: $unit;
-    }
-}
-
-@media screen and (min-width: 768px) { 
-    .sg-main {
+    @media screen and (min-width: 768px) { 
         padding: 0 $unit;
     }
 }
@@ -228,7 +230,7 @@ body {
             .sg-main {
                 float: right;
                 transition: width 0.4s ease;
-                width: 80%;
+                width: $content-width;
             }
         }
     }
@@ -282,7 +284,7 @@ body {
         width: 100%;
         
         .nav-is-active & {
-            width: 80%;
+            width: $content-width;
         }
     }
 }
@@ -331,7 +333,7 @@ body {
 .nav-is-active {
     .sg-nav-toggle {
         @media screen and (max-width: 1024px) {
-            color: $white;
+            color: $text-color-inverted;
 
             &:hover,
             &:focus {
@@ -369,8 +371,8 @@ body {
         }
 
         .nav-is-active & {
-            background: $primary-color;
-            color: $white;
+            background: $nav-mobile-bg-color;
+            color: $nav-mobile-text-color;
             display: flex;
             height: 100vh;
             opacity: 1;
@@ -392,7 +394,7 @@ body {
         position: fixed;
             bottom: 0;
             top: 0;
-        width: 20%; 
+        width: $nav-width; 
 
         .js & {
             transform: translateX(-100%);
@@ -413,7 +415,7 @@ body {
 
 .sg-nav-list {
     @media screen and (max-width: 1024px) {
-        color: $white;
+        color: text-color-inverted;
         width: 100%;
     }
 
@@ -423,12 +425,8 @@ body {
 }
 
 .sg-nav-lv-0 {
-    @media screen and (max-width: 1024px) {
-        
-    }
-
     @media screen and (min-width: 1025px) {
-        background: $secondary-color;
+        background: $nav-bg-color;
         border-top: 1px solid $nav-border-color;
     }
 }
@@ -482,8 +480,8 @@ body {
 
      @media screen and (min-width: 1025px) {
         &:hover {
-            background: $nav-btn-hover-bg-color;
-            color: $nav-btn-hover-text-color;
+            background: $nav-parent-hover-bg-color;
+            color: $nav-parent-hover-text-color;
         }
      }
 }
@@ -501,26 +499,22 @@ body {
     }
     
     @media screen and (max-width: 1024px) {
-        background: rgba($secondary-color, 0.4);
+        background: rgba($nav-parent-mobile-hover-bg-color, 0.4);
         margin-bottom: 1px;
         position: relative;
         width: 100%;
-            
+        
         &:before {
             content: '';
             display: block;
-            padding-top: 50%; //
+            padding-top: 50%; 
             transition: padding-top 0.4s ease;
-        }
-
-        /* &:nth-child(2n+1) {
-            margin-right: 1px;
-        } */            
+        }        
 
         &:hover,
         &.active {
             background: $mid-grey;
-            color: $primary-color;
+            color: $nav-parent-mobile-hover-text-color;
         }
 
         &.active {
@@ -541,7 +535,7 @@ body {
     }
 
     @media screen and (max-width: 1024px) {
-        background: rgba($secondary-color, 0.2);
+        background: rgba($nav-parent-mobile-hover-bg-color, 0.2);
         margin-bottom: 1px;
         position: relative;
         width: 100%;
@@ -549,13 +543,16 @@ body {
         &:before {
             content: '';
             display: block;
-            padding-top: 30%; //
+            padding-top: 30%;
             transition: padding-top 0.4s ease;
+        }
+        
+        &:hover,
+        &.active {
+            background: rgba($nav-parent-mobile-hover-bg-color, 0.4);
         }
 
         &.active {
-            background: rgba($secondary-color, 0.4);
-
             &:before {
                 padding-top: 0;
                 transition: padding-top 0.4s ease 0.05s;
@@ -584,7 +581,7 @@ body {
     transition: all 0.15s ease-in;
 
     @media screen and (max-width: 1024px) {
-        color: $white;
+        color: $text-color-inverted;
     }
 
     @media screen and (min-width: 1025px) {
@@ -598,8 +595,16 @@ body {
     &.active,
     &:hover,
     &:focus {
-        background: $nav-link-hover-bg-color;
-        color: $nav-link-hover-text-color;
+        @media screen and (max-width: 1024px) {
+            background: rgba($nav-link-mobile-hover-bg-color, 0.2); 
+            color: $nav-link-mobile-hover-text-color;
+        }
+
+        @media screen and (min-width: 1025px) {
+            background: $nav-link-hover-bg-color;
+            color: $nav-link-hover-text-color;
+        }
+        
     }
 }
 
@@ -693,7 +698,7 @@ body {
 
 .nav-is-active {
     .sg-section-header.fixed {
-        width: calc( 80% - (#{$unit} * 2));
+        width: calc( #{$content-width} - (#{$unit} * 2));
     }
 }
 
@@ -955,7 +960,7 @@ button {
 ---------------------------------------------------------------------------- */
 
 .sg-doc { 
-    background: $light-grey;
+    background: $secondary-color;
     border: 0;
     margin: 0;
 }
@@ -1050,12 +1055,12 @@ button {
 }
 
 .sg-video video {
-    bottom: 0;
     height: 100%;
-    left: 0;
     position: absolute;
-    right: 0;
-    top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
     width: 100%;
     z-index: 100;
 }
