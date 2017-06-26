@@ -112,6 +112,15 @@
                 $(this).removeClass('sg-nav-opened');
             });
 
+
+            // Documentation Section Toggle
+            // with jQuery b/c I'm too nooby for vanilla js 
+            // -jLaz
+
+            $('.btn-documentation').on('click', function() {
+                $(this).closest('.sg-section').find('.sg-doc').toggleClass('sg-doc-active');
+            });  
+
         </script>
 
         <script>
@@ -125,7 +134,6 @@
 
                 // collapse navi
                 $('.sg-sidebar .sg-nav-group li h3').siblings().children().toggle();
-            
             });
         </script>
 
@@ -209,14 +217,13 @@
                 $('.followWrap').height( $('.sg-section-header').height() );
             });
             
-
             // make it so!
             $(function() {
                 stickyHeaders.load($('.sg-section-header'));
-            });
-
-            
+            });            
         </script>
+
+        
 
         {% for script in footerScripts %}
             <script type="text/javascript" src="{{ script }}"></script>

@@ -66,6 +66,9 @@ var SGB = window.SGB || {};
             _removeClass( docEl, 'nav-is-active' );
         };
 
+        // Source Code toggle
+        // -jLaz
+
         var getNextSource = function( el ) {
             if ( el.parentElement === null ) {
                 return false;
@@ -85,33 +88,9 @@ var SGB = window.SGB || {};
             }
         };
 
-        /*SGB.toggleSourceCode = function() {
-            var sourceCode = this.parentElement.classList.contains( 'sg-section' );
-            _toggleClass( sourceCode, 'sg-source-active' );
-        };*/
+        // Source Code toggle Button
 
-        SGB.selectSourceCode = function() {
-            var range,
-                selection;
-
-            if ( doc.body.createTextRange ) {
-                range = doc.body.createTextRange();
-                range.moveToElementText( this.nextSibling );
-                range.select();
-            } else if ( w.getSelection ) {
-                selection = w.getSelection();
-                range = doc.createRange();
-                range.selectNodeContents( this.nextSibling );
-                selection.removeAllRanges();
-                selection.addRange( range );
-            }
-
-            _toggleClass( this, 'sg-btn--select-active' );
-        };
-
-        // add toggle button for code view on sg modules
-        // -jLaz
-        SGB.toggleActiveBtnClass = function() {
+        SGB.toggleActiveCodeBtnClass = function() {
             var button = this;
             var buttonIcon = this.childNodes[ 1 ];
             _toggleClass( button, 'btn-active' );
@@ -119,10 +98,22 @@ var SGB = window.SGB || {};
             _toggleClass( buttonIcon, 'fa-times' );
         };
 
+        // Documentation Toggle
+        // -jLaz
+
+        SGB.toggleActiveDocumentationBtnClass = function() {
+            var button = this;
+            var buttonIcon = this.childNodes[ 1 ];
+            _toggleClass( button, 'btn-active' );
+            _toggleClass( buttonIcon, 'fa-align-left' );
+            _toggleClass( buttonIcon, 'fa-times' );
+        };
+
         queryAll( '.sg-nav-toggle' ).on( 'click', SGB.toggleNav );
         //queryAll( '.sg-nav-group a' ).on( 'click', SGB.hideNav );
         queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleSourceCode );
+        queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
         queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
-        queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveBtnClass );
+        queryAll( '.btn-documentation' ).on( 'click', SGB.toggleActiveDocumentationBtnClass );
     }
 }( this, SGB ) );

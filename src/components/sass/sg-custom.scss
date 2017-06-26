@@ -956,6 +956,36 @@ button {
 }
 
 
+/* Section Documentation Preview
+---------------------------------------------------------------------------- */
+
+.sg-doc {
+    position: relative;
+
+    /* experimental */
+    max-height: 50vh;
+    margin: 0 0 $unit;
+    overflow: auto;
+}
+
+
+/* Hide source code blocks off-screen */
+.sg-enhanced .sg-doc {
+    opacity: 0;
+    position: absolute;
+    top: -100%;
+    width: 1px;
+    transition: opacity 0.6s ease-out;
+}
+
+/* Show source code blocks when active or JS is not enabled */
+.sg-enhanced .sg-doc-active {
+    opacity: 1;
+    position: relative;
+    width: 100%;
+}
+
+
 /* Section Markdown Documentation
 ---------------------------------------------------------------------------- */
 
