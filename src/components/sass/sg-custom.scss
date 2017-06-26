@@ -8,17 +8,20 @@ $dark-grey:         #ccc;
 $black:             #111; 
 $green:             #48c876;
 
+$primary-color:             $green;
+$secondary-color:           $light-grey;
+
 $body-bg-color:             $white;
 $text-color:                $black;
 
-$nav-bg-color:              $light-grey;
+$nav-bg-color:              $secondary-color;
 $nav-border-color:          $dark-grey;
 $content-border-color:      $dark-grey;
 
-$nav-link-hover-bg-color:       $green;
+$nav-link-hover-bg-color:       $primary-color;
 $nav-link-hover-text-color:     $white;
 $nav-btn-hover-bg-color:        $mid-grey;
-$nav-btn-hover-text-color:      $green;
+$nav-btn-hover-text-color:      $primary-color;
 
 $btn-bg-color:                  transparent;
 $btn-hover-bg-color:            transparent;
@@ -257,7 +260,7 @@ body {
         border-bottom: 1px solid $content-border-color;
 
         .nav-is-active & {
-            background: $green;
+            background: $primary-color;
             border-bottom-color: transparent;
         }
     }
@@ -366,7 +369,7 @@ body {
         }
 
         .nav-is-active & {
-            background: $green;
+            background: $primary-color;
             color: $white;
             display: flex;
             height: 100vh;
@@ -425,7 +428,7 @@ body {
     }
 
     @media screen and (min-width: 1025px) {
-        background: $light-grey;
+        background: $secondary-color;
         border-top: 1px solid $nav-border-color;
     }
 }
@@ -498,7 +501,7 @@ body {
     }
     
     @media screen and (max-width: 1024px) {
-        background: rgba($light-grey, 0.4);
+        background: rgba($secondary-color, 0.4);
         margin-bottom: 1px;
         position: relative;
         width: 100%;
@@ -517,7 +520,7 @@ body {
         &:hover,
         &.active {
             background: $mid-grey;
-            color: $green;
+            color: $primary-color;
         }
 
         &.active {
@@ -538,7 +541,7 @@ body {
     }
 
     @media screen and (max-width: 1024px) {
-        background: rgba($light-grey, 0.2);
+        background: rgba($secondary-color, 0.2);
         margin-bottom: 1px;
         position: relative;
         width: 100%;
@@ -551,7 +554,7 @@ body {
         }
 
         &.active {
-            background: rgba($light-grey, 0.4);
+            background: rgba($secondary-color, 0.4);
 
             &:before {
                 padding-top: 0;
@@ -590,7 +593,7 @@ body {
 }
 
 .sg-nav-link-lv-2 {
-    border-bottom: 1px solid rgba($light-grey, 0.4);
+    border-bottom: 1px solid rgba($secondary-color, 0.4);
 
     &.active,
     &:hover,
@@ -972,7 +975,7 @@ button {
     blockquote {
         padding: 0 0 0 1em;
         color: $text-color;
-        border-left: 0.25em solid $green;
+        border-left: 0.25em solid $primary-color;
     }
 
     p {
