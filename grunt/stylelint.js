@@ -20,7 +20,7 @@ module.exports = function( grunt, options ) {
         all: [
             'src/components/**/**/*.scss',
             '!src/components/sass/vendor/**/*.scss'
-
+            // 'dist/css/**/*.css'
         ]
     };
 };
