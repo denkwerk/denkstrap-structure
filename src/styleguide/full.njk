@@ -116,9 +116,9 @@
 
         <script>
             $(document).ready(function () {
-                // highlight active pattern in navi
+                // highlight active section in navi
                 $(".sg-section").mouseenter(function () {
-                    var id = $(this).attr('id');
+                    var id = $(this).find('.sg-section-anchor').attr('id');
                     $('a').removeClass('active');
                     $("[href=#" + id + "]").addClass('active');
                 });
