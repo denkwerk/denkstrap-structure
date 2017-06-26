@@ -17,22 +17,6 @@ module.exports = function( grunt, options ) {
                 ]
             },
             src: '<%= distPath %>css/**/*.css'
-        },
-        lintscss: {
-            options: {
-                processors: [
-                    require( 'stylelint' )( {} )
-                ],
-                syntax: require( 'postcss-scss' ),
-                extends: [
-                    'stylelintrc'
-                ]
-            },
-
-            src: [
-                '<%= srcPath %>components/**/**/*.scss',
-                '!<%= srcPath %>components/sass/vendor/**/*.scss'
-            ]
         }
     };
 };
