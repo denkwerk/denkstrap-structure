@@ -179,7 +179,9 @@ $unit:              30px;
 ---------------------------------------------------------------------------- */
 html {
     &.nav-is-active {
-        overflow: hidden;
+        @media screen and (max-width: 1024px) {
+            overflow: hidden;
+        }
     }
 }
 
@@ -218,10 +220,21 @@ body {
 }
 
 @media screen and (min-width: 1025px) {
+    .nav-is-active {
+        .styleguide-full {
+            .sg-main {
+                float: right;
+                transition: width 0.4s ease;
+                width: 80%;
+            }
+        }
+    }
+
     .styleguide-full {
         .sg-main {
             float: right;
-            width: 80%;
+            width: 100%;
+            transition: width 0.4s ease;
         }
     }
 }
@@ -235,12 +248,13 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-nav-toggle-container {
+    position: fixed;
+    z-index: 11;
+    width: 100%;
+    
     @media screen and (max-width: 1024px) {
         background: $body-bg-color;
         border-bottom: 1px solid $content-border-color;
-        position: fixed;
-        width: 100%;
-        z-index: 11;
 
         .nav-is-active & {
             background: $green;
@@ -248,8 +262,25 @@ body {
         }
     }
     
-    @media screen and (min-width: 1025px) {
+}
+
+.sg-sticky-bg-helper {
+    @media screen and (max-width: 1024px) {
         display: none;
+    }
+
+    @media screen and (min-width: 1025px) {
+        background: $body-bg-color;
+        height: 50px;
+        position: absolute;
+            right: 0;
+            top: 0;
+            transition: width 0.4s ease;
+        width: 100%;
+        
+        .nav-is-active & {
+            width: 80%;
+        }
     }
 }
 
@@ -266,16 +297,11 @@ body {
     padding: 0;
     position: relative;
     text-decoration: none;
-    transition: all 0.15s ease-in;
     width: 50px;
     z-index: 11;
 
     @media screen and (min-width: 768px) {
         margin-left: $unit / 2;
-    }
-    
-    @media screen and (min-width: 1025px) {
-        display: none;
     }
 
     &:hover,
@@ -290,31 +316,33 @@ body {
     }
 
     .fa-times {
-        font-size: 20px;
-        transform: translateY(-50px);
+        font-size: 22px;
+        display: none;
     }
 
     .fa-navicon {
-        transform: translateY(0px);
+        display: block;
     }
 }
 
 .nav-is-active {
     .sg-nav-toggle {
-        color: $white;
+        @media screen and (max-width: 1024px) {
+            color: $white;
 
-        &:hover,
-        &:focus {
-            color: $text-color;
-            outline: 0;
+            &:hover,
+            &:focus {
+                color: $text-color;
+                outline: 0;
+            }
         }
-
+        
         .fa-times {
-            transform: translateY(0px);
+            display: block;
         }
 
         .fa-navicon {
-            transform: translateY(-50px);
+            display: none;
         }
     }
 }
@@ -326,11 +354,9 @@ body {
 
 .sg-sidebar {
     background: $nav-bg-color;
-}
 
-@media screen and (max-width: 1024px) {
-    .js {
-        .sg-sidebar {
+    @media screen and (max-width: 1024px) {
+        .js & {
             padding-top: 50px;
             opacity: 0;
             position: absolute;
@@ -338,10 +364,8 @@ body {
             visibility: hidden;
             z-index: -100;
         }
-    }
 
-    .js.nav-is-active {
-        .sg-sidebar {
+        .nav-is-active & {
             background: $green;
             color: $white;
             display: flex;
@@ -355,24 +379,28 @@ body {
             z-index: 10;
         }
     }
-}
 
-@media screen and (min-width: 1025px) {
-    .sg-sidebar {
-        padding: $unit 0;   
-    }
-
-    .sg-sidebar,
-    .js .sg-sidebar,
-    .js.nav-is-active .sg-sidebar {
+    @media screen and (min-width: 1025px) {
         float: left;
         font-size: 14px;
-        opacity: 1;
+        opacity: 0;
         overflow-y: scroll;
+        padding: 50px 0;
         position: fixed;
             bottom: 0;
             top: 0;
-        width: 20%;
+        width: 20%; 
+
+        .js & {
+            transform: translateX(-100%);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .nav-is-active & {
+            transform: translateX(0%);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            opacity: 1;
+        }
     }
 }
 
@@ -461,10 +489,17 @@ body {
     font-size: 1.25em;
     min-height: 50px;
     
+    @media screen and (max-width: 767px) {
+        padding-left: 33px; // even with navigation-toggle
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        padding-left: 49px; // even with navigation-toggle
+    }
+    
     @media screen and (max-width: 1024px) {
         background: rgba($light-grey, 0.4);
         margin-bottom: 1px;
-        padding-left: 33px; // even with navigation-toggle
         position: relative;
         width: 100%;
             
@@ -620,15 +655,8 @@ body {
 .sg-section-anchor {
     border-bottom: 1px solid $content-border-color;
     display: block;
+    height: 51px;
     width: 100%;
-
-    @media screen and (max-width: 1024px) { 
-        height: 50px;
-    }
-
-    @media screen and (min-width: 1025px) {
-        height: $unit;
-    }
 }
 
 

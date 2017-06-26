@@ -37,6 +37,7 @@
                 <i class="fa fa-navicon" aria-hidden="true"></i>
                 <i class="fa fa-times" aria-hidden="true"></i>
             </button>
+            <div class="sg-sticky-bg-helper"></div>
         </div>
 
         <nav class="sg-sidebar">
@@ -151,7 +152,7 @@
                                 .data('originalPosition', $thisSticky.offset().top)
                                 .data('originalHeight', $thisSticky.outerHeight())
                                 .parent()
-                                .height($thisSticky.outerHeight()) ;  
+                                .height($thisSticky.outerHeight());  
                         });
 
                         $window.off("scroll.stickies").on("scroll.stickies", function() {
@@ -211,6 +212,11 @@
             $(window).on('resize', function () {
                 $('.sg-section-header').width( $('.sg-section').width() );
             });
+
+            // same when we toggle the Navigation
+            $('.sg-nav-toggle').on('click', function () {
+                $('.sg-section-header').width( $('.sg-section').width() );
+            }):
 
             // make it so!
             $(function() {
