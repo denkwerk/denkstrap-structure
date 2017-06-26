@@ -297,7 +297,7 @@ body {
     padding: 0;
     position: relative;
     text-decoration: none;
-    width: 50px;
+    width: 47px;
     z-index: 11;
 
     @media screen and (min-width: 768px) {
@@ -671,12 +671,26 @@ body {
         box-sizing: border-box;
         position: fixed;
             top: 0;
-        width: 100%;
         z-index: 0;
+
+        @media screen and (max-width: 767px) {         
+            width: 100%;
+        }
+
+        @media screen and (min-width: 768px) { 
+            transition: width 0.4s ease;
+            width: calc( 100% - (#{$unit} * 2) );
+        }
     }
 
     &.fixed.absolute {
         position: absolute;
+    }
+}
+
+.nav-is-active {
+    .sg-section-header.fixed {
+        width: calc( 80% - (#{$unit} * 2));
     }
 }
 

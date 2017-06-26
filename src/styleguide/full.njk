@@ -168,17 +168,12 @@
                         var $thisSticky = $(this),
                             $stickyPosition = $thisSticky.data('originalPosition');
 
-                        // get the original width
-                        var $width = $(this).width();
-
                         if ($stickyPosition <= $window.scrollTop()) {        
 
                             var $nextSticky = $stickies.eq(i + 1),
                                 $nextStickyPosition = $nextSticky.data('originalPosition') - $thisSticky.data('originalHeight');
 
-                            // $thisSticky.addClass("fixed").css('width', $width);
-                            // Add the width to overwrite the standard 100% width of a fixed element
-                            $thisSticky.addClass("fixed").css('width', $width);
+                             $thisSticky.addClass("fixed");
                             
                             if ($nextSticky.length > 0 && $thisSticky.offset().top >= $nextStickyPosition) {
 
@@ -193,7 +188,7 @@
 
                             if ($prevSticky.length > 0 && $window.scrollTop() <= $thisSticky.data('originalPosition') - $thisSticky.data('originalHeight')) {
 
-                                //$prevSticky.removeClass("absolute").removeAttr("style");
+                                // $prevSticky.removeClass("absolute").removeAttr("style");
                                 // We still need the style attribute here b/c the element is still fixed
                                 // and we don't want 100% width again. But since the Attribute was removed to get
                                 // rid of the top value, we set top to zero
@@ -207,16 +202,6 @@
                 load: load
                 };
             })();
-
-            // because we're responsive, we need to update the width value on the sticky headers
-            $(window).on('resize', function () {
-                $('.sg-section-header').width( $('.sg-section').width() );
-            });
-
-            // same when we toggle the Navigation
-            $('.sg-nav-toggle').on('click', function () {
-                $('.sg-section-header').width( $('.sg-section').width() );
-            });
 
             // make it so!
             $(function() {
