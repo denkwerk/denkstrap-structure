@@ -203,6 +203,13 @@
                 };
             })();
 
+            // because we're responsive, we need to update the height value on the sticky headers
+            
+            $(window).on('resize', function () {
+                $('.followWrap').height( $('.sg-section-header').height() );
+            });
+            
+
             // make it so!
             $(function() {
                 stickyHeaders.load($('.sg-section-header'));
