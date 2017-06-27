@@ -1,7 +1,7 @@
 {% macro render( element ) -%}
     <article class="sg-section">
 
-        <header class="sg-section-header">
+        <header class="sg-section-header" data-sticky-class="fixed">
             <a id="{{ element.name }}" class="sg-section-anchor"></a>
             <h2 class="sg-h2 sg-section-title">{{ element.name }}</h2>
                 
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="sg-doc">
+        <div class="sg-doc sg-doc-active">
             <div class="markdown-body">
                 {{element.doc | safe}}
             </div>

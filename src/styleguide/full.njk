@@ -63,67 +63,7 @@
         <!--<![endif]-->
 
         <script>
-            // add folding and switching icons to groups
 
-            // this opens all navigation levels at once
-            // -jLaz
-            /*$('.sg-nav-group h3').click(function () {
-                $(this).siblings().children().toggle();
-                $(this).children().toggleClass('fa-minus').toggleClass('fa-plus');
-                $(this).siblings('h3 i').toggleClass('fa-minus').toggleClass('fa-plus');
-            });*/
-
-            $(document).on('click', '.sg-nav-list h3', function() {
-
-                // this opens just the next level
-                // -jLaz
-                $(this).parent().find('.sg-nav-item').toggle();
-                $(this).children('i').toggleClass('fa-plus fa-minus');  
-
-                // adding an active class to the item
-                $(this).toggleClass('active');
-
-                // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
-                // -jLaz
-                if( $(this).hasClass('sg-nav-link-lv-0') ) {
-                    $(this).addClass('sg-nav-opened');
-                }
-
-                // detect if nav-text has more than one line
-                // -jLaz
-                var $navText = $('.sg-nav-text');
-                $navText.each(function(){
-                    if ($(this).height() > 30) {
-                        $(this).parent().addClass('multiline');
-                    }
-                });
-            });
-
-            // extra class in action: using this to find all fa-mius Icons
-            // to resolve the bug where lv1 items were still on fa-minus even when closed 
-            // b/c of that, the next toggle gave them fa-plus but they were then open 
-            // so it was the opposite way around.
-            // also remove all active classes.
-            // -jLaz
-            $(document).on('click', '.sg-nav-opened', function() {
-
-                $(this).parent().find('.fa-minus').removeClass('fa-minus').addClass('fa-plus');
-                $(this).parent().find('.active').removeClass('active');
-                $(this).removeClass('sg-nav-opened');
-            });
-
-
-            // Documentation Section Toggle
-            // with jQuery b/c I'm too nooby for vanilla js 
-            // -jLaz
-
-            $('.btn-documentation').on('click', function() {
-                $(this).closest('.sg-section').find('.sg-doc').toggleClass('sg-doc-active');
-            });  
-
-        </script>
-
-        <script>
             $(document).ready(function () {
                 // highlight active section in navi
                 $(".sg-section").mouseenter(function () {
@@ -135,95 +75,64 @@
                 // collapse navi
                 $('.sg-sidebar .sg-nav-group li h3').siblings().children().toggle();
             });
-        </script>
 
-        <script>
-            // Instagram-Like sticky headers 
-            // https://codepen.io/sales/pen/oxqzOe
-            // with modifications (comments)
+            // add folding and switching icons to groups
+            // this opens all navigation levels at once
+            /*
+            $('.sg-nav-group h3').click(function () {
+                $(this).siblings().children().toggle();
+                $(this).children().toggleClass('fa-minus').toggleClass('fa-plus');
+                $(this).siblings('h3 i').toggleClass('fa-minus').toggleClass('fa-plus');
+            });
+            */
+
+            // some navigation magic
             // -jLaz
 
-            var stickyHeaders = (function() {
+            $(document).on('click', '.sg-nav-list h3', function() {
 
-                var $window = $(window),
-                    $stickies;
+                // this opens just the next level
+                $(this).parent().find('.sg-nav-item').toggle();
+                $(this).children('i').toggleClass('fa-plus fa-minus');  
 
-                var load = function(stickies) {
+                // adding an active class to the item
+                $(this).toggleClass('active');
 
-                    if (typeof stickies === "object" && stickies instanceof jQuery && stickies.length > 0) {
+                // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
+                if( $(this).hasClass('sg-nav-link-lv-0') ) {
+                    $(this).addClass('sg-nav-opened');
+                }
 
-                        $stickies = stickies.each(function() {
-
-                            var $thisSticky = $(this).wrap('<div class="followWrap" />');
-
-                            $thisSticky
-                                .data('originalPosition', $thisSticky.offset().top)
-                                .data('originalHeight', $thisSticky.outerHeight())
-                                .parent()
-                                .height($thisSticky.outerHeight());  
-                        });
-
-                        $window.off("scroll.stickies").on("scroll.stickies", function() {
-                          _whenScrolling();     
-                        });
+                // detect if nav-text has more than one line
+                var $navText = $('.sg-nav-text');
+                $navText.each(function(){
+                    if ($(this).height() > 30) {
+                        $(this).parent().addClass('multiline');
                     }
-                };
-                
-                var _whenScrolling = function() {
-
-                    $stickies.each(function(i) {            
-
-                        var $thisSticky = $(this),
-                            $stickyPosition = $thisSticky.data('originalPosition');
-
-                        if ($stickyPosition <= $window.scrollTop()) {        
-
-                            var $nextSticky = $stickies.eq(i + 1),
-                                $nextStickyPosition = $nextSticky.data('originalPosition') - $thisSticky.data('originalHeight');
-
-                             $thisSticky.addClass("fixed");
-                            
-                            if ($nextSticky.length > 0 && $thisSticky.offset().top >= $nextStickyPosition) {
-
-                                $thisSticky.addClass("absolute").css("top", $nextStickyPosition);
-                            }
-
-                        } else {
-
-                            var $prevSticky = $stickies.eq(i - 1);
-
-                            $thisSticky.removeClass("fixed");
-
-                            if ($prevSticky.length > 0 && $window.scrollTop() <= $thisSticky.data('originalPosition') - $thisSticky.data('originalHeight')) {
-
-                                // $prevSticky.removeClass("absolute").removeAttr("style");
-                                // We still need the style attribute here b/c the element is still fixed
-                                // and we don't want 100% width again. But since the Attribute was removed to get
-                                // rid of the top value, we set top to zero
-                                $prevSticky.removeClass("absolute").css('top', 0);
-                            }
-                        }
-                    });
-                };
-
-                return {
-                load: load
-                };
-            })();
-
-            // because we're responsive, we need to update the height value on the sticky headers
-            
-            $(window).on('resize', function () {
-                $('.followWrap').height( $('.sg-section-header').height() );
+                });
             });
-            
-            // make it so!
-            $(function() {
-                stickyHeaders.load($('.sg-section-header'));
-            });            
-        </script>
 
-        
+            // extra class in action: using this to find all fa-mius Icons
+            // to resolve the bug where lv1 items were still on fa-minus even when closed. 
+            // b/c of that, the next toggle gave them fa-plus but they were then open 
+            // so it was the opposite way around.
+            // also remove all active classes.
+            // -jLaz
+            $(document).on('click', '.sg-nav-opened', function() {
+
+                $(this).parent().find('.fa-minus').removeClass('fa-minus').addClass('fa-plus');
+                $(this).parent().find('.active').removeClass('active');
+                $(this).removeClass('sg-nav-opened');
+            });
+
+            // Documentation Section Toggle
+            // with jQuery b/c I'm too much of a noob for vanilla js 
+            // -jLaz
+
+            $('.btn-documentation').on('click', function() {
+                $(this).closest('.sg-section').find('.sg-doc').toggleClass('sg-doc-active');
+            }); 
+        </script>        
 
         {% for script in footerScripts %}
             <script type="text/javascript" src="{{ script }}"></script>
