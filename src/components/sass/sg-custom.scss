@@ -755,7 +755,7 @@ body {
 
     &:hover, 
     &:focus, 
-    &.btn-active {
+    &.sg-btn-active {
         background: $btn-hover-bg-color;
         outline: 0;
         
@@ -778,8 +778,7 @@ body {
 
     .fa-code {
         font-size: 18px;
-        -webkit-font-smoothing: inherit;
-         
+        -webkit-font-smoothing: inherit; 
     }
 
     .fa-times {
@@ -809,11 +808,11 @@ button {
 
 // we want to replace and modify some buttons depending on the view
 .styleguide-full {
-    .btn-back {
+    .sg-btn-back {
         display: none;
     }
 
-    .btn-expand {
+    .sg-btn-expand {
         @media screen and (max-width: 599px) { 
             border-left: 1px solid $content-border-color;
         }
@@ -821,12 +820,12 @@ button {
 }
 
 .styleguide-single {
-    .btn-expand,
+    .sg-btn-expand,
     .sg-btn--top {
         display: none;
     }
 
-    .btn-back {
+    .sg-btn-back {
         @media screen and (max-width: 599px) { 
             border-left: 1px solid $content-border-color;
         }

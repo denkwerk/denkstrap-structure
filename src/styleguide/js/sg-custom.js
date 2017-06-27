@@ -113,7 +113,7 @@ var SGB = window.SGB || {};
         SGB.toggleActiveCodeBtnClass = function() {
             var button = this;
             var buttonIcon = this.childNodes[ 1 ];
-            _toggleClass( button, 'btn-active' );
+            _toggleClass( button, 'sg-btn-active' );
             _toggleClass( buttonIcon, 'fa-code' );
             _toggleClass( buttonIcon, 'fa-times' );
         };
@@ -124,7 +124,7 @@ var SGB = window.SGB || {};
         SGB.toggleActiveDocumentationBtnClass = function() {
             var button = this;
             var buttonIcon = this.childNodes[ 1 ];
-            _toggleClass( button, 'btn-active' );
+            _toggleClass( button, 'sg-btn-active' );
             _toggleClass( buttonIcon, 'fa-align-left' );
             _toggleClass( buttonIcon, 'fa-times' );
             _recalculateStickies();
@@ -135,7 +135,7 @@ var SGB = window.SGB || {};
         queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleSourceCode );
         queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
         queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
-        queryAll( '.btn-documentation' ).on( 'click', SGB.toggleActiveDocumentationBtnClass );
+        queryAll( '.sg-btn-documentation' ).on( 'click', SGB.toggleActiveDocumentationBtnClass );
 
         // Instagram-Like sticky headers
         // https://codepen.io/sales/pen/oxqzOe
