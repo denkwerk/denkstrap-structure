@@ -50,5 +50,6 @@ styleguide:
     tasks:
         - 'dev'
         - 'dw-styleguide'
-        - 'sass:styleguide'
         - 'copy:styleguide'
+        - 'sass:styleguide'
+        - 'postcss:styleguide'

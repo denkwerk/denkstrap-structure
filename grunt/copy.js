@@ -16,12 +16,13 @@ module.exports = {
     },
     styleguide: {
         expand: true,
-        cwd: '<%= srcPath %>styleguide/js',
+        cwd: '<%= srcPath %>styleguide',
         src: [
             '**/*.js',
+            '**/*.svg',
             '!**/*.spec.js'
         ],
-        dest: '<%= distPath %>styleguide/js/'
+        dest: '<%= distPath %>styleguide/'
     }
 
 };
