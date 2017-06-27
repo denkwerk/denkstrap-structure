@@ -74,6 +74,7 @@ var SGB = window.SGB || {};
                     .height( $thisSticky.outerHeight() );
             } );
         }
+
         /* jshint ignore:end */
 
         // Public methods
@@ -83,6 +84,39 @@ var SGB = window.SGB || {};
 
         SGB.hideNav = function() {
             _removeClass( docEl, 'nav-is-active' );
+        };
+
+        // Toggle All Options
+        // -jLaz
+
+        $( '#sg-toggle-all-doc' ).on( 'click', function() {
+            $( '.sg-btn-documentation' ).toggleClass( 'sg-btn-active' );
+            $( '.sg-btn-documentation i' ).toggleClass( 'fa-times' );
+            $( '.sg-btn-documentation i' ).toggleClass( 'fa-align-left' );
+            $( '.sg-doc' ).toggleClass( 'sg-doc-active' );
+        } );
+
+        $( '#sg-toggle-all-source' ).on( 'click', function() {
+            $( '.sg-btn--source' ).toggleClass( 'sg-btn-active' );
+            $( '.sg-btn--source i' ).toggleClass( 'fa-times' );
+            $( '.sg-btn--source i' ).toggleClass( 'fa-code' );
+            $( '.sg-source' ).toggleClass( 'sg-source-active' );
+        } );
+
+        SGB.toggleAllDocumentation = function() {
+            if ( document.getElementById( 'sg-toggle-all-doc' ).checked ) {
+                _recalculateStickies();
+            } else {
+                _recalculateStickies();
+            }
+        };
+
+        SGB.toggleAllSource = function() {
+            if ( document.getElementById( 'sg-toggle-all-source' ).checked ) {
+                _recalculateStickies();
+            } else {
+                _recalculateStickies();
+            }
         };
 
         // Source Code toggle
@@ -136,6 +170,8 @@ var SGB = window.SGB || {};
         queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
         queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
         queryAll( '.sg-btn-documentation' ).on( 'click', SGB.toggleActiveDocumentationBtnClass );
+        queryAll( '#sg-toggle-all-doc' ).on( 'click', SGB.toggleAllDocumentation );
+        queryAll( '#sg-toggle-all-source' ).on( 'click', SGB.toggleAllSource );
 
         // Instagram-Like sticky headers
         // https://codepen.io/sales/pen/oxqzOe
