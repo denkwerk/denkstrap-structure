@@ -210,7 +210,7 @@ body {
 
 .sg-nav-toggle-container {
     position: fixed;
-    z-index: 21;
+    z-index: 2100;
     width: 100%;
    
     @media screen and (max-width: 1024px) {
@@ -260,7 +260,7 @@ body {
     position: relative;
     text-decoration: none;
     width: 47px;
-    z-index: 11;
+    z-index: 1100;
 
     @media screen and (min-width: 768px) {
         margin-left: $unit / 2;
@@ -369,7 +369,7 @@ body {
             opacity: 0;
             position: absolute;
             visibility: hidden;
-            z-index: -100;
+            z-index: -1000;
         }
 
         .nav-is-active & {
@@ -382,7 +382,7 @@ body {
                 top: 0;
             width: 100%;
             visibility: visible;
-            z-index: 20;
+            z-index: 2000;
         }
     }
 
@@ -715,7 +715,7 @@ body {
         box-sizing: border-box;
         position: fixed;
             top: 0;
-        z-index: 11;
+        z-index: 1100;
 
         @media screen and (max-width: 767px) {         
             width: 100%;
