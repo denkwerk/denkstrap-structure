@@ -1164,6 +1164,7 @@ button {
 
 .sg-preview {
     margin: $unit 0 0;
+    position: relative; // prevent module position fixed elements from thinking out of their box.
 }
 
 
