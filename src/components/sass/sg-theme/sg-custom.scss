@@ -213,6 +213,12 @@ body {
     position: fixed;
     z-index: 21;
     width: 100%;
+   
+    @media screen and (max-width: 1024px) {
+        .nav-is-active & {
+            background: $nav-bg-color-mobile;
+        }
+    }
 }
 
 .sg-sticky-bg-helper {
