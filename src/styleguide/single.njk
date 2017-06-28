@@ -3,29 +3,33 @@
 
         <header class="sg-section-header" data-sticky-class="fixed">
             <a id="{{ element.name }}" class="sg-section-anchor"></a>
-            <h2 class="sg-h2 sg-section-title">{{ element.name }}</h2>
-                
-            <div class="sg-button-container">
-                
-                <button type="button" class="sg-btn sg-btn-back" title="back to styleguide" onClick="history.go(-1);return true;">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                </button>
+            
+            <div class="sg-header-group">
+                <div class="sg-title-container">
+                    <h2 class="sg-h2 sg-section-title">{{ element.name }}</h2>
+                </div>
 
-                <a class="sg-btn sg-btn-expand" href="{{element.path}}" title="single view">
-                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                </a>
-                
-                <button type="button" class="sg-btn sg-btn-documentation" title="view documentation">
-                    <i class="fa fa-align-left" aria-hidden="true"></i>
-                </button>
+                <div class="sg-button-container">
+                    <button type="button" class="sg-btn sg-btn-back" title="back to styleguide" onClick="history.go(-1);return true;">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </button>
 
-                <button type="button" class="sg-btn sg-btn--source" title="view source">
-                    <i class="fa fa-code" aria-hidden="true"></i>
-                </button>
+                    <a class="sg-btn sg-btn-expand" href="{{element.path}}" title="single view">
+                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                    </a>
+                    
+                    <button type="button" class="sg-btn sg-btn-documentation" title="view documentation">
+                        <i class="fa fa-align-left" aria-hidden="true"></i>
+                    </button>
 
-                <a class="sg-btn sg-btn--top" href="#top" title="back to top">
-                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                </a>
+                    <button type="button" class="sg-btn sg-btn--source" title="view source">
+                        <i class="fa fa-code" aria-hidden="true"></i>
+                    </button>
+
+                    <a class="sg-btn sg-btn--top" href="#top" title="back to top">
+                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
         </header>
         

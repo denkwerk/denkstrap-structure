@@ -209,7 +209,6 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-nav-toggle-container {
-    background: $nav-toggle-bg-color;
     position: fixed;
     z-index: 21;
     width: 100%;
@@ -217,6 +216,12 @@ body {
     @media screen and (max-width: 1024px) {
         .nav-is-active & {
             background: $nav-bg-color-mobile;
+        }
+    }
+
+    @media screen and (min-width: 1025px) {
+        .nav-is-active & {
+            background: transparent;
         }
     }
 }
@@ -706,23 +711,44 @@ body {
     }
 }
 
-.nav-is-active {
-    .sg-section-header.fixed {
-        width: calc(#{$content-width} - (#{$unit} * 2));
+@media screen and (min-width: 1025px) { 
+    .nav-is-active {
+        .sg-section-header.fixed {
+            width: calc(#{$content-width} - (#{$unit} * 2));
+        }
     }
+}
+
+.sg-header-group {
+    @media screen and (min-width: 768px) { 
+        display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+    }
+}
+
+.sg-title-container {
+    display: flex;
+        align-items: center;
+    min-height: 50px;
 }
 
 .sg-section-title {
     border: 0;
     display: inline-block;
     font-size: 1.25em;
-    line-height: 50px;
+    line-height: 1.2;
     margin: 0;
     padding: 0;
 
     @media screen and (max-width: 767px) { 
         font-size: 1em;
         margin-left: $unit / 2;
+    }
+
+    @media screen and (max-width: 1024px) { 
+        padding: 10px 0;
     }
 }
 
@@ -731,14 +757,14 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-button-container {
-    @media screen and (max-width: 599px) { 
+    @media screen and (max-width: 767px) { 
         @include clearfix;
         border-top: 1px solid $content-border-color;
         display: flex;
         justify-content: flex-end;
     }
 
-    @media screen and (min-width: 600px) { 
+    @media screen and (min-width: 768px) { 
         float: right;  
         border-left: 1px solid $content-border-color;
     }
@@ -778,7 +804,7 @@ body {
     }
 
     &:last-child {
-        @media screen and (max-width: 768px) { 
+        @media screen and (max-width: 767px) { 
             border: 0;
         }
     }
@@ -895,7 +921,7 @@ button {
     }
 
     .sg-btn-expand {
-        @media screen and (max-width: 599px) { 
+        @media screen and (max-width: 767px) { 
             border-left: 1px solid $content-border-color;
         }
     }
@@ -908,13 +934,13 @@ button {
     }
 
     .sg-btn-back {
-        @media screen and (max-width: 599px) { 
+        @media screen and (max-width: 767px) { 
             border-left: 1px solid $content-border-color;
         }
     }
 
     .sg-btn--source {
-        @media screen and (max-width: 599px) { 
+        @media screen and (max-width: 767px) { 
             border: 0;
         }
     }
