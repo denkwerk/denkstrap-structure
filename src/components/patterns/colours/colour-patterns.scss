@@ -1,30 +1,45 @@
+// Variables
+@import '../../sass/sg-theme/variables';
+
 .styleguide__list {
-    display: flex;
-    flex-wrap: wrap;
+    @include clearfix;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .styleguide__element {
-    margin: 0 0.75em 1.5em;
+    float: left;
+    padding: $unit / 2;
+    
+    @media screen and (max-width: 480px) {
+        width: 50%;
+    }
+
+    @media screen and (min-width: 481px) {
+        min-height: 170px;
+        width: calc(100% / 6);
+            min-width: 200px;
+    }
 }
 
 .styleguide__colorbox {
     display: block;
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 50px;
     padding: 10px;
     border: 1px solid transparent;
-    color: #fff;
+    color: $text-color-inverted;
+}
+
+.styleguide__definition--info {
+    font-weight: 600;
 }
 
 .styleguide__definition {
     margin: 0.5em 0;
     list-style: none;
-    color: #7a7a7a;
-    line-height: 1.2em;
+    color: $text-color;
     padding: 0;
     font-size: 14px;
 }
-

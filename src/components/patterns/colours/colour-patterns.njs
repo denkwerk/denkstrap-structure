@@ -1,104 +1,95 @@
+<h3 class="sg-h3">Main Colors</h3>
 <ul class="styleguide__list">
     <li class="styleguide__element">
-        <div class="styleguide__colorbox " style="background-color: #ff5a10;">
-            #ff5a10
-        </div>
+        <div class="styleguide__colorbox " style="background-color: #48c876;"></div>
         <ul class="styleguide__definition styleguide__definition--info">
-                <li>$color-primary</li>
-                <li>$color-headline</li>
-                <li>$color-price</li>
+            <li>#48c876</li>
+            <li>$color-primary</li>
         </ul>
         <ul class="styleguide__definition styleguide__definition--usage">
-                <li>Display</li>
-                <li>Headline</li>
-                <li>Unterheadline</li>
-                <li>Preis</li>
-                <li>Subline</li>
-                <li>Aktive Elemente</li>
-                <li>Rollover</li>
+            <li>Mobile Nav bg</li>
+            <li>Desktop Nav active</li>
+            <li>Button/CTA/Icons :hover</li>
         </ul>
     </li>
     <li class="styleguide__element">
-        <div class="styleguide__colorbox " style="background-color: #081f49;">
-            #081f49
-        </div>
+        <div class="styleguide__colorbox " style="background-color: #eee;"></div>
         <ul class="styleguide__definition styleguide__definition--info">
-                <li>$color-secondary</li>
+            <li>#eeeeee</li>
+            <li>$color-secondary</li>
         </ul>
         <ul class="styleguide__definition styleguide__definition--usage">
-                <li>Inaktive Elemente</li>
-                <li>CTA</li>
-                <li>Buttons</li>
-                <li>Meta-Navigation</li>
+            <li>Desktop Nav bg</li>
+            <li>Mobile Nav active </li>
+            <li>Module Section bg</li>
         </ul>
     </li>
 </ul>
 
+<h3 class="sg-h3">Color Shades</h3>
 <ul class="styleguide__list">
     <li class="styleguide__element">
-        <div class="styleguide__colorbox " style="background-color: #686868;">
-            #686868
-        </div>
+        <div class="styleguide__colorbox " style="background-color: #fefefe;"></div>
         <ul class="styleguide__definition styleguide__definition--info">
-                <li>$color-nav</li>
-                <li>$color-quote</li>
-                <li>$color-subheadline</li>
+            <li>#fefefe</li>
+            <li>$white</li>
         </ul>
         <ul class="styleguide__definition styleguide__definition--usage">
-                <li>Subheadline</li>
-                <li>Zitate</li>
-                <li>Main Navigation</li>
+            <li>body bg</li>
+            <li>inverted text color</li>
         </ul>
     </li>
     <li class="styleguide__element">
-        <div class="styleguide__colorbox " style="background-color: #7a7a7a;">
-            #7a7a7a
-        </div>
+        <div class="styleguide__colorbox " style="background-color: #eeeeee;"></div>
         <ul class="styleguide__definition styleguide__definition--info">
-                <li>$color-default</li>
+            <li>#eeeeee</li>
+            <li>$light-grey</li>
         </ul>
         <ul class="styleguide__definition styleguide__definition--usage">
-                <li>Copytext</li>
+            <li>backgrounds</li>
+            <li>Mobile Nav :hover</li>
         </ul>
     </li>
     <li class="styleguide__element">
-        <div class="styleguide__colorbox  styleguide__bright" style="background-color: #ffffff;">
-            #ffffff
-        </div>
+        <div class="styleguide__colorbox  styleguide__bright" style="background-color: #e9e9e9;"></div>
         <ul class="styleguide__definition styleguide__definition--info">
-                <li>$color-negative</li>
-                <li>$color-bg-footer-default</li>
-                <li>$color-bg-layer</li>
-                <li>$color-bg-teaser</li>
+            <li>#e9e9e9</li>
+            <li>$mid-grey</li>
         </ul>
         <ul class="styleguide__definition styleguide__definition--usage">
-                <li>Schriftfarbe (negativ)</li>
-                <li>Section Background</li>
+            <li>Desktiop Nav :hover</li>
+            <li>Section Background</li>
         </ul>
     </li>
     <li class="styleguide__element">
-        <div class="styleguide__colorbox " style="background-color: #aea49c;">
-            #aea49c
-        </div>
+        <div class="styleguide__colorbox " style="background-color: #dddddd;"></div>
         <ul class="styleguide__definition styleguide__definition--info">
-                <li>$color-meta</li>
-                <li>$color-disabled</li>
-                <li>$color-form-label</li>
+            <li>#dddddd</li>
+            <li>$grey</li>
         </ul>
         <ul class="styleguide__definition styleguide__definition--usage">
-                <li>Schriftfarbe (inaktiv)</li>
-                <li>Meta-Copy</li>
+            <li>Markdown Code</li>
         </ul>
     </li>
     <li class="styleguide__element">
-        <div class="styleguide__colorbox " style="background-color: #d6d1cd;">
-            #d6d1cd
-        </div>
+        <div class="styleguide__colorbox " style="background-color: #cccccc;"></div>
         <ul class="styleguide__definition styleguide__definition--info">
-                <li>$color-button-disabled</li>
+            <li>#cccccc</li>
+            <li>$dark-grey</li>
         </ul>
         <ul class="styleguide__definition styleguide__definition--usage">
-                <li>Buttons (inaktiv)</li>
+            <li>Borders</li>
+        </ul>
+    </li>
+    <li class="styleguide__element">
+        <div class="styleguide__colorbox " style="background-color: #111111;"></div>
+        <ul class="styleguide__definition styleguide__definition--info">
+            <li>#111111</li>
+            <li>$black</li>
+        </ul>
+        <ul class="styleguide__definition styleguide__definition--usage">
+            <li>Text</li>
+            <li>Button/CTA/Icons</li>
         </ul>
     </li>
 </ul>

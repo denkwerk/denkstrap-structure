@@ -1,64 +1,5 @@
-/* Variables */
-
-$white:             #fefefe;
-$light-grey:        #eee;
-$mid-grey:          #e9e9e9;
-$grey:              #ddd;
-$dark-grey:         #ccc;
-$black:             #111; 
-$green:             #48c876;
-
-$primary-color:             $green;
-$secondary-color:           $light-grey;
-
-$body-bg-color:             $white;
-$text-color:                $black;
-$text-color-inverted:       $white;
-
-$content-border-color:      $dark-grey;
-
-$nav-toggle-bg-color:           $body-bg-color;
-$nav-toggle-bg-color-active:    $primary-color;
-
-$nav-bg-color:              $secondary-color;
-$nav-bg-color-mobile:       $primary-color;
-
-$nav-text-color:            $text-color;
-$nav-text-color-mobile:     $text-color-inverted;
-
-$nav-border-color:          $dark-grey;
-
-$nav-bg-color-parent:                   transparent;
-$nav-bg-color-parent-hover:             $mid-grey;
-$nav-bg-color-parent-mobile:            transparent;
-$nav-bg-color-parent-mobile-hover:      $secondary-color;
-
-$nav-text-color-parent:                 $nav-text-color;
-$nav-text-color-parent-hover:           $primary-color;
-$nav-text-color-parent-mobile:          $nav-text-color-mobile;
-$nav-text-color-parent-mobile-hover:    $primary-color;
-
-$nav-bg-color-link-hover:               $primary-color;
-$nav-bg-color-link-mobile-hover:        $nav-bg-color-mobile;
-
-$nav-text-color-link:                   $nav-text-color;
-$nav-text-color-link-hover:             $nav-text-color-mobile;
-$nav-text-color-link-mobile:            $nav-text-color-mobile;
-$nav-text-color-link-mobile-hover:      $nav-text-color-mobile;
-
-
-$btn-bg-color:              transparent;
-$btn-bg-color-hover:        transparent;
-$btn-text-color:            $text-color;
-$btn-text-color-hover:      $primary-color;
-
-
-$unit:              30px;
-$content-width:     75%;
-$nav-width:         25%;
-
-
-
+// Variables
+@import 'variables';
 
 /* -------------------------------------------------------------------------
 
@@ -139,7 +80,7 @@ $nav-width:         25%;
  ---------------------------------------------------------------------------- */
 
 %font {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 /* SG Font 1 */
@@ -158,6 +99,7 @@ $nav-width:         25%;
 .sg-h1,
 .sg-h2,
 .sg-h3,
+.sg-h4,
 .sg-color-name,
 .sg-font-list dt {
     @extend %font;
@@ -187,8 +129,7 @@ $nav-width:         25%;
 }
 
 .sg-h3 {
-    font-size: 1em;
-    font-weight: 600;
+    font-size: 1.25em;
 }
 
 .sg-about, 
@@ -268,14 +209,12 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-nav-toggle-container {
+    background: $nav-toggle-bg-color;
     position: fixed;
     z-index: 21;
     width: 100%;
-    
+   
     @media screen and (max-width: 1024px) {
-        background: $nav-toggle-bg-color;
-        border-bottom: 1px solid $content-border-color;
-
         .nav-is-active & {
             background: $nav-toggle-bg-color-active;
             border-bottom-color: transparent;
@@ -454,16 +393,15 @@ body {
         position: fixed;
             bottom: 0;
             top: 0;
+        transition: all 0.4s ease;
         width: $nav-width; 
 
         .js & {
             transform: translateX(-100%);
-            transition: transform 0.4s ease, opacity 0.4s ease;
         }
 
         .nav-is-active & {
             transform: translateX(0%);
-            transition: transform 0.4s ease, opacity 0.4s ease;
             opacity: 1;
         }
     }
@@ -825,7 +763,7 @@ body {
     }
 
     &:last-child {
-        @media screen and (max-width: 599px) { 
+        @media screen and (max-width: 768px) { 
             border: 0;
         }
     }
@@ -1222,52 +1160,6 @@ button {
 }
 
 
-/* Colors
----------------------------------------------------------------------------- */
-
-/* .sg-color {
-    margin-bottom: 1.5em;
-}
-
-.sg-color-swatch {
-    padding-top: 20%; // Used to set height of color swatch
-}
-
-.sg-color-name {
-    font-size: 10.2em; // Test this with 1.1 em
-    padding: 0.5em 0;
-}
-
-.sg-color-value {
-    font-size: 10.2em;  // Test this with 1.1 em
-}
-
-@media only screen and (min-width: 375px) {
-    .sg-color-grid {
-        margin: 0 -2.5%;
-        overflow: hidden;
-    }
-
-    .sg-color {
-        float: left;
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-        width: 45%;
-    }
-
-}
-
-@media only screen and (min-width: 760px) {
-    .sg-color {
-        margin-left: 1.5%;
-        margin-right: 1.5%;
-        width: 22%;
-    }
-
-    .sg-color-grid {
-        margin: 0 -1.5%;
-    }
-} */
 
 
 /* Fonts List
@@ -1305,43 +1197,3 @@ button {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-/* scss aus Modulen/Patterns wird nicht geladen.. */
-.styleguide__list {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.styleguide__element {
-    margin: 0 0.75em 1.5em;
-}
-
-.styleguide__colorbox {
-    display: block;
-    width: 150px;
-    height: 150px;
-    padding: 10px;
-    border: 1px solid transparent;
-    color: #fff;
-}
-
-.styleguide__definition {
-    margin: 0.5em 0;
-    list-style: none;
-    color: #7a7a7a;
-    line-height: 1.2em;
-    padding: 0;
-    font-size: 14px;
-}

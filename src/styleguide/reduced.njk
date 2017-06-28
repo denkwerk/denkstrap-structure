@@ -6,23 +6,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- https://github.com/sindresorhus/github-markdown-css -->
+        {#<!-- https://github.com/sindresorhus/github-markdown-css -->#}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         
-        <!-- Style Guide Boilerplate Styles -->
+        {#<!-- Style Guide Styles -->#}
+        <link rel="stylesheet" href="{{ distPath }}/css/main.css">
         <link rel="stylesheet" href="{{ webPath }}/css/sg-custom.css">
         <!--[if lt IE 9]><link rel="stylesheet" href="{{ webPath }}/css/sg-style-old-ie.css"><![endif]-->
 
-        <!-- prism Syntax Highlighting Styles -->
+        {#<!-- prism Syntax Highlighting Styles -->#}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
-
-        <!-- Replace below stylesheet with your own stylesheet -->
-        {# {% for stylesheet in stylesheets %}
-            <link rel="stylesheet" href="{{ stylesheet }}">
-        {% endfor %} #}
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 

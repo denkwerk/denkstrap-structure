@@ -23,6 +23,8 @@ module.exports = {
         options: {
             // sourceMap: true
         },
-        files: { '<%= distPath %>styleguide/css/sg-custom.css': '<%= srcPath %>components/sass/sg-custom.scss' }
+        files: {
+            '<%= distPath %>styleguide/css/sg-custom.css': '<%= srcPath %>components/sass/sg-theme/sg-custom.scss'
+        }
     }
 };
