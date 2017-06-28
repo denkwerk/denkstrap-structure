@@ -86,21 +86,35 @@ var SGB = window.SGB || {};
             _removeClass( docEl, 'nav-is-active' );
         };
 
-        // Toggle All Options
+        // Bulk toggle options for documentation and source code
         // -jLaz
 
         $( '#sg-toggle-all-doc' ).on( 'click', function() {
-            $( '.sg-btn-documentation' ).toggleClass( 'sg-btn-active' );
-            $( '.sg-btn-documentation i' ).toggleClass( 'fa-times' );
-            $( '.sg-btn-documentation i' ).toggleClass( 'fa-align-left' );
-            $( '.sg-doc' ).toggleClass( 'sg-doc-active' );
+            if ( $( this ).is( ':checked' ) ) {
+                $( '.sg-btn-documentation' ).addClass( 'sg-btn-active' );
+                $( '.sg-btn-documentation i' ).addClass( 'fa-times' );
+                $( '.sg-btn-documentation i' ).removeClass( 'fa-align-left' );
+                $( '.sg-doc' ).addClass( 'sg-doc-active' );
+            } else {
+                $( '.sg-btn-documentation' ).removeClass( 'sg-btn-active' );
+                $( '.sg-btn-documentation i' ).removeClass( 'fa-times' );
+                $( '.sg-btn-documentation i' ).addClass( 'fa-align-left' );
+                $( '.sg-doc' ).removeClass( 'sg-doc-active' );
+            }
         } );
 
         $( '#sg-toggle-all-source' ).on( 'click', function() {
-            $( '.sg-btn--source' ).toggleClass( 'sg-btn-active' );
-            $( '.sg-btn--source i' ).toggleClass( 'fa-times' );
-            $( '.sg-btn--source i' ).toggleClass( 'fa-code' );
-            $( '.sg-source' ).toggleClass( 'sg-source-active' );
+            if ( $( this ).is( ':checked' ) ) {
+                $( '.sg-btn--source' ).addClass( 'sg-btn-active' );
+                $( '.sg-btn--source i' ).addClass( 'fa-times' );
+                $( '.sg-btn--source i' ).removeClass( 'fa-code' );
+                $( '.sg-source' ).addClass( 'sg-source-active' );
+            } else {
+                $( '.sg-btn--source' ).removeClass( 'sg-btn-active' );
+                $( '.sg-btn--source i' ).removeClass( 'fa-times' );
+                $( '.sg-btn--source i' ).addClass( 'fa-code' );
+                $( '.sg-source' ).removeClass( 'sg-source-active' );
+            }
         } );
 
         SGB.toggleAllDocumentation = function() {
@@ -165,7 +179,7 @@ var SGB = window.SGB || {};
         };
 
         queryAll( '.sg-nav-toggle' ).on( 'click', SGB.toggleNav );
-        //queryAll( '.sg-nav-group a' ).on( 'click', SGB.hideNav );
+        queryAll( '.sg-nav-group a' ).on( 'click', SGB.hideNav );
         queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleSourceCode );
         queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
         queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
