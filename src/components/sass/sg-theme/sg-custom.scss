@@ -672,6 +672,27 @@ body {
     margin-bottom: $unit;   
 }
 
+/* fancy shit */
+
+@-webkit-keyframes fadeIn { 
+    0% { opacity:0; } 
+    100% { opacity:1; } 
+}
+
+.sg-section {
+    opacity: 0;
+    animation: fadeIn ease 1;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{$i}00ms;
+        }
+    }
+}
+
+
 /* Section Anchor
 ---------------------------------------------------------------------------- */
 
@@ -1317,5 +1338,3 @@ button {
         padding-right: 0.25em;
     }
 }
-
-
