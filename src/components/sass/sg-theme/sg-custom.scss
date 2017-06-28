@@ -370,7 +370,6 @@ body {
         .nav-is-active & {
             background: $nav-bg-color-mobile;
             color: $nav-text-color-mobile;
-            display: flex;
             height: 100vh;
             opacity: 1;
             overflow-y: auto;
@@ -561,7 +560,11 @@ body {
 .sg-nav-link-lv-1,
 .sg-nav-link-lv-2 {
     padding: 0 ($unit / 2) 0 ($unit * 1.5);
+}
 
+.sg-nav-link-lv-1,
+.sg-nav-link-lv-2,
+.sg-options form {
     @media screen and (max-width: 1024px) {
         min-height: $unit * 1.5;
     }
@@ -600,6 +603,19 @@ body {
             color: $nav-text-color-link-hover;
         }
         
+    }
+}
+
+// Bulk toggle options
+
+.sg-options {
+    form.sg-nav-link {
+        padding-left: $unit;
+    }
+
+    form,
+    label {
+        width: 100%;
     }
 }
 
@@ -1136,6 +1152,87 @@ button {
         display: inline;
     }
 }
+
+
+
+
+
+/* Custom checkboxes
+---------------------------------------------------------------------------- */
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+    
+    // label
+
+    + label {
+        position: relative;
+        padding-left: 1.95em;
+        cursor: pointer;
+    }
+    
+    // checkbox default
+
+    + label:before {
+        background: $white;
+        border: 1px solid $grey;
+        content: '';
+        height: 16px;
+        margin-top: 3px;
+        position: absolute;
+            left: 0; 
+            top: 0;
+        width: 16px; 
+    }
+
+    // checkbox checked
+
+    + label:after {
+        background: svg-load('../img/font-awesome-svg/check.svg', fill=$btn-text-color-hover);
+        background-repeat: no-repeat;
+        background-size: 14px;
+        color: $text-color;
+        content: '';
+        height: 14px;
+        position: absolute;
+            left: 1px;
+            top: 4px; 
+        transition: all 0.2s ease;
+        width: 14px;
+    }
+
+    // checkbox disabled
+
+    &:disabled {
+        + label:before,
+        + label:after,
+        + label {
+            opacity: 0.5;   
+        }
+
+        + label {
+            cursor: not-allowed;
+        }
+    }
+}
+
+
+[type="checkbox"]:not(:checked) {
+    + label:after {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+[type="checkbox"]:checked {
+    + label:after {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 
 
 /* Responsive Videos

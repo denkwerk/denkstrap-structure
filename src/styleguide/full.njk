@@ -40,22 +40,26 @@
             <ul class="sg-options sg-nav-list sg-nav-lv-0">
                 <li class="sg-nav-item">
                     <h3 class="sg-nav-link sg-nav-link-lv-0 sg-h3">
-                        <i class="fa fa-minus" aria-hidden="true"></i> 
-                        <span class="sg-nav-text">_options</span>
+                        <i class="fa fa-plus" aria-hidden="true"></i> 
+                        <span class="sg-nav-text">View Options</span>
                     </h3>
                     <ul class="sg-nav-group sg-nav-list sg-nav-lv-1">
-                        <li class="sg-nav-item">
-                            <form>
-                                <input id="sg-toggle-all-doc" type="checkbox" id="toggleAllDoc">
-                                    <span class="sg-nav-text">Toggle all Documentation</span>
-                                </input>                             
+                        <li class="sg-nav-item " style="display: none;">
+                            <form class="sg-nav-link sg-nav-link-lv-2">
+                                <input id="sg-toggle-all-doc" type="checkbox" id="toggleAllDoc" />
+                                <label for="sg-toggle-all-doc" class="sg-nav-text">Toggle all Documentation</label>
                             </form>
                         </li>
-                        <li class="sg-nav-item">
-                            <form>
-                                <input id="sg-toggle-all-source" type="checkbox" id="toggleAllSource">
-                                    <span class="sg-nav-text">Toggle all Source Code</span>
-                                </input>                             
+                        <li class="sg-nav-item" style="display: none;">
+                            <form class="sg-nav-link sg-nav-link-lv-2">
+                                <input id="sg-toggle-all-source" type="checkbox" id="toggleAllSource" />
+                                <label for="sg-toggle-all-source" class="sg-nav-text">Toggle all Source Code</label>
+                            </form>
+                        </li>
+                        <li class="sg-nav-item" style="display: none;">
+                            <form class="sg-nav-link sg-nav-link-lv-2">
+                                <input id="sg-toggle-all-source" type="checkbox" id="toggleAllSource" disabled="disabled" />
+                                <label for="sg-toggle-all-source" class="sg-nav-text">Disabled Item</label>
                             </form>
                         </li>
                     </ul>
