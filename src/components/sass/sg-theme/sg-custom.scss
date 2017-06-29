@@ -178,23 +178,20 @@ body {
     background: $body-bg-color;
     margin-bottom: $unit * 2;
     overflow-x: hidden; // prevent module preview content from thinking outside of the box and overlap the nav
-    transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1),
-                -webkit-transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1)
+    transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
 }
 
 @media screen and (min-width: 1025px) {
     .nav-is-active {
         .styleguide-full {
             .sg-main {
-                float: right;
-                transform: translate3d(300px, 0, 0);
+                margin-left: 300px;
             }
         }
     }
 
     .styleguide-full {
         .sg-main {
-            float: right;
             width: 100%;
         }
     }
@@ -369,18 +366,18 @@ body {
 
     @media screen and (min-width: 1025px) {
         background: $nav-bg-color;
-        float: left;
         position: fixed;
             bottom: 0;
             top: 0;
         transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1),
                 -webkit-transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
-        transform: translate3d(-50%, 0, 0);
+        transform: translateX(-50%);
         width: $nav-width; 
         z-index: -1;
 
         .nav-is-active & {
-            transform: translate3d(0, 0, 0);
+            transform: translateX(0);
+            z-index: 0;
         }
     }
 }
@@ -708,7 +705,8 @@ h3.sg-nav-link {
  ---------------------------------------------------------------------------- */
 
 .sg-section {
-    margin-bottom: $unit;   
+    background: $body-bg-color;
+    padding-bottom: $unit;
 }
 
 /* fancy shit */
