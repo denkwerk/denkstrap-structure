@@ -149,6 +149,8 @@
 /* Content
 ---------------------------------------------------------------------------- */
 html {
+    overflow-x: hidden; // needed for offcanvas navigatio pushing the content
+
     &.nav-is-active {
         @media screen and (max-width: 1024px) {
             overflow: hidden;
@@ -173,12 +175,11 @@ body {
 }
 
 .sg-main {
+    background: $body-bg-color;
     margin-bottom: $unit * 2;
     overflow-x: hidden; // prevent module preview content from thinking outside of the box and overlap the nav
-
-    @media screen and (min-width: 768px) { 
-        //padding: 0 $unit;
-    }
+    transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1),
+                -webkit-transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1)
 }
 
 @media screen and (min-width: 1025px) {
@@ -186,8 +187,7 @@ body {
         .styleguide-full {
             .sg-main {
                 float: right;
-                transition: width 0.4s ease;
-                width: $content-width;
+                transform: translate3d(300px, 0, 0);
             }
         }
     }
@@ -196,7 +196,6 @@ body {
         .sg-main {
             float: right;
             width: 100%;
-            transition: width 0.4s ease;
         }
     }
 }
@@ -223,26 +222,6 @@ body {
     @media screen and (min-width: 1025px) {
         .nav-is-active & {
             background: transparent;
-        }
-    }
-}
-
-.sg-sticky-bg-helper {
-    @media screen and (max-width: 1024px) {
-        display: none;
-    }
-
-    @media screen and (min-width: 1025px) {
-        background: $body-bg-color;
-        height: 50px;
-        position: absolute;
-            right: 0;
-            top: 0;
-            transition: width 0.4s ease;
-        width: 100%;
-        
-        .nav-is-active & {
-            width: $content-width;
         }
     }
 }
@@ -363,7 +342,6 @@ body {
     @media screen and (max-width: 1024px) {
         .js & {
             padding-top: 50px;
-            opacity: 0;
             position: absolute;
             visibility: hidden;
             z-index: -1000;
@@ -373,7 +351,6 @@ body {
             background: $nav-bg-color-mobile;
             color: $nav-text-color-mobile;
             height: 100vh;
-            opacity: 1;
             overflow-y: auto;
             position: fixed;
                 top: 0;
@@ -387,28 +364,25 @@ body {
         background: $nav-bg-color;
         float: left;
         font-size: 14px;
-        opacity: 0;
         overflow-y: scroll;
         padding: 50px 0;
         position: fixed;
             bottom: 0;
             top: 0;
-        transition: all 0.4s ease;
+        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1),
+                -webkit-transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+        transform: translate3d(-50%, 0, 0);
         width: $nav-width; 
-
-        .js & {
-            transform: translateX(-100%);
-        }
+        z-index: -1;
 
         .nav-is-active & {
-            transform: translateX(0%);
-            opacity: 1;
+            transform: translate3d(0, 0, 0);
         }
     }
 }
 
 
-/* Navigtion List
+/* Navigtion LV 0
 ---------------------------------------------------------------------------- */
 
 .sg-nav-list {
@@ -436,7 +410,7 @@ body {
 }
 
 
-/* Navigtion Item
+/* Navigtion LV 1
 ---------------------------------------------------------------------------- */
 
 .sg-nav-item {
@@ -512,7 +486,6 @@ a.sg-nav-link {
     }
 
     @media screen and (min-width: 1025px) {
-        //border-bottom: 1px solid $nav-border-color;
         color: $nav-text-color-link;
     }
 
@@ -792,7 +765,7 @@ h3.sg-nav-link {
 @media screen and (min-width: 1025px) { 
     .nav-is-active {
         .sg-section-header.fixed {
-            width: $content-width;
+            width: 100%;
         }
     }
 }
