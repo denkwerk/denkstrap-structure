@@ -5,13 +5,14 @@ $light-grey:        #eee;
 $mid-grey:          #e9e9e9;
 $grey:              #ddd;
 $dark-grey:         #ccc;
-$black:             #111; 
+$darker-grey:       #444;
+$black:             #333; 
 
 $green:             #48c876;
 
 
 $primary-color:             $green;
-$secondary-color:           $light-grey;
+$secondary-color:           $black;
 
 $body-bg-color:             $white;
 $text-color:                $black;
@@ -24,26 +25,28 @@ $nav-toggle-bg-color:           $body-bg-color;
 $nav-bg-color:                  $secondary-color;
 $nav-bg-color-mobile:           $primary-color;
 
-$nav-text-color:                $text-color;
+$nav-text-color:                $text-color-inverted;
 $nav-text-color-mobile:         $text-color-inverted;
 
-$nav-border-color:              $dark-grey;
+$nav-border-color:              $darker-grey;
 
 $nav-bg-color-parent:                   transparent;
-$nav-bg-color-parent-hover:             $mid-grey;
+$nav-bg-color-parent-hover:             $darker-grey;
 $nav-bg-color-parent-mobile:            transparent;
-$nav-bg-color-parent-mobile-hover:      $secondary-color;
+$nav-bg-color-parent-mobile-hover:      $light-grey;
 
 $nav-text-color-parent:                 $nav-text-color;
 $nav-text-color-parent-hover:           $primary-color;
 $nav-text-color-parent-mobile:          $nav-text-color-mobile;
 $nav-text-color-parent-mobile-hover:    $primary-color;
 
-$nav-bg-color-link-hover:               $primary-color;
+$nav-bg-color-link-hover:               $nav-bg-color-parent-hover;
+$nav-bg-color-link-active:              $primary-color;
 $nav-bg-color-link-mobile-hover:        $nav-bg-color-mobile;
 
 $nav-text-color-link:                   $nav-text-color;
-$nav-text-color-link-hover:             $nav-text-color-mobile;
+$nav-text-color-link-hover:             $nav-text-color-parent-hover;
+$nav-text-color-link-active:            $nav-text-color;
 $nav-text-color-link-mobile:            $nav-text-color-mobile;
 $nav-text-color-link-mobile-hover:      $nav-text-color-mobile;
 
@@ -51,6 +54,7 @@ $nav-text-color-link-mobile-hover:      $nav-text-color-mobile;
 $btn-bg-color:              transparent;
 $btn-bg-color-hover:        transparent;
 $btn-text-color:            $text-color;
+$btn-text-color-inverted:   $text-color-inverted;
 $btn-text-color-hover:      $primary-color;
 
 

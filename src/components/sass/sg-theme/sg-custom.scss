@@ -177,7 +177,7 @@ body {
     overflow-x: hidden; // prevent module preview content from thinking outside of the box and overlap the nav
 
     @media screen and (min-width: 768px) { 
-        padding: 0 $unit;
+        //padding: 0 $unit;
     }
 }
 
@@ -263,10 +263,6 @@ body {
     width: 47px;
     z-index: 1100;
 
-    @media screen and (min-width: 768px) {
-        margin-left: $unit / 2;
-    }
-
     &:hover,
     &:focus {
         color: $btn-text-color-hover;
@@ -309,7 +305,7 @@ body {
 
     // close icon
     .fa-times:before {
-        background-image: svg-load('../img/font-awesome-svg/times.svg', fill=$btn-text-color);
+        background-image: svg-load('../img/font-awesome-svg/times.svg', fill=$btn-text-color-inverted);
     }
 
     &:hover .fa-times:before {
@@ -456,13 +452,15 @@ body {
 }
 
 .sg-nav-lv-1 {
-    > .sg-nav-item:last-child {
-        padding-bottom: $unit / 2;
-    }
-
-    > .sg-nav-item:not(:last-child) {
-        .sg-nav-item:last-child {
+    @media screen and (min-width: 1025px) {
+        > .sg-nav-item:last-child {
             padding-bottom: $unit / 2;
+        }
+
+        > .sg-nav-item:not(:last-child) {
+            .sg-nav-item:last-child {
+                padding-bottom: $unit / 2;
+            }
         }
     }
 }
@@ -506,18 +504,18 @@ body {
 }
 
 a.sg-nav-link {
-    border-bottom: 1px solid rgba($secondary-color, 0.4);
     text-decoration: none;
+    font-weight: 200;
 
     @media screen and (max-width: 1024px) {
         color: $nav-text-color-link-mobile;
     }
 
     @media screen and (min-width: 1025px) {
+        //border-bottom: 1px solid $nav-border-color;
         color: $nav-text-color-link;
     }
 
-    &.active,
     &:hover,
     &:focus {
         @media screen and (max-width: 1024px) {
@@ -531,6 +529,18 @@ a.sg-nav-link {
         }
     }
 
+    &.active {
+        @media screen and (max-width: 1024px) {
+            background: rgba($nav-bg-color-link-mobile-hover, 0.2); 
+            color: $nav-text-color-link-mobile-hover;
+        }
+
+        @media screen and (min-width: 1025px) {
+            background: $nav-bg-color-link-active;
+            color: $nav-text-color-link-active;
+        }
+    }
+
     &:visited {
         @media screen and (max-width: 1024px) {
             color: $nav-text-color-link-mobile;
@@ -538,6 +548,19 @@ a.sg-nav-link {
 
         @media screen and (min-width: 1025px) {
             color: $nav-text-color-link;
+        }
+
+        &:hover,
+        &:focus {
+            @media screen and (max-width: 1024px) {
+                background: rgba($nav-bg-color-link-mobile-hover, 0.2); 
+                color: $nav-text-color-link-mobile-hover;
+            }
+
+            @media screen and (min-width: 1025px) {
+                background: $nav-bg-color-link-hover;
+                color: $nav-text-color-link-hover;
+            }
         }
     }
 }
@@ -548,10 +571,6 @@ a.sg-nav-link {
     
     @media screen and (max-width: 767px) {
         padding-left: 33px; // even with navigation-toggle
-    }
-
-    @media screen and (min-width: 768px) and (max-width: 1024px) {
-        padding-left: 49px; // even with navigation-toggle
     }
     
     @media screen and (max-width: 1024px) {
@@ -685,6 +704,9 @@ h3.sg-nav-link {
 }
 
 
+
+
+
 /* -------------------------------------------------------------------------
  SG Sections
  ---------------------------------------------------------------------------- */
@@ -758,7 +780,7 @@ h3.sg-nav-link {
 
         @media screen and (min-width: 768px) { 
             transition: width 0.4s ease;
-            width: calc(100% - (#{$unit} * 2));
+            width: 100%;
         }
     }
 
@@ -770,7 +792,7 @@ h3.sg-nav-link {
 @media screen and (min-width: 1025px) { 
     .nav-is-active {
         .sg-section-header.fixed {
-            width: calc(#{$content-width} - (#{$unit} * 2));
+            width: $content-width;
         }
     }
 }
@@ -787,7 +809,9 @@ h3.sg-nav-link {
 .sg-title-container {
     display: flex;
         align-items: center;
+    margin-left: $unit / 2;
     min-height: 50px;
+
 }
 
 .sg-section-title {
@@ -800,7 +824,6 @@ h3.sg-nav-link {
 
     @media screen and (max-width: 767px) { 
         font-size: 1em;
-        margin-left: $unit / 2;
     }
 
     @media screen and (max-width: 1024px) { 
@@ -855,14 +878,12 @@ h3.sg-nav-link {
         }
     }
 
+    &:last-child {
+        border: 0;
+    }
+    
     &.sg-btn-active {
         outline: 0;
-    }
-
-    &:last-child {
-        @media screen and (max-width: 767px) { 
-            border: 0;
-        }
     }
 
     i,
@@ -1151,7 +1172,7 @@ button {
 ---------------------------------------------------------------------------- */
 
 .sg-doc { 
-    background: $secondary-color;
+    background: $light-grey;
     border: 0;
     margin: 0;
 }
