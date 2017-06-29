@@ -1,0 +1,86 @@
+
+
+/* -------------------------------------------------------------------------
+ Utility Classes
+ ---------------------------------------------------------------------------- */
+
+/* http:/paulirish.com/2012/box-sizing-border-box-ftw/ */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.sg-container:before,
+.sg-container:after,
+.sg-clearfix:before,
+.sg-clearfix:after,
+.sg-section:before,
+.sg-section:after,
+.sg-markup-controls:before,
+.sg-markup-controls:after {
+    content: '';
+    display: table;
+    line-height: 0;
+}
+
+.sg-container:after,
+.sg-clearfix:after,
+.sg-section:after,
+.sg-markup-controls:after {
+    clear: both;
+}
+
+.sg-visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.sg-visually-hidden-focusable:active,
+.sg-visually-hidden-focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: ' '; /* 1 */
+        display: table; /* 2 */
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+
+/* Responsive Videos
+---------------------------------------------------------------------------- */
+
+.sg-video {
+    height: 0;
+    padding-top: 56.25%;
+    position: relative;
+}
+
+.sg-video video {
+    height: 100%;
+    position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+    width: 100%;
+    z-index: 100;
+}

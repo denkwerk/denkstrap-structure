@@ -134,17 +134,18 @@ var SGB = window.SGB || {};
         };
 
         // Source Code toggle
+        // REFACTOR THIS!
         // -jLaz
 
         var getNextSource = function( el ) {
             if ( el.parentElement === null ) {
                 return false;
-            } else if ( el.parentElement.nextElementSibling &&
-                 el.parentElement.nextElementSibling.children.length > 0 &&
-                 _hasClass( el.parentElement.nextElementSibling.children[ 0 ], 'sg-source' ) ) {
-                return el.parentElement.nextElementSibling.children[ 0 ];
+            } else if ( el.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling &&
+                 el.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children.length > 0 &&
+                 _hasClass( el.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children[ 0 ], 'sg-source' ) ) {
+                return el.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children[ 0 ];
             } else {
-                return getNextSource( el.parentElement );
+                return getNextSource( el.parentElement.parentElement.parentElement.parentElement );
             }
         };
 

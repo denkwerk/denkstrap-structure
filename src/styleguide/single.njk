@@ -6,7 +6,7 @@
             
             <div class="sg-header-group">
                 <div class="sg-title-container">
-                    <h2 class="sg-h2 sg-section-title">{{ element.name }}</h2>
+                    <h2 class="sg-section-title">{{ element.name }}</h2>
                 </div>
 
                 <div class="sg-button-container">
@@ -32,18 +32,18 @@
                 </div>
             </div>
         </header>
+
+        <div class="sg-doc">
+            <div class="markdown-body">
+                {{element.doc | safe}}
+            </div>
+        </div>
         
         <div class="sg-code">
             <div class="sg-source">
 <pre class="line-numbers">
 <code class="language-markup">{{ element.content | trim }}</code>
 </pre>
-            </div>
-        </div>
-
-        <div class="sg-doc">
-            <div class="markdown-body">
-                {{element.doc | safe}}
             </div>
         </div>
 
