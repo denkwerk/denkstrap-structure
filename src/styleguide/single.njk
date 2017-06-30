@@ -10,24 +10,36 @@
                 </div>
 
                 <div class="sg-button-container">
-                    <button type="button" class="sg-btn sg-btn-back" title="back to styleguide" onClick="history.go(-1);return true;">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    <button type="button" class="sg-btn sg-btn-back" title="back to styleguide" onClick="history.go(-1);return true;">                       
+                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use class="sg-icon sg-check" xlink:href="#sg-icon-arrow-left"></use>
+                        </svg>
                     </button>
 
                     <a class="sg-btn sg-btn-expand" href="{{element.path}}" title="single view">
-                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use class="sg-icon sg-enlarge" xlink:href="#sg-icon-enlarge"></use>
+                        </svg>
                     </a>
                     
                     <button type="button" class="sg-btn sg-btn-documentation" title="view documentation">
-                        <i class="fa fa-align-left" aria-hidden="true"></i>
+                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use class="sg-icon sg-comment" xlink:href="#sg-icon-comment"></use>
+                            <use class="sg-icon sg-close" xlink:href="#sg-icon-close"></use>
+                        </svg>
                     </button>
 
                     <button type="button" class="sg-btn sg-btn--source" title="view source">
-                        <i class="fa fa-code" aria-hidden="true"></i>
+                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use class="sg-icon sg-code" xlink:href="#sg-icon-code"></use>
+                            <use class="sg-icon sg-close" xlink:href="#sg-icon-close"></use>
+                        </svg>
                     </button>
 
                     <a class="sg-btn sg-btn--top" href="#top" title="back to top">
-                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use class="sg-icon sg-arrow-up" xlink:href="#sg-icon-arrow-up"></use>
+                        </svg>
                     </a>
                 </div>
             </div>
