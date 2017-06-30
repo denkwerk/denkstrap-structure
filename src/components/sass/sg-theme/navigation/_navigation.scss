@@ -1,9 +1,6 @@
 /* -------------------------------------------------------------------------
- Navigation
+ Navigation Toggle
  ---------------------------------------------------------------------------- */
-
-/* Navigtion Toggle
----------------------------------------------------------------------------- */
 
 .sg-nav-toggle-container {
     height: 50px;
@@ -11,24 +8,6 @@
     z-index: 2100;
     width: $nav-width;
    
-}
-
-.sg-nav-toggle-helper {
-    height: 50px;
-    position: fixed;
-    width: 100%;
-
-    @media screen and (max-width: 1024px) {
-        .nav-is-active & {
-            background: $nav-bg-color-mobile;
-        }
-    }
-
-    @media screen and (min-width: 1025px) {
-        .nav-is-active & {
-            background: $nav-bg-color;
-        }
-    }
 }
 
 .sg-nav-toggle {
@@ -139,9 +118,10 @@
 }
 
 
+/* -------------------------------------------------------------------------
+ Navigation Container
+ ---------------------------------------------------------------------------- */
 
-/* Navigtion Container
--------------------------------------------------------------------- */
 .sg-navigation-container {
     padding-top: 50px;
     overflow: hidden;
@@ -169,8 +149,7 @@
         position: fixed;
             bottom: 0;
             top: 0;
-        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1),
-                -webkit-transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
         transform: translateX(-50%);
         width: $nav-width; 
         z-index: -1;
@@ -202,9 +181,14 @@
 }
 
 
-/* Navigtion LV 0
+/* -------------------------------------------------------------------------
+ Navigation Lists
+ ---------------------------------------------------------------------------- */
+
+/* general
 ---------------------------------------------------------------------------- */
 
+// List
 .sg-nav-list {
     @media screen and (max-width: 1024px) {
         color: $nav-text-color-mobile;
@@ -216,52 +200,19 @@
     }
 }
 
-.sg-nav-lv-0 {
-    @media screen and (min-width: 1025px) {
-        background: $nav-bg-color;
-        border-top: 1px solid $nav-border-color;
-    }
-}
-
 .sg-nav-list,
 .sg-nav-item {
     margin: 0;
     padding: 0;
 }
 
-
-/* Navigtion LV 1
----------------------------------------------------------------------------- */
+// Item
 
 .sg-nav-item {
     list-style: none;  
 }
 
-.sg-nav-lv-0 {
-    > .sg-nav-item {
-        @media screen and (min-width: 1025px) {
-            border-bottom: 1px solid $nav-border-color;
-        }
-    }   
-}
-
-.sg-nav-lv-1 {
-    @media screen and (min-width: 1025px) {
-        > .sg-nav-item:last-child {
-            padding-bottom: $unit / 2;
-        }
-
-        > .sg-nav-item:not(:last-child) {
-            .sg-nav-item:last-child {
-                padding-bottom: $unit / 2;
-            }
-        }
-    }
-}
-
-
-/* Navigtion Item Link & Text
----------------------------------------------------------------------------- */
+// Link
 
 .sg-nav-link {
     cursor: pointer;
@@ -358,6 +309,57 @@ a.sg-nav-link {
     }
 }
 
+// Icon
+
+.sg-nav-link {
+    i {
+        font-size: 14px;
+        margin-left: -($unit / 2);
+    }
+}
+
+// on.click h3.sg-nav-link-lv-0 js detects if .sg-nav-text is > $unit (30px)
+// if yes, the container gets .multiline and we can reset the align-items: center;
+// for the icon so that it always stays on top.
+// -jLaz
+@media screen and (min-width: 1025px) {
+    .multiline {
+        i {
+            align-self: flex-start;
+            margin-top: 3px;
+        }
+    }
+}
+
+// Text
+
+.sg-nav-text {
+    line-height: 1.4;
+    display: block;
+}
+
+h3.sg-nav-link {
+    .sg-nav-text {
+        margin-left: 4px;
+    }
+}
+
+
+/* Lv 0 specific
+---------------------------------------------------------------------------- */
+
+.sg-nav-lv-0 {
+    @media screen and (min-width: 1025px) {
+        border-top: 1px solid $nav-border-color;
+    }
+}
+
+.sg-nav-item-lv-0 {
+    @media screen and (min-width: 1025px) {
+        border-bottom: 1px solid $nav-border-color;
+    }
+}
+
 .sg-nav-link-lv-0 {
     font-size: 1.25em;
     min-height: 50px;
@@ -389,6 +391,24 @@ a.sg-nav-link {
             &:before {
                 padding-top: 0;
                 transition: padding-top 0.4s ease 0.05s;
+            }
+        }
+    }
+}
+
+
+/* Lv 1 specific
+---------------------------------------------------------------------------- */
+
+.sg-nav-lv-1 {
+    @media screen and (min-width: 1025px) {
+        > .sg-nav-item:last-child {
+            padding-bottom: $unit / 2;
+        }
+
+        > .sg-nav-item:not(:last-child) {
+            .sg-nav-item:last-child {
+                padding-bottom: $unit / 2;
             }
         }
     }
@@ -430,6 +450,10 @@ a.sg-nav-link-lv-1 {
     //fine 
 }
 
+
+/* Lv 2 specific
+---------------------------------------------------------------------------- */
+
 h3.sg-nav-link-lv-2 {
     padding: 0 ($unit / 2) 0 ($unit * 2);
 }
@@ -438,6 +462,10 @@ a.sg-nav-link-lv-2 {
     padding: 0 ($unit / 2) 0 ($unit * 1.5);
 }
 
+
+/* Lv 3 specific
+---------------------------------------------------------------------------- */
+
 a.sg-nav-link-lv-3 {
     padding: 0 ($unit / 2) 0 ($unit * 2);
 }
@@ -445,7 +473,9 @@ a.sg-nav-link-lv-3 {
 
 
 
-// Bulk toggle options
+/* -------------------------------------------------------------------------
+ Navigation Bulk Toggle
+ ---------------------------------------------------------------------------- */
 
 .sg-options {
     form.sg-nav-link {
@@ -455,43 +485,5 @@ a.sg-nav-link-lv-3 {
     form,
     label {
         width: 100%;
-    }
-}
-
-/* Navigtion Icon
----------------------------------------------------------------------------- */
-
-.sg-nav-link {
-    i {
-        font-size: 14px;
-        margin-left: -($unit / 2);
-    }
-}
-
-// on.click h3.sg-nav-link-lv-0 js detects if .sg-nav-text is > $unit (30px)
-// if yes, the container gets .multiline and we can reset the align-items: center;
-// for the icon so that it always stays on top.
-// -jLaz
-@media screen and (min-width: 1025px) {
-    .multiline {
-        i {
-            align-self: flex-start;
-            margin-top: 3px;
-        }
-    }
-}
-
-
-/* Navigtion Item Text
----------------------------------------------------------------------------- */
-
-.sg-nav-text {
-    line-height: 1.4;
-    display: block;
-}
-
-h3.sg-nav-link {
-    .sg-nav-text {
-        margin-left: 5px;
     }
 }

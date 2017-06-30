@@ -3,7 +3,7 @@
 
 <ul class="sg-nav-group sg-nav-list sg-nav-lv-{{ level }}">
     {% for item in tree %}
-    <li class="sg-nav-item">
+    <li class="sg-nav-item sg-nav-item-lv-{{ level }}">
         {{ navigationItem(item, level) }}
     </li>
     {% endfor %}

@@ -36,7 +36,7 @@ body {
     .nav-is-active {
         .styleguide-full {
             .sg-main {
-                margin-left: 300px;
+                margin-left: $nav-width;
             }
         }
     }
@@ -79,6 +79,8 @@ body {
 /* Section Header
 ---------------------------------------------------------------------------- */
 
+// Header Container
+
 .sg-section-header {
     background: $body-bg-color;
     border-bottom: 1px solid $content-border-color;
@@ -112,6 +114,8 @@ body {
     }
 }
 
+// Section Anchor
+
 .sg-section-anchor {
     border-bottom: 1px solid $content-border-color;
     display: block;
@@ -127,6 +131,9 @@ body {
             justify-content: space-between;
     }
 }
+
+
+// Section Title 
 
 .sg-title-container {
     display: flex;
@@ -158,6 +165,8 @@ body {
 /* Section Documentation Preview
 ---------------------------------------------------------------------------- */
 
+// Documentation Container
+
 .sg-doc {
     background: $light-grey;
     border: 0;
@@ -177,13 +186,23 @@ body {
 }
 
 /* Show source code blocks when active or JS is not enabled */
-.sg-enhanced .sg-doc-active {
-    opacity: 1;
-    position: relative;
-    width: 100%;
+.sg-enhanced {
+    .sg-doc-active {
+        opacity: 1;
+        position: relative;
+        width: 100%;
+    }
 }
 
+// Documentation Code
+
 .markdown-body { 
+    padding: $unit / 2;
+    
+    @media screen and (min-width: 768px) {
+        max-width: 83%; // 83% = 10col
+    }
+
     h1,
     h2,
     h3 {
@@ -212,16 +231,9 @@ body {
     }
 }
 
-.markdown-body {
-    padding: $unit / 2;
-    
-    @media screen and (min-width: 768px) {
-        max-width: 83%; // 83% = 10col
-    }
-}
 
 
-/* Section Code Preview
+/* Section Source Code Preview
 ---------------------------------------------------------------------------- */
 
 .sg-source {
@@ -268,10 +280,6 @@ body {
 
 
 
-
-/* -------------------------------------------------------------------------
- Modules
- ---------------------------------------------------------------------------- */
 
 /* Branding
 ---------------------------------------------------------------------------- */
