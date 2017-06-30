@@ -150,12 +150,16 @@
                 $(this).removeClass('sg-nav-opened');
             });
 
-            // Documentation Section Toggle
+            // Documentation & Source Code Section Toggle
             // with jQuery b/c I'm too much of a noob for vanilla js 
             // -jLaz
 
             $('.sg-btn-documentation').on('click', function() {
-                $(this).closest('.sg-section').find('.sg-doc').toggleClass('sg-doc-active');
+                $(this).closest('.sg-section').find('.sg-documentation-container').toggleClass('sg-active');
+            }); 
+
+            $('.sg-btn--source').on('click', function() {
+                $(this).closest('.sg-section').find('.sg-source-container').toggleClass('sg-active');
             }); 
 
         </script>        

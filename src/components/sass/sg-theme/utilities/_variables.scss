@@ -5,7 +5,8 @@ $light-grey:        #eee;
 $mid-grey:          #e9e9e9;
 $grey:              #ddd;
 $dark-grey:         #ccc;
-$darker-grey:       #444;
+$darker-grey:       #999;
+$darkest-grey:      #444;
 $black:             #333; 
 
 $green:             #48c876;
@@ -28,10 +29,10 @@ $nav-bg-color-mobile:           $primary-color;
 $nav-text-color:                $text-color-inverted;
 $nav-text-color-mobile:         $text-color-inverted;
 
-$nav-border-color:              $darker-grey;
+$nav-border-color:              $darkest-grey;
 
 $nav-bg-color-parent:                   transparent;
-$nav-bg-color-parent-hover:             $darker-grey;
+$nav-bg-color-parent-hover:             $darkest-grey;
 $nav-bg-color-parent-mobile:            transparent;
 $nav-bg-color-parent-mobile-hover:      $light-grey;
 

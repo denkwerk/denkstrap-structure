@@ -94,12 +94,12 @@ var SGB = window.SGB || {};
                 $( '.sg-btn-documentation' ).addClass( 'sg-btn-active' );
                 $( '.sg-btn-documentation i' ).addClass( 'fa-times' );
                 $( '.sg-btn-documentation i' ).removeClass( 'fa-align-left' );
-                $( '.sg-doc' ).addClass( 'sg-doc-active' );
+                $( '.sg-documentation-container' ).addClass( 'sg-active' );
             } else {
                 $( '.sg-btn-documentation' ).removeClass( 'sg-btn-active' );
                 $( '.sg-btn-documentation i' ).removeClass( 'fa-times' );
                 $( '.sg-btn-documentation i' ).addClass( 'fa-align-left' );
-                $( '.sg-doc' ).removeClass( 'sg-doc-active' );
+                $( '.sg-documentation-container' ).removeClass( 'sg-active' );
             }
         } );
 
@@ -108,12 +108,12 @@ var SGB = window.SGB || {};
                 $( '.sg-btn--source' ).addClass( 'sg-btn-active' );
                 $( '.sg-btn--source i' ).addClass( 'fa-times' );
                 $( '.sg-btn--source i' ).removeClass( 'fa-code' );
-                $( '.sg-source' ).addClass( 'sg-source-active' );
+                $( '.sg-source-container' ).addClass( 'sg-active' );
             } else {
                 $( '.sg-btn--source' ).removeClass( 'sg-btn-active' );
                 $( '.sg-btn--source i' ).removeClass( 'fa-times' );
                 $( '.sg-btn--source i' ).addClass( 'fa-code' );
-                $( '.sg-source' ).removeClass( 'sg-source-active' );
+                $( '.sg-source-container' ).removeClass( 'sg-active' );
             }
         } );
 
@@ -137,13 +137,17 @@ var SGB = window.SGB || {};
         // REFACTOR THIS!
         // -jLaz
 
-        var getNextSource = function( el ) {
+        /*var getNextSource = function( el ) {
             if ( el.parentElement === null ) {
                 return false;
-            } else if ( el.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling &&
-                 el.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children.length > 0 &&
-                 _hasClass( el.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children[ 0 ], 'sg-source' ) ) {
-                return el.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.children[ 0 ];
+            } else if ( el.parentElement.parentElement.parentElement.parentElement
+                        .nextElementSibling.nextElementSibling &&
+                el.parentElement.parentElement.parentElement.parentElement
+                .nextElementSibling.nextElementSibling.children.length > 0 &&
+                 _hasClass( el.parentElement.parentElement.parentElement.parentElement
+                            .nextElementSibling.nextElementSibling.children[ 0 ], 'sg-source' ) ) {
+                return el.parentElement.parentElement.parentElement.parentElement
+                       .nextElementSibling.nextElementSibling.children[ 0 ];
             } else {
                 return getNextSource( el.parentElement.parentElement.parentElement.parentElement );
             }
@@ -153,21 +157,12 @@ var SGB = window.SGB || {};
             var sourceCode = getNextSource( this );
             if ( sourceCode instanceof HTMLElement ) {
                 _toggleClass( sourceCode, 'sg-source-active' );
+                _recalculateStickies();
             }
-            _recalculateStickies();
-        };
+        };*/
 
-        // Source Code toggle Button
-
-        SGB.toggleActiveCodeBtnClass = function() {
-            var button = this;
-            var buttonIcon = this.childNodes[ 1 ];
-            _toggleClass( button, 'sg-btn-active' );
-            _toggleClass( buttonIcon, 'fa-code' );
-            _toggleClass( buttonIcon, 'fa-times' );
-        };
-
-        // Documentation Toggle
+        // Documentation & Source Code Toggle
+        // REFACTOR THIS!
         // -jLaz
 
         SGB.toggleActiveDocumentationBtnClass = function() {
@@ -176,7 +171,24 @@ var SGB = window.SGB || {};
             _toggleClass( button, 'sg-btn-active' );
             _toggleClass( buttonIcon, 'fa-align-left' );
             _toggleClass( buttonIcon, 'fa-times' );
-            _recalculateStickies();
+
+            var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-documentation-container' );
+            thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
+                _recalculateStickies();
+            } );
+        };
+
+        SGB.toggleActiveSourceBtnClass = function() {
+            var button = this;
+            var buttonIcon = this.childNodes[ 1 ];
+            _toggleClass( button, 'sg-btn-active' );
+            _toggleClass( buttonIcon, 'fa-code' );
+            _toggleClass( buttonIcon, 'fa-times' );
+
+            var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-source-container' );
+            thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
+                _recalculateStickies();
+            } );
         };
 
         queryAll( '.sg-nav-toggle' ).on( 'click', SGB.toggleNav );
@@ -185,6 +197,7 @@ var SGB = window.SGB || {};
         queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
         queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
         queryAll( '.sg-btn-documentation' ).on( 'click', SGB.toggleActiveDocumentationBtnClass );
+        queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveSourceBtnClass );
         queryAll( '#sg-toggle-all-doc' ).on( 'click', SGB.toggleAllDocumentation );
         queryAll( '#sg-toggle-all-source' ).on( 'click', SGB.toggleAllSource );
 
@@ -253,8 +266,8 @@ var SGB = window.SGB || {};
         // because we're responsive, we need to update the height value on the sticky headers
 
         $( window ).on( 'resize', function() {
-                $( '.sticky-header-helper' ).height( $( '.sg-section-header' ).height() );
-            } );
+            $( '.sticky-header-helper' ).height( $( '.sg-section-header' ).height() );
+        } );
 
         // you can make it happen. You can make it REAL!
         $( function() {
