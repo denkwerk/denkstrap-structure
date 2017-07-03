@@ -52,4 +52,3 @@ styleguide:
         - 'dw-styleguide'
         - 'copy:styleguide'
         - 'sass:styleguide'
-        - 'postcss:styleguide'

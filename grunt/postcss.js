@@ -13,14 +13,6 @@ module.exports = function( grunt, options ) {
                 ]
             },
             src: '<%= distPath %>css/**/*.css'
-        },
-        styleguide: {
-            options: {
-                processors: [
-                    require( 'postcss-inline-svg' )()
-                ]
-            },
-            src: '<%= distPath %>styleguide/**/*.css'
         }
     };
 };

@@ -86,8 +86,10 @@
 
         <div class="sg-nav-toggle-container">
             <button class="sg-nav-toggle" title="toggle navigation">
-                <i class="fa fa-navicon" aria-hidden="true"></i>
-                <i class="fa fa-times" aria-hidden="true"></i>
+                <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <use class="sg-icon sg-navicon" xlink:href="#sg-icon-navicon"></use>
+                    <use class="sg-icon sg-close" xlink:href="#sg-icon-close"></use>
+                </svg>
             </button>
         </div>
 
@@ -103,13 +105,23 @@
                             <li class="sg-nav-item " style="display: none;">
                                 <form class="sg-nav-link sg-nav-link-lv-2">
                                     <input id="sg-toggle-all-doc" type="checkbox" id="toggleAllDoc" />
-                                    <label for="sg-toggle-all-doc" class="sg-nav-text">Toggle all Documentation</label>
+                                    <label for="sg-toggle-all-doc" class="sg-nav-text">
+                                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <use class="sg-icon sg-check" xlink:href="#sg-icon-check"></use>
+                                        </svg>
+                                        Toggle all Documentation
+                                    </label>
                                 </form>
                             </li>
                             <li class="sg-nav-item" style="display: none;">
                                 <form class="sg-nav-link sg-nav-link-lv-2">
                                     <input id="sg-toggle-all-source" type="checkbox" id="toggleAllSource" />
-                                    <label for="sg-toggle-all-source" class="sg-nav-text">Toggle all Source Code</label>
+                                    <label for="sg-toggle-all-source" class="sg-nav-text">
+                                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <use class="sg-icon sg-check" xlink:href="#sg-icon-check"></use>
+                                        </svg>
+                                        Toggle all Source Code
+                                    </label>
                                 </form>
                             </li>
                             <li class="sg-nav-item" style="display: none;">
@@ -215,7 +227,7 @@
                 $(this).closest('.sg-section').find('.sg-documentation-container').toggleClass('sg-active');
             }); 
 
-            $('.sg-btn--source').on('click', function() {
+            $('.sg-btn-source').on('click', function() {
                 $(this).closest('.sg-section').find('.sg-source-container').toggleClass('sg-active');
             }); 
 

@@ -105,14 +105,14 @@ var SGB = window.SGB || {};
 
         $( '#sg-toggle-all-source' ).on( 'click', function() {
             if ( $( this ).is( ':checked' ) ) {
-                $( '.sg-btn--source' ).addClass( 'sg-btn-active' );
-                $( '.sg-btn--source i' ).addClass( 'fa-times' );
-                $( '.sg-btn--source i' ).removeClass( 'fa-code' );
+                $( '.sg-btn-source' ).addClass( 'sg-btn-active' );
+                $( '.sg-btn-source i' ).addClass( 'fa-times' );
+                $( '.sg-btn-source i' ).removeClass( 'fa-code' );
                 $( '.sg-source-container' ).addClass( 'sg-active' );
             } else {
-                $( '.sg-btn--source' ).removeClass( 'sg-btn-active' );
-                $( '.sg-btn--source i' ).removeClass( 'fa-times' );
-                $( '.sg-btn--source i' ).addClass( 'fa-code' );
+                $( '.sg-btn-source' ).removeClass( 'sg-btn-active' );
+                $( '.sg-btn-source i' ).removeClass( 'fa-times' );
+                $( '.sg-btn-source i' ).addClass( 'fa-code' );
                 $( '.sg-source-container' ).removeClass( 'sg-active' );
             }
         } );
@@ -193,11 +193,11 @@ var SGB = window.SGB || {};
 
         queryAll( '.sg-nav-toggle' ).on( 'click', SGB.toggleNav );
         queryAll( '.sg-nav-group a' ).on( 'click', SGB.hideNav );
-        queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleSourceCode );
-        queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
-        queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
+        queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleSourceCode );
+        queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
+        //queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
         queryAll( '.sg-btn-documentation' ).on( 'click', SGB.toggleActiveDocumentationBtnClass );
-        queryAll( '.sg-btn--source' ).on( 'click', SGB.toggleActiveSourceBtnClass );
+        queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleActiveSourceBtnClass );
         queryAll( '#sg-toggle-all-doc' ).on( 'click', SGB.toggleAllDocumentation );
         queryAll( '#sg-toggle-all-source' ).on( 'click', SGB.toggleAllSource );
 

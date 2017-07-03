@@ -26,94 +26,74 @@
     width: 47px;
     z-index: 1100;
 
+    svg {
+        width: 14px;
+    }
+
+    use,
+    path {
+        fill: $btn-text-color;
+    }
+
+    use.sg-close {
+        display: none;
+    }
+
     &:hover,
     &:focus {
         color: $btn-text-color-hover;
         cursor: pointer;
         outline: 0;
-    }
 
-    i {
-        position: absolute;
-    }
-    
-    // some enhaced stuff b/c those icons are so different
-    // https://github.com/TrySound/postcss-inline-svg
-    // needs grunt styleguide --force
-
-    i,
-    i:before {
-        height: 14px;
-        width: 14px;
-    }
-
-    i {
-        &:before {
-            background-repeat: no-repeat;
-            background-size: contain;
-            content: '';
-            display: block;
+        use,
+        path {
+            fill: $btn-text-color-hover;
         }
     }
 
-    // menu icon
-    .fa-navicon:before {
-        background-image: svg-load('../img/font-awesome-svg/navicon.svg', fill=$btn-text-color);
-    }
-
-    &:hover .fa-navicon:before {
-        background-image: svg-load('../img/font-awesome-svg/navicon.svg', fill=$primary-color);
-    }
-
-    // close icon
-    .fa-times:before {
-        background-image: svg-load('../img/font-awesome-svg/times.svg', fill=$btn-text-color-inverted);
-    }
-
-    &:hover .fa-times:before {
-        background-image: svg-load('../img/font-awesome-svg/times.svg', fill=$primary-color);
-    }
-    
-    .fa-times,
-    .fa-times:before {
-        height: 20px;
-        width: 19px;
-    }
-
-    .fa-times {
-        display: none;
-    }
-
-    .fa-navicon {
-        display: block;
-    }
 }
 
 .nav-is-active {
     .sg-nav-toggle {
+        svg {
+            width: 18px;
+        }
+
+        use.sg-close {
+            display: block;
+            fill: $nav-text-color;
+        }
+        
+        use.sg-navicon {
+            display: none;
+        }        
+
         @media screen and (max-width: 1024px) {            
+            use.sg-close {
+                fill: $nav-text-color-mobile;
+            }
+
             &:hover,
             &:focus {
                 outline: 0;
-            }
 
-            // close icon
-            .fa-times:before {
-                background-image: svg-load('../img/font-awesome-svg/times.svg', fill=$nav-text-color-mobile);
-            }
-
-            &:hover .fa-times:before {
-                background-image: svg-load('../img/font-awesome-svg/times.svg', fill=$nav-text-color);
+                use.sg-close {
+                    fill: $btn-text-color;
+                }
             }
         }
-        
-        .fa-times {
-            display: block;
-        }
 
-        .fa-navicon {
-            display: none;
-        }
+        @media screen and (min-width: 1025px) {  
+            &:hover,
+            &:focus {
+                outline: 0;
+
+                use.sg-close {
+                    fill: $btn-text-color-hover;
+                }
+            }
+
+        }          
     }
 }
 

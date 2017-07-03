@@ -30,16 +30,13 @@
 
     // checkbox checked
 
-    + label:after {
-        background: svg-load('../img/font-awesome-svg/check.svg', fill=$btn-text-color-hover);
-        background-repeat: no-repeat;
-        background-size: 14px;
-        color: $text-color;
+    + label svg {
+        color: $primary-color;
         content: '';
         height: 14px;
         position: absolute;
             left: 1px;
-            top: 4px; 
+            top: 3px; 
         transition: all 0.2s ease;
         width: 14px;
     }
@@ -48,7 +45,7 @@
 
     &:disabled {
         + label:before,
-        + label:after,
+        + label svg,
         + label {
             opacity: 0.5;   
         }
@@ -61,14 +58,14 @@
 
 
 [type="checkbox"]:not(:checked) {
-    + label:after {
+    + label svg {
         opacity: 0;
         transform: scale(0);
     }
 }
 
 [type="checkbox"]:checked {
-    + label:after {
+    + label svg {
         opacity: 1;
         transform: scale(1);
     }

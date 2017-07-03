@@ -80,16 +80,12 @@
 
 .sg-btn {
     svg {
-        width: 16px;
+        width: 14px;
     }
 
     use,
     path {
         fill: $btn-text-color;
-    }
-
-    use.sg-close {
-        display: none;
     }
     
     &:hover,
@@ -98,6 +94,41 @@
         path {
             fill: $btn-text-color-hover;
         }
+    }
+    
+    // btn show documentation
+    &.sg-btn-documentation {
+        svg {
+            width: 16px;
+        }
+    }
+    
+    // btn show source code
+    &.sg-btn-source {
+        svg {
+            width: 25px;
+        }
+    }
+
+    // btn back to top
+    &.sg-btn-top {
+        svg {
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    // btn back to full styleguide
+    &.sg-btn-back {
+        svg {
+            height: 18px;
+            width: 20px;
+        }
+    }
+
+    // btn close
+    use.sg-close {
+        display: none;
     }
 
     &.sg-btn-active {
@@ -110,17 +141,21 @@
         use.sg-comment {
             display: none;
         }
-    }
 
-    &.sg-btn--source {
         svg {
+            height: 22px;
             width: 22px;
         }
     }
 
-    &.sg-btn--source.sg-btn-active {
+    &.sg-btn-source.sg-btn-active {
         use.sg-code {
             display: none;
+        }
+
+        svg {
+            height: 22px;
+            width: 22px;
         }
     }
 }
@@ -148,7 +183,7 @@ button {
 
 .styleguide-single {
     .sg-btn-expand,
-    .sg-btn--top {
+    .sg-btn-top {
         display: none;
     }
 
@@ -158,7 +193,7 @@ button {
         }
     }
 
-    .sg-btn--source {
+    .sg-btn-source {
         @media screen and (max-width: 767px) { 
             border: 0;
         }
@@ -168,6 +203,6 @@ button {
 
 
 // we don't want display: block here
-.sg-enhanced .sg-btn--source { 
+.sg-enhanced .sg-btn-source { 
     display: flex;
 }
