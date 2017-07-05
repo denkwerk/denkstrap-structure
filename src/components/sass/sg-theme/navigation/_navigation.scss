@@ -97,6 +97,21 @@
     }
 }
 
+.nav-toggle-helper {
+    background: #fff;
+    height: 50px;
+    position: fixed;
+        top: 0;
+    transition: top 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+    width: 100%;
+    z-index: 1;
+
+    .nav-is-active & {
+        top: -50px;
+        transition: top 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+    }
+}
+
 
 /* -------------------------------------------------------------------------
  Navigation Container
@@ -168,7 +183,12 @@
 /* general
 ---------------------------------------------------------------------------- */
 
+nav {
+    @extend %font;
+}
+
 // List
+
 .sg-nav-list {
     @media screen and (max-width: 1024px) {
         color: $nav-text-color-mobile;
@@ -292,9 +312,24 @@ a.sg-nav-link {
 // Icon
 
 .sg-nav-link {
-    i {
-        font-size: 14px;
+    svg {
+        height: 14px;
         margin-left: -($unit / 2);
+        width: 15px;
+    }
+
+    use.sg-minus {
+        display: none;
+    }
+
+    &.active {
+        use.sg-minus {
+            display: block;
+        }
+
+        use.sg-plus {
+            display: none;
+        }
     }
 }
 
@@ -304,7 +339,7 @@ a.sg-nav-link {
 // -jLaz
 @media screen and (min-width: 1025px) {
     .multiline {
-        i {
+        svg {
             align-self: flex-start;
             margin-top: 3px;
         }
@@ -386,20 +421,6 @@ h3.sg-nav-link {
 /* Lv 1 specific
 ---------------------------------------------------------------------------- */
 
-.sg-nav-lv-1 {
-    @media screen and (min-width: 1025px) {
-        > .sg-nav-item:last-child {
-            padding-bottom: $unit / 2;
-        }
-
-        > .sg-nav-item:not(:last-child) {
-            .sg-nav-item:last-child {
-                padding-bottom: $unit / 2;
-            }
-        }
-    }
-}
-
 .sg-nav-link-lv-1 {
     @media screen and (max-width: 1024px) {
         background: rgba($nav-bg-color-parent-mobile-hover, 0.2);
@@ -429,7 +450,7 @@ h3.sg-nav-link {
 }
 
 h3.sg-nav-link-lv-1 {
-    padding: 0 ($unit / 2) 0 ($unit * 1.5);
+    padding: 0 ($unit / 2) 0 50px;
 }
 
 a.sg-nav-link-lv-1 {
@@ -441,29 +462,58 @@ a.sg-nav-link-lv-1 {
 ---------------------------------------------------------------------------- */
 
 h3.sg-nav-link-lv-2 {
-    padding: 0 ($unit / 2) 0 ($unit * 2);
+    padding: 0 ($unit / 2) 0 68px;
 }
 
 a.sg-nav-link-lv-2 {
-    padding: 0 ($unit / 2) 0 ($unit * 1.5);
+    padding: 0 ($unit / 2) 0 55px;
 }
 
 
 /* Lv 3 specific
 ---------------------------------------------------------------------------- */
 
+h3.sg-nav-link-lv-3 {
+    padding: 0 ($unit / 2) 0 68px;
+}
+
 a.sg-nav-link-lv-3 {
-    padding: 0 ($unit / 2) 0 ($unit * 2);
+    padding: 0 ($unit / 2) 0 72px;
+}
+
+
+/* Nav item spacing magic
+---------------------------------------------------------------------------- */
+
+.sg-nav-item-lv-1:last-child {
+    padding-bottom: $unit / 2;
+}
+
+.sg-nav-item-lv-1:not(:last-child) {
+    .sg-nav-item-lv-2:last-child {
+        padding-bottom: $unit / 2;
+    }
+}
+
+.sg-nav-item-lv-2:not(:last-child) {
+    .sg-nav-item-lv-3:last-child {
+        padding-bottom: $unit / 2;
+    }
 }
 
 
 
-
 /* -------------------------------------------------------------------------
- Navigation Bulk Toggle
+ Navigation Bulk Toggle options
  ---------------------------------------------------------------------------- */
 
 .sg-options {
+    .sg-nav-lv-1 {
+        .sg-nav-item:last-child {
+            padding-bottom: $unit / 2;
+        }
+    }
+
     .sg-nav-link-lv-0 {
         &:before {
             padding-top: 25%;
@@ -481,5 +531,11 @@ a.sg-nav-link-lv-3 {
     form,
     label {
         width: 100%;
+    }
+
+    label {
+        svg {
+            margin-left: 0;
+        }
     }
 }

@@ -13,7 +13,11 @@
 {% macro navigationItem(item, level) %}
     {% if item.children %}
         <h3 class="sg-nav-link sg-nav-link-lv-{{ level }} sg-h3">
-            <i class="fa fa-plus" aria-hidden="true"></i> 
+            {# <i class="fa fa-plus" aria-hidden="true"></i> #}
+            <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <use class="sg-icon sg-plus" xlink:href="#sg-icon-plus"></use>
+                <use class="sg-icon sg-minus" xlink:href="#sg-icon-minus"></use>
+            </svg>
             <span class="sg-nav-text">{{ item.name }}</span>
         </h3>
         {{ navigation(item.children, level + 1)}}

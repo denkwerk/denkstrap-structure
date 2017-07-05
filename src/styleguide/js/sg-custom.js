@@ -530,7 +530,7 @@ $( document ).on( 'click', '.sg-nav-list h3', function() {
     $( this ).toggleClass( 'active' );
 
     // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
-    if ( $( this ).hasClass( 'sg-nav-link-lv-0' ) ) {
+    if ( $( this ).hasClass( 'sg-nav-link-lv-0' ) || $( this ).hasClass( 'sg-nav-link-lv-1' ) ) {
         $( this ).addClass( 'sg-nav-opened' );
     }
 
@@ -550,10 +550,9 @@ $( document ).on( 'click', '.sg-nav-list h3', function() {
 // also remove all active classes.
 // -jLaz
 $( document ).on( 'click', '.sg-nav-opened', function() {
-
-    $( this ).parent().find( '.fa-minus' ).removeClass( 'fa-minus' ).addClass( 'fa-plus' );
     $( this ).parent().find( '.active' ).removeClass( 'active' );
     $( this ).removeClass( 'sg-nav-opened' );
+    $( this ).parent().find( '.sg-nav-opened' ).removeClass( 'sg-nav-opened' );
 } );
 
 // Documentation & Source Code Section Toggle
