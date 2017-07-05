@@ -169,8 +169,6 @@ var SGB = window.SGB || {};
             var button = this;
             var buttonIcon = this.childNodes[ 1 ];
             _toggleClass( button, 'sg-btn-active' );
-            //_toggleClass( buttonIcon, 'fa-align-left' );
-            //_toggleClass( buttonIcon, 'fa-times' );
 
             var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-documentation-container' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
@@ -182,8 +180,6 @@ var SGB = window.SGB || {};
             var button = this;
             var buttonIcon = this.childNodes[ 1 ];
             _toggleClass( button, 'sg-btn-active' );
-            //_toggleClass( buttonIcon, 'fa-code' );
-            //_toggleClass( buttonIcon, 'fa-times' );
 
             var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-source-container' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
@@ -193,7 +189,7 @@ var SGB = window.SGB || {};
 
         queryAll( '.sg-nav-toggle' ).on( 'click', SGB.toggleNav );
         queryAll( '.sg-nav-group a' ).on( 'click', SGB.hideNav );
-        queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleSourceCode );
+        //queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleSourceCode );
         queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
         //queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
         queryAll( '.sg-btn-documentation' ).on( 'click', SGB.toggleActiveDocumentationBtnClass );
@@ -264,7 +260,6 @@ var SGB = window.SGB || {};
         } )();
 
         // because we're responsive, we need to update the height value on the sticky headers
-
         $( window ).on( 'resize', function() {
             $( '.sticky-header-helper' ).height( $( '.sg-section-header' ).height() );
         } );
@@ -506,6 +501,10 @@ var SGB = window.SGB || {};
 
     }
 }( this, SGB ) );
+
+// All the stuff I can't do in vanilla js b/c I'm a noob.
+// REFACTOR THIS!
+// -jLaz
 
 $( document ).ready( function() {
     // highlight active section in navi
