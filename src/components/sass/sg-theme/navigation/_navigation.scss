@@ -329,6 +329,12 @@ h3.sg-nav-link {
 ---------------------------------------------------------------------------- */
 
 .sg-nav-lv-0 {
+    @media screen and (max-width: 1025px) {
+        &:last-child {
+            margin-bottom: 50px;
+        }
+    }
+
     @media screen and (min-width: 1025px) {
         border-top: 1px solid $nav-border-color;
     }
@@ -458,6 +464,16 @@ a.sg-nav-link-lv-3 {
  ---------------------------------------------------------------------------- */
 
 .sg-options {
+    .sg-nav-link-lv-0 {
+        &:before {
+            padding-top: 25%;
+        }
+
+        &.active:before {
+            padding-top: 0;
+        }
+    }
+
     form.sg-nav-link {
         padding-left: $unit;
     }
