@@ -169,8 +169,8 @@ var SGB = window.SGB || {};
             var button = this;
             var buttonIcon = this.childNodes[ 1 ];
             _toggleClass( button, 'sg-btn-active' );
-            _toggleClass( buttonIcon, 'fa-align-left' );
-            _toggleClass( buttonIcon, 'fa-times' );
+            //_toggleClass( buttonIcon, 'fa-align-left' );
+            //_toggleClass( buttonIcon, 'fa-times' );
 
             var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-documentation-container' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
@@ -182,8 +182,8 @@ var SGB = window.SGB || {};
             var button = this;
             var buttonIcon = this.childNodes[ 1 ];
             _toggleClass( button, 'sg-btn-active' );
-            _toggleClass( buttonIcon, 'fa-code' );
-            _toggleClass( buttonIcon, 'fa-times' );
+            //_toggleClass( buttonIcon, 'fa-code' );
+            //_toggleClass( buttonIcon, 'fa-times' );
 
             var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-source-container' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
@@ -506,3 +506,65 @@ var SGB = window.SGB || {};
 
     }
 }( this, SGB ) );
+
+$( document ).ready( function() {
+    // highlight active section in navi
+    $( '.sg-section' ).mouseenter( function() {
+        var id = $( this ).find( '.sg-section-anchor' ).attr( 'id' );
+        $( 'a' ).removeClass( 'active' );
+        $( '[href=#' + id + ']' ).addClass( 'active' );
+    } );
+
+    // collapse navi
+    $( '.sg-navigation .sg-nav-group h3.sg-nav-link' ).siblings().children().toggle();
+} );
+
+// some navigation magic
+// -jLaz
+$( document ).on( 'click', '.sg-nav-list h3', function() {
+
+    // this opens just the next level
+    $( this ).parent().find( '.sg-nav-item' ).toggle();
+    $( this ).children( 'i' ).toggleClass( 'fa-plus fa-minus' );
+
+    // adding an active class to the item
+    $( this ).toggleClass( 'active' );
+
+    // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
+    if ( $( this ).hasClass( 'sg-nav-link-lv-0' ) ) {
+        $( this ).addClass( 'sg-nav-opened' );
+    }
+
+    // detect if nav-text has more than one line
+    var $navText = $( '.sg-nav-text' );
+    $navText.each( function() {
+        if ( $( this ).height() > 30 ) {
+            $( this ).parent().addClass( 'multiline' );
+        }
+    } );
+} );
+
+// extra class in action: using this to find all fa-mius Icons
+// to resolve the bug where lv1 items were still on fa-minus even when closed.
+// b/c of that, the next toggle gave them fa-plus but they were then open
+// so it was the opposite way around.
+// also remove all active classes.
+// -jLaz
+$( document ).on( 'click', '.sg-nav-opened', function() {
+
+    $( this ).parent().find( '.fa-minus' ).removeClass( 'fa-minus' ).addClass( 'fa-plus' );
+    $( this ).parent().find( '.active' ).removeClass( 'active' );
+    $( this ).removeClass( 'sg-nav-opened' );
+} );
+
+// Documentation & Source Code Section Toggle
+// with jQuery b/c I'm too much of a noob for vanilla js
+// -jLaz
+
+$( '.sg-btn-documentation' ).on( 'click', function() {
+    $( this ).closest( '.sg-section' ).find( '.sg-documentation-container' ).toggleClass( 'sg-active' );
+} );
+
+$( '.sg-btn-source' ).on( 'click', function() {
+    $( this ).closest( '.sg-section' ).find( '.sg-source-container' ).toggleClass( 'sg-active' );
+} );
