@@ -26,7 +26,7 @@ body {
 
 .sg-main {
     background: $body-bg-color;
-    margin-bottom: $unit * 2;
+    padding-bottom: $unit * 2;
     overflow-x: hidden; // prevent module preview content from thinking outside of the box and overlap the nav
     transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
 }
