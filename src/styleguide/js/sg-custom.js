@@ -77,7 +77,8 @@ var SGB = window.SGB || {};
 
         /* jshint ignore:end */
 
-        // Public methods
+        // Toggle Navigation container
+
         SGB.toggleNav = function() {
             _toggleClass( docEl, 'nav-is-active' );
         };
@@ -86,116 +87,103 @@ var SGB = window.SGB || {};
             _removeClass( docEl, 'nav-is-active' );
         };
 
+        queryAll( '.sg-nav-toggle' ).on( 'click', SGB.toggleNav );
+        queryAll( '.sg-nav-group a' ).on( 'click', SGB.hideNav );
+
         // Bulk toggle options for documentation and source code
-        // -jLaz
+        // -jLaz & troth
 
-        $( '#sg-toggle-all-doc' ).on( 'click', function() {
-            if ( $( this ).is( ':checked' ) ) {
-                $( '.sg-btn-documentation' ).addClass( 'sg-btn-active' );
-                $( '.sg-btn-documentation i' ).addClass( 'fa-times' );
-                $( '.sg-btn-documentation i' ).removeClass( 'fa-align-left' );
-                $( '.sg-documentation-container' ).addClass( 'sg-active' );
+        var toggleAllDocBtn = document.getElementById( 'sg-toggle-all-doc' ),
+            allDocBtns = document.getElementsByClassName( 'sg-btn-documentation' ),
+            allDocContainer = document.getElementsByClassName( 'sg-documentation-container' );
+
+        toggleAllDocBtn.addEventListener( 'click', function() {
+            if ( toggleAllDocBtn.checked ) {
+                Array.prototype.forEach.call( allDocBtns, function( button ) {
+                    button.classList.add( 'sg-btn-active' );
+                } );
+
+                Array.prototype.forEach.call( allDocContainer, function( container ) {
+                    container.classList.add( 'sg-active' );
+                } );
+
+                _recalculateStickies();
             } else {
-                $( '.sg-btn-documentation' ).removeClass( 'sg-btn-active' );
-                $( '.sg-btn-documentation i' ).removeClass( 'fa-times' );
-                $( '.sg-btn-documentation i' ).addClass( 'fa-align-left' );
-                $( '.sg-documentation-container' ).removeClass( 'sg-active' );
+                Array.prototype.forEach.call( allDocBtns, function( button ) {
+                    button.classList.remove( 'sg-btn-active' );
+                } );
+
+                Array.prototype.forEach.call( allDocContainer, function( container ) {
+                    container.classList.remove( 'sg-active' );
+                } );
+
+                _recalculateStickies();
             }
         } );
 
-        $( '#sg-toggle-all-source' ).on( 'click', function() {
-            if ( $( this ).is( ':checked' ) ) {
-                $( '.sg-btn-source' ).addClass( 'sg-btn-active' );
-                $( '.sg-btn-source i' ).addClass( 'fa-times' );
-                $( '.sg-btn-source i' ).removeClass( 'fa-code' );
-                $( '.sg-source-container' ).addClass( 'sg-active' );
+        var toggleAllSourceBtn = document.getElementById( 'sg-toggle-all-source' ),
+            allSourceBtns = document.getElementsByClassName( 'sg-btn-source' ),
+            allSourceContainer = document.getElementsByClassName( 'sg-source-container' );
+
+        toggleAllSourceBtn.addEventListener( 'click', function() {
+            if ( toggleAllSourceBtn.checked ) {
+                Array.prototype.forEach.call( allSourceBtns, function( button ) {
+                    button.classList.add( 'sg-btn-active' );
+                } );
+
+                Array.prototype.forEach.call( allSourceContainer, function( container ) {
+                    container.classList.add( 'sg-active' );
+                } );
+
+                _recalculateStickies();
             } else {
-                $( '.sg-btn-source' ).removeClass( 'sg-btn-active' );
-                $( '.sg-btn-source i' ).removeClass( 'fa-times' );
-                $( '.sg-btn-source i' ).addClass( 'fa-code' );
-                $( '.sg-source-container' ).removeClass( 'sg-active' );
+                Array.prototype.forEach.call( allSourceBtns, function( button ) {
+                    button.classList.remove( 'sg-btn-active' );
+                } );
+
+                Array.prototype.forEach.call( allSourceContainer, function( container ) {
+                    container.classList.remove( 'sg-active' );
+                } );
+
+                _recalculateStickies();
             }
         } );
 
-        SGB.toggleAllDocumentation = function() {
-            if ( document.getElementById( 'sg-toggle-all-doc' ).checked ) {
-                _recalculateStickies();
-            } else {
-                _recalculateStickies();
-            }
-        };
-
-        SGB.toggleAllSource = function() {
-            if ( document.getElementById( 'sg-toggle-all-source' ).checked ) {
-                _recalculateStickies();
-            } else {
-                _recalculateStickies();
-            }
-        };
-
-        // Source Code toggle
-        // REFACTOR THIS!
+        // Single toggles for documentation and source code
         // -jLaz
 
-        /*var getNextSource = function( el ) {
-            if ( el.parentElement === null ) {
-                return false;
-            } else if ( el.parentElement.parentElement.parentElement.parentElement
-                        .nextElementSibling.nextElementSibling &&
-                el.parentElement.parentElement.parentElement.parentElement
-                .nextElementSibling.nextElementSibling.children.length > 0 &&
-                 _hasClass( el.parentElement.parentElement.parentElement.parentElement
-                            .nextElementSibling.nextElementSibling.children[ 0 ], 'sg-source' ) ) {
-                return el.parentElement.parentElement.parentElement.parentElement
-                       .nextElementSibling.nextElementSibling.children[ 0 ];
-            } else {
-                return getNextSource( el.parentElement.parentElement.parentElement.parentElement );
-            }
-        };
-
-        SGB.toggleSourceCode = function() {
-            var sourceCode = getNextSource( this );
-            if ( sourceCode instanceof HTMLElement ) {
-                _toggleClass( sourceCode, 'sg-source-active' );
-                _recalculateStickies();
-            }
-        };*/
-
-        // Documentation & Source Code Toggle
-        // REFACTOR THIS!
-        // -jLaz
-
-        SGB.toggleActiveDocumentationBtnClass = function() {
-            var button = this;
-            var buttonIcon = this.childNodes[ 1 ];
+        SGB.toggleSingleDocBtn = function() {
+            var button = this,
+                buttonIcon = this.childNodes[ 1 ];
+            
             _toggleClass( button, 'sg-btn-active' );
 
             var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-documentation-container' );
+            
+            thisContainer.toggleClass( 'sg-active' );            
+            
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
                 _recalculateStickies();
             } );
         };
 
-        SGB.toggleActiveSourceBtnClass = function() {
-            var button = this;
-            var buttonIcon = this.childNodes[ 1 ];
+        queryAll( '.sg-btn-documentation' ).on( 'click', SGB.toggleSingleDocBtn );
+
+        SGB.toggleSingleSourceBtn = function() {
+            var button = this,
+                buttonIcon = this.childNodes[ 1 ];
+            
             _toggleClass( button, 'sg-btn-active' );
 
             var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-source-container' );
+            
+            thisContainer.toggleClass( 'sg-active' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
                 _recalculateStickies();
             } );
         };
 
-        queryAll( '.sg-nav-toggle' ).on( 'click', SGB.toggleNav );
-        queryAll( '.sg-nav-group a' ).on( 'click', SGB.hideNav );
-        //queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleSourceCode );
-        queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleActiveCodeBtnClass );
-        //queryAll( '.sg-btn--select' ).on( 'click', SGB.selectSourceCode );
-        queryAll( '.sg-btn-documentation' ).on( 'click', SGB.toggleActiveDocumentationBtnClass );
-        queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleActiveSourceBtnClass );
-        queryAll( '#sg-toggle-all-doc' ).on( 'click', SGB.toggleAllDocumentation );
-        queryAll( '#sg-toggle-all-source' ).on( 'click', SGB.toggleAllSource );
+        queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleSingleSourceBtn );
 
         // Instagram-Like sticky headers
         // https://codepen.io/sales/pen/oxqzOe
@@ -524,7 +512,6 @@ $( document ).on( 'click', '.sg-nav-list h3', function() {
 
     // this opens just the next level
     $( this ).parent().find( '.sg-nav-item' ).toggle();
-    $( this ).children( 'i' ).toggleClass( 'fa-plus fa-minus' );
 
     // adding an active class to the item
     $( this ).toggleClass( 'active' );
@@ -553,18 +540,6 @@ $( document ).on( 'click', '.sg-nav-opened', function() {
     $( this ).parent().find( '.active' ).removeClass( 'active' );
     $( this ).removeClass( 'sg-nav-opened' );
     $( this ).parent().find( '.sg-nav-opened' ).removeClass( 'sg-nav-opened' );
-} );
-
-// Documentation & Source Code Section Toggle
-// with jQuery b/c I'm too much of a noob for vanilla js
-// -jLaz
-
-$( '.sg-btn-documentation' ).on( 'click', function() {
-    $( this ).closest( '.sg-section' ).find( '.sg-documentation-container' ).toggleClass( 'sg-active' );
-} );
-
-$( '.sg-btn-source' ).on( 'click', function() {
-    $( this ).closest( '.sg-section' ).find( '.sg-source-container' ).toggleClass( 'sg-active' );
 } );
 
 // experimental
