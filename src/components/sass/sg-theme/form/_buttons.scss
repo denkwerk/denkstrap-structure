@@ -2,15 +2,15 @@
 ---------------------------------------------------------------------------- */
 
 .sg-button-container {
-    @media screen and (max-width: 767px) { 
+    @media screen and (max-width: 767px) {
         @include clearfix;
         border-top: 1px solid $content-border-color;
         display: flex;
         justify-content: flex-end;
     }
 
-    @media screen and (min-width: 768px) { 
-        float: right;  
+    @media screen and (min-width: 768px) {
+        float: right;
         border-left: 1px solid $content-border-color;
     }
 }
@@ -21,7 +21,7 @@
     border-right: 1px solid $content-border-color;
     color: $btn-text-color;
     float: left;
-    font-size: 16px; // For older browsers 
+    font-size: 16px; // For older browsers
     font-size: 1rem;
     line-height: 50px;
     padding: 0;
@@ -31,23 +31,23 @@
 
     height: 50px;
     display: flex;
-        align-items: center;
-        justify-content: center;
+    align-items: center;
+    justify-content: center;
 
-    &:hover, 
+    &:hover,
     &:focus {
         background: $btn-bg-color-hover;
         outline: 0;
-        
+
         i {
-            color: $btn-text-color-hover;        
+            color: $btn-text-color-hover;
         }
     }
 
     &:last-child {
         border: 0;
     }
-    
+
     &.sg-btn-active {
         outline: 0;
     }
@@ -69,14 +69,13 @@
 }
 
 .sg-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
 }
-
 
 .sg-btn {
     svg {
@@ -87,7 +86,7 @@
     path {
         fill: $btn-text-color;
     }
-    
+
     &:hover,
     &.sg-btn-active {
         use,
@@ -95,14 +94,14 @@
             fill: $btn-text-color-hover;
         }
     }
-    
+
     // btn show documentation
     &.sg-btn-documentation {
         svg {
             width: 16px;
         }
     }
-    
+
     // btn show source code
     &.sg-btn-source {
         svg {
@@ -160,11 +159,10 @@
     }
 }
 
-
 // Safari fix for icons in buttons (weren't centered)
 button {
     i {
-        width: 100%; 
+        width: 100%;
     }
 }
 
@@ -175,7 +173,7 @@ button {
     }
 
     .sg-btn-expand {
-        @media screen and (max-width: 767px) { 
+        @media screen and (max-width: 767px) {
             border-left: 1px solid $content-border-color;
         }
     }
@@ -188,21 +186,19 @@ button {
     }
 
     .sg-btn-back {
-        @media screen and (max-width: 767px) { 
+        @media screen and (max-width: 767px) {
             border-left: 1px solid $content-border-color;
         }
     }
 
     .sg-btn-source {
-        @media screen and (max-width: 767px) { 
+        @media screen and (max-width: 767px) {
             border: 0;
         }
     }
 }
 
-
-
 // we don't want display: block here
-.sg-enhanced .sg-btn-source { 
+.sg-enhanced .sg-btn-source {
     display: flex;
 }

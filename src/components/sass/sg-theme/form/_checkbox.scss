@@ -5,7 +5,7 @@
 [type="checkbox"]:checked {
     position: absolute;
     left: -9999px;
-    
+
     // label
 
     + label {
@@ -13,7 +13,7 @@
         padding-left: 1.95em;
         cursor: pointer;
     }
-    
+
     // checkbox default
 
     + label:before {
@@ -23,9 +23,9 @@
         height: 16px;
         margin-top: 2px;
         position: absolute;
-            left: 0; 
-            top: 0;
-        width: 16px; 
+        left: 0;
+        top: 0;
+        width: 16px;
     }
 
     // checkbox checked
@@ -35,8 +35,8 @@
         content: '';
         height: 14px;
         position: absolute;
-            left: 1px;
-            top: 3px; 
+        left: 1px;
+        top: 3px;
         transition: all 0.2s ease;
         width: 14px;
     }
@@ -47,7 +47,7 @@
         + label:before,
         + label svg,
         + label {
-            opacity: 0.5;   
+            opacity: 0.5;
         }
 
         + label {
@@ -55,7 +55,6 @@
         }
     }
 }
-
 
 [type="checkbox"]:not(:checked) {
     + label svg {

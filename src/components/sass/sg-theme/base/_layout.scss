@@ -21,7 +21,6 @@ body {
     margin: 0;
 }
 
-
 /* Content
 ---------------------------------------------------------------------------- */
 
@@ -48,7 +47,6 @@ body {
     }
 }
 
-
 /* -------------------------------------------------------------------------
  SG Sections
  ---------------------------------------------------------------------------- */
@@ -62,7 +60,7 @@ body {
     animation: fadeIn ease 1;
     animation-duration: 1s;
     animation-fill-mode: forwards;
-    
+
     @for $i from 1 through 10 {
         &:nth-child(#{$i}) {
             animation-delay: #{$i}00ms;
@@ -70,11 +68,14 @@ body {
     }
 }
 
-@-webkit-keyframes fadeIn { 
-    0% { opacity:0; } 
-    100% { opacity:1; } 
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
-
 
 /* Section Header
 ---------------------------------------------------------------------------- */
@@ -88,14 +89,14 @@ body {
     &.fixed {
         box-sizing: border-box;
         position: fixed;
-            top: 0;
+        top: 0;
         z-index: 1100;
 
-        @media screen and (max-width: 767px) {         
+        @media screen and (max-width: 767px) {
             width: 100%;
         }
 
-        @media screen and (min-width: 768px) { 
+        @media screen and (min-width: 768px) {
             transition: width 0.4s ease;
             width: 100%;
         }
@@ -106,7 +107,7 @@ body {
     }
 }
 
-@media screen and (min-width: 1025px) { 
+@media screen and (min-width: 1025px) {
     .nav-is-active {
         .sg-section-header.fixed {
             width: 100%;
@@ -124,20 +125,19 @@ body {
 }
 
 .sg-header-group {
-    @media screen and (min-width: 768px) { 
+    @media screen and (min-width: 768px) {
         display: flex;
-            align-items: center;
-            flex-direction: row;
-            justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 
-
-// Section Title 
+// Section Title
 
 .sg-title-container {
     display: flex;
-        align-items: center;
+    align-items: center;
     margin-left: $unit / 2;
     min-height: 50px;
 
@@ -152,15 +152,14 @@ body {
     margin: 0;
     text-transform: capitalize;
 
-    @media screen and (max-width: 767px) { 
+    @media screen and (max-width: 767px) {
         font-size: 1em;
     }
 
-    @media screen and (max-width: 1024px) { 
+    @media screen and (max-width: 1024px) {
         padding: 10px 0;
     }
 }
-
 
 /* Section Documentation & Source Code Toggle
 ---------------------------------------------------------------------------- */
@@ -186,8 +185,8 @@ body {
             font-size: 12px;
             line-height: 45px;
             position: absolute;
-                left: $unit / 2;
-                top: 0;
+            left: $unit / 2;
+            top: 0;
             text-transform: uppercase;
             z-index: 1;
         }
@@ -206,8 +205,7 @@ body {
     }
 }
 
-
-// Documentation 
+// Documentation
 
 .sg-documentation {
     border: 0;
@@ -229,7 +227,7 @@ body {
     }
 }
 
-.markdown-body {     
+.markdown-body {
     h1,
     h2,
     h3 {
@@ -258,7 +256,6 @@ body {
     }
 }
 
-
 // Source Code
 
 .sg-source {
@@ -270,7 +267,6 @@ body {
     &:before {
         content: 'Source Code';
     }
-
 
     pre {
         background: transparent !important;
@@ -285,7 +281,6 @@ body {
     }
 }
 
-
 /* Section Preview
 ---------------------------------------------------------------------------- */
 
@@ -294,7 +289,7 @@ body {
     position: relative; // prevent module position fixed elements from thinking out of their box.
     // for interact.js
     /*
-    box-sizing: border-box; 
+    box-sizing: border-box;
     background: #f0f0f0;
     margin: $unit auto 0;
     */
@@ -309,7 +304,6 @@ body {
     z-index: 1;
 }
 */
-
 
 /* Branding
 ---------------------------------------------------------------------------- */
