@@ -68,10 +68,11 @@ body {
     }
 }
 
-@-webkit-keyframes fadeIn {
+@keyframes fadeIn {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -165,7 +166,7 @@ body {
 ---------------------------------------------------------------------------- */
 .sg-toggle-container {
     background: $light-grey;
-    max-height: 0px;
+    max-height: 0;
     overflow: hidden;
     position: relative;
     transition: max-height 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
@@ -174,28 +175,29 @@ body {
     &.sg-active {
         max-height: 50vh;
     }
+}
 
-    div {
-        max-height: 50vh;
-        margin-top: $unit * 1.5;
+.sg-documentation,
+.sg-source {
+    max-height: 50vh;
+    margin-top: $unit * 1.5;
 
-        &:before {
-            color: $darker-grey;
-            display: block;
-            font-size: 12px;
-            line-height: 45px;
-            position: absolute;
-            left: $unit / 2;
-            top: 0;
-            text-transform: uppercase;
-            z-index: 1;
-        }
+    &:before {
+        color: $darker-grey;
+        display: block;
+        font-size: 12px;
+        line-height: 45px;
+        position: absolute;
+        left: $unit / 2;
+        top: 0;
+        text-transform: uppercase;
+        z-index: 1;
+    }
+}
 
-        &.sg-documentation {
-            &:before {
-                top: -45px;
-            }
-        }
+.sg-documentation {
+    &:before {
+        top: -45px;
     }
 }
 

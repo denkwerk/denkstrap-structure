@@ -126,18 +126,18 @@
     }
 
     // btn close
-    use.sg-close {
+    .sg-icon-close {
         display: none;
     }
 
     &.sg-btn-active {
-        use.sg-close {
+        .sg-icon-close {
             display: block;
         }
     }
 
     &.sg-btn-documentation.sg-btn-active {
-        use.sg-comment {
+        .sg-icon-comment {
             display: none;
         }
 
@@ -148,7 +148,7 @@
     }
 
     &.sg-btn-source.sg-btn-active {
-        use.sg-code {
+        .sg-icon-code {
             display: none;
         }
 

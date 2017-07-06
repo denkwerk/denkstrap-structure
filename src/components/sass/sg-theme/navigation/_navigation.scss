@@ -35,7 +35,7 @@
         fill: $btn-text-color;
     }
 
-    use.sg-close {
+    .sg-icon-close {
         display: none;
     }
 
@@ -59,42 +59,37 @@
             width: 18px;
         }
 
-        use.sg-close {
+        .sg-icon-close {
             display: block;
             fill: $nav-text-color;
         }
 
-        use.sg-navicon {
+        .sg-icon-navicon {
             display: none;
         }
 
-        @media screen and (max-width: 1024px) {
-            use.sg-close {
+        .sg-icon-close {
+            @media screen and (max-width: 1024px) {
                 fill: $nav-text-color-mobile;
             }
-
-            &:hover,
-            &:focus {
-                outline: 0;
-
-                use.sg-close {
-                    fill: $btn-text-color;
-                }
-            }
-        }
-
-        @media screen and (min-width: 1025px) {
-            &:hover,
-            &:focus {
-                outline: 0;
-
-                use.sg-close {
-                    fill: $btn-text-color-hover;
-                }
-            }
-
         }
     }
+    
+    .sg-nav-toggle:hover,
+    .sg-nav-toggle:focus {
+        .sg-icon-close {
+            outline: 0;
+
+            @media screen and (max-width: 1024px) {
+                fill: $btn-text-color;
+            }
+
+            @media screen and (min-width: 1025px) {
+                fill: $btn-text-color-hover;
+            }
+        }
+    }
+
 }
 
 .nav-toggle-helper {
@@ -247,7 +242,7 @@ nav {
     }
 }
 
-a.sg-nav-link {
+.sg-nav-link-child { // a tag
     text-decoration: none;
     font-weight: 200;
 
@@ -317,16 +312,16 @@ a.sg-nav-link {
         width: 15px;
     }
 
-    use.sg-minus {
+    .sg-icon-minus {
         display: none;
     }
 
     &.active {
-        use.sg-minus {
+        .sg-icon-minus {
             display: block;
         }
 
-        use.sg-plus {
+        .sg-icon-plus {
             display: none;
         }
     }
@@ -352,7 +347,7 @@ a.sg-nav-link {
     display: block;
 }
 
-h3.sg-nav-link {
+.sg-nav-link-parent { // h3 tag
     .sg-nav-text {
         margin-left: 4px;
     }
@@ -444,37 +439,40 @@ h3.sg-nav-link {
             }
         }
     }
+
+    &.sg-nav-link-parent {
+        padding: 0 ($unit / 2) 0 50px;
+    }
 }
 
-h3.sg-nav-link-lv-1 {
-    padding: 0 ($unit / 2) 0 50px;
-}
-
-a.sg-nav-link-lv-1 {
-    //fine
-}
 
 /* Lv 2 specific
 ---------------------------------------------------------------------------- */
 
-h3.sg-nav-link-lv-2 {
-    padding: 0 ($unit / 2) 0 68px;
+.sg-nav-link-lv-2 {
+    &.sg-nav-link-parent {
+        padding: 0 ($unit / 2) 0 68px;
+    }
+
+    &.sg-nav-link-child {
+        padding: 0 ($unit / 2) 0 55px;
+    }
 }
 
-a.sg-nav-link-lv-2 {
-    padding: 0 ($unit / 2) 0 55px;
-}
 
 /* Lv 3 specific
 ---------------------------------------------------------------------------- */
 
-h3.sg-nav-link-lv-3 {
-    padding: 0 ($unit / 2) 0 68px;
+.sg-nav-link-lv-3 {
+    &.sg-nav-link-parent {
+        padding: 0 ($unit / 2) 0 68px;
+    }
+
+    &.sg-nav-link-child {
+        padding: 0 ($unit / 2) 0 72px;
+    }
 }
 
-a.sg-nav-link-lv-3 {
-    padding: 0 ($unit / 2) 0 72px;
-}
 
 /* Nav item spacing magic
 ---------------------------------------------------------------------------- */
@@ -516,7 +514,7 @@ a.sg-nav-link-lv-3 {
         }
     }
 
-    form.sg-nav-link {
+    form {
         padding-left: $unit;
     }
 
