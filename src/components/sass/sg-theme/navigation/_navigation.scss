@@ -157,7 +157,8 @@
 
 .sg-navigation {
     height: 100%;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: absolute;
     top: 50px;
     width: 100%;
