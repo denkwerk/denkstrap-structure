@@ -155,13 +155,12 @@ var SGB = window.SGB || {};
         SGB.toggleSingleDocBtn = function() {
             var button = this,
                 buttonIcon = this.childNodes[ 1 ];
-            
+
             _toggleClass( button, 'sg-btn-active' );
 
             var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-documentation-container' );
-            
-            thisContainer.toggleClass( 'sg-active' );            
-            
+
+            thisContainer.toggleClass( 'sg-active' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
                 _recalculateStickies();
             } );
@@ -172,11 +171,11 @@ var SGB = window.SGB || {};
         SGB.toggleSingleSourceBtn = function() {
             var button = this,
                 buttonIcon = this.childNodes[ 1 ];
-            
+
             _toggleClass( button, 'sg-btn-active' );
 
             var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-source-container' );
-            
+
             thisContainer.toggleClass( 'sg-active' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
                 _recalculateStickies();
