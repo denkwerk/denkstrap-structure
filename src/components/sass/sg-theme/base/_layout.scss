@@ -292,9 +292,23 @@ body {
 .sg-preview {
     margin-top: $unit;
     position: relative; // prevent module position fixed elements from thinking out of their box.
+    // for interact.js
+    /*
+    box-sizing: border-box; 
+    background: #f0f0f0;
+    margin: $unit auto 0;
+    */
 }
 
-
+/*
+.resize-options-container {
+    position: fixed;
+        top: 0;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+}
+*/
 
 
 /* Branding
@@ -325,9 +339,3 @@ body {
         display: inline;
     }
 } */
-
-
-
-
-
-

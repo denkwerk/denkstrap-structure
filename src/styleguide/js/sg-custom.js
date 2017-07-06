@@ -566,3 +566,65 @@ $( '.sg-btn-documentation' ).on( 'click', function() {
 $( '.sg-btn-source' ).on( 'click', function() {
     $( this ).closest( '.sg-section' ).find( '.sg-source-container' ).toggleClass( 'sg-active' );
 } );
+
+// experimental
+
+// Resize preview
+// -jLaz
+/*
+$( '#btn-320' ).on( 'click', function() {
+    $( '.sg-preview' ).css( 'width', 320 );
+} );
+$( '#btn-480' ).on( 'click', function() {
+    $( '.sg-preview' ).css( 'width', 480 );
+} );
+$( '#btn-768' ).on( 'click', function() {
+    $( '.sg-preview' ).css( 'width', 768 );
+} );
+$( '#btn-1024' ).on( 'click', function() {
+    $( '.sg-preview' ).css( 'width', 1024 );
+} );
+$( '#btn-1200' ).on( 'click', function() {
+    $( '.sg-preview' ).css( 'width', 1200 );
+} );
+$( '#btn-reset' ).on( 'click', function() {
+    $( '.sg-preview' ).removeAttr( 'style' );
+} );
+*/
+
+/*
+var $resizeLength = this.$element.find( '.sg-preview' ),
+    $handleLeft = this.$element.find( '.sg-esize-handle-left' ),
+    $handleRight = this.$element.find( '.sg-resize-handle-right' );
+
+interact( '.sg-preview' )
+.resizable( {
+    axis: 'x',
+    edges: {
+        left: $handleRight[ 0 ],
+        right: $handleLeft[ 0 ],
+        bottom: false,
+        top: false
+    }
+} )
+.on( 'resizemove', function( event ) {
+    var target = event.target,
+        x = ( parseFloat( target.getAttribute( 'data-x' ) ) || 0 ),
+        y = ( parseFloat( target.getAttribute( 'data-y' ) ) || 0 );
+
+    // update the element's style
+    target.style.width  = event.rect.width + 'px';
+    target.style.height = event.rect.height + 'px';
+
+    // translate when resizing from top or left edges
+    x += event.deltaRect.left;
+    y += event.deltaRect.top;
+
+    target.style.webkitTransform = target.style.transform =
+        'translate(' + x + 'px,' + y + 'px)';
+
+    target.setAttribute( 'data-x', x );
+    target.setAttribute( 'data-y', y );
+    target.textContent = Math.round( event.rect.width ) + '×' + Math.round( event.rect.height );
+} );
+*/

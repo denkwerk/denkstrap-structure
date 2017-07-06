@@ -246,6 +246,20 @@
         <main class="sg-main">
 
             <div class="nav-toggle-helper"></div>
+            
+            {# some future resizing feature?
+            <div class="resize-options-container">
+                <span>Resize view:</span>
+                <div class="resize-options">
+                    <button type="button" id="btn-320">320</button>
+                    <button type="button" id="btn-480">480</button>
+                    <button type="button" id="btn-768">768</button>
+                    <button type="button" id="btn-1024">1024</button>
+                    <button type="button" id="btn-1200">1200</button>
+                    <button type="button" id="btn-reset">reset</button>
+                </div>
+            </div>
+            #}
 
             {% import "single.njk" as singleView %}
             {% for element in elements %}
@@ -260,6 +274,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-css.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-clike.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-javascript.min.js"></script>
+
+        {# <script src="//cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.6/interact.min.js"></script> #}
         <!--<![endif]-->
 
         {% for script in footerScripts %}
