@@ -308,7 +308,7 @@ nav {
 .sg-nav-link {
     svg {
         height: 14px;
-        margin-left: -($unit / 2);
+        margin-left: -16px;
         width: 15px;
     }
 
@@ -347,11 +347,6 @@ nav {
     display: block;
 }
 
-.sg-nav-link-parent { // h3 tag
-    .sg-nav-text {
-        margin-left: 4px;
-    }
-}
 
 /* Lv 0 specific
 ---------------------------------------------------------------------------- */
@@ -449,7 +444,7 @@ nav {
 /* Lv 2 specific
 ---------------------------------------------------------------------------- */
 
-.sg-nav-link-lv-2 {
+/* .sg-nav-link-lv-2 {
     &.sg-nav-link-parent {
         padding: 0 ($unit / 2) 0 68px;
     }
@@ -457,13 +452,13 @@ nav {
     &.sg-nav-link-child {
         padding: 0 ($unit / 2) 0 55px;
     }
-}
+} */
 
 
 /* Lv 3 specific
 ---------------------------------------------------------------------------- */
 
-.sg-nav-link-lv-3 {
+/* .sg-nav-link-lv-3 {
     &.sg-nav-link-parent {
         padding: 0 ($unit / 2) 0 68px;
     }
@@ -471,11 +466,39 @@ nav {
     &.sg-nav-link-child {
         padding: 0 ($unit / 2) 0 72px;
     }
-}
+} */
 
 
 /* Nav item spacing magic
 ---------------------------------------------------------------------------- */
+
+.sg-nav-link-parent .sg-nav-text {
+    margin-left: 3px;
+}
+
+@for $i from 1 through 10 {
+    .sg-nav-link-lv-#{$i} {
+        &.sg-nav-link-child,
+        &.sg-nav-link-parent {
+            padding-right: $unit / 2;
+            padding-left: calc(#{$unit} * ((#{$i} / 2) + 1) + #{$i} * 2px);
+            // description: 30px * (level number / 2) + 1 + the magic 2px * level number
+            // the magic 2px: the svg is 15px wide, the icon itself 11px so we have 4px space = 2px on each side.
+            
+            // maybe easier to understand:
+            // padding-left: calc((#{$unit} / 2) * (#{$i} + 1) + (#{$unit} / 2) + (#{$i} * 2px);
+            // description:        15px          *    LV+1     +       15px     +     LV*2px
+            // we start with 15px so that we can calculate with whole numbers
+            // so, for each level: 15px * level number + 1 (b/c we start at lv0. lv0+1=15, lv1+1=30, ..)
+            // then, extra 15px for each level (so we have 30px on lv0, 45px on lv1, ..)
+            // then add 2px * level number on top for icon alignment. 
+        }
+
+        &.sg-nav-link-child {
+            padding-left: calc((#{$unit} / 2 * (#{$i} + 1) + #{$i} * 2px);
+        }
+    }
+}
 
 .sg-nav-item-lv-1:last-child {
     padding-bottom: $unit / 2;
@@ -492,6 +515,7 @@ nav {
         padding-bottom: $unit / 2;
     }
 }
+
 
 /* -------------------------------------------------------------------------
  Navigation Bulk Toggle options
