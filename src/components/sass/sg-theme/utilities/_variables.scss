@@ -1,63 +1,63 @@
 /* Variables */
 
-$white:             #fefefe;
-$light-grey:        #eee;
-$mid-grey:          #e9e9e9;
-$grey:              #ddd;
-$dark-grey:         #ccc;
-$darker-grey:       #999;
-$darkest-grey:      #444;
-$black:             #333; 
+$sg-white:             #fefefe;
+$sg-light-grey:        #eee;
+$sg-mid-grey:          #e9e9e9;
+$sg-grey:              #ddd;
+$sg-dark-grey:         #ccc;
+$sg-darker-grey:       #999;
+$sg-darkest-grey:      #444;
+$sg-black:             #333; 
 
-$green:             #48c876;
-
-
-$primary-color:             $green;
-$secondary-color:           $black;
-
-$body-bg-color:             $white;
-$text-color:                $black;
-$text-color-inverted:       $white;
-
-$content-border-color:      $dark-grey;
-
-$nav-toggle-bg-color:           $body-bg-color;
-
-$nav-bg-color:                  $secondary-color;
-$nav-bg-color-mobile:           $primary-color;
-
-$nav-text-color:                $text-color-inverted;
-$nav-text-color-mobile:         $text-color-inverted;
-
-$nav-border-color:              $darkest-grey;
-
-$nav-bg-color-parent:                   transparent;
-$nav-bg-color-parent-hover:             $darkest-grey;
-$nav-bg-color-parent-mobile:            transparent;
-$nav-bg-color-parent-mobile-hover:      $light-grey;
-
-$nav-text-color-parent:                 $nav-text-color;
-$nav-text-color-parent-hover:           $primary-color;
-$nav-text-color-parent-mobile:          $nav-text-color-mobile;
-$nav-text-color-parent-mobile-hover:    $primary-color;
-
-$nav-bg-color-link-hover:               $nav-bg-color-parent-hover;
-$nav-bg-color-link-active:              $primary-color;
-$nav-bg-color-link-mobile-hover:        $nav-bg-color-mobile;
-
-$nav-text-color-link:                   $nav-text-color;
-$nav-text-color-link-hover:             $nav-text-color-parent-hover;
-$nav-text-color-link-active:            $nav-text-color;
-$nav-text-color-link-mobile:            $nav-text-color-mobile;
-$nav-text-color-link-mobile-hover:      $nav-text-color-mobile;
+$sg-green:             #48c876;
 
 
-$btn-bg-color:              transparent;
-$btn-bg-color-hover:        transparent;
-$btn-text-color:            $text-color;
-$btn-text-color-inverted:   $text-color-inverted;
-$btn-text-color-hover:      $primary-color;
+$sg-primary-color:             $sg-green;
+$sg-secondary-color:           $sg-black;
+
+$sg-body-bg-color:             $sg-white;
+$sg-text-color:                $sg-black;
+$sg-text-color-inverted:       $sg-white;
+
+$sg-content-border-color:      $sg-dark-grey;
+
+$sg-nav-toggle-bg-color:           $sg-body-bg-color;
+
+$sg-nav-bg-color:                  $sg-secondary-color;
+$sg-nav-bg-color-mobile:           $sg-primary-color;
+
+$sg-nav-text-color:                $sg-text-color-inverted;
+$sg-nav-text-color-mobile:         $sg-text-color-inverted;
+
+$sg-nav-border-color:              $sg-darkest-grey;
+
+$sg-nav-bg-color-parent:                   transparent;
+$sg-nav-bg-color-parent-hover:             $sg-darkest-grey;
+$sg-nav-bg-color-parent-mobile:            transparent;
+$sg-nav-bg-color-parent-mobile-hover:      $sg-light-grey;
+
+$sg-nav-text-color-parent:                 $sg-nav-text-color;
+$sg-nav-text-color-parent-hover:           $sg-primary-color;
+$sg-nav-text-color-parent-mobile:          $sg-nav-text-color-mobile;
+$sg-nav-text-color-parent-mobile-hover:    $sg-primary-color;
+
+$sg-nav-bg-color-link-hover:               $sg-nav-bg-color-parent-hover;
+$sg-nav-bg-color-link-active:              $sg-primary-color;
+$sg-nav-bg-color-link-mobile-hover:        $sg-nav-bg-color-mobile;
+
+$sg-nav-text-color-link:                   $sg-nav-text-color;
+$sg-nav-text-color-link-hover:             $sg-nav-text-color-parent-hover;
+$sg-nav-text-color-link-active:            $sg-nav-text-color;
+$sg-nav-text-color-link-mobile:            $sg-nav-text-color-mobile;
+$sg-nav-text-color-link-mobile-hover:      $sg-nav-text-color-mobile;
 
 
-$unit:              30px;
-$nav-width:         300px;
+$sg-btn-bg-color:              transparent;
+$sg-btn-bg-color-hover:        transparent;
+$sg-btn-text-color:            $sg-text-color;
+$sg-btn-text-color-inverted:   $sg-text-color-inverted;
+$sg-btn-text-color-hover:      $sg-primary-color;
+
+
+$sg-unit:              30px;
+$sg-nav-width:         300px;

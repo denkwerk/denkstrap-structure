@@ -17,8 +17,8 @@
     // checkbox default
 
     + label:before {
-        background: $white;
-        border: 1px solid $grey;
+        background: $sg-white;
+        border: 1px solid $sg-grey;
         content: '';
         height: 16px;
         margin-top: 2px;
@@ -31,7 +31,7 @@
     // checkbox checked
 
     + label svg {
-        color: $primary-color;
+        color: $sg-primary-color;
         content: '';
         height: 14px;
         position: absolute;

@@ -4,22 +4,22 @@
 .sg-button-container {
     @media screen and (max-width: 767px) {
         @include clearfix;
-        border-top: 1px solid $content-border-color;
+        border-top: 1px solid $sg-content-border-color;
         display: flex;
         justify-content: flex-end;
     }
 
     @media screen and (min-width: 768px) {
         float: right;
-        border-left: 1px solid $content-border-color;
+        border-left: 1px solid $sg-content-border-color;
     }
 }
 
 .sg-btn {
-    background: $btn-bg-color;
+    background: $sg-btn-bg-color;
     border: 0;
-    border-right: 1px solid $content-border-color;
-    color: $btn-text-color;
+    border-right: 1px solid $sg-content-border-color;
+    color: $sg-btn-text-color;
     float: left;
     font-size: 16px; // For older browsers
     font-size: 1rem;
@@ -36,11 +36,11 @@
 
     &:hover,
     &:focus {
-        background: $btn-bg-color-hover;
+        background: $sg-btn-bg-color-hover;
         outline: 0;
 
         i {
-            color: $btn-text-color-hover;
+            color: $sg-btn-text-color-hover;
         }
     }
 
@@ -84,14 +84,14 @@
 
     use,
     path {
-        fill: $btn-text-color;
+        fill: $sg-btn-text-color;
     }
 
     &:hover,
     &.sg-btn-active {
         use,
         path {
-            fill: $btn-text-color-hover;
+            fill: $sg-btn-text-color-hover;
         }
     }
 
@@ -174,7 +174,7 @@ button {
 
     .sg-btn-expand {
         @media screen and (max-width: 767px) {
-            border-left: 1px solid $content-border-color;
+            border-left: 1px solid $sg-content-border-color;
         }
     }
 }
@@ -187,7 +187,7 @@ button {
 
     .sg-btn-back {
         @media screen and (max-width: 767px) {
-            border-left: 1px solid $content-border-color;
+            border-left: 1px solid $sg-content-border-color;
         }
     }
 

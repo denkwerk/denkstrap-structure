@@ -10,7 +10,7 @@
 
 .styleguide__element {
     float: left;
-    padding: $unit / 2;
+    padding: $sg-unit / 2;
 
     @media screen and (max-width: 480px) {
         width: 50%;
@@ -29,7 +29,7 @@
     height: 50px;
     padding: 10px;
     border: 1px solid transparent;
-    color: $text-color-inverted;
+    color: $sg-text-color-inverted;
 }
 
 .styleguide__definition--info {
@@ -39,7 +39,7 @@
 .styleguide__definition {
     margin: 0.5em 0;
     list-style: none;
-    color: $text-color;
+    color: $sg-text-color;
     padding: 0;
     font-size: 14px;
 }

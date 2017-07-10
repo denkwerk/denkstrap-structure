@@ -17,7 +17,7 @@ html {
 
 body {
     @extend %font;
-    background: $body-bg-color;
+    background: $sg-body-bg-color;
     margin: 0;
 }
 
@@ -25,8 +25,8 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-main {
-    background: $body-bg-color;
-    padding-bottom: $unit * 2;
+    background: $sg-body-bg-color;
+    padding-bottom: $sg-unit * 2;
     overflow-x: hidden; // prevent module preview content from thinking outside of the box and overlap the nav
     transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
 }
@@ -35,7 +35,7 @@ body {
     .nav-is-active {
         .styleguide-full {
             .sg-main {
-                margin-left: $nav-width;
+                margin-left: $sg-nav-width;
             }
         }
     }
@@ -52,8 +52,8 @@ body {
  ---------------------------------------------------------------------------- */
 
 .sg-section {
-    background: $body-bg-color;
-    padding-bottom: $unit;
+    background: $sg-body-bg-color;
+    padding-bottom: $sg-unit;
 
     // fancy shit
     opacity: 0;
@@ -84,8 +84,8 @@ body {
 // Header Container
 
 .sg-section-header {
-    background: $body-bg-color;
-    border-bottom: 1px solid $content-border-color;
+    background: $sg-body-bg-color;
+    border-bottom: 1px solid $sg-content-border-color;
 
     &.fixed {
         box-sizing: border-box;
@@ -119,7 +119,7 @@ body {
 // Section Anchor
 
 .sg-section-anchor {
-    border-bottom: 1px solid $content-border-color;
+    border-bottom: 1px solid $sg-content-border-color;
     display: block;
     height: 51px;
     width: 100%;
@@ -139,7 +139,7 @@ body {
 .sg-title-container {
     display: flex;
     align-items: center;
-    margin-left: $unit / 2;
+    margin-left: $sg-unit / 2;
     min-height: 50px;
 
 }
@@ -165,7 +165,7 @@ body {
 /* Section Documentation & Source Code Toggle
 ---------------------------------------------------------------------------- */
 .sg-toggle-container {
-    background: $light-grey;
+    background: $sg-light-grey;
     max-height: 0;
     overflow: hidden;
     position: relative;
@@ -180,15 +180,15 @@ body {
 .sg-documentation,
 .sg-source {
     max-height: 50vh;
-    margin-top: $unit * 1.5;
+    margin-top: $sg-unit * 1.5;
 
     &:before {
-        color: $darker-grey;
+        color: $sg-darker-grey;
         display: block;
         font-size: 12px;
         line-height: 45px;
         position: absolute;
-        left: $unit / 2;
+        left: $sg-unit / 2;
         top: 0;
         text-transform: uppercase;
         z-index: 1;
@@ -203,7 +203,7 @@ body {
 
 .sg-section {
     .sg-active + .sg-active {
-        border-top: 1px solid $body-bg-color;
+        border-top: 1px solid $sg-body-bg-color;
     }
 }
 
@@ -211,13 +211,13 @@ body {
 
 .sg-documentation {
     border: 0;
-    padding-bottom: $unit / 2;
-    padding-left: $unit / 2;
+    padding-bottom: $sg-unit / 2;
+    padding-left: $sg-unit / 2;
     overflow: visible;
     position: relative;
 
     @media screen and (max-width: 767px) {
-        padding-right: $unit / 2;
+        padding-right: $sg-unit / 2;
     }
 
     @media screen and (min-width: 768px) {
@@ -243,8 +243,8 @@ body {
 
     blockquote {
         padding: 0 0 0 1em;
-        color: $text-color;
-        border-left: 0.25em solid $primary-color;
+        color: $sg-text-color;
+        border-left: 0.25em solid $sg-primary-color;
     }
 
     p {
@@ -254,7 +254,7 @@ body {
 
     pre,
     code {
-        background: $grey;
+        background: $sg-grey;
     }
 }
 
@@ -262,9 +262,9 @@ body {
 
 .sg-source {
     overflow: auto;
-    padding-bottom: $unit / 2;
-    padding-left: $unit / 2;
-    padding-right: $unit / 2;
+    padding-bottom: $sg-unit / 2;
+    padding-left: $sg-unit / 2;
+    padding-right: $sg-unit / 2;
 
     &:before {
         content: 'Source Code';
@@ -287,13 +287,13 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-preview {
-    margin-top: $unit;
+    margin-top: $sg-unit;
     position: relative; // prevent module position fixed elements from thinking out of their box.
     // for interact.js
     /*
     box-sizing: border-box;
     background: #f0f0f0;
-    margin: $unit auto 0;
+    margin: $sg-unit auto 0;
     */
 }
 

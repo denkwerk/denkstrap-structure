@@ -6,14 +6,14 @@
     height: 50px;
     position: fixed;
     z-index: 2100;
-    width: $nav-width;
+    width: $sg-nav-width;
 
 }
 
 .sg-nav-toggle {
-    background: $btn-bg-color;
+    background: $sg-btn-bg-color;
     border: 0;
-    color: $btn-text-color;
+    color: $sg-btn-text-color;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,7 +32,7 @@
 
     use,
     path {
-        fill: $btn-text-color;
+        fill: $sg-btn-text-color;
     }
 
     .sg-icon-close {
@@ -41,13 +41,13 @@
 
     &:hover,
     &:focus {
-        color: $btn-text-color-hover;
+        color: $sg-btn-text-color-hover;
         cursor: pointer;
         outline: 0;
 
         use,
         path {
-            fill: $btn-text-color-hover;
+            fill: $sg-btn-text-color-hover;
         }
     }
 
@@ -61,7 +61,7 @@
 
         .sg-icon-close {
             display: block;
-            fill: $nav-text-color;
+            fill: $sg-nav-text-color;
         }
 
         .sg-icon-navicon {
@@ -70,7 +70,7 @@
 
         .sg-icon-close {
             @media screen and (max-width: 1024px) {
-                fill: $nav-text-color-mobile;
+                fill: $sg-nav-text-color-mobile;
             }
         }
     }
@@ -81,11 +81,11 @@
             outline: 0;
 
             @media screen and (max-width: 1024px) {
-                fill: $btn-text-color;
+                fill: $sg-btn-text-color;
             }
 
             @media screen and (min-width: 1025px) {
-                fill: $btn-text-color-hover;
+                fill: $sg-btn-text-color-hover;
             }
         }
     }
@@ -123,7 +123,7 @@
         }
 
         .nav-is-active & {
-            background: $nav-bg-color-mobile;
+            background: $sg-nav-bg-color-mobile;
             height: 100vh;
             position: fixed;
             top: 0;
@@ -134,13 +134,13 @@
     }
 
     @media screen and (min-width: 1025px) {
-        background: $nav-bg-color;
+        background: $sg-nav-bg-color;
         position: fixed;
         bottom: 0;
         top: 0;
         transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
         transform: translateX(-50%);
-        width: $nav-width;
+        width: $sg-nav-width;
         z-index: -1;
 
         .nav-is-active & {
@@ -161,7 +161,7 @@
 
     @media screen and (max-width: 1024px) {
         .nav-is-active & {
-            color: $nav-text-color-mobile;
+            color: $sg-nav-text-color-mobile;
         }
     }
 
@@ -192,12 +192,12 @@ nav {
 
 .sg-nav-list {
     @media screen and (max-width: 1024px) {
-        color: $nav-text-color-mobile;
+        color: $sg-nav-text-color-mobile;
         width: 100%;
     }
 
     @media screen and (min-width: 1025px) {
-        color: $nav-text-color;
+        color: $sg-nav-text-color;
     }
 }
 
@@ -241,13 +241,13 @@ nav {
     align-items: center;
     font-size: 1em;
     margin: 0;
-    padding: 0 ($unit / 2) 0 0;
+    padding: 0 ($sg-unit / 2) 0 0;
     text-transform: capitalize;
 
     @media screen and (min-width: 1025px) {
         &:hover {
-            background: $nav-bg-color-parent-hover;
-            color: $nav-text-color-parent-hover;
+            background: $sg-nav-bg-color-parent-hover;
+            color: $sg-nav-text-color-parent-hover;
         }
     }
 
@@ -260,11 +260,11 @@ nav {
 .sg-nav-link,
 .sg-options form {
     @media screen and (max-width: 1024px) {
-        min-height: $unit * 1.5;
+        min-height: $sg-unit * 1.5;
     }
 
     @media screen and (min-width: 1025px) {
-        min-height: $unit;
+        min-height: $sg-unit;
     }
 }
 
@@ -273,57 +273,57 @@ nav {
     font-weight: 200;
 
     @media screen and (max-width: 1024px) {
-        color: $nav-text-color-link-mobile;
+        color: $sg-nav-text-color-link-mobile;
     }
 
     @media screen and (min-width: 1025px) {
-        color: $nav-text-color-link;
+        color: $sg-nav-text-color-link;
     }
 
     &:hover,
     &:focus {
         @media screen and (max-width: 1024px) {
-            background: rgba($nav-bg-color-link-mobile-hover, 0.2);
-            color: $nav-text-color-link-mobile-hover;
+            background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
+            color: $sg-nav-text-color-link-mobile-hover;
         }
 
         @media screen and (min-width: 1025px) {
-            background: $nav-bg-color-link-hover;
-            color: $nav-text-color-link-hover;
+            background: $sg-nav-bg-color-link-hover;
+            color: $sg-nav-text-color-link-hover;
         }
     }
 
     &.active {
         @media screen and (max-width: 1024px) {
-            background: rgba($nav-bg-color-link-mobile-hover, 0.2);
-            color: $nav-text-color-link-mobile-hover;
+            background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
+            color: $sg-nav-text-color-link-mobile-hover;
         }
 
         @media screen and (min-width: 1025px) {
-            background: $nav-bg-color-link-active;
-            color: $nav-text-color-link-active;
+            background: $sg-nav-bg-color-link-active;
+            color: $sg-nav-text-color-link-active;
         }
     }
 
     &:visited {
         @media screen and (max-width: 1024px) {
-            color: $nav-text-color-link-mobile;
+            color: $sg-nav-text-color-link-mobile;
         }
 
         @media screen and (min-width: 1025px) {
-            color: $nav-text-color-link;
+            color: $sg-nav-text-color-link;
         }
 
         &:hover,
         &:focus {
             @media screen and (max-width: 1024px) {
-                background: rgba($nav-bg-color-link-mobile-hover, 0.2);
-                color: $nav-text-color-link-mobile-hover;
+                background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
+                color: $sg-nav-text-color-link-mobile-hover;
             }
 
             @media screen and (min-width: 1025px) {
-                background: $nav-bg-color-link-hover;
-                color: $nav-text-color-link-hover;
+                background: $sg-nav-bg-color-link-hover;
+                color: $sg-nav-text-color-link-hover;
             }
         }
     }
@@ -353,7 +353,7 @@ nav {
     }
 }
 
-// on.click h3.sg-nav-link-lv-0 js detects if .sg-nav-text is > $unit (30px)
+// on.click h3.sg-nav-link-lv-0 js detects if .sg-nav-text is > $sg-unit (30px)
 // if yes, the container gets .multiline and we can reset the align-items: center;
 // for the icon so that it always stays on top.
 // -jLaz
@@ -385,13 +385,13 @@ nav {
     }
 
     @media screen and (min-width: 1025px) {
-        border-top: 1px solid $nav-border-color;
+        border-top: 1px solid $sg-nav-border-color;
     }
 }
 
 .sg-nav-item-lv-0 {
     @media screen and (min-width: 1025px) {
-        border-bottom: 1px solid $nav-border-color;
+        border-bottom: 1px solid $sg-nav-border-color;
     }
 }
 
@@ -404,7 +404,7 @@ nav {
     }
 
     @media screen and (max-width: 1024px) {
-        background: rgba($nav-bg-color-parent-mobile-hover, 0.4);
+        background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
         margin-bottom: 1px;
         position: relative;
         width: 100%;
@@ -418,8 +418,8 @@ nav {
 
         &:hover,
         &.active {
-            background: $nav-bg-color-parent-mobile-hover;
-            color: $nav-text-color-parent-mobile-hover;
+            background: $sg-nav-bg-color-parent-mobile-hover;
+            color: $sg-nav-text-color-parent-mobile-hover;
         }
 
         &.active {
@@ -436,7 +436,7 @@ nav {
 
 .sg-nav-link-lv-1 {
     @media screen and (max-width: 1024px) {
-        background: rgba($nav-bg-color-parent-mobile-hover, 0.2);
+        background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
         margin-bottom: 1px;
         position: relative;
         width: 100%;
@@ -450,7 +450,7 @@ nav {
 
         &:hover,
         &.active {
-            background: rgba($nav-bg-color-parent-mobile-hover, 0.4);
+            background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
         }
 
         &.active {
@@ -473,23 +473,23 @@ nav {
 // margin-bottom for last li with children in list
 .sg-nav-lv-1 .sg-nav-item.sg-nav-item-parent:last-child {
     //background: rgba(yellow, 0.2);
-    margin-bottom: $unit / 2;
+    margin-bottom: $sg-unit / 2;
 }
 
 // margin-bottom for every last link in li
 .sg-nav-item:not(.sg-nav-item-parent):not(:first-child) .sg-nav-link-child:last-child {
     //background: purple;
-    margin-bottom: $unit / 2;
+    margin-bottom: $sg-unit / 2;
 }
 
 // margin-bottom for last links in li's without child ul's
 .sg-nav-item:not(.sg-nav-item-parent):only-child:first-child .sg-nav-link-child:last-child {
     //background: green;
-    margin-bottom: $unit / 2;
+    margin-bottom: $sg-unit / 2;
 }
 
 .sg-nav-item:not(.sg-nav-item-parent) + .sg-nav-item-parent {
-    margin-top: $unit / 2
+    margin-top: $sg-unit / 2
 }
 
 
@@ -501,7 +501,7 @@ nav {
 .sg-options {
     .sg-nav-lv-1 {
         .sg-nav-item:last-child {
-            padding-bottom: $unit / 2;
+            padding-bottom: $sg-unit / 2;
         }
     }
 
@@ -516,7 +516,7 @@ nav {
     }
 
     form {
-        padding-left: $unit;
+        padding-left: $sg-unit;
     }
 
     form,
