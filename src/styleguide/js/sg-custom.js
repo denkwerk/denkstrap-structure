@@ -503,22 +503,23 @@ $( document ).ready( function() {
 
     // collapse navi
     $( '.sg-navigation .sg-nav-group h3.sg-nav-link' ).siblings().children().toggle();
+
+    // do this in twig!
+    $( '.sg-nav-link-parent' ).parent( 'li' ).addClass( 'sg-nav-item-parent' );
 } );
 
 // some navigation magic
 // -jLaz
-$( document ).on( 'click', '.sg-nav-list h3', function() {
+$( document ).on( 'click', '.sg-nav-link-parent', function() {
 
     // this opens just the next level
     $( this ).parent().find( '.sg-nav-item' ).toggle();
 
     // adding an active class to the item
     $( this ).toggleClass( 'active' );
-
+    
     // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
-    if ( $( this ).hasClass( 'sg-nav-link-lv-0' ) || $( this ).hasClass( 'sg-nav-link-lv-1' ) ) {
-        $( this ).addClass( 'sg-nav-opened' );
-    }
+    $( this ).addClass( 'sg-nav-opened' );
 
     // detect if nav-text has more than one line
     var $navText = $( '.sg-nav-text' );

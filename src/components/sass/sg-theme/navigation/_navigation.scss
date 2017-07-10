@@ -23,7 +23,7 @@
     padding: 0;
     position: fixed;
     text-decoration: none;
-    width: 47px;
+    width: 42px;
     z-index: 1100;
 
     svg {
@@ -154,6 +154,7 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    padding-bottom: 100px;
     position: absolute;
     top: 50px;
     width: 100%;
@@ -181,6 +182,12 @@ nav {
     @extend %font;
 }
 
+.sg-nav-list,
+.sg-nav-item {
+    margin: 0;
+    padding: 0;
+}
+
 // List
 
 .sg-nav-list {
@@ -194,16 +201,35 @@ nav {
     }
 }
 
-.sg-nav-list,
-.sg-nav-item {
-    margin: 0;
-    padding: 0;
-}
-
 // Item
 
 .sg-nav-item {
     list-style: none;
+
+    $navPadding: 13px;
+    
+    // pading for lv0 links
+    &.sg-nav-item-lv-0 {
+        > .sg-nav-link {
+            padding-left: $navPadding;
+        }
+    }
+
+    &.sg-nav-item-lv-1 {
+        // padding for lv1 links
+        padding-left: calc(#{$navPadding} * 2 + 6px);
+        
+        // do some magic for vull-width links
+        .sg-nav-link {
+            margin-left: -100%;
+            padding-left: 100%;
+        }
+        
+        // padding for all the other level links
+        .sg-nav-item {
+            padding-left: calc(#{$navPadding} + 6px);
+        }
+    }
 }
 
 // Link
@@ -215,7 +241,7 @@ nav {
     align-items: center;
     font-size: 1em;
     margin: 0;
-    padding: 0 ($unit / 2) 0 $unit;
+    padding: 0 ($unit / 2) 0 0;
     text-transform: capitalize;
 
     @media screen and (min-width: 1025px) {
@@ -308,7 +334,7 @@ nav {
 .sg-nav-link {
     svg {
         height: 14px;
-        margin-left: -16px;
+        //margin-left: -16px;
         width: 15px;
     }
 
@@ -434,39 +460,7 @@ nav {
             }
         }
     }
-
-    &.sg-nav-link-parent {
-        padding: 0 ($unit / 2) 0 50px;
-    }
 }
-
-
-/* Lv 2 specific
----------------------------------------------------------------------------- */
-
-/* .sg-nav-link-lv-2 {
-    &.sg-nav-link-parent {
-        padding: 0 ($unit / 2) 0 68px;
-    }
-
-    &.sg-nav-link-child {
-        padding: 0 ($unit / 2) 0 55px;
-    }
-} */
-
-
-/* Lv 3 specific
----------------------------------------------------------------------------- */
-
-/* .sg-nav-link-lv-3 {
-    &.sg-nav-link-parent {
-        padding: 0 ($unit / 2) 0 68px;
-    }
-
-    &.sg-nav-link-child {
-        padding: 0 ($unit / 2) 0 72px;
-    }
-} */
 
 
 /* Nav item spacing magic
@@ -476,45 +470,28 @@ nav {
     margin-left: 3px;
 }
 
-@for $i from 1 through 10 {
-    .sg-nav-link-lv-#{$i} {
-        &.sg-nav-link-child,
-        &.sg-nav-link-parent {
-            padding-right: $unit / 2;
-            padding-left: calc(#{$unit} * ((#{$i} / 2) + 1) + #{$i} * 2px);
-            // description: 30px * (level number / 2) + 1 + the magic 2px * level number
-            // the magic 2px: the svg is 15px wide, the icon itself 11px so we have 4px space = 2px on each side.
-            
-            // maybe easier to understand:
-            // padding-left: calc((#{$unit} / 2) * (#{$i} + 1) + (#{$unit} / 2) + (#{$i} * 2px);
-            // description:        15px          *    LV+1     +       15px     +     LV*2px
-            // we start with 15px so that we can calculate with whole numbers
-            // so, for each level: 15px * level number + 1 (b/c we start at lv0. lv0+1=15, lv1+1=30, ..)
-            // then, extra 15px for each level (so we have 30px on lv0, 45px on lv1, ..)
-            // then add 2px * level number on top for icon alignment. 
-        }
-
-        &.sg-nav-link-child {
-            padding-left: calc((#{$unit} / 2 * (#{$i} + 1) + #{$i} * 2px);
-        }
-    }
+// margin-bottom for last li with children in list
+.sg-nav-lv-1 .sg-nav-item.sg-nav-item-parent:last-child {
+    //background: rgba(yellow, 0.2);
+    margin-bottom: $unit / 2;
 }
 
-.sg-nav-item-lv-1:last-child {
-    padding-bottom: $unit / 2;
+// margin-bottom for every last link in li
+.sg-nav-item:not(.sg-nav-item-parent):not(:first-child) .sg-nav-link-child:last-child {
+    //background: purple;
+    margin-bottom: $unit / 2;
 }
 
-.sg-nav-item-lv-1:not(:last-child) {
-    .sg-nav-item-lv-2:last-child {
-        padding-bottom: $unit / 2;
-    }
+// margin-bottom for last links in li's without child ul's
+.sg-nav-item:not(.sg-nav-item-parent):only-child:first-child .sg-nav-link-child:last-child {
+    //background: green;
+    margin-bottom: $unit / 2;
 }
 
-.sg-nav-item-lv-2:not(:last-child) {
-    .sg-nav-item-lv-3:last-child {
-        padding-bottom: $unit / 2;
-    }
+.sg-nav-item:not(.sg-nav-item-parent) + .sg-nav-item-parent {
+    margin-top: $unit / 2
 }
+
 
 
 /* -------------------------------------------------------------------------

@@ -95,8 +95,9 @@
         <div class="sg-navigation-container">            
             <nav class="sg-navigation">
                 
+                {# View Options #}
                 <ul class="sg-options sg-nav-list sg-nav-lv-0">
-                    <li class="sg-nav-item">
+                    <li class="sg-nav-item sg-nav-item-lv-0 sg-nav-item-parent">
                         <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-0 sg-h3">
                             {# <i class="fa fa-plus" aria-hidden="true"></i> #}
                             <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -137,42 +138,105 @@
                         </ul>
                     </li>
                 </ul>
-
+                
+                {# Hardcoded Nav Example for styling purposes #}
                 <ul class="sg-nav-group sg-nav-list sg-nav-lv-0">
                     <li class="sg-nav-item sg-nav-item-lv-0">
                         <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-0 sg-h3">
                             <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <use class="sg-icon sg-plus" xlink:href="#sg-icon-plus"></use>
-                                <use class="sg-icon sg-minus" xlink:href="#sg-icon-minus"></use>
+                                <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
                             </svg>
-                            <span class="sg-nav-text">Hardcoded Nav Test to lv4</span>
+                            <span class="sg-nav-text">Nav List LV1</span>
                         </h3>
                         
                         <ul class="sg-nav-group sg-nav-list sg-nav-lv-1">
+                            <li class="sg-nav-item sg-nav-item-lv-1" style="display: list-item;">
+                                <a class="sg-nav-link sg-nav-link-child sg-nav-link-lv-1" href="#another-example-module">
+                                    <span class="sg-nav-text">Nav Item LV1</span>
+                                </a>
+                            </li>
                             <li class="sg-nav-item sg-nav-item-lv-1">
                                 <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-1 sg-h3">
                                     <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <use class="sg-icon sg-plus" xlink:href="#sg-icon-plus"></use>
-                                        <use class="sg-icon sg-minus" xlink:href="#sg-icon-minus"></use>
+                                        <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                        <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
                                     </svg>
-                                    <span class="sg-nav-text">another-example-module</span>
+                                    <span class="sg-nav-text">Nav List LV2</span>
                                 </h3>
 
                                 <ul class="sg-nav-group sg-nav-list sg-nav-lv-2">
+                                    <li class="sg-nav-item sg-nav-item-lv-2" style="display: list-item;">
+                                        <a class="sg-nav-link sg-nav-link-child sg-nav-link-lv-2" href="#another-example-module">
+                                            <span class="sg-nav-text">Nav Item LV2</span>
+                                        </a>
+                                    </li>
                                     <li class="sg-nav-item sg-nav-item-lv-2">
                                         <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-2 sg-h3">
                                             <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <use class="sg-icon sg-plus" xlink:href="#sg-icon-plus"></use>
-                                                <use class="sg-icon sg-minus" xlink:href="#sg-icon-minus"></use>
+                                                <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                                <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
                                             </svg>
-                                            <span class="sg-nav-text">another-example-module</span>
+                                            <span class="sg-nav-text">Nav List LV3</span>
                                         </h3>
                                     
                                         <ul class="sg-nav-group sg-nav-list sg-nav-lv-3">
                                             <li class="sg-nav-item sg-nav-item-lv-3" style="display: list-item;">
                                                 <a class="sg-nav-link sg-nav-link-child sg-nav-link-lv-3" href="#another-example-module">
-                                                    <span class="sg-nav-text">another-example-module</span>
+                                                    <span class="sg-nav-text">Nav Item LV3</span>
                                                 </a>
+                                            </li>
+                                            <li class="sg-nav-item sg-nav-item-lv-3">
+                                                <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-3 sg-h3">
+                                                    <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                                        <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
+                                                    </svg>
+                                                    <span class="sg-nav-text">Nav List LV4</span>
+                                                </h3>
+                                            
+                                                <ul class="sg-nav-group sg-nav-list sg-nav-lv-4">
+                                                    <li class="sg-nav-item sg-nav-item-lv-4" style="display: list-item;">
+                                                        <a class="sg-nav-link sg-nav-link-child sg-nav-link-lv-4" href="#another-example-module">
+                                                            <span class="sg-nav-text">Nav Item LV4</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="sg-nav-item sg-nav-item-lv-4" style="display: list-item;">
+                                                        <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-4 sg-h3">
+                                                            <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                                <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                                                <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
+                                                            </svg>
+                                                            <span class="sg-nav-text">Nav List LV5</span>
+                                                        </h3>
+                                                    
+                                                        <ul class="sg-nav-group sg-nav-list sg-nav-lv-5">
+                                                            <li class="sg-nav-item sg-nav-item-lv-5" style="display: list-item;">
+                                                                <a class="sg-nav-link sg-nav-link-child sg-nav-link-lv-5" href="#another-example-module">
+                                                                    <span class="sg-nav-text">Nav Item LV5</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="sg-nav-item sg-nav-item-lv-5" style="display: list-item;">
+                                                                <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-5 sg-h3">
+                                                                    <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                                        <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                                                        <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
+                                                                    </svg>
+                                                                    <span class="sg-nav-text">Nav List LV6</span>
+                                                                </h3>
+                                                            
+                                                                <ul class="sg-nav-group sg-nav-list sg-nav-lv-6">
+                                                                    <li class="sg-nav-item sg-nav-item-lv-6" style="display: list-item;">
+                                                                        <a class="sg-nav-link sg-nav-link-child sg-nav-link-lv-6" href="#another-example-module">
+                                                                            <span class="sg-nav-text">Nav Item LV6</span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+
                                             </li>
                                         </ul>
 
@@ -183,8 +247,8 @@
                             <li class="sg-nav-item sg-nav-item-lv-1">
                                 <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-1 sg-h3">
                                     <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <use class="sg-icon sg-plus" xlink:href="#sg-icon-plus"></use>
-                                        <use class="sg-icon sg-minus" xlink:href="#sg-icon-minus"></use>
+                                        <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                        <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
                                     </svg>
                                     <span class="sg-nav-text">another-example-module</span>
                                 </h3>
@@ -193,8 +257,8 @@
                                     <li class="sg-nav-item sg-nav-item-lv-2">
                                         <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-2 sg-h3">
                                             <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <use class="sg-icon sg-plus" xlink:href="#sg-icon-plus"></use>
-                                                <use class="sg-icon sg-minus" xlink:href="#sg-icon-minus"></use>
+                                                <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                                <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
                                             </svg>
                                             <span class="sg-nav-text">another-example-module</span>
                                         </h3>
@@ -211,8 +275,8 @@
                                     <li class="sg-nav-item sg-nav-item-lv-2">
                                         <h3 class="sg-nav-link sg-nav-link-parent sg-nav-link-lv-2 sg-h3">
                                             <svg viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <use class="sg-icon sg-plus" xlink:href="#sg-icon-plus"></use>
-                                                <use class="sg-icon sg-minus" xlink:href="#sg-icon-minus"></use>
+                                                <use class="sg-icon sg-icon-plus" xlink:href="#sg-icon-plus"></use>
+                                                <use class="sg-icon sg-icon-minus" xlink:href="#sg-icon-minus"></use>
                                             </svg>
                                             <span class="sg-nav-text">another-example-module</span>
                                         </h3>
@@ -238,7 +302,8 @@
 
                     </li>
                 </ul>
-
+                
+                {# Main Navigation #}
                 {% import "navigation.njk" as nav %}
                 {{ nav.navigation(navigation) }}
             </nav>
