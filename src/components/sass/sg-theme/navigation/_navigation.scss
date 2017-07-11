@@ -466,7 +466,7 @@ nav {
             
             &:hover,
             &.active {
-                background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
+                background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.6);
             }
         }
     }
@@ -478,6 +478,17 @@ nav {
 @media screen and (max-width: 1024px) {
     .sg-nav-item-lv-2 {
         padding-left: 19px;
+    }
+
+    .sg-nav-lv-2 .sg-nav-link {
+        &.sg-nav-link-parent {
+            background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
+            
+            &:hover,
+            &.active {
+                background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
+            }
+        }
     }
 }
 
