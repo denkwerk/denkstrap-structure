@@ -46,12 +46,22 @@
         </header>
 
         <div class="sg-documentation-container sg-toggle-container">
-            <div class="sg-documentation markdown-body">
-                {{element.doc | safe}}
+            <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <use class="sg-icon sg-icon-comment" xlink:href="#sg-icon-comment"></use>
+            </svg>
+
+            <div class="sg-documentation">
+                <div class="markdown-body">
+                    {{element.doc | safe}}
+                </div>
             </div>
         </div>
         
         <div class="sg-source-container sg-toggle-container">
+            <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <use class="sg-icon sg-icon-code" xlink:href="#sg-icon-code"></use>
+            </svg>
+
             <div class="sg-source">
 <pre class="line-numbers">
 <code class="language-markup">{{ element.content | trim }}</code>

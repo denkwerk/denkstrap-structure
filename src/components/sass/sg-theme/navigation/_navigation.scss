@@ -508,7 +508,7 @@ nav {
     }
 
     // margin-bottom for every last link in li
-    .sg-nav-item:not(.sg-nav-item-parent):not(:first-child) .sg-nav-link-child:last-child {
+    .sg-nav-item:not(.sg-nav-item-parent):last-child .sg-nav-link-child:last-child {
         //background: purple;
         margin-bottom: $sg-unit / 2;
     }

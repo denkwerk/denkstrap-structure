@@ -517,7 +517,7 @@ $( document ).on( 'click', '.sg-nav-link-parent', function() {
 
     // adding an active class to the item
     $( this ).toggleClass( 'active' );
-    
+
     // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
     $( this ).addClass( 'sg-nav-opened' );
 
