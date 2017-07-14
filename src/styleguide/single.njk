@@ -1,8 +1,8 @@
 {% macro render( element ) -%}
-    <article class="sg-section">
+    <article class="sg-section js-sg-section">
 
-        <header class="sg-section-header" data-sticky-class="fixed">
-            <div id="{{ element.name }}" class="sg-section-anchor"></div>
+        <header class="sg-section-header js-sg-section-header" data-sticky-class="fixed">
+            <div id="{{ element.name }}" class="sg-section-anchor js-sg-section-anchor"></div>
             
             <div class="sg-header-group">
                 <div class="sg-title-container">
@@ -22,14 +22,14 @@
                         </svg>
                     </a>
                     
-                    <button type="button" class="sg-btn sg-btn-documentation" title="view documentation">
+                    <button type="button" class="sg-btn sg-btn-documentation js-sg-btn-documentation" title="view documentation">
                         <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <use class="sg-icon sg-icon-comment" xlink:href="#sg-icon-comment"></use>
                             <use class="sg-icon sg-icon-close" xlink:href="#sg-icon-close"></use>
                         </svg>
                     </button>
 
-                    <button type="button" class="sg-btn sg-btn-source" title="view source">
+                    <button type="button" class="sg-btn sg-btn-source js-sg-btn-source" title="view source">
                         <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <use class="sg-icon sg-icon-code" xlink:href="#sg-icon-code"></use>
                             <use class="sg-icon sg-icon-close" xlink:href="#sg-icon-close"></use>
@@ -45,7 +45,7 @@
             </div>
         </header>
 
-        <div class="sg-documentation-container sg-toggle-container">
+        <div class="sg-documentation-container sg-toggle-container js-sg-documentation-container">
             <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <use class="sg-icon sg-icon-comment" xlink:href="#sg-icon-comment"></use>
             </svg>
@@ -57,7 +57,7 @@
             </div>
         </div>
         
-        <div class="sg-source-container sg-toggle-container">
+        <div class="sg-source-container sg-toggle-container js-sg-source-container">
             <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <use class="sg-icon sg-icon-code" xlink:href="#sg-icon-code"></use>
             </svg>

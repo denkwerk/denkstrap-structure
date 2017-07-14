@@ -8,11 +8,12 @@
 
         {#<!-- https://github.com/sindresorhus/github-markdown-css -->#}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
-        
+
         {#<!-- Style Guide Styles -->#}
-        <link rel="stylesheet" href="{{ distPath }}/css/main.css">
         <link rel="stylesheet" href="{{ webPath }}/css/sg-custom.css">
         <!--[if lt IE 9]><link rel="stylesheet" href="{{ webPath }}/css/sg-style-old-ie.css"><![endif]-->
+
+        <link rel="stylesheet" href="{{ distPath }}/css/main.css">
 
         {#<!-- prism Syntax Highlighting Styles -->#}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.css">
@@ -23,9 +24,7 @@
         {% for script in headerScripts %}
             <script type="text/javascript" src="{{ script }}"></script>
         {% endfor %}
-
     </head>
-   
     <body class="styleguide-single">
 
         {# SVG sg-icons map #}
@@ -91,8 +90,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-clike.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-javascript.min.js"></script>
         <!--<![endif]-->
-
-        <script src="{{ webPath }}/js/sg-scripts.js"></script>
 
         {% for script in footerScripts %}
             <script type="text/javascript" src="{{ script }}"></script>

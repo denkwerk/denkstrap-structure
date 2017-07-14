@@ -17,7 +17,7 @@ var SGB = window.SGB || {};
     // Cut the mustard
     if ( 'querySelector' in doc && Array.prototype.forEach ) {
 
-        // TODO: chef if class is already on. reduced vies gets it twice
+        // TODO: check if class is already on. reduced view gets it twice
         // -jLaz
         docEl.className += ' sg-enhanced';
 
@@ -87,14 +87,14 @@ var SGB = window.SGB || {};
             _removeClass( docEl, 'nav-is-active' );
         };
 
-        queryAll( '.sg-nav-toggle' ).on( 'click', SGB.toggleNav );
-        queryAll( '.sg-nav-group a' ).on( 'click', SGB.hideNav );
+        queryAll( '.js-sg-nav-toggle' ).on( 'click', SGB.toggleNav );
+        queryAll( '.js-sg-nav-group a' ).on( 'click', SGB.hideNav );
 
         // Bulk toggle options for documentation and source code
         // -jLaz & troth
 
         var toggleAllDocBtn = document.getElementById( 'sg-toggle-all-doc' ),
-            allDocBtns = document.getElementsByClassName( 'sg-btn-documentation' ),
+            allDocBtns = document.getElementsByClassName( 'js-sg-btn-documentation' ),
             allDocContainer = document.getElementsByClassName( 'sg-documentation-container' );
 
         toggleAllDocBtn.addEventListener( 'click', function() {
@@ -158,7 +158,7 @@ var SGB = window.SGB || {};
 
             _toggleClass( button, 'sg-btn-active' );
 
-            var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-documentation-container' );
+            var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-documentation-container' );
 
             thisContainer.toggleClass( 'sg-active' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
@@ -166,7 +166,7 @@ var SGB = window.SGB || {};
             } );
         };
 
-        queryAll( '.sg-btn-documentation' ).on( 'click', SGB.toggleSingleDocBtn );
+        queryAll( '.js-sg-btn-documentation' ).on( 'click', SGB.toggleSingleDocBtn );
 
         SGB.toggleSingleSourceBtn = function() {
             var button = this,
@@ -174,7 +174,7 @@ var SGB = window.SGB || {};
 
             _toggleClass( button, 'sg-btn-active' );
 
-            var thisContainer = $( this ).closest( '.sg-section' ).find( '.sg-source-container' );
+            var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-source-container' );
 
             thisContainer.toggleClass( 'sg-active' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
@@ -182,7 +182,7 @@ var SGB = window.SGB || {};
             } );
         };
 
-        queryAll( '.sg-btn-source' ).on( 'click', SGB.toggleSingleSourceBtn );
+        queryAll( '.js-sg-btn-source' ).on( 'click', SGB.toggleSingleSourceBtn );
 
         // Instagram-Like sticky headers
         // https://codepen.io/sales/pen/oxqzOe
@@ -195,7 +195,7 @@ var SGB = window.SGB || {};
 
                 if ( typeof stickies === 'object' && stickies instanceof jQuery && stickies.length > 0 ) {
                     $stickies = stickies.each( function() {
-                        var $thisSticky = $( this ).wrap( '<div class="sticky-header-helper" />' );
+                        var $thisSticky = $( this ).wrap( '<div class="js-sticky-header-helper" />' );
                         $thisSticky
                             .data( 'originalPosition', $thisSticky.offset().top )
                             .data( 'originalHeight', $thisSticky.outerHeight() )
@@ -248,12 +248,12 @@ var SGB = window.SGB || {};
 
         // because we're responsive, we need to update the height value on the sticky headers
         $( window ).on( 'resize', function() {
-            $( '.sticky-header-helper' ).height( $( '.sg-section-header' ).height() );
+            $( '.js-sticky-header-helper' ).height( $( '.js-sg-section-header' ).height() );
         } );
 
         // you can make it happen. You can make it REAL!
         $( function() {
-            stickyHeaders.load( $( '.sg-section-header' ) );
+            stickyHeaders.load( $( '.js-sg-section-header' ) );
         } );
 
         /*!
@@ -493,36 +493,47 @@ var SGB = window.SGB || {};
 // REFACTOR THIS!
 // -jLaz
 
+var activeClass = 'active';
+var activeSelector = '.' + activeClass;
+
+var navLinkParent = '.js-sg-nav-link-parent';
+
 $( document ).ready( function() {
     // highlight active section in navi
-    $( '.sg-section' ).mouseenter( function() {
-        var id = $( this ).find( '.sg-section-anchor' ).attr( 'id' );
-        $( 'a' ).removeClass( 'active' );
-        $( '[href=#' + id + ']' ).addClass( 'active' );
+    $( '.js-sg-section' ).mouseenter( function() {
+        var id = $( this ).find( '.js-sg-section-anchor' ).attr( 'id' );
+
+        $( 'a' ).removeClass( activeClass );
+        $( '[href=#' + id + ']' ).addClass( activeClass );
     } );
 
-    // collapse navi
-    $( '.sg-navigation .sg-nav-group h3.sg-nav-link' ).siblings().children().toggle();
+    // initial nav toggle to archieve display:none on all li's
+    $( navLinkParent ).siblings().children().toggle();
 
     // do this in twig!
-    $( '.sg-nav-link-parent' ).parent( 'li' ).addClass( 'sg-nav-item-parent' );
+    $( navLinkParent ).parent( 'li' ).addClass( 'sg-nav-item-parent' );
 } );
 
 // some navigation magic
 // -jLaz
-$( document ).on( 'click', '.sg-nav-link-parent', function() {
 
-    // this opens just the next level
-    $( this ).parent().find( '.sg-nav-item' ).toggle();
+var navOpenedClass = 'js-sg-nav-opened';
+var navOpenedSelector = '.' + navOpenedClass;
+
+$( document ).on( 'click', navLinkParent, function() {
+
+    // this opens the li's again but just the next level
+    $( this ).parent().find( '.js-sg-nav-item' ).toggle();
 
     // adding an active class to the item
-    $( this ).toggleClass( 'active' );
+    $( this ).toggleClass( activeClass );
 
     // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
-    $( this ).addClass( 'sg-nav-opened' );
+    $( this ).addClass( navOpenedClass );
 
-    // detect if nav-text has more than one line
-    var $navText = $( '.sg-nav-text' );
+    // detect if nav-text has more than one line and if yes, add class multiline
+    var $navText = $( '.js-sg-nav-text' );
+
     $navText.each( function() {
         if ( $( this ).height() > 30 ) {
             $( this ).parent().addClass( 'multiline' );
@@ -536,10 +547,11 @@ $( document ).on( 'click', '.sg-nav-link-parent', function() {
 // so it was the opposite way around.
 // also remove all active classes.
 // -jLaz
-$( document ).on( 'click', '.sg-nav-opened', function() {
-    $( this ).parent().find( '.active' ).removeClass( 'active' );
-    $( this ).removeClass( 'sg-nav-opened' );
-    $( this ).parent().find( '.sg-nav-opened' ).removeClass( 'sg-nav-opened' );
+
+$( document ).on( 'click', navOpenedSelector, function() {
+    $( this ).parent().find( activeSelector ).removeClass( activeClass );
+    $( this ).removeClass( navOpenedClass );
+    $( this ).parent().find( navOpenedSelector ).removeClass( navOpenedClass );
 } );
 
 // experimental
