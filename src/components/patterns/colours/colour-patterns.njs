@@ -1,4 +1,4 @@
-<h3 class="sg-h3">Main Colors</h3>
+<h3 class="sg-subtitle">Main Colors</h3>
 <ul class="styleguide__list">
     <li class="styleguide__element">
         <div class="styleguide__colorbox " style="background-color: #48c876;"></div>
@@ -26,7 +26,7 @@
     </li>
 </ul>
 
-<h3 class="sg-h3">Color Shades</h3>
+<h3 class="sg-subtitle">Color Shades</h3>
 <ul class="styleguide__list">
     <li class="styleguide__element">
         <div class="styleguide__colorbox " style="background-color: #fefefe;"></div>
