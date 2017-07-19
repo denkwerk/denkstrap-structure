@@ -80,7 +80,7 @@
 
         <main class="sg-main">
             {% import "single.njk" as singleView %}
-            {{ singleView.render( element ) }}
+            {{ singleView.render( element, iframe=false ) }}
         </main>
 
         <!--[if gt IE 8]><!-->
@@ -90,6 +90,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-clike.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-javascript.min.js"></script>
         <!--<![endif]-->
+
+        <script type="text/javascript" src="{{ webPath }}styleguide/js/sg-test-custom.js" ></script>
 
         {% for script in footerScripts %}
             <script type="text/javascript" src="{{ script }}"></script>

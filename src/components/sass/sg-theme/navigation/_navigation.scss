@@ -520,7 +520,7 @@ nav {
     }
 
     .sg-nav-item:not(.sg-nav-item-parent) + .sg-nav-item-parent {
-        margin-top: $sg-unit / 2
+        margin-top: $sg-unit / 2;
     }
 }
 

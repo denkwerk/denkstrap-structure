@@ -11,10 +11,10 @@ module.exports = function( grunt, options ) {
                     '/styleguide/css/sg-custom.css'
                 ],
                 footerScripts: [
-                    '/js/app/main.js',
-                    '/styleguide/js/sg-custom.js'
+                    '/js/app/main.js'
                 ],
-                templatesPath: '<%= srcPath %>styleguide'
+                templatesPath: '<%= srcPath %>styleguide',
+                iframeTemplate: 'iframe.njk'
             }
         }
     };

@@ -78,7 +78,6 @@
             </defs>
         </svg>
 
-
         <div class="sg-nav-toggle-container">
             <button class="sg-nav-toggle js-sg-nav-toggle" title="toggle navigation">
                 <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -321,10 +320,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-css.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-clike.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-javascript.min.js"></script>
-
-        {# <script src="//cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.6/interact.min.js"></script> #}
         <!--<![endif]-->
         
+        <script type="text/javascript" src="{{ distPath }}/styleguide/js/iframeResizer.min.js" ></script>
+        <script type="text/javascript" src="{{ distPath }}/styleguide/js/sg-custom.js" ></script>
+        <script type="text/javascript" src="{{ distPath }}/styleguide/js/sg-custom-fullview.js" ></script>
+
         {% for script in footerScripts %}
             <script type="text/javascript" src="{{ script }}"></script>
         {% endfor %}

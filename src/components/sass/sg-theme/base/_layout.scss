@@ -55,17 +55,6 @@ body {
     background: $sg-body-bg-color;
     padding-bottom: $sg-unit;
 
-    // fancy shit
-    opacity: 0;
-    animation: fadeIn ease 1;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-
-    @for $i from 1 through 10 {
-        &:nth-child(#{$i}) {
-            animation-delay: #{$i}00ms;
-        }
-    }
 }
 
 @keyframes fadeIn {
@@ -86,16 +75,14 @@ body {
 .sg-section-header {
     background: $sg-body-bg-color;
     border-bottom: 1px solid $sg-content-border-color;
+    height: 102px;
+    width: 100%;
 
     &.fixed {
         box-sizing: border-box;
         position: fixed;
         top: 0;
         z-index: 1100;
-
-        @media screen and (max-width: 767px) {
-            width: 100%;
-        }
 
         @media screen and (min-width: 768px) {
             transition: width 0.4s ease;
@@ -238,8 +225,6 @@ body {
     padding-left: $sg-unit / 2;
 }
 
-
-
 // Documentation
 
 .sg-documentation {
@@ -273,6 +258,7 @@ body {
         }
     }
 }
+
 
 // Markdown
 
@@ -311,11 +297,10 @@ body {
 
 .sg-preview {
     margin-top: $sg-unit;
+    //min-height: 300px;
     position: relative; // prevent module position fixed elements from thinking out of their box.
-    // for interact.js
-    /*
-    box-sizing: border-box;
-    background: #f0f0f0;
-    margin: $sg-unit auto 0;
-    */
+}
+
+iframe {
+    width: 100%;
 }

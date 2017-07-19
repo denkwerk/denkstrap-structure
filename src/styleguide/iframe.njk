@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {#<!-- Style Guide Styles -->#}
+        <link rel="stylesheet" href="{{ webPath }}/css/sg-custom.css">
+        <!--[if lt IE 9]><link rel="stylesheet" href="{{ webPath }}/css/sg-style-old-ie.css"><![endif]-->
+
+        <link rel="stylesheet" href="{{ distPath }}/css/main.css">
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+        {% for script in headerScripts %}
+            <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+    </head>
+
+    <body class="styleguide-single">
+
+        {{ element.content | safe }}
+        
+        <script type="text/javascript" src="{{ distPath }}/styleguide/js/iframeResizer.contentWindow.min.js" ></script>
+
+    </body>
+</html>
