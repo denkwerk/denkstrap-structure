@@ -29,6 +29,9 @@ body {
     padding-bottom: $sg-unit * 2;
     overflow-x: hidden; // prevent module preview content from thinking outside of the box and overlap the nav
     transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+    // prevent navigation overlapping the sections
+    position: relative;
+    z-index: 0;
 }
 
 @media screen and (min-width: 1025px) {
@@ -55,6 +58,18 @@ body {
     background: $sg-body-bg-color;
     padding-bottom: $sg-unit;
 
+    // fancy shit
+    opacity: 0;
+    animation: fadeIn ease 1;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    will-change: opacity; 
+
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{$i}00ms;
+        }
+    }
 }
 
 @keyframes fadeIn {
@@ -297,10 +312,11 @@ body {
 
 .sg-preview {
     margin-top: $sg-unit;
-    //min-height: 300px;
     position: relative; // prevent module position fixed elements from thinking out of their box.
 }
 
 iframe {
+    height: 50px;
     width: 100%;
+    transition: height 0.4s ease;
 }

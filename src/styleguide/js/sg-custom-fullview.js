@@ -195,8 +195,19 @@ var SGB = window.SGB || {};
         // init iframe resizer
         $( 'iframe' ).iFrameResize( {
             warningTimeout: 0, //hide timeout warnings
+            initCallback: function() {
+                _recalculateStickies();
+
+                $( this ).bind( 'transitionend', function( event ) {
+                    _recalculateStickies();
+                } );
+            },
             resizedCallback: function() {
                 _recalculateStickies();
+
+                $( this ).bind( 'transitionend', function( event ) {
+                    _recalculateStickies();
+                } );
             }
         } );
 
