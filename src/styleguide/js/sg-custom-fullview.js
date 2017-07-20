@@ -194,7 +194,11 @@ var SGB = window.SGB || {};
 
         // init iframe resizer
         $( 'iframe' ).iFrameResize( {
-            warningTimeout: 0, //hide timeout warnings
+            //hide timeout warnings
+            warningTimeout: 0,
+            // include pos: absolute elements and bigger elements coming in when interacting with sth
+            heightCalculationMethod: 'grow',
+            // recalcilate the sticky headers
             initCallback: function() {
                 _recalculateStickies();
 
