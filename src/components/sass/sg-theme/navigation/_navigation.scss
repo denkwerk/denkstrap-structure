@@ -501,29 +501,26 @@ nav {
 }
 
 @media screen and (min-width: 1025px) {
-    // margin-bottom for last li with children in list
-    .sg-nav-lv-1 .sg-nav-item.sg-nav-item-parent:last-child {
+    // margin-bottom for last li with containing li
+    .sg-nav-level-parent:last-child {
         //background: rgba(yellow, 0.2);
         margin-bottom: $sg-unit / 2;
     }
 
-    // margin-bottom for every last link in li
-    .sg-nav-item:not(.sg-nav-item-parent):last-child .sg-nav-link-child:last-child {
+    // margin-bottom for every link in the last li where there is no next level
+    .sg-nav-item:not(.sg-nav-level-parent):last-child > .sg-nav-link-child {
         //background: purple;
         margin-bottom: $sg-unit / 2;
     }
-
-    // margin-bottom for last links in li's without child ul's
-    .sg-nav-item:not(.sg-nav-item-parent):only-child:first-child .sg-nav-link-child:last-child {
-        //background: green;
-        margin-bottom: $sg-unit / 2;
-    }
-
-    .sg-nav-item:not(.sg-nav-item-parent) + .sg-nav-item-parent {
+    
+    // margin-top for every li that contains next levels hat follows a no-next-level li
+    .sg-nav-item:not(.sg-nav-level-parent) + .sg-nav-level-parent {
+        //background: yellowgreen;
         margin-top: $sg-unit / 2;
     }
-}
 
+
+}
 
 
 /* -------------------------------------------------------------------------
