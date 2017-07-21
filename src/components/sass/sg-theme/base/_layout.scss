@@ -34,18 +34,28 @@ body {
     z-index: 0;
 }
 
+.styleguide-full {
+    .sg-main {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .nav-is-active {
+        .styleguide-full {
+            .sg-main {
+                margin-left: 100%;
+            }
+        }
+    }    
+}
+
 @media screen and (min-width: 1025px) {
     .nav-is-active {
         .styleguide-full {
             .sg-main {
                 margin-left: $sg-nav-width;
             }
-        }
-    }
-
-    .styleguide-full {
-        .sg-main {
-            width: 100%;
         }
     }
 }

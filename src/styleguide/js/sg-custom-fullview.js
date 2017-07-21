@@ -236,7 +236,7 @@ $( document ).ready( function() {
         $( '[href=#' + id + ']' ).addClass( activeClass );
     } );
 
-    // initial nav toggle to archieve display:none on all li's
+    // initial nav toggle to archieve display:none on li's
     $( navLinkParent ).siblings().children().toggle();
 
 } );
@@ -268,8 +268,8 @@ $( document ).on( 'click', navLinkParent, function() {
     } );
 } );
 
-// extra class in action: using this to find all fa-mius Icons
-// to resolve the bug where lv1 items were still on fa-minus even when closed.
+// extra class in action: using this to find all mius Icons
+// to resolve the bug where lv1 items were still on minus even when closed.
 // b/c of that, the next toggle gave them fa-plus but they were then open
 // so it was the opposite way around.
 // also remove all active classes.
@@ -280,3 +280,30 @@ $( document ).on( 'click', navOpenedSelector, function() {
     $( this ).removeClass( navOpenedClass );
     $( this ).parent().find( navOpenedSelector ).removeClass( navOpenedClass );
 } );
+
+// add an active class for lv1 navigation
+// TODO <1025px only
+
+var lv0LinkParent = $( '.sg-nav-link-lv-0.js-sg-nav-link-parent' );
+var lv1activeClass = 'nav-lv1-is-active';
+
+lv0LinkParent.on( 'click', function() {
+    if ( $( 'html' ).hasClass( lv1activeClass ) ) {
+        $( 'html' ).removeClass( lv1activeClass );
+    } else {
+        $( 'html' ).addClass( lv1activeClass );
+    }
+} );
+
+var closeLV1Button = $( '.js-sg-sub-nav-toggle' );
+
+closeLV1Button.on( 'click', function() {
+    $( 'html' ).removeClass( lv1activeClass );
+
+    $( ' h3.active.js-sg-nav-opened' ).removeClass( activeClass ).removeClass( navOpenedClass );
+    // we cant use .toggle here b/c this leads to problematic behaviour
+    // so we need to do special things for speacial elements
+    lv0LinkParent.next().find( '.sg-nav-item-lv-1[style*="list-item"]' ).css( 'display', 'none' );
+    lv0LinkParent.next().find( '.sg-nav-item-lv-2' ).removeAttr( 'style' );
+} );
+

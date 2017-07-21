@@ -15,7 +15,7 @@
 
         {# patterns & modules styles #}
         <link rel="stylesheet" href="{{ distPath }}/css/main.css">
-        
+
         {#<!-- prism Syntax Highlighting Styles -->#}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
 
@@ -85,6 +85,13 @@
                     <use class="sg-icon sg-icon-close" xlink:href="#sg-icon-close"></use>
                 </svg>
             </button>
+    
+            <button class="sg-sub-nav-toggle js-sg-sub-nav-toggle" title="toggle sub-navigation">
+                <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <use class="sg-icon sg-icon-arrow-left" xlink:href="#sg-icon-arrow-left"></use>
+                </svg>
+            </button>
+
         </div>
 
         <div class="sg-navigation-container">            
@@ -123,17 +130,12 @@
                                     </label>
                                 </form>
                             </li>
-                            <li class="sg-nav-item js-sg-nav-item">
-                                <form class="sg-nav-link sg-nav-link-lv-2">
-                                    <input id="sg-toggle-all-source" type="checkbox" disabled="disabled" />
-                                    <label for="sg-toggle-all-source" class="sg-nav-text js-sg-nav-text">Disabled Item</label>
-                                </form>
-                            </li>
                         </ul>
                     </li>
                 </ul>
                 
                 {# Hardcoded Nav Example for styling purposes #}
+                {#
                 <ul class="sg-nav-group sg-nav-list sg-nav-lv-0">
                     <li class="sg-nav-item sg-nav-item-lv-0 js-sg-nav-item js-sg-nav-level-parent">
                         <h3 class="sg-nav-link sg-nav-link-parent js-sg-nav-link-parent sg-nav-link-lv-0 sg-h3">
@@ -306,6 +308,7 @@
 
                     </li>
                 </ul>
+                #}
                 
                 {# Main Navigation #}
                 {% import "navigation.njk" as nav %}

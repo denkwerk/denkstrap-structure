@@ -10,7 +10,8 @@
 
 }
 
-.sg-nav-toggle {
+.sg-nav-toggle,
+.sg-sub-nav-toggle {
     background: $sg-btn-bg-color;
     border: 0;
     color: $sg-btn-text-color;
@@ -29,7 +30,9 @@
     svg {
         width: 14px;
     }
+}
 
+.sg-nav-toggle {
     use,
     path {
         fill: $sg-btn-text-color;
@@ -50,7 +53,11 @@
             fill: $sg-btn-text-color-hover;
         }
     }
+}
 
+.sg-sub-nav-toggle {
+    display: none;
+    left: 50px;
 }
 
 .nav-is-active {
@@ -92,6 +99,19 @@
 
 }
 
+.nav-is-active.nav-lv1-is-active {
+    @media screen and (max-width: 1024px) {
+        .sg-sub-nav-toggle {
+            display: block;
+
+            .sg-icon-arrow-left {
+                fill: $sg-nav-text-color-mobile;
+            }
+        }
+    }
+
+}
+
 .nav-toggle-helper {
     background: $sg-body-bg-color;
     height: 50px;
@@ -112,33 +132,28 @@
  ---------------------------------------------------------------------------- */
 
 .sg-navigation-container {
-    padding-top: 50px;
     overflow: hidden;
+    padding-top: 50px;
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
 
     @media screen and (max-width: 1024px) {
-        .js & {
-            position: absolute;
-            visibility: hidden;
-            z-index: -1000;
-        }
+        background: $sg-nav-bg-color-mobile;
+        height: 100vh;
+        transform: translateX(-30%);
+        width: 100%;
+        z-index: -1;
 
         .nav-is-active & {
-            background: $sg-nav-bg-color-mobile;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            visibility: visible;
-            z-index: 2000;
+            transform: translateX(0);
+            z-index: 0;
         }
     }
 
     @media screen and (min-width: 1025px) {
         background: $sg-nav-bg-color;
-        position: fixed;
-        bottom: 0;
-        top: 0;
-        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
         transform: translateX(-50%);
         width: $sg-nav-width;
         z-index: -1;
@@ -413,6 +428,7 @@ nav {
         background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
         margin-bottom: 1px;
         position: relative;
+        transition: background 0.4s ease;
         width: 100%;
 
         &:before {
@@ -422,7 +438,7 @@ nav {
             transition: padding-top 0.4s ease;
         }
 
-        &:hover,
+        //&:hover,
         &.active {
             background: $sg-nav-bg-color-parent-mobile-hover;
             color: $sg-nav-text-color-parent-mobile-hover;
@@ -464,11 +480,38 @@ nav {
                 transition: padding-top 0.4s ease;
             }
             
-            &:hover,
+            //&:hover,
             &.active {
                 background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.6);
+
             }
         }
+    }
+    
+    // fancy shit
+
+    .sg-nav-lv-1 {
+        background: $sg-nav-bg-color-mobile;
+        height: 100%;
+        position: fixed;
+        top: 50px;
+        transform: translateY(100%);
+        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+        width: 100%;
+        z-index: -1;
+
+        opacity: 0;
+        animation: fadeIn ease 1;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        will-change: opacity; 
+    }
+
+    .nav-lv1-is-active .sg-nav-link-lv-0.active + .sg-nav-lv-1 {
+        transform: translateY(0px);
+        z-index: 1;
+
+        opacity: 1;
     }
 }
 
@@ -484,7 +527,7 @@ nav {
         &.sg-nav-link-parent {
             background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
             
-            &:hover,
+            //&:hover,
             &.active {
                 background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
             }
