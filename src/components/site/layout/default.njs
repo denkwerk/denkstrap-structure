@@ -8,14 +8,9 @@
 </head>
 <body>
 
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
 
     <script type="text/javascript" data-main="/js/app/main.js" src="/js/app/vendor/require.js"></script>
-
-{% if not production %}
-    <script type="text/javascript" src="//localhost:{{ liveReloadPort }}/livereload.js"></script>
-{% endif %}
 
 </body>
 </html>

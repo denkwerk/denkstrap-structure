@@ -4,19 +4,22 @@
  */
 module.exports = {
     options: {
-        nospawn: false,
-        livereload: '<%= liveReloadPort %>'
+        spawn: false,
+        livereload: true
     },
+
     sass: {
+        options: {
+            event: [ 'added', 'deleted', 'changed' ],
+            atBegin: true
+        },
         files: [
             '<%= srcPath %>**/*.scss'
         ],
         tasks: [
-            'sass:development'
-        ],
-        options: {
-            atBegin: true
-        }
+            'sass:development',
+            'postcss:autoprefixer'
+        ]
     },
 
     html: {
@@ -30,5 +33,4 @@ module.exports = {
             atBegin: true
         }
     }
-
 };
