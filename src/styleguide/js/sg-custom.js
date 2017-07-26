@@ -344,3 +344,11 @@ var SGB = window.SGB || {};
 
     }
 }( this, SGB ) );
+
+$( '.js-sg-btn-bgcolor' ).on( 'click', function() {
+    var classes = [ 'sg-section js-sg-section bgcolor-2', 'sg-section js-sg-section bgcolor-3', 'sg-section js-sg-section bgcolor-1' ];
+
+    $( this ).parents( '.js-sg-section' ).each( function() {
+        this.className = classes[ ( $.inArray( this.className, classes ) + 1 ) % classes.length ];
+    } );
+} );

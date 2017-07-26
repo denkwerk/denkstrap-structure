@@ -361,14 +361,3 @@ closeLV1Button.on( 'click', function( event ) {
     }
 
 } );
-
-
-$('.js-sg-btn-bgcolor').on('click', function() {
-    console.log('change color');
-    var classes = ['sg-section js-sg-section bgcolor-2', 'sg-section js-sg-section bgcolor-3', 'sg-section js-sg-section bgcolor-1'];
-
-    $(this).parents('.js-sg-section').each(function(){
-        this.className = classes[($.inArray(this.className, classes)+1)%classes.length];
-    });
-});
-
