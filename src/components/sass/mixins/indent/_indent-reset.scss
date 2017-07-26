@@ -1,3 +1,5 @@
+/* stylelint-disable */
+
 // Reset indent mixin
 // includes indent mixin
 
@@ -12,4 +14,6 @@
     // Use indent mixin
     // with pre configuration for reset
     @include indent($side, $property, $map, $negative, $offset);
-};
+}
+
+/* stylelint-enable */

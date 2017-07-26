@@ -2,7 +2,7 @@
     @include breakpoint($name) {
         body {
             &:after {
-                content: "#{$name}";
+                content: '#{$name}';
                 visibility: hidden;
                 display: block;
                 width: 0;

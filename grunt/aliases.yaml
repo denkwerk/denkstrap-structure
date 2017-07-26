@@ -3,8 +3,9 @@ development:
     tasks:
         - 'clean:dist'
         - 'sass:development'
-        - 'postcss:autoprefixer'
-        - 'lint'
+        - 'postcss:scss'
+        - 'postcss:css'
+#        - 'lint'
         - 'copy:js'
         - 'nunjuckr:development'
 
@@ -32,7 +33,7 @@ lint:
     tasks:
         - 'jshint:grunt'
         - 'jscs:grunt'
-        - 'scsslint:scss'
+        - 'postcss:lintscss'
         - 'csslint:development'
         - 'jshint:frontend'
         - 'jscs:frontend'

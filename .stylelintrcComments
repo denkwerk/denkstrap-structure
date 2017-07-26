@@ -1,0 +1,159 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+
+
+    // Diskussion zu dem Thema CSSLint -> Stylelint auf github: https://github.com/stylelint/stylelint/issues/1739
+
+    "box-model": false,
+    // dies gibt eine Warnung wenn auf box padding/border gegeben und nicht "box-sizing: border-box" -> keine Entsprechung
+    // Meiner Meinung nach brauchen wir diese Regel nicht (stand ja sowieso auf false ..)
+
+
+    "display-property-grouping": 2      entspricht
+    "declaration-block-no-ignored-properties": true
+    // Entsprechung funktioniert laut Author nicht richtig und ist als deprecated eingestuft -> also entfernen ?!
+
+
+    "duplicate-properties": 2           entspricht
+    "declaration-block-no-duplicate-properties": [true, {
+      "ignore": ["consecutive-duplicates-with-different-values"]
+    }],
+    // verschiede Werte der selben property werden erlaubt
+
+
+    "empty-rules": 2,                   entspricht
+    "block-no-empty": true,
+
+
+    "known-properties": false           entspricht
+    "property-no-unknown": false,
+
+
+    //"adjoining-classes": false,       keine Entsprechung ( stand sowieso auf false )
+
+
+    "box-sizing": false,                entspricht
+    "property-blacklist": [],
+    // mit dieser Regel kann man properties verbieten, brauchen wir nicht da ebenfalls auf false stand
+
+
+    "compatible-vendor-prefixes": false, keine Entsprechung ( stand sowieso auf false )
+    // warnt falls vendor prefix fehlt -> hierf?r haben wir autoprefixer
+
+
+    "gradients": false,                 keine Entsprechung ( stand sowieso auf false )
+    // rule warns when one vendor-prefixed gradient is used without all of the others -> autoprefixer
+
+
+    //"text-indent": false,             keine Entsprechung ( stand sowieso auf false )
+    // warns when a text-indent is used without the use of direction: ltr
+
+
+    "vendor-prefix": false,             keine Entsprechung ( stand sowieso auf false )
+    // standard property must be after vendor prefixes
+
+
+    "fallback-colors": false,           keine Entsprechung ( stand sowieso auf false )
+
+
+    "star-property-hack": 2,            keine Entsprechung ( k?nnen wir glaube ich wegfallen lassen da wir ie7 nicht mehr supporten
+    // disallow <IE8 Hack *width: 100px;
+
+
+    "underscore-property-hack": 2,      keine Entsprechung ( k?nnen wir glaube ich wegfallen lassen da wir ie7 nicht mehr supporten
+    // disallow IE7 Hack _width:100px
+
+
+    //"bulletproof-font-face": false,   keine Entsprechung ( k?nnen wir glaube ich wegfallen lassen da )
+    // requires that the first font declared is a .eot file ( 404's in old versions of IE )
+
+
+    //Performance
+
+    //font-faces
+    //KEINE ENTSPRECHUNG!!! -> diese Regel wird entfernt
+
+    //import
+    //entspricht
+    "at-rule-blacklist": ["import"],
+
+    //regex-selectors
+    //entspricht
+    "selector-attribute-operator-blacklist": ["~=", "^=", "|=", "$=", "*="],
+
+    //universal-selector ->
+    //entspricht
+    "selector-no-universal": true,
+
+    //unqualified-attributes
+    //KEINE ENTSPRECHUNG!!!
+
+
+    //zero-units
+    //entspricht
+    "length-zero-no-unit": true,
+
+
+    //overqualified-elements
+    //shorthand -> Ref: #1735
+    //duplicate-background-images
+    //KEINE ENTSPRECHUNGEN!!!
+
+    //"font-sizes": false, // no more than 10 different sizes
+    //KEINE ENTSPRECHUNGEN!!!
+
+
+    //"ids": false,
+    //entspricht
+    "selector-no-id": true,
+
+    //"important": false,
+    //entspricht
+    "declaration-no-important": true
+
+    // Accessibility
+    //"outline-none": false,
+
+    // OOCSS
+    //"qualified-headings": false,
+    //"unique-headings": false
+    //KEINE ENTSPRECHUNGEN!!!
+
+
+    "at-rule-name-space-after": "always",
+    "block-opening-brace-newline-before": "never",
+    "block-opening-brace-newline-after": "always",
+    "block-closing-brace-newline-after": "always",
+    "block-closing-brace-newline-before": "always",
+    "color-hex-length": "short",
+    "color-hex-case": "lower",
+    "color-no-invalid-hex": true,
+    "declaration-bang-space-before": "always",
+    "declaration-bang-space-after": "never",
+    "declaration-block-single-line-max-declarations": 1,
+    "declaration-block-no-shorthand-property-overrides": true,
+    "declaration-colon-space-after": "always",
+    "declaration-block-trailing-semicolon": "always",
+    "function-calc-no-unspaced-operator": true,
+    "function-comma-space-after": "always",
+    "function-url-no-scheme-relative": true,
+    "function-url-quotes": "always",
+    "indentation": 4,
+    "max-nesting-depth": 3,
+    "number-leading-zero": "always",
+    "number-no-trailing-zeros": true,
+    "property-no-vendor-prefix": true,
+    // "selector-no-id": true,
+    "selector-no-qualifying-type": true,
+    "shorthand-property-no-redundant-values": true,
+    "string-quotes": "single",
+    "selector-class-pattern": "^[a-z\\-_0-9]+$",
+    "declaration-property-value-blacklist": { "border": ["none"] },
+    // "at-rule-blacklist": ["debug"],
+    "no-missing-end-of-source-newline": true,
+    "no-duplicate-selectors": true,
+    "declaration-block-semicolon-newline-after": "always",
+    "no-extra-semicolons": true
+  }
+}

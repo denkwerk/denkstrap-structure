@@ -18,7 +18,8 @@ module.exports = {
         ],
         tasks: [
             'sass:development',
-            'postcss:autoprefixer'
+            'postcss:scss',
+            'postcss:css'
         ]
     },
 
