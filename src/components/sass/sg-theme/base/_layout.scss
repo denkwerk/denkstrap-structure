@@ -67,7 +67,6 @@ body {
  ---------------------------------------------------------------------------- */
 
 .sg-section {
-    background: $sg-body-bg-color;
     padding-bottom: $sg-unit;
 
     // fancy shit
@@ -81,6 +80,18 @@ body {
         &:nth-child(#{$i}) {
             animation-delay: #{$i}00ms;
         }
+    }
+
+    &.bgcolor-1 {
+        background: $sg-section-bg-color-1;
+    }
+
+    &.bgcolor-2 {
+        background: $sg-section-bg-color-2;
+    }
+
+    &.bgcolor-3 {
+        background: $sg-section-bg-color-3;
     }
 }
 

@@ -165,6 +165,13 @@
             width: 14px;
         }
     }
+
+    // btn change bg color
+    &.sg-btn-bgcolor {
+        svg {
+            width: 16px;
+        }
+    }
 }
 
 // Safari fix for icons in buttons (weren't centered)

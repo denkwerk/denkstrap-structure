@@ -1,5 +1,5 @@
 {% macro render( element, iframe=true ) -%}
-    <article class="sg-section js-sg-section">
+    <article class="sg-section js-sg-section bgcolor-1">
 
         <header class="sg-section-header js-sg-section-header" data-sticky-class="fixed">
             <div id="{{ element.name }}" class="sg-section-anchor js-sg-section-anchor"></div>
@@ -21,6 +21,12 @@
                             <use class="sg-icon" xlink:href="#sg-icon-enlarge"></use>
                         </svg>
                     </a>
+                    
+                    <button type="button" class="sg-btn sg-btn-bgcolor js-sg-btn-bgcolor" title="change section bg color">
+                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use class="sg-icon sg-icon-droplet" xlink:href="#sg-icon-droplet"></use>
+                        </svg>
+                    </button>
                     
                     <button type="button" class="sg-btn sg-btn-documentation js-sg-btn-documentation" title="view documentation">
                         <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
