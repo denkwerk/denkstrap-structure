@@ -184,6 +184,7 @@ var SGB = window.SGB || {};
             var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-source-container' );
 
             thisContainer.toggleClass( 'sg-active' );
+
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
                 _recalculateStickies();
             } );
@@ -197,7 +198,7 @@ var SGB = window.SGB || {};
             //hide timeout warnings
             warningTimeout: 0,
             // include pos: absolute elements and bigger elements coming in when interacting with sth
-            heightCalculationMethod: 'grow',
+            heightCalculationMethod: 'max',
             // recalcilate the sticky headers
             initCallback: function() {
                 _recalculateStickies();
@@ -222,12 +223,22 @@ var SGB = window.SGB || {};
 // REFACTOR THIS!
 // -jLaz
 
+var navLinkParent = '.js-sg-nav-link-parent';
 var activeClass = 'active';
 var activeSelector = '.' + activeClass;
+var navOpenedClass = 'js-sg-nav-opened sg-nav-opened';
+var navOpenedSelector = '.' + navOpenedClass;
 
-var navLinkParent = '.js-sg-nav-link-parent';
+var lv0LinkParent = $( '.sg-nav-link-lv-0.js-sg-nav-link-parent' );
+var lv1activeClass = 'nav-lv1-is-active';
+var closeLV1Button = $( '.js-sg-sub-nav-toggle' );
+var navShowItemClass = 'sg-show-item';
+var navShowItemSelector = '.' + navShowItemClass;
+
+var current;
 
 $( document ).ready( function() {
+
     // highlight active section in navi
     $( '.js-sg-section' ).mouseenter( function() {
         var id = $( this ).find( '.js-sg-section-anchor' ).attr( 'id' );
@@ -237,26 +248,26 @@ $( document ).ready( function() {
     } );
 
     // initial nav toggle to archieve display:none on li's
-    $( navLinkParent ).siblings().children().toggle();
+    //$( navLinkParent ).siblings().children().toggle();
 
 } );
 
 // some navigation magic
 // -jLaz
 
-var navOpenedClass = 'js-sg-nav-opened';
-var navOpenedSelector = '.' + navOpenedClass;
-
 $( document ).on( 'click', navLinkParent, function() {
 
+    current = this;
+
     // this opens the li's again but just the next level
-    $( this ).parent().find( '.js-sg-nav-item' ).toggle();
+    $( this ).siblings().find( '> .js-sg-nav-item' ).toggleClass( 'sg-show-item' );
 
     // adding an active class to the item
-    $( this ).toggleClass( activeClass );
+    //$( this ).toggleClass( activeClass );
 
     // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
-    $( this ).addClass( navOpenedClass );
+    $( this ).toggleClass( navOpenedClass );
+    console.log( 'navOpenedClass toggled' );
 
     // detect if nav-text has more than one line and if yes, add class multiline
     var $navText = $( '.js-sg-nav-text' );
@@ -276,34 +287,78 @@ $( document ).on( 'click', navLinkParent, function() {
 // -jLaz
 
 $( document ).on( 'click', navOpenedSelector, function() {
-    $( this ).parent().find( activeSelector ).removeClass( activeClass );
+
     $( this ).removeClass( navOpenedClass );
     $( this ).parent().find( navOpenedSelector ).removeClass( navOpenedClass );
+    console.log( 'navOpenedClass removed this' );
+
+    $( this ).parent().find( activeSelector ).removeClass( activeClass );
+
 } );
 
 // add an active class for lv1 navigation
 // TODO <1025px only
 
-var lv0LinkParent = $( '.sg-nav-link-lv-0.js-sg-nav-link-parent' );
-var lv1activeClass = 'nav-lv1-is-active';
-
 lv0LinkParent.on( 'click', function() {
+
     if ( $( 'html' ).hasClass( lv1activeClass ) ) {
         $( 'html' ).removeClass( lv1activeClass );
     } else {
         $( 'html' ).addClass( lv1activeClass );
     }
+
 } );
 
-var closeLV1Button = $( '.js-sg-sub-nav-toggle' );
+closeLV1Button.on( 'click', function( event ) {
 
-closeLV1Button.on( 'click', function() {
+    console.log( 'click' );
+    console.log( current );
+
     $( 'html' ).removeClass( lv1activeClass );
 
-    $( ' h3.active.js-sg-nav-opened' ).removeClass( activeClass ).removeClass( navOpenedClass );
     // we cant use .toggle here b/c this leads to problematic behaviour
     // so we need to do special things for speacial elements
-    lv0LinkParent.next().find( '.sg-nav-item-lv-1[style*="list-item"]' ).css( 'display', 'none' );
-    lv0LinkParent.next().find( '.sg-nav-item-lv-2' ).removeAttr( 'style' );
+
+    var navList = $( current ).siblings( '.sg-nav-list' );
+    console.log( navList );
+
+    /*
+    navList.one( 'transitionend', function( event ) {
+        console.log( 'is lv1' );
+        console.log( event.target );
+        console.log( 'transitionend' );
+
+        $( event.target ).find( '.sg-show-item' ).removeClass('sg-show-item');
+        $( 'h3.js-sg-nav-opened' ).removeClass( activeClass ).removeClass( navOpenedClass );
+
+        console.log('navOpenedClass removed');
+    } );
+    */
+
+    if ( navList.hasClass( 'sg-nav-lv-1' ) ) {
+        navList.one( 'transitionend', function( event ) {
+            console.log( 'is lv1' );
+            console.log( event.target );
+            console.log( 'transitionend' );
+
+            $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
+            $( 'h3.js-sg-nav-opened' ).removeClass( activeClass ).removeClass( navOpenedClass );
+
+            console.log( 'navOpenedClass removed' );
+        } );
+    } else {
+
+        $( '.js-sg-nav-opened + .sg-nav-lv-1' ).one( 'transitionend', function( event ) {
+            console.log( 'is not lv1' );
+            console.log( event.target );
+            console.log( 'transitionend' );
+
+            $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
+            $( 'h3.js-sg-nav-opened' ).removeClass( activeClass ).removeClass( navOpenedClass );
+
+            console.log( 'navOpenedClass lv2 removed' );
+        } );
+    }
+
 } );
 

@@ -7,7 +7,6 @@
     position: fixed;
     z-index: 2100;
     width: $sg-nav-width;
-
 }
 
 .sg-nav-toggle,
@@ -58,6 +57,11 @@
 .sg-sub-nav-toggle {
     display: none;
     left: 50px;
+    
+    svg {
+        margin-top: 5px;
+        width: 16px;
+    }
 }
 
 .nav-is-active {
@@ -76,7 +80,7 @@
         }
 
         .sg-icon-close {
-            @media screen and (max-width: 1024px) {
+            @media screen and (max-width: 768px) {
                 fill: $sg-nav-text-color-mobile;
             }
         }
@@ -87,20 +91,19 @@
         .sg-icon-close {
             outline: 0;
 
-            @media screen and (max-width: 1024px) {
+            @media screen and (max-width: 768px) {
                 fill: $sg-btn-text-color;
             }
 
-            @media screen and (min-width: 1025px) {
+            @media screen and (min-width: 769px) {
                 fill: $sg-btn-text-color-hover;
             }
         }
     }
-
 }
 
 .nav-is-active.nav-lv1-is-active {
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         .sg-sub-nav-toggle {
             display: block;
 
@@ -109,7 +112,6 @@
             }
         }
     }
-
 }
 
 .nav-toggle-helper {
@@ -139,7 +141,7 @@
     top: 0;
     transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         background: $sg-nav-bg-color-mobile;
         height: 100vh;
         transform: translateX(-30%);
@@ -152,7 +154,7 @@
         }
     }
 
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 769px) {
         background: $sg-nav-bg-color;
         transform: translateX(-50%);
         width: $sg-nav-width;
@@ -174,15 +176,14 @@
     top: 50px;
     width: 100%;
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         .nav-is-active & {
             color: $sg-nav-text-color-mobile;
         }
     }
 
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 769px) {
         font-size: 14px;
-
     }
 }
 
@@ -206,12 +207,12 @@ nav {
 // List
 
 .sg-nav-list {
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         color: $sg-nav-text-color-mobile;
         width: 100%;
     }
 
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 769px) {
         color: $sg-nav-text-color;
     }
 }
@@ -221,7 +222,7 @@ nav {
 .sg-nav-item {
     list-style: none;
     
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 769px) {
         $navPadding: 13px;
         
         // pading for lv0 links
@@ -249,6 +250,14 @@ nav {
     }
 }
 
+.sg-nav-link-parent + .sg-nav-list .sg-nav-item {
+    display: none;
+}
+
+.sg-show-item {
+    display: list-item !important;
+}
+
 // Link
 
 .sg-nav-link {
@@ -261,7 +270,7 @@ nav {
     padding: 0 ($sg-unit / 2) 0 0;
     text-transform: capitalize;
 
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 769px) {
         &:hover {
             background: $sg-nav-bg-color-parent-hover;
             color: $sg-nav-text-color-parent-hover;
@@ -276,11 +285,11 @@ nav {
 
 .sg-nav-link,
 .sg-options form {
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         min-height: $sg-unit * 1.5;
     }
 
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 769px) {
         min-height: $sg-unit;
     }
 }
@@ -289,56 +298,56 @@ nav {
     text-decoration: none;
     font-weight: 200;
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         color: $sg-nav-text-color-link-mobile;
     }
 
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 769px) {
         color: $sg-nav-text-color-link;
     }
 
     &:hover,
     &:focus {
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 768px) {
             background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
             color: $sg-nav-text-color-link-mobile-hover;
         }
 
-        @media screen and (min-width: 1025px) {
+        @media screen and (min-width: 769px) {
             background: $sg-nav-bg-color-link-hover;
             color: $sg-nav-text-color-link-hover;
         }
     }
 
     &.active {
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 768px) {
             background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
             color: $sg-nav-text-color-link-mobile-hover;
         }
 
-        @media screen and (min-width: 1025px) {
+        @media screen and (min-width: 769px) {
             background: $sg-nav-bg-color-link-active;
             color: $sg-nav-text-color-link-active;
         }
     }
 
     &:visited {
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 768px) {
             color: $sg-nav-text-color-link-mobile;
         }
 
-        @media screen and (min-width: 1025px) {
+        @media screen and (min-width: 769px) {
             color: $sg-nav-text-color-link;
         }
 
         &:hover,
         &:focus {
-            @media screen and (max-width: 1024px) {
+            @media screen and (max-width: 768px) {
                 background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
                 color: $sg-nav-text-color-link-mobile-hover;
             }
 
-            @media screen and (min-width: 1025px) {
+            @media screen and (min-width: 769px) {
                 background: $sg-nav-bg-color-link-hover;
                 color: $sg-nav-text-color-link-hover;
             }
@@ -349,9 +358,12 @@ nav {
 // Icon
 
 .sg-nav-link {
+    @media screen and (max-width: 768px) {
+        padding-left: 13px;
+    }
+    
     svg {
         height: 14px;
-        //margin-left: -16px;
         width: 15px;
     }
 
@@ -359,7 +371,7 @@ nav {
         display: none;
     }
 
-    &.active {
+    &.sg-nav-opened {
         .sg-icon-minus {
             display: block;
         }
@@ -368,17 +380,13 @@ nav {
             display: none;
         }
     }
-
-    @media screen and (max-width: 1024px) {
-        padding-left: 13px;
-    }
 }
 
 // on.click h3.sg-nav-link-lv-0 js detects if .sg-nav-text is > $sg-unit (30px)
 // if yes, the container gets .multiline and we can reset the align-items: center;
 // for the icon so that it always stays on top.
 // -jLaz
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 769px) {
     .multiline {
         svg {
             align-self: flex-start;
@@ -399,19 +407,19 @@ nav {
 ---------------------------------------------------------------------------- */
 
 .sg-nav-lv-0 {
-    @media screen and (max-width: 1024px) {
-        &:last-child {
+    @media screen and (min-width: 769px) {
+        border-top: 1px solid $sg-nav-border-color;
+    }
+    
+    &:last-child {
+        @media screen and (max-width: 768px) {
             margin-bottom: 50px;
         }
-    }
-
-    @media screen and (min-width: 1025px) {
-        border-top: 1px solid $sg-nav-border-color;
     }
 }
 
 .sg-nav-item-lv-0 {
-    @media screen and (min-width: 1025px) {
+    @media screen and (min-width: 769px) {
         border-bottom: 1px solid $sg-nav-border-color;
     }
 }
@@ -420,34 +428,45 @@ nav {
     font-size: 1.25em;
     min-height: 50px;
 
-    @media screen and (max-width: 767px) {
-        padding-left: 13px; // even with navigation-toggle
-    }
-
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
         margin-bottom: 1px;
+        padding-left: 13px; // even with navigation-toggle
         position: relative;
         transition: background 0.4s ease;
         width: 100%;
-
-        &:before {
-            content: '';
-            display: block;
-            padding-top: 50%;
-            transition: padding-top 0.4s ease;
+            
+        &.sg-nav-opened {
+            background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.6);
+                       
+            .sg-nav-text {
+                white-space: nowrap;
+            }
         }
+    }
 
-        //&:hover,
-        &.active {
-            background: $sg-nav-bg-color-parent-mobile-hover;
-            color: $sg-nav-text-color-parent-mobile-hover;
+    &:before {
+        content: '';
+        display: block;
+        padding-top: $sg-unit * 4;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav-is-active {
+        .sg-nav-link-lv-0 {
+             svg {
+                margin-left: 0;
+                transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+            }
         }
+    }
 
-        &.active {
-            &:before {
-                padding-top: 0;
-                transition: padding-top 0.4s ease 0.05s;
+    .nav-is-active.nav-lv1-is-active {
+        .sg-nav-link-lv-0 { 
+            svg {
+                margin-left: 20%;
+                transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
             }
         }
     }
@@ -456,84 +475,90 @@ nav {
 /* Lv 1 specific
 ---------------------------------------------------------------------------- */
 
-@media screen and (max-width: 1024px) {
-    .sg-nav-lv-1 .sg-nav-link {
+@media screen and (max-width: 768px) {
+    .sg-nav-lv-1 {
+        background: $sg-nav-bg-color-mobile;
+        height: 100%;
+        position: fixed;
+        top: 50px;
+        margin-left: -100%;
+        transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+        width: 100%;
+        z-index: 1;
+        will-change: transform; 
+    }
+
+    .nav-lv1-is-active .sg-nav-link-lv-0.sg-nav-opened + .sg-nav-lv-1 {
+        margin-left: 0;
+    }
+
+    .sg-nav-link-lv-1 {
         margin-bottom: 1px;
-        padding-left: 13px; // even with navigation-toggle
         position: relative;
         width: 100%;
         
         &.sg-nav-link-parent {
             background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
 
-            &.active {
-                &:before {
-                    padding-top: 0;
-                    transition: padding-top 0.4s ease 0.05s;
-                }
-            }
-            
             &:before {
                 content: '';
                 display: block;
-                padding-top: 30%;
+                padding-top: $sg-unit * 4;
                 transition: padding-top 0.4s ease;
             }
-            
-            //&:hover,
-            &.active {
-                background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.6);
 
+            &.sg-nav-opened {
+                background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.6);
+                
+                &:before {
+                    //padding-top: 0;
+                    //transition: padding-top 0.4s ease 0.05s;
+                }
             }
         }
-    }
-    
-    // fancy shit
-
-    .sg-nav-lv-1 {
-        background: $sg-nav-bg-color-mobile;
-        height: 100%;
-        position: fixed;
-        top: 50px;
-        transform: translateY(100%);
-        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
-        width: 100%;
-        z-index: -1;
-
-        opacity: 0;
-        animation: fadeIn ease 1;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-        will-change: opacity; 
-    }
-
-    .nav-lv1-is-active .sg-nav-link-lv-0.active + .sg-nav-lv-1 {
-        transform: translateY(0px);
-        z-index: 1;
-
-        opacity: 1;
-    }
+    }    
 }
+
 
 /* Lv 2 specific
 ---------------------------------------------------------------------------- */
 
-@media screen and (max-width: 1024px) {
-    .sg-nav-item-lv-2 {
-        padding-left: 19px;
-    }
-
-    .sg-nav-lv-2 .sg-nav-link {
+@media screen and (max-width: 768px) {
+    .sg-nav-link-lv-2 {
         &.sg-nav-link-parent {
             background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
+            padding-left: 32px;
+
+            &:before { 
+                padding-top: 45px;
+            }
             
-            //&:hover,
-            &.active {
+            &.sg-nav-opened {
                 background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
             }
         }
     }
+
+    .sg-nav-item-lv-2:not(.sg-nav-level-parent) {
+        padding-left: 19px;
+    }
 }
+
+
+/* LV 3 specific
+---------------------------------------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    .sg-nav-lv-3 {
+        padding-left: 19px;
+    }
+
+    .sg-nav-item-lv-3 {
+        padding-left: 19px;
+    }
+}
+
+
 
 
 /* Nav item spacing magic
@@ -543,26 +568,22 @@ nav {
     margin-left: 3px;
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 769px) {
     // margin-bottom for last li with containing li
     .sg-nav-level-parent:last-child {
-        //background: rgba(yellow, 0.2);
         margin-bottom: $sg-unit / 2;
     }
 
     // margin-bottom for every link in the last li where there is no next level
     .sg-nav-item:not(.sg-nav-level-parent):last-child > .sg-nav-link-child {
-        //background: purple;
         margin-bottom: $sg-unit / 2;
     }
     
-    // margin-top for every li that contains next levels hat follows a no-next-level li
-    .sg-nav-item:not(.sg-nav-level-parent) + .sg-nav-level-parent {
-        //background: yellowgreen;
-        margin-top: $sg-unit / 2;
-    }
+}
 
-
+// margin-top for every li that contains next levels hat follows a no-next-level li
+.sg-nav-item:not(.sg-nav-level-parent) + .sg-nav-level-parent {
+    margin-top: $sg-unit / 2;
 }
 
 
@@ -571,24 +592,32 @@ nav {
  ---------------------------------------------------------------------------- */
 
 .sg-options {
-    .sg-nav-lv-1 {
+    .sg-nav-lv-1 {        
         .sg-nav-item:last-child {
             padding-bottom: $sg-unit / 2;
         }
     }
 
     .sg-nav-link-lv-0 {
-        &:before {
-            padding-top: 25%;
+        @media screen and (max-width: 768px) {
+            padding-left: 13px; // even with navigation-toggle
         }
 
-        &.active:before {
-            padding-top: 0;
+        &:before {
+            padding-top: $sg-unit * 4;
         }
     }
 
     form {
+        background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
         padding-left: $sg-unit;
+
+        &:before {
+            content: '';
+            display: block;
+            padding-top: $sg-unit * 4;
+            transition: padding-top 0.4s ease;
+        }
     }
 
     form,
