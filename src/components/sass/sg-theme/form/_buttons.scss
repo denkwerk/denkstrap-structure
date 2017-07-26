@@ -105,7 +105,15 @@
     // btn show source code
     &.sg-btn-source {
         svg {
-            width: 25px;
+            height: 24px;
+            margin-left: 5px;
+            width: 24px;
+        }
+
+        &.sg-btn-active {
+            svg {
+                margin-left: 0;
+            }
         }
     }
 
@@ -142,8 +150,8 @@
         }
 
         svg {
-            height: 22px;
-            width: 22px;
+            height: 14px;
+            width: 14px;
         }
     }
 
@@ -153,8 +161,8 @@
         }
 
         svg {
-            height: 22px;
-            width: 22px;
+            height: 14px;
+            width: 14px;
         }
     }
 }

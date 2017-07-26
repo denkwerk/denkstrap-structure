@@ -67,7 +67,7 @@
 .nav-is-active {
     .sg-nav-toggle {
         svg {
-            width: 18px;
+            width: 14px;
         }
 
         .sg-icon-close {
@@ -363,7 +363,7 @@ nav {
     }
     
     svg {
-        height: 14px;
+        height: 13px;
         width: 15px;
     }
 
@@ -378,6 +378,12 @@ nav {
 
         .sg-icon-plus {
             display: none;
+        }
+    }
+
+    &.sg-nav-link-lv-0 {
+        svg {
+            margin-top: -2px;
         }
     }
 }
@@ -448,7 +454,10 @@ nav {
     &:before {
         content: '';
         display: block;
-        padding-top: $sg-unit * 4;
+
+        @media screen and (max-width: 768px) {
+            padding-top: $sg-unit * 4;
+        }
     }
 }
 
@@ -592,31 +601,36 @@ nav {
  ---------------------------------------------------------------------------- */
 
 .sg-options {
+    .sg-nav-link-lv-0 {
+        @media screen and (max-width: 768px) {
+            padding-left: 13px; // even with navigation-toggle
+
+            &:before {
+                padding-top: $sg-unit * 4;
+            }
+        }
+    }
+    
     .sg-nav-lv-1 {        
         .sg-nav-item:last-child {
             padding-bottom: $sg-unit / 2;
         }
     }
 
-    .sg-nav-link-lv-0 {
-        @media screen and (max-width: 768px) {
-            padding-left: 13px; // even with navigation-toggle
-        }
-
-        &:before {
-            padding-top: $sg-unit * 4;
-        }
-    }
-
     form {
-        background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
         padding-left: $sg-unit;
+        
+        @media screen and (max-width: 768px) {
+            background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
+        }
 
         &:before {
             content: '';
             display: block;
-            padding-top: $sg-unit * 4;
-            transition: padding-top 0.4s ease;
+        
+            @media screen and (max-width: 768px) {
+                padding-top: $sg-unit * 4;
+            }
         }
     }
 
