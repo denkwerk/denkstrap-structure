@@ -2,14 +2,14 @@
 ---------------------------------------------------------------------------- */
 
 .sg-button-container {
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 768px) {
         @include clearfix;
         border-top: 1px solid $sg-content-border-color;
         display: flex;
         justify-content: flex-end;
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 769px) {
         float: right;
         border-left: 1px solid $sg-content-border-color;
     }
@@ -173,7 +173,7 @@ button {
     }
 
     .sg-btn-expand {
-        @media screen and (max-width: 767px) {
+        @media screen and (max-width: 768px) {
             border-left: 1px solid $sg-content-border-color;
         }
     }
@@ -186,13 +186,13 @@ button {
     }
 
     .sg-btn-back {
-        @media screen and (max-width: 767px) {
+        @media screen and (max-width: 768px) {
             border-left: 1px solid $sg-content-border-color;
         }
     }
 
     .sg-btn-source {
-        @media screen and (max-width: 767px) {
+        @media screen and (max-width: 768px) {
             border: 0;
         }
     }

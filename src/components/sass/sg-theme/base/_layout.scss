@@ -6,13 +6,7 @@
 ---------------------------------------------------------------------------- */
 
 html {
-    overflow-x: hidden; // needed for offcanvas navigatio pushing the content
-
-    &.nav-is-active {
-        @media screen and (max-width: 1024px) {
-            overflow: hidden;
-        }
-    }
+    overflow-x: hidden; // needed for offcanvas navigation pushing the content
 }
 
 body {
@@ -20,6 +14,14 @@ body {
     background: $sg-body-bg-color;
     margin: 0;
 }
+
+@media screen and (max-width: 768px) {
+    html.nav-is-active,
+    .nav-is-active body {
+        overflow: hidden;
+    }
+}
+
 
 /* Content
 ---------------------------------------------------------------------------- */
@@ -40,7 +42,7 @@ body {
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     .nav-is-active {
         .styleguide-full {
             .sg-main {
@@ -50,7 +52,7 @@ body {
     }    
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 769px) {
     .nav-is-active {
         .styleguide-full {
             .sg-main {
@@ -82,16 +84,6 @@ body {
     }
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 /* Section Header
 ---------------------------------------------------------------------------- */
 
@@ -100,7 +92,6 @@ body {
 .sg-section-header {
     background: $sg-body-bg-color;
     border-bottom: 1px solid $sg-content-border-color;
-    height: 102px;
     width: 100%;
 
     &.fixed {
@@ -109,7 +100,7 @@ body {
         top: 0;
         z-index: 1100;
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 769px) {
             transition: width 0.4s ease;
             width: 100%;
         }
@@ -120,7 +111,7 @@ body {
     }
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 769px) {
     .nav-is-active {
         .sg-section-header.fixed {
             width: 100%;
@@ -138,7 +129,7 @@ body {
 }
 
 .sg-header-group {
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 769px) {
         display: flex;
         align-items: center;
         flex-direction: row;
@@ -165,7 +156,7 @@ body {
     margin: 0;
     text-transform: capitalize;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 736px) { // <= iPhone6 Plus Landscape
         font-size: 1em;
     }
 
@@ -256,11 +247,11 @@ body {
     border: 0;
     overflow: visible;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 768px) {
         padding-right: $sg-unit / 2;
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 769px) {
         padding-right: 17%; // 83% = 10col
     }
 }
@@ -321,8 +312,8 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-preview {
-    margin-top: $sg-unit;
     position: relative; // prevent module position fixed elements from thinking out of their box.
+    margin-top: $sg-unit;
 }
 
 iframe {
