@@ -112,6 +112,21 @@ var SGB = window.SGB || {};
 
         queryAll( '.js-sg-btn-source' ).on( 'click', SGB.toggleSingleSourceBtn );
 
+        // toggle active class when we click the documentation or source buttons
+        SGB.DocumentationToggleBtn = function() {
+            var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-documentation-container' );
+            thisContainer.toggleClass( 'sg-active' );
+        };
+
+        SGB.SourceToggleBtn = function() {
+            var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-source-container' );
+            thisContainer.toggleClass( 'sg-active' );
+        };
+
+        queryAll( '.js-sg-btn-documentation' ).on( 'click', SGB.DocumentationToggleBtn );
+        queryAll( '.js-sg-btn-source' ).on( 'click', SGB.SourceToggleBtn );
+
+
         /*!
          * @copyright Copyright (c) 2017 IcoMoon.io
          * @license   Licensed under MIT license

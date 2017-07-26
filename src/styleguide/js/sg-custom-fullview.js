@@ -173,8 +173,6 @@ var SGB = window.SGB || {};
         // recalculate the sticky headers again after we toggle one of the documentation or source buttons
         SGB.recalculateStickiesOnDocumentationToggleBtn = function() {
             var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-documentation-container' );
-
-            thisContainer.toggleClass( 'sg-active' );
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
                 _recalculateStickies();
             } );
@@ -182,9 +180,6 @@ var SGB = window.SGB || {};
 
         SGB.recalculateStickiesOnSourceToggleBtn = function() {
             var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-source-container' );
-
-            thisContainer.toggleClass( 'sg-active' );
-
             thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
                 _recalculateStickies();
             } );
