@@ -76,15 +76,13 @@
         </div>
 
         <div class="sg-preview">            
-            <div class="sg-iframe-container">            
-                
-                {% if iframe %}
-                    <iframe src="{{ element.iframePath }}" frameborder="0"></iframe>
-                {% else %}
-                    {{ element.content | safe }}
-                {% endif %}
+            
+            {% if iframe %}
+                <iframe src="{{ element.iframePath }}" frameborder="0"></iframe>
+            {% else %}
+                {{ element.content | safe }}
+            {% endif %}
 
-            </div>
         </div>
 
     </article>
