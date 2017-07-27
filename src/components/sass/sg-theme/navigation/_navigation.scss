@@ -16,29 +16,17 @@
     color: $sg-btn-text-color;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: 16px;
     font-size: 1rem;
     height: 50px;
-    padding: 0;
-    position: fixed;
+    padding: 0 ($sg-unit / 2);
     text-decoration: none;
-    width: 42px;
     z-index: 1100;
 
-    svg {
-        width: 14px;
-    }
-}
-
-.sg-nav-toggle {
-    use,
-    path {
-        fill: $sg-btn-text-color;
-    }
-
-    .sg-icon-close {
-        display: none;
+    .btn-text {
+        color: currentColor;
+        margin-left: 5px;
     }
 
     &:hover,
@@ -54,41 +42,96 @@
     }
 }
 
+.sg-nav-toggle {
+    svg {
+        width: 14px;
+    }
+
+    use,
+    path {
+        fill: $sg-btn-text-color;
+    }
+    
+    .sg-icon-close,
+    .btn-text-close {
+        display: none;
+    }
+}
+
 .sg-sub-nav-toggle {
+    border-left: 1px solid rgba($sg-white, 0.2);
     display: none;
-    left: 50px;
     
     svg {
-        margin-top: 5px;
         width: 16px;
+    }
+
+    .btn-text {
+        display: block;
     }
 }
 
 .nav-is-active {
+    @media screen and (max-width: 768px) {
+        .sg-nav-toggle-container {
+            display: flex;
+            width: 100%;
+        }        
+
+        .sg-nav-toggle,
+        .sg-sub-nav-toggle {
+            width: 50%;
+        }
+    }
+
+    .btn-text {
+        @media screen and (max-width: 768px) {
+            color: $sg-nav-text-color-mobile;
+        }
+
+        @media screen and (min-width: 769px) {
+            color: $sg-nav-text-color;
+        }
+    }
+    
     .sg-nav-toggle {
         svg {
-            width: 14px;
+            width: 12px;
         }
-
-        .sg-icon-close {
-            display: block;
-            fill: $sg-nav-text-color;
-        }
-
-        .sg-icon-navicon {
+        
+        .sg-icon-navicon,
+        .btn-text-open {
             display: none;
+        }
+
+        .sg-icon-close,
+        .btn-text-close {
+            display: block;
         }
 
         .sg-icon-close {
             @media screen and (max-width: 768px) {
                 fill: $sg-nav-text-color-mobile;
             }
+
+            @media screen and (min-width: 769px) {
+                fill: $sg-nav-text-color;
+            }
+        }
+    }
+
+    .sg-sub-nav-toggle {
+        .sg-icon-arrow-left {
+            fill: $sg-nav-text-color-mobile;
         }
     }
     
     .sg-nav-toggle:hover,
-    .sg-nav-toggle:focus {
-        .sg-icon-close {
+    .sg-nav-toggle:focus,
+    .sg-sub-nav-toggle:hover,
+    .sg-sub-nav-toggle:focus {
+        .sg-icon-close,
+        .sg-icon-arrow-left {
             outline: 0;
 
             @media screen and (max-width: 768px) {
@@ -99,17 +142,23 @@
                 fill: $sg-btn-text-color-hover;
             }
         }
+
+        .btn-text {
+            @media screen and (max-width: 768px) {
+                color: $sg-btn-text-color;
+            }
+
+            @media screen and (min-width: 769px) {
+                color: $sg-btn-text-color-hover;
+            }
+        }
     }
 }
 
 .nav-is-active.nav-lv1-is-active {
     @media screen and (max-width: 768px) {
         .sg-sub-nav-toggle {
-            display: block;
-
-            .sg-icon-arrow-left {
-                fill: $sg-nav-text-color-mobile;
-            }
+            display: flex;
         }
     }
 }
@@ -135,7 +184,7 @@
 
 .sg-navigation-container {
     overflow: hidden;
-    padding-top: 50px;
+    padding-top: 51px;
     position: fixed;
     bottom: 0;
     top: 0;
@@ -172,8 +221,6 @@
     overflow-x: hidden;
     overflow-y: auto;
     padding-bottom: 100px;
-    position: absolute;
-    top: 50px;
     width: 100%;
 
     @media screen and (max-width: 768px) {
@@ -489,7 +536,7 @@ nav {
         background: $sg-nav-bg-color-mobile;
         height: 100%;
         position: fixed;
-        top: 50px;
+        top: 51px;
         margin-left: -100%;
         transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
         width: 100%;

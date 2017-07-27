@@ -4,14 +4,19 @@
 .sg-button-container {
     @media screen and (max-width: 768px) {
         @include clearfix;
-        border-top: 1px solid $sg-content-border-color;
         display: flex;
         justify-content: flex-end;
     }
 
-    @media screen and (min-width: 769px) {
-        float: right;
-        border-left: 1px solid $sg-content-border-color;
+    .sg-section-header & {
+        @media screen and (max-width: 768px) {
+            border-top: 1px solid $sg-content-border-color;
+        }
+
+        @media screen and (min-width: 769px) {
+            float: right;
+            border-left: 1px solid $sg-content-border-color;
+        }
     }
 }
 
