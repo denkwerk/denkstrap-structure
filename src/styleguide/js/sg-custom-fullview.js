@@ -165,7 +165,7 @@ var SGB = window.SGB || {};
             $( '.js-sticky-header-helper' ).height( $( '.js-sg-section-header' ).height() );
         } );
 
-        // you can make it happen. You can make it REAL!
+        // sticky headers - you can make it happen. You can make it REAL!
         $( function() {
             stickyHeaders.load( $( '.js-sg-section-header' ) );
         } );
@@ -189,6 +189,8 @@ var SGB = window.SGB || {};
         queryAll( '.js-sg-btn-source' ).on( 'click', SGB.recalculateStickiesOnSourceToggleBtn );
 
         // init iframe resizer
+        // https://github.com/davidjbradshaw/iframe-resizer
+
         $( 'iframe' ).iFrameResize( {
             //hide timeout warnings
             warningTimeout: 0,
@@ -218,10 +220,12 @@ var SGB = window.SGB || {};
 // REFACTOR THIS!
 // -jLaz
 
+// some navigation magic
+
 var navLinkParent = '.js-sg-nav-link-parent';
 var activeClass = 'active';
 var activeSelector = '.' + activeClass;
-var navOpenedClass = 'js-sg-nav-opened sg-nav-opened';
+var navOpenedClass = 'sg-nav-opened';
 var navOpenedSelector = '.' + navOpenedClass;
 
 var lv0LinkParent = $( '.sg-nav-link-lv-0.js-sg-nav-link-parent' );
@@ -241,28 +245,18 @@ $( document ).ready( function() {
         $( 'a' ).removeClass( activeClass );
         $( '[href=#' + id + ']' ).addClass( activeClass );
     } );
-
-    // initial nav toggle to archieve display:none on li's
-    //$( navLinkParent ).siblings().children().toggle();
-
+    
 } );
-
-// some navigation magic
-// -jLaz
 
 $( document ).on( 'click', navLinkParent, function() {
 
     current = this;
 
-    // this opens the li's again but just the next level
+    // this opens the li's, but just the next level
     $( this ).siblings().find( '> .js-sg-nav-item' ).toggleClass( 'sg-show-item' );
-
-    // adding an active class to the item
-    //$( this ).toggleClass( activeClass );
 
     // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
     $( this ).toggleClass( navOpenedClass );
-    console.log( 'navOpenedClass toggled' );
 
     // detect if nav-text has more than one line and if yes, add class multiline
     var $navText = $( '.js-sg-nav-text' );
@@ -274,85 +268,78 @@ $( document ).on( 'click', navLinkParent, function() {
     } );
 } );
 
-// extra class in action: using this to find all mius Icons
-// to resolve the bug where lv1 items were still on minus even when closed.
-// b/c of that, the next toggle gave them fa-plus but they were then open
+// extra class in action: using this to find all items with mius icons
+// to resolve the bug where lv1 items were still on minus when closed.
+// b/c of that, the next toggle gave them the plus icon but they were then open
 // so it was the opposite way around.
-// also remove all active classes.
 // -jLaz
 
 $( document ).on( 'click', navOpenedSelector, function() {
 
     $( this ).removeClass( navOpenedClass );
     $( this ).parent().find( navOpenedSelector ).removeClass( navOpenedClass );
-    console.log( 'navOpenedClass removed this' );
-
-    $( this ).parent().find( activeSelector ).removeClass( activeClass );
+    $( this ).parent().find( navShowItemSelector ).removeClass( navShowItemClass );
 
 } );
 
-// add an active class for lv1 navigation
-// TODO <1025px only
+// media query event handler for screen <=768px
+// https://www.sitepoint.com/javascript-media-queries/
+// -jLaz
 
-lv0LinkParent.on( 'click', function() {
+if (matchMedia) {
+  const mq = window.matchMedia('(max-width: 768px)');
+  mq.addListener(WidthChange);
+  WidthChange(mq);
+}
 
-    if ( $( 'html' ).hasClass( lv1activeClass ) ) {
-        $( 'html' ).removeClass( lv1activeClass );
+// media query change
+function WidthChange(mq) {
+    if (mq.matches) {
+
+        // add an active class for lv1 navigation
+
+        lv0LinkParent.on( 'click', function() {
+
+            if ( $( 'html' ).hasClass( lv1activeClass ) ) {
+                
+            } else {
+                $( 'html' ).addClass( lv1activeClass );
+            }
+
+        } );
+
+        // mobile nav close button for lv1
+
+        closeLV1Button.on( 'click', function( event ) {
+
+            $( 'html' ).removeClass( lv1activeClass );
+
+            // we cant use .toggle here b/c this leads to problematic behaviour
+            // so we need to do special things for speacial elements
+
+            var navList = $( current ).siblings( '.sg-nav-list' );
+
+            if ( navList.hasClass( 'sg-nav-lv-1' ) ) {
+                navList.one( 'transitionend', function( event ) {
+
+                    $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
+                    $( navOpenedSelector ).removeClass( activeClass ).removeClass( navOpenedClass );
+
+                } );
+            } else {
+
+                $( navOpenedSelector + ' + .sg-nav-lv-1' ).one( 'transitionend', function( event ) {
+
+                    $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
+                    $( navOpenedSelector ).removeClass( activeClass ).removeClass( navOpenedClass );
+
+                } );
+            }
+
+        } );
+
     } else {
-        $( 'html' ).addClass( lv1activeClass );
+        // window width is >=769px
     }
 
-} );
-
-closeLV1Button.on( 'click', function( event ) {
-
-    console.log( 'click' );
-    console.log( current );
-
-    $( 'html' ).removeClass( lv1activeClass );
-
-    // we cant use .toggle here b/c this leads to problematic behaviour
-    // so we need to do special things for speacial elements
-
-    var navList = $( current ).siblings( '.sg-nav-list' );
-    console.log( navList );
-
-    /*
-    navList.one( 'transitionend', function( event ) {
-        console.log( 'is lv1' );
-        console.log( event.target );
-        console.log( 'transitionend' );
-
-        $( event.target ).find( '.sg-show-item' ).removeClass('sg-show-item');
-        $( 'h3.js-sg-nav-opened' ).removeClass( activeClass ).removeClass( navOpenedClass );
-
-        console.log('navOpenedClass removed');
-    } );
-    */
-
-    if ( navList.hasClass( 'sg-nav-lv-1' ) ) {
-        navList.one( 'transitionend', function( event ) {
-            console.log( 'is lv1' );
-            console.log( event.target );
-            console.log( 'transitionend' );
-
-            $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
-            $( 'h3.js-sg-nav-opened' ).removeClass( activeClass ).removeClass( navOpenedClass );
-
-            console.log( 'navOpenedClass removed' );
-        } );
-    } else {
-
-        $( '.js-sg-nav-opened + .sg-nav-lv-1' ).one( 'transitionend', function( event ) {
-            console.log( 'is not lv1' );
-            console.log( event.target );
-            console.log( 'transitionend' );
-
-            $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
-            $( 'h3.js-sg-nav-opened' ).removeClass( activeClass ).removeClass( navOpenedClass );
-
-            console.log( 'navOpenedClass lv2 removed' );
-        } );
-    }
-
-} );
+}
