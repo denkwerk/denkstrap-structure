@@ -126,7 +126,6 @@ var SGB = window.SGB || {};
         queryAll( '.js-sg-btn-documentation' ).on( 'click', SGB.DocumentationToggleBtn );
         queryAll( '.js-sg-btn-source' ).on( 'click', SGB.SourceToggleBtn );
 
-
         /*!
          * @copyright Copyright (c) 2017 IcoMoon.io
          * @license   Licensed under MIT license

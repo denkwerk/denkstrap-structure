@@ -245,7 +245,7 @@ $( document ).ready( function() {
         $( 'a' ).removeClass( activeClass );
         $( '[href=#' + id + ']' ).addClass( activeClass );
     } );
-    
+
 } );
 
 $( document ).on( 'click', navLinkParent, function() {
@@ -286,22 +286,22 @@ $( document ).on( 'click', navOpenedSelector, function() {
 // https://www.sitepoint.com/javascript-media-queries/
 // -jLaz
 
-if (matchMedia) {
-  const mq = window.matchMedia('(max-width: 768px)');
-  mq.addListener(WidthChange);
-  WidthChange(mq);
+if ( matchMedia ) {
+    const mq = window.matchMedia( '(max-width: 768px)' );
+    mq.addListener( WidthChange );
+    WidthChange( mq );
 }
 
 // media query change
-function WidthChange(mq) {
-    if (mq.matches) {
+function WidthChange( mq ) {
+    if ( mq.matches ) {
 
         // add an active class for lv1 navigation
 
         lv0LinkParent.on( 'click', function() {
 
             if ( $( 'html' ).hasClass( lv1activeClass ) ) {
-                
+
             } else {
                 $( 'html' ).addClass( lv1activeClass );
             }
