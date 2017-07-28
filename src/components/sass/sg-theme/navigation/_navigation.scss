@@ -16,10 +16,9 @@
     }
 }
 
-.sg-nav-toggle {
+.sg-nav-toggle-btn {
     background: $sg-btn-bg-color;
     border: 0;
-    color: $sg-btn-text-color;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -34,17 +33,7 @@
         width: 14px;
     }
 
-    .sg-icon {
-        fill: currentColor;
-    }
-    
-    .sg-icon-close,
-    .btn-text-close {
-        display: none;
-    }
-
     .btn-text {
-        color: currentColor;
         margin-left: 5px;
     }
 
@@ -57,21 +46,11 @@
 
     .nav-is-active & {
         color: $sg-btn-text-color-inverted;
+
+        @media screen and (max-width: 768px) {
+            width: 50%;
+        }
         
-        svg {
-            width: 12px;
-        }
-
-        .sg-icon-navicon,
-        .btn-text-open {
-            display: none;
-        }
-
-        .sg-icon-close,
-        .btn-text-close {
-            display: flex;
-        }
-
         &:hover,
         &:focus {
             @media screen and (max-width: 768px) {
@@ -85,52 +64,19 @@
     }
 }
 
-.sg-sub-nav-toggle {
-    display: none;
-}
-
-/*
-.sg-sub-nav-toggle {
-    border-left: 1px solid rgba($sg-white, 0.2);
-    display: none;
-    
-    svg {
-        width: 16px;
+.sg-nav-toggle {
+    color: $sg-btn-text-color;
+        
+    .sg-icon-close,
+    .btn-text-close {
+        display: none;
     }
 
-    use,
-    path {
-        fill: currentColor;
-    }
-
-    .btn-text {
-        color: currentColor;
-        display: block;
-    }
-}
-
-.nav-is-active {
-    @media screen and (max-width: 768px) {
-        .sg-nav-toggle,
-        .sg-sub-nav-toggle {
-            width: 50%;
-        }
-    }
-
-    .btn-text {
-        @media screen and (max-width: 768px) {
-            color: $sg-nav-text-color-mobile;
-        }
-
-        @media screen and (min-width: 769px) {
-            color: $sg-nav-text-color;
-        }
-    }
-    .sg-nav-toggle {
+    .nav-is-active & {
         svg {
             width: 12px;
         }
-        
+
         .sg-icon-navicon,
         .btn-text-open {
             display: none;
@@ -138,65 +84,29 @@
 
         .sg-icon-close,
         .btn-text-close {
-            display: block;
-        }
-
-        .sg-icon-close {
-            @media screen and (max-width: 768px) {
-                fill: $sg-nav-text-color-mobile;
-            }
-
-            @media screen and (min-width: 769px) {
-                fill: $sg-nav-text-color;
-            }
-        }
-    }
-
-    .sg-sub-nav-toggle {
-        .sg-icon-arrow-left {
-            fill: $sg-nav-text-color-mobile;
-        }
-    }
-    
-    .sg-nav-toggle:hover,
-    .sg-nav-toggle:focus,
-    .sg-sub-nav-toggle:hover,
-    .sg-sub-nav-toggle:focus {
-        .sg-icon-close,
-        .sg-icon-arrow-left {
-            outline: 0;
-            
-            @media screen and (max-width: 768px) {
-                fill: $sg-btn-text-color;
-            }
-
-            @media screen and (min-width: 769px) {
-                fill: $sg-btn-text-color-hover;
-            }
-            
-        }
-
-        
-        .btn-text {
-            @media screen and (max-width: 768px) {
-                color: $sg-btn-text-color;
-            }
-
-            @media screen and (min-width: 769px) {
-                color: $sg-btn-text-color-hover;
-            }
-        }
-    }
-}
-
-.nav-is-active.nav-lv1-is-active {
-    @media screen and (max-width: 768px) {
-        .sg-sub-nav-toggle {
             display: flex;
         }
     }
 }
-*/
+
+.sg-sub-nav-toggle {
+    @media screen and (max-width: 768px) {
+        border-left: 1px solid rgba($sg-white, 0.2);
+        display: none;
+        
+        svg {
+            width: 16px;
+        }
+        
+        .nav-is-active.nav-lv1-is-active & {
+            display: flex;
+        }
+    }
+
+    @media screen and (min-width: 769px) {
+        display: none;
+    }
+}
 
 .nav-toggle-helper {
     background: $sg-body-bg-color;
@@ -565,17 +475,17 @@ nav {
     .sg-nav-lv-1 {
         background: $sg-nav-bg-color-mobile;
         height: 100%;
-        //position: fixed;
-        //top: 51px;
-        //margin-left: -100%;
-        //transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+        position: absolute;
+        top: 51px;
+        transform: translateX(-100%);
+        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
         width: 100%;
         z-index: 1;
-        //will-change: transform; 
+        will-change: transform; 
     }
 
     .nav-lv1-is-active .sg-nav-link-lv-0.sg-nav-opened + .sg-nav-lv-1 {
-        margin-left: 0;
+        transform: translateX(0);
     }
 
     .sg-nav-link-lv-1 {

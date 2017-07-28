@@ -27,7 +27,6 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-main {
-    padding-bottom: $sg-unit * 2;
     // prevent module preview content from thinking outside of the box and overlap the nav
     overflow-x: hidden; 
     // prevent navigation overlapping the sections
@@ -104,10 +103,10 @@ body {
 }
 
 .sg-header-group {
-    @media screen and (min-width: 769px) {
-        background: $sg-body-bg-color;
-        border-bottom: 1px solid $sg-content-border-color;
+    background: $sg-body-bg-color;
+    border-bottom: 1px solid $sg-content-border-color;
 
+    @media screen and (min-width: 769px) {
         display: flex;
         align-items: center;
         flex-direction: row;
@@ -306,6 +305,12 @@ body {
 
     .bgcolor-3 & {
         background: $sg-section-bg-color-3;
+    }
+}
+
+.sg-section:last-child {
+    .sg-preview {
+        padding-bottom: $sg-unit * 2;
     }
 }
 

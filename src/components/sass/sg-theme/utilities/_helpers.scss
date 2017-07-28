@@ -2,11 +2,7 @@
 /* Transform 
 ---------------------------------------------------------------------------- */
 
-.transform-this {
-    transform: translateX(0);
-    transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
-}
-
+/*
 @media screen and (max-width: 768px) {
     .nav-is-active {
         .styleguide-full {
@@ -16,8 +12,14 @@
         }
     }    
 }
+*/
 
 @media screen and (min-width: 769px) {
+    .transform-this {
+        transform: translateX(0);
+        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+    }
+    
     .nav-is-active {
         .styleguide-full {
             .transform-this {

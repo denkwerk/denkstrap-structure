@@ -295,6 +295,10 @@ var toggleNavigationContainer = function() {
     $( 'html' ).toggleClass( 'nav-is-active' );
 };
 
+var addNavigationZIndex = function() {
+    $( 'html' ).addClass( 'nav-z-index' );
+};
+
 var removeNavigationZIndex = function() {
     $( 'html' ).removeClass( 'nav-z-index' );
 };
@@ -304,7 +308,7 @@ var toggleNavigationZIndex = function( event ) {
         removeNavigationZIndex();
     } else {
         $( '.sg-navigation-container' ).one( 'transitionend', function( event ) {
-            $( 'html' ).addClass( 'nav-z-index' );
+            addNavigationZIndex();
         } );
     }
 };
@@ -350,20 +354,19 @@ $( document ).on( 'click', navOpenedSelector, function() {
 
 } );
 
-/*
 // media query event handler for screen <=768px
 // https://www.sitepoint.com/javascript-media-queries/
 // -jLaz
 
 if ( matchMedia ) {
-    const mq = window.matchMedia( '(max-width: 768px)' );
-    mq.addListener( WidthChange );
-    WidthChange( mq );
+    const toMQ = window.matchMedia( '(max-width: 768px)' );
+    toMQ.addListener( WidthChange );
+    WidthChange( toMQ );
 }
 
 // media query change
-function WidthChange( mq ) {
-    if ( mq.matches ) {
+function WidthChange( toMQ ) {
+    if ( toMQ.matches ) {
 
         // add an active class for lv1 navigation
 
@@ -412,4 +415,3 @@ function WidthChange( mq ) {
 
 }
 
-*/
