@@ -22,15 +22,14 @@ body {
     }
 }
 
-
+            
 /* Content
 ---------------------------------------------------------------------------- */
 
 .sg-main {
-    background: $sg-body-bg-color;
     padding-bottom: $sg-unit * 2;
-    overflow-x: hidden; // prevent module preview content from thinking outside of the box and overlap the nav
-    transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+    // prevent module preview content from thinking outside of the box and overlap the nav
+    overflow-x: hidden; 
     // prevent navigation overlapping the sections
     position: relative;
     z-index: 0;
@@ -42,58 +41,29 @@ body {
     }
 }
 
-@media screen and (max-width: 768px) {
-    .nav-is-active {
-        .styleguide-full {
-            .sg-main {
-                margin-left: 100%;
-            }
-        }
-    }    
-}
-
-@media screen and (min-width: 769px) {
-    .nav-is-active {
-        .styleguide-full {
-            .sg-main {
-                margin-left: $sg-nav-width;
-            }
-        }
-    }
-}
-
 /* -------------------------------------------------------------------------
  SG Sections
  ---------------------------------------------------------------------------- */
 
 .sg-section {
-    padding-bottom: $sg-unit;
-
     // fancy shit
+    /*
     opacity: 0;
     animation: fadeIn ease 1;
     animation-duration: 1s;
     animation-fill-mode: forwards;
     will-change: opacity; 
+    */
 
     @for $i from 1 through 10 {
+        /*
         &:nth-child(#{$i}) {
             animation-delay: #{$i}00ms;
         }
-    }
-
-    &.bgcolor-1 {
-        background: $sg-section-bg-color-1;
-    }
-
-    &.bgcolor-2 {
-        background: $sg-section-bg-color-2;
-    }
-
-    &.bgcolor-3 {
-        background: $sg-section-bg-color-3;
+        */
     }
 }
+
 
 /* Section Header
 ---------------------------------------------------------------------------- */
@@ -101,8 +71,6 @@ body {
 // Header Container
 
 .sg-section-header {
-    background: $sg-body-bg-color;
-    border-bottom: 1px solid $sg-content-border-color;
     width: 100%;
 
     &.fixed {
@@ -110,11 +78,6 @@ body {
         position: fixed;
         top: 0;
         z-index: 1100;
-
-        @media screen and (min-width: 769px) {
-            transition: width 0.4s ease;
-            width: 100%;
-        }
     }
 
     &.fixed.absolute {
@@ -133,6 +96,7 @@ body {
 // Section Anchor
 
 .sg-section-anchor {
+    background: $sg-body-bg-color;
     border-bottom: 1px solid $sg-content-border-color;
     display: block;
     height: 51px;
@@ -141,6 +105,9 @@ body {
 
 .sg-header-group {
     @media screen and (min-width: 769px) {
+        background: $sg-body-bg-color;
+        border-bottom: 1px solid $sg-content-border-color;
+
         display: flex;
         align-items: center;
         flex-direction: row;
@@ -167,7 +134,8 @@ body {
     margin: 0;
     text-transform: capitalize;
 
-    @media screen and (max-width: 736px) { // <= iPhone6 Plus Landscape
+    // <= iPhone6 Plus Landscape
+    @media screen and (max-width: 736px) { 
         font-size: 1em;
     }
 
@@ -324,8 +292,21 @@ body {
 ---------------------------------------------------------------------------- */
 
 .sg-preview {
-    position: relative; // prevent module position fixed elements from thinking out of their box.
-    margin-top: $sg-unit;
+    // prevent module position fixed elements from thinking out of their box.
+    position: relative; 
+    padding-top: $sg-unit;
+    
+    .bgcolor-1 & {
+        background: $sg-section-bg-color-1;
+    }
+
+    .bgcolor-2 & {
+        background: $sg-section-bg-color-2;
+    }
+
+    .bgcolor-3 & {
+        background: $sg-section-bg-color-3;
+    }
 }
 
 iframe {

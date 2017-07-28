@@ -77,19 +77,6 @@ var SGB = window.SGB || {};
 
         /* jshint ignore:end */
 
-        // Toggle Navigation container
-
-        SGB.toggleNav = function() {
-            _toggleClass( docEl, 'nav-is-active' );
-        };
-
-        SGB.hideNav = function() {
-            _removeClass( docEl, 'nav-is-active' );
-        };
-
-        queryAll( '.js-sg-nav-toggle' ).on( 'click', SGB.toggleNav );
-        queryAll( '.js-sg-nav-item a' ).on( 'click', SGB.hideNav );
-
         // Single toggles for documentation and source code
         // -jLaz
 

@@ -7,12 +7,8 @@ var SGB = window.SGB || {};
 ( function( w, SGB, undefined ) {
 
     var doc = w.document,
-        docEl = doc.documentElement,
+        docEl = doc.documentElement, //html
         $stickies;
-
-    // Replace no-js class with js class
-    docEl.className = docEl.className.replace( /no-js/gi, '' );
-    docEl.className += ' js';
 
     // Syntactic sugar for querySelectorAll and event delegates courtesy
     // @paul_irish: https://gist.github.com/paulirish/12fb951a8b893a454b32
@@ -21,6 +17,42 @@ var SGB = window.SGB || {};
     // Cut the mustard
     if ( 'querySelector' in doc && Array.prototype.forEach ) {
 
+        /* jshint ignore:start */
+        // Add functionality to toggle classes on elements
+        function _hasClass( el, cl ) {
+            var regex = new RegExp( '(?:\\s|^)' + cl + '(?:\\s|$)' );
+            return !!el.className.match( regex );
+        }
+
+        function _addClass( el, cl ) {
+            el.className += ' ' + cl;
+        }
+
+        function _removeClass( el, cl ) {
+            var regex = new RegExp( '(?:\\s|^)' + cl );
+            el.className = el.className.replace( regex, '' );
+        }
+
+        function _toggleClass( el, cl ) {
+            _hasClass( el, cl ) ? _removeClass( el, cl ) : _addClass( el, cl );
+        }
+        /* jshint ignore:end */
+
+        // Toggle Navigation container
+
+        /*
+        SGB.toggleNav = function() {
+            _toggleClass( docEl, 'nav-is-active' );
+        };
+
+        SGB.hideNav = function() {
+            _removeClass( docEl, 'nav-is-active' );
+        };
+
+        queryAll( '.js-sg-nav-toggle' ).on( 'click', SGB.toggleNav );
+        queryAll( '.js-sg-nav-item a' ).on( 'click', SGB.hideNav );
+        */
+
         // recalculate the height of the content of the current sg-section
         // so that the next sticky header knows its new position
         // when source code or documentation is toggled.
@@ -28,15 +60,20 @@ var SGB = window.SGB || {};
         // -jLaz & marius
 
         function _recalculateStickies() {
-            $stickies.each( function() {
-                var $thisSticky = $( this );
+            if ( navigator.userAgent.toLowerCase().indexOf( 'firefox' ) > -1 ) {
+                // no sticky headres for firefox
+                // b/c there is a bug with the non-fixed elements and transform
+            } else {
+                $stickies.each( function() {
+                    var $thisSticky = $( this );
 
-                $thisSticky
-                    .data( 'originalPosition', $thisSticky.offset().top )
-                    .data( 'originalHeight', $thisSticky.outerHeight() )
-                    .parent()
-                    .height( $thisSticky.outerHeight() );
-            } );
+                    $thisSticky
+                        .data( 'originalPosition', $thisSticky.offset().top )
+                        .data( 'originalHeight', $thisSticky.outerHeight() )
+                        .parent()
+                        .height( $thisSticky.outerHeight() );
+                } );
+            }
         }
 
         // Bulk toggle options for documentation and source code
@@ -103,90 +140,92 @@ var SGB = window.SGB || {};
         // with modifications (comments)
         // -jLaz
 
-        var stickyHeaders = ( function() {
-            var $window = $( window );
-            var load = function( stickies ) {
+        if ( navigator.userAgent.toLowerCase().indexOf( 'firefox' ) > -1 ) {
+            // no sticky headres for firefox
+            // b/c there is a bug with the non-fixed elements and transform
+        } else {
 
-                if ( typeof stickies === 'object' && stickies instanceof jQuery && stickies.length > 0 ) {
-                    $stickies = stickies.each( function() {
-                        var $thisSticky = $( this ).wrap( '<div class="js-sticky-header-helper" />' );
-                        $thisSticky
-                            .data( 'originalPosition', $thisSticky.offset().top )
-                            .data( 'originalHeight', $thisSticky.outerHeight() )
-                            .parent()
-                            .height( $thisSticky.outerHeight() );
-                    } );
+            var stickyHeaders = ( function() {
+                var $window = $( window );
+                var load = function( stickies ) {
 
-                    $window.off( 'scroll.stickies' ).on( 'scroll.stickies', function() {
-                        _whenScrolling();
-                    } );
-                }
-            };
+                    if ( typeof stickies === 'object' && stickies instanceof jQuery && stickies.length > 0 ) {
+                        $stickies = stickies.each( function() {
+                            var $thisSticky = $( this ).wrap( '<div class="js-sticky-header-helper" />' );
+                            $thisSticky
+                                .data( 'originalPosition', $thisSticky.offset().top )
+                                .data( 'originalHeight', $thisSticky.outerHeight() )
+                                .parent()
+                                .height( $thisSticky.outerHeight() );
+                        } );
 
-            var _whenScrolling = function() {
-                $stickies.each( function( i ) {
-                    var $thisSticky = $( this ),
-                        $stickyPosition = $thisSticky.data( 'originalPosition' );
-
-                    if ( $stickyPosition <= $window.scrollTop() ) {
-                        var $nextSticky = $stickies.eq( i + 1 ),
-                            $nextStickyPosition = $nextSticky.data( 'originalPosition' ) -
-                            $thisSticky.data( 'originalHeight' );
-                        $thisSticky.addClass( 'fixed' );
-
-                        if ( $nextSticky.length > 0 && $thisSticky.offset().top >= $nextStickyPosition ) {
-                            $thisSticky.addClass( 'absolute' ).css( 'top', $nextStickyPosition );
-                        }
-                    } else {
-                        var $prevSticky = $stickies.eq( i - 1 );
-                        $thisSticky.removeClass( 'fixed' );
-
-                        if ( $prevSticky.length > 0 &&
-                            $window.scrollTop() <= $thisSticky.data( 'originalPosition' ) -
-                                $thisSticky.data( 'originalHeight' ) ) {
-
-                            // $prevSticky.removeClass("absolute").removeAttr("style");
-                            // We still need the style attribute here b/c the element is still fixed
-                            // and we don't want 100% width again. But since the Attribute was removed to get
-                            // rid of the top value, we set top to zero
-                            $prevSticky.removeClass( 'absolute' ).css( 'top', 0 );
-                        }
+                        $window.off( 'scroll.stickies' ).on( 'scroll.stickies', function() {
+                            _whenScrolling();
+                        } );
                     }
+                };
+
+                var _whenScrolling = function() {
+                    $stickies.each( function( i ) {
+                        var $thisSticky = $( this ),
+                            $stickyPosition = $thisSticky.data( 'originalPosition' );
+
+                        if ( $stickyPosition <= $window.scrollTop() ) {
+                            var $nextSticky = $stickies.eq( i + 1 ),
+                                $nextStickyPosition = $nextSticky.data( 'originalPosition' ) -
+                                $thisSticky.data( 'originalHeight' );
+                            $thisSticky.addClass( 'fixed' );
+
+                            if ( $nextSticky.length > 0 && $thisSticky.offset().top >= $nextStickyPosition ) {
+                                $thisSticky.addClass( 'absolute' ).css( 'top', $nextStickyPosition );
+                            }
+                        } else {
+                            var $prevSticky = $stickies.eq( i - 1 );
+                            $thisSticky.removeClass( 'fixed' );
+
+                            if ( $prevSticky.length > 0 &&
+                                $window.scrollTop() <= $thisSticky.data( 'originalPosition' ) -
+                                    $thisSticky.data( 'originalHeight' ) ) {
+
+                                $prevSticky.removeClass( 'absolute' ).removeAttr( 'style' );
+                            }
+                        }
+                    } );
+                };
+
+                return {
+                        load: load
+                    };
+            } )();
+
+            // because we're responsive, we need to update the height value on the sticky headers
+            $( window ).on( 'resize', function() {
+                $( '.js-sticky-header-helper' ).height( $( '.js-sg-section-header' ).height() );
+            } );
+
+            // sticky headers - you can make it happen. You can make it REAL!
+            $( function() {
+                stickyHeaders.load( $( '.js-sg-section-header' ) );
+            } );
+
+            // recalculate the sticky headers again after we toggle one of the documentation or source buttons
+            SGB.recalculateStickiesOnDocumentationToggleBtn = function() {
+                var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-documentation-container' );
+                thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
+                    _recalculateStickies();
                 } );
             };
 
-            return {
-                    load: load
-                };
-        } )();
+            SGB.recalculateStickiesOnSourceToggleBtn = function() {
+                var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-source-container' );
+                thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
+                    _recalculateStickies();
+                } );
+            };
 
-        // because we're responsive, we need to update the height value on the sticky headers
-        $( window ).on( 'resize', function() {
-            $( '.js-sticky-header-helper' ).height( $( '.js-sg-section-header' ).height() );
-        } );
-
-        // sticky headers - you can make it happen. You can make it REAL!
-        $( function() {
-            stickyHeaders.load( $( '.js-sg-section-header' ) );
-        } );
-
-        // recalculate the sticky headers again after we toggle one of the documentation or source buttons
-        SGB.recalculateStickiesOnDocumentationToggleBtn = function() {
-            var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-documentation-container' );
-            thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
-                _recalculateStickies();
-            } );
-        };
-
-        SGB.recalculateStickiesOnSourceToggleBtn = function() {
-            var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-source-container' );
-            thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
-                _recalculateStickies();
-            } );
-        };
-
-        queryAll( '.js-sg-btn-documentation' ).on( 'click', SGB.recalculateStickiesOnDocumentationToggleBtn );
-        queryAll( '.js-sg-btn-source' ).on( 'click', SGB.recalculateStickiesOnSourceToggleBtn );
+            queryAll( '.js-sg-btn-documentation' ).on( 'click', SGB.recalculateStickiesOnDocumentationToggleBtn );
+            queryAll( '.js-sg-btn-source' ).on( 'click', SGB.recalculateStickiesOnSourceToggleBtn );
+        }
 
         // init iframe resizer
         // https://github.com/davidjbradshaw/iframe-resizer
@@ -222,9 +261,10 @@ var SGB = window.SGB || {};
 
 // some navigation magic
 
-var navLinkParent = '.js-sg-nav-link-parent';
 var activeClass = 'active';
 var activeSelector = '.' + activeClass;
+
+var navLinkParent = '.js-sg-nav-link-parent';
 var navOpenedClass = 'sg-nav-opened';
 var navOpenedSelector = '.' + navOpenedClass;
 
@@ -247,6 +287,34 @@ $( document ).ready( function() {
     } );
 
 } );
+
+// toggle navigation container when we click the menu/close button
+// and also when we click on a nav link
+
+var toggleNavigationContainer = function() {
+    $( 'html' ).toggleClass( 'nav-is-active' );
+};
+
+var removeNavigationZIndex = function() {
+    $( 'html' ).removeClass( 'nav-z-index' );
+};
+
+var toggleNavigationZIndex = function( event ) {
+    if ( $( 'html' ).hasClass( 'nav-z-index' ) ) {
+        removeNavigationZIndex();
+    } else {
+        $( '.sg-navigation-container' ).one( 'transitionend', function( event ) {
+            $( 'html' ).addClass( 'nav-z-index' );
+        } );
+    }
+};
+
+$( '.js-sg-nav-toggle' ).on( 'click', toggleNavigationContainer );
+$( '.js-sg-nav-toggle' ).on( 'click', toggleNavigationZIndex );
+$( '.sg-nav-link-child' ).on( 'click', toggleNavigationContainer );
+$( '.sg-nav-link-child' ).on( 'click', removeNavigationZIndex );
+
+/**/
 
 $( document ).on( 'click', navLinkParent, function() {
 
@@ -282,6 +350,7 @@ $( document ).on( 'click', navOpenedSelector, function() {
 
 } );
 
+/*
 // media query event handler for screen <=768px
 // https://www.sitepoint.com/javascript-media-queries/
 // -jLaz
@@ -327,7 +396,6 @@ function WidthChange( mq ) {
 
                 } );
             } else {
-
                 $( navOpenedSelector + ' + .sg-nav-lv-1' ).one( 'transitionend', function( event ) {
 
                     $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
@@ -343,3 +411,5 @@ function WidthChange( mq ) {
     }
 
 }
+
+*/

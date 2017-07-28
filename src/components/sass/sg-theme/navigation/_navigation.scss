@@ -7,10 +7,16 @@
     position: fixed;
     z-index: 2100;
     width: $sg-nav-width;
+
+    .nav-is-active & {
+        @media screen and (max-width: 768px) {
+            display: flex;
+            width: 100%;
+        }
+    }
 }
 
-.sg-nav-toggle,
-.sg-sub-nav-toggle {
+.sg-nav-toggle {
     background: $sg-btn-bg-color;
     border: 0;
     color: $sg-btn-text-color;
@@ -23,6 +29,19 @@
     padding: 0 ($sg-unit / 2);
     text-decoration: none;
     z-index: 1100;
+    
+    svg {
+        width: 14px;
+    }
+
+    .sg-icon {
+        fill: currentColor;
+    }
+    
+    .sg-icon-close,
+    .btn-text-close {
+        display: none;
+    }
 
     .btn-text {
         color: currentColor;
@@ -34,30 +53,43 @@
         color: $sg-btn-text-color-hover;
         cursor: pointer;
         outline: 0;
+    }
 
-        use,
-        path {
-            fill: $sg-btn-text-color-hover;
+    .nav-is-active & {
+        color: $sg-btn-text-color-inverted;
+        
+        svg {
+            width: 12px;
+        }
+
+        .sg-icon-navicon,
+        .btn-text-open {
+            display: none;
+        }
+
+        .sg-icon-close,
+        .btn-text-close {
+            display: flex;
+        }
+
+        &:hover,
+        &:focus {
+            @media screen and (max-width: 768px) {
+                color: $sg-btn-text-color-mobile-hover;
+            }
+
+            @media screen and (min-width: 769px) {
+                color: $sg-btn-text-color-hover;
+            }
         }
     }
 }
 
-.sg-nav-toggle {
-    svg {
-        width: 14px;
-    }
-
-    use,
-    path {
-        fill: $sg-btn-text-color;
-    }
-    
-    .sg-icon-close,
-    .btn-text-close {
-        display: none;
-    }
+.sg-sub-nav-toggle {
+    display: none;
 }
 
+/*
 .sg-sub-nav-toggle {
     border-left: 1px solid rgba($sg-white, 0.2);
     display: none;
@@ -66,18 +98,19 @@
         width: 16px;
     }
 
+    use,
+    path {
+        fill: currentColor;
+    }
+
     .btn-text {
+        color: currentColor;
         display: block;
     }
 }
 
 .nav-is-active {
     @media screen and (max-width: 768px) {
-        .sg-nav-toggle-container {
-            display: flex;
-            width: 100%;
-        }        
-
         .sg-nav-toggle,
         .sg-sub-nav-toggle {
             width: 50%;
@@ -93,7 +126,6 @@
             color: $sg-nav-text-color;
         }
     }
-    
     .sg-nav-toggle {
         svg {
             width: 12px;
@@ -133,7 +165,7 @@
         .sg-icon-close,
         .sg-icon-arrow-left {
             outline: 0;
-
+            
             @media screen and (max-width: 768px) {
                 fill: $sg-btn-text-color;
             }
@@ -141,8 +173,10 @@
             @media screen and (min-width: 769px) {
                 fill: $sg-btn-text-color-hover;
             }
+            
         }
 
+        
         .btn-text {
             @media screen and (max-width: 768px) {
                 color: $sg-btn-text-color;
@@ -162,19 +196,18 @@
         }
     }
 }
+*/
 
 .nav-toggle-helper {
     background: $sg-body-bg-color;
     height: 50px;
     position: fixed;
     top: 0;
-    transition: top 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
     width: 100%;
-    z-index: 1;
+    z-index: 1200;
 
     .nav-is-active & {
         top: -50px;
-        transition: top 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
     }
 }
 
@@ -189,30 +222,27 @@
     bottom: 0;
     top: 0;
     transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+    z-index: -1;
+
+    .nav-is-active & {
+        transform: translateX(0);
+    }
+
+    .nav-z-index & {
+        z-index: 1;
+    }
 
     @media screen and (max-width: 768px) {
         background: $sg-nav-bg-color-mobile;
         height: 100vh;
         transform: translateX(-30%);
         width: 100%;
-        z-index: -1;
-
-        .nav-is-active & {
-            transform: translateX(0);
-            z-index: 0;
-        }
     }
 
     @media screen and (min-width: 769px) {
         background: $sg-nav-bg-color;
         transform: translateX(-50%);
         width: $sg-nav-width;
-        z-index: -1;
-
-        .nav-is-active & {
-            transform: translateX(0);
-            z-index: 0;
-        }
     }
 }
 
@@ -535,13 +565,13 @@ nav {
     .sg-nav-lv-1 {
         background: $sg-nav-bg-color-mobile;
         height: 100%;
-        position: fixed;
-        top: 51px;
-        margin-left: -100%;
-        transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+        //position: fixed;
+        //top: 51px;
+        //margin-left: -100%;
+        //transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
         width: 100%;
         z-index: 1;
-        will-change: transform; 
+        //will-change: transform; 
     }
 
     .nav-lv1-is-active .sg-nav-link-lv-0.sg-nav-opened + .sg-nav-lv-1 {

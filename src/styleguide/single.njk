@@ -2,9 +2,9 @@
     <article class="sg-section js-sg-section bgcolor-1">
 
         <header class="sg-section-header js-sg-section-header" data-sticky-class="fixed">
-            <div id="{{ element.name }}" class="sg-section-anchor js-sg-section-anchor"></div>
+            <div id="{{ element.name }}" class="sg-section-anchor js-sg-section-anchor transform-this"></div>
             
-            <div class="sg-header-group">
+            <div class="sg-header-group transform-this">
                 <div class="sg-title-container">
                     <h2 class="sg-section-title">{{ element.name }}</h2>
                 </div>
@@ -51,7 +51,7 @@
             </div>
         </header>
 
-        <div class="sg-documentation-container sg-toggle-container js-sg-documentation-container">
+        <div class="sg-documentation-container sg-toggle-container js-sg-documentation-container transform-this">
             <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <use class="sg-icon sg-icon-comment" xlink:href="#sg-icon-comment"></use>
             </svg>
@@ -63,7 +63,7 @@
             </div>
         </div>
         
-        <div class="sg-source-container sg-toggle-container js-sg-source-container">
+        <div class="sg-source-container sg-toggle-container js-sg-source-container transform-this">
             <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <use class="sg-icon sg-icon-code" xlink:href="#sg-icon-code"></use>
             </svg>
@@ -75,10 +75,10 @@
             </div>
         </div>
 
-        <div class="sg-preview">            
+        <div class="sg-preview transform-this">            
             
             {% if iframe %}
-                <iframe src="{{ element.iframePath }}" frameborder="0"></iframe>
+                <iframe src="{{ element.iframePath }}" frameborder="0" title="iframe for {{ element.name }}"></iframe>
             {% else %}
                 {{ element.content | safe }}
             {% endif %}
