@@ -224,8 +224,13 @@ var SGB = window.SGB || {};
                 } );
             };
 
-            queryAll( '.js-sg-btn-documentation' ).on( 'click', SGB.recalculateStickiesOnDocumentationToggleBtn );
-            queryAll( '.js-sg-btn-source' ).on( 'click', SGB.recalculateStickiesOnSourceToggleBtn );
+            Array.prototype.forEach.call( queryAll( '.js-sg-btn-documentation' ), function( el ) {
+                el.addEventListener( 'click', SGB.recalculateStickiesOnDocumentationToggleBtn );
+            } );
+
+            Array.prototype.forEach.call( queryAll( '.js-sg-btn-source' ), function( el ) {
+                el.addEventListener( 'click', SGB.recalculateStickiesOnSourceToggleBtn );
+            } );
         }
 
         // init iframe resizer
