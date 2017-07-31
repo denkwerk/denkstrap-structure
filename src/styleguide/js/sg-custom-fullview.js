@@ -38,6 +38,23 @@ var SGB = window.SGB || {};
             _hasClass( el, cl ) ? _removeClass( el, cl ) : _addClass( el, cl );
         }
 
+        /**
+         * Get the closest element for the given selector
+         *
+         * @param {HTMLElement} element
+         * @param {String} selector
+         * @return {HTMLElement|null}
+         * @private
+         */
+        function _getClosest( element, selector ) {
+            if ( !element ) {
+                return null;
+            }
+
+            return element.matches( selector ) ? element :
+                _getClosest( element.parentElement, selector );
+        }
+
         /*
         ** recalculate the height of the content of the current sg-section
         ** so that the next sticky header knows its new position
@@ -193,8 +210,8 @@ var SGB = window.SGB || {};
 
             // because we're responsive, we need to update the height value on the sticky headers
             window.addEventListener( 'resize', function() {
-                var stickyHeaderHelper = document.querySelector( '.js-sticky-header-helper' )
-                    stickyHeaderHeight =  document.querySelector( '.js-sg-section-header' ).clientHeight;
+                var stickyHeaderHelper = document.querySelector( '.js-sticky-header-helper' );
+                stickyHeaderHeight =  document.querySelector( '.js-sg-section-header' ).clientHeight;
 
                 stickyHeaderHelper.style.height = stickyHeaderHeight;
             } );
@@ -206,15 +223,17 @@ var SGB = window.SGB || {};
 
             // recalculate the sticky headers again after we toggle one of the documentation or source buttons
             SGB.recalculateStickiesOnDocumentationToggleBtn = function() {
-                var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-documentation-container' );
-                thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
+                var thisContainer = _getClosest( this, '.js-sg-section' )
+                    .querySelector( '.js-sg-documentation-container' );
+                thisContainer.addEventListener( 'transitionend', function( event ) {
                     _recalculateStickies();
                 } );
             };
 
             SGB.recalculateStickiesOnSourceToggleBtn = function() {
-                var thisContainer = $( this ).closest( '.js-sg-section' ).find( '.js-sg-source-container' );
-                thisContainer[ 0 ].addEventListener( 'transitionend', function( event ) {
+                var thisContainer = _getClosest( this, '.js-sg-section' )
+                    .querySelector( '.js-sg-source-container' );
+                thisContainer.addEventListener( 'transitionend', function( event ) {
                     _recalculateStickies();
                 } );
             };
