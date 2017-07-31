@@ -22,7 +22,7 @@
         </h3>
         {{ navigation(item.children, level + 1)}}
     {% else %}
-        <a class="sg-nav-link sg-nav-link-lv-{{ level }} sg-nav-link-child" href="#{{ item.hash }}">
+        <a class="sg-nav-link sg-nav-link-lv-{{ level }} sg-nav-link-child js-sg-nav-link-child" href="#{{ item.hash }}">
             <span class="sg-nav-text js-sg-nav-text">{{ item.hash}}</span>
         </a>
     {% endif %}

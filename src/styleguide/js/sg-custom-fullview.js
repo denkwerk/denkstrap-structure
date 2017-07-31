@@ -18,6 +18,7 @@ var SGB = window.SGB || {};
     if ( 'querySelector' in doc && Array.prototype.forEach ) {
 
         /* jshint ignore:start */
+
         // Add functionality to toggle classes on elements
         function _hasClass( el, cl ) {
             var regex = new RegExp( '(?:\\s|^)' + cl + '(?:\\s|$)' );
@@ -37,26 +38,13 @@ var SGB = window.SGB || {};
             _hasClass( el, cl ) ? _removeClass( el, cl ) : _addClass( el, cl );
         }
 
-        // Toggle Navigation container
-
         /*
-        SGB.toggleNav = function() {
-            _toggleClass( docEl, 'nav-is-active' );
-        };
-
-        SGB.hideNav = function() {
-            _removeClass( docEl, 'nav-is-active' );
-        };
-
-        queryAll( '.js-sg-nav-toggle' ).on( 'click', SGB.toggleNav );
-        queryAll( '.js-sg-nav-item a' ).on( 'click', SGB.hideNav );
+        ** recalculate the height of the content of the current sg-section
+        ** so that the next sticky header knows its new position
+        ** when source code or documentation is toggled.
+        ** b/c the function in Instagram-Like sticky headers fires on documend.load
+        ** -jLaz & mbuescher
         */
-
-        // recalculate the height of the content of the current sg-section
-        // so that the next sticky header knows its new position
-        // when source code or documentation is toggled.
-        // b/c the function in Instagram-Like sticky headers fires on documend.load
-        // -jLaz & marius
 
         function _recalculateStickies() {
             if ( navigator.userAgent.toLowerCase().indexOf( 'firefox' ) > -1 ) {
@@ -77,8 +65,10 @@ var SGB = window.SGB || {};
 
         /* jshint ignore:end */
 
-        // Bulk toggle options for documentation and source code
-        // -jLaz & troth
+        /*
+        ** Bulk toggle options for documentation and source code
+        ** -jLaz & troth
+        */
 
         var toggleAllDocBtn = document.getElementById( 'sg-toggle-all-doc' ),
             allDocBtns = document.getElementsByClassName( 'js-sg-btn-documentation' ),
@@ -87,21 +77,21 @@ var SGB = window.SGB || {};
         toggleAllDocBtn.addEventListener( 'click', function() {
             if ( toggleAllDocBtn.checked ) {
                 Array.prototype.forEach.call( allDocBtns, function( button ) {
-                    button.classList.add( 'sg-btn-active' );
+                    _addClass( button, 'sg-btn-active');
                 } );
 
                 Array.prototype.forEach.call( allDocContainer, function( container ) {
-                    container.classList.add( 'sg-active' );
+                    _addClass( container, 'sg-active' );
                 } );
 
                 _recalculateStickies();
             } else {
                 Array.prototype.forEach.call( allDocBtns, function( button ) {
-                    button.classList.remove( 'sg-btn-active' );
+                    _removeClass( button, 'sg-btn-active' );
                 } );
 
                 Array.prototype.forEach.call( allDocContainer, function( container ) {
-                    container.classList.remove( 'sg-active' );
+                    _removeClass( container, 'sg-active' );
                 } );
 
                 _recalculateStickies();
@@ -136,10 +126,12 @@ var SGB = window.SGB || {};
             }
         } );
 
-        // Instagram-Like sticky headers
-        // https://codepen.io/sales/pen/oxqzOe
-        // with modifications (comments)
-        // -jLaz
+        /* 
+        ** Instagram-Like sticky headers
+        ** https://codepen.io/sales/pen/oxqzOe
+        ** with modifications (comments)
+        ** -jLaz
+        */
 
         if ( navigator.userAgent.toLowerCase().indexOf( 'firefox' ) > -1 ) {
             // no sticky headres for firefox
@@ -233,8 +225,10 @@ var SGB = window.SGB || {};
             } );
         }
 
-        // init iframe resizer
-        // https://github.com/davidjbradshaw/iframe-resizer
+        /* 
+        ** init iframe resizer
+        ** https://github.com/davidjbradshaw/iframe-resizer
+        */
 
         var iframes = iFrameResize( {
             //hide timeout warnings
@@ -258,166 +252,194 @@ var SGB = window.SGB || {};
             }
         }, 'iframe' );
 
+        // All the stuff I can't do in vanilla js b/c I'm a noob.
+        // REFACTOR THIS!
+        // -jLaz
+
+        // some navigation magic
+
+        var lv0LinkParent = $( '.sg-nav-link-lv-0.js-sg-nav-link-parent' );
+        var lv1activeClass = 'nav-lv1-is-active';
+        var closeLV1Button = $( '.js-sg-sub-nav-toggle' );
+        var navShowItemClass = 'sg-show-item';
+        var navShowItemSelector = '.' + navShowItemClass;
+
+        var current;
+
+        var activeClass = 'active';
+        var activeSelector = '.' + activeClass;
+
+        /*
+        ** highlight active section in navigation
+        */
+
+        $( document ).ready( function() {
+
+            $( '.js-sg-section' ).mouseenter( function() {
+                var id = $( this ).find( '.js-sg-section-anchor' ).attr( 'id' ),
+                    navigationlinks = document.querySelector( '.js-sg-nav-link-child' );
+
+                _removeClass( navigationlinks, activeClass );
+                //_addClass( '[href=#' + id + ']', 'activeClass' );
+                $( '[href=#' + id + ']' ).addClass( activeClass );
+            } );
+
+        } );
+
+        /* 
+        ** toggle navigation container when we click the menu/close button
+        ** and also when we click on a nav link
+        */
+
+        var html = document.querySelector( 'html' )
+            zIndexClass = 'nav-z-index';
+
+
+        var toggleNavigationContainer = function() {
+            _toggleClass( html, 'nav-is-active' );
+        };
+
+        var addNavigationZIndex = function() {
+            _addClass( html, 'nav-z-index' );
+        };
+
+        var removeNavigationZIndex = function() {
+            _removeClass( html, 'nav-z-index' );
+        };
+
+        var toggleNavigationZIndex = function( event ) {
+            if ( _hasClass( html, 'nav-z-index' ) ) {
+                removeNavigationZIndex();
+            } else {
+                //queryAll( '.sg-navigation-container' ).one( 'transitionend', function( event ) {
+                $( '.sg-navigation-container' ).one( 'transitionend', function( event ) {
+                    addNavigationZIndex();
+                } );
+            }
+        };
+
+        Array.prototype.forEach.call( queryAll( '.js-sg-nav-toggle' ), function( el ) {
+            el.addEventListener( 'click', toggleNavigationContainer );
+            el.addEventListener( 'click', toggleNavigationZIndex );
+        } );
+
+        Array.prototype.forEach.call( queryAll( '.js-sg-nav-link-child' ), function( el ) {
+            el.addEventListener( 'click', toggleNavigationContainer );
+            el.addEventListener( 'click', removeNavigationZIndex );
+        } );
+
+        /**/
+
+        var navLinkParent = '.js-sg-nav-link-parent';
+        var navOpenedClass = 'sg-nav-opened';
+        var navOpenedSelector = '.' + navOpenedClass;
+
+        $( document ).on( 'click', navLinkParent, function() {
+
+            current = this;
+
+            /* 
+            ** Open the current next level list.
+            */
+
+            var thisSiblingItem = $(this).siblings().find( '> .js-sg-nav-item' );
+            thisSiblingItem.toggleClass( 'sg-show-item' );
+            //_toggleClass( thisSiblingItem, 'sg-show-item' );
+
+            /* 
+            ** add an extra class b/c the icon toggle is buggy when it comes to multiple levels
+            */
+
+            _toggleClass( this, navOpenedClass );
+
+            /*
+            ** detect if nav-text has more than one line and if yes, add class multiline
+            */
+
+            var $navText = $( '.js-sg-nav-text' );
+
+            $navText.each( function() {
+                if ( $( this ).height() > 30 ) {
+                    $( this ).parent().addClass( 'multiline' );
+                }
+            } );
+        } );
+
+        // extra class in action: using this to find all items with mius icons
+        // to resolve the bug where lv1 items were still on minus when closed.
+        // b/c of that, the next toggle gave them the plus icon but they were then open
+        // so it was the opposite way around.
+        // -jLaz
+
+        $( document ).on( 'click', navOpenedSelector, function() {
+
+            $( this ).removeClass( navOpenedClass );
+            $( this ).parent().find( navOpenedSelector ).removeClass( navOpenedClass );
+            $( this ).parent().find( navShowItemSelector ).removeClass( navShowItemClass );
+
+        } );
+
+        // media query event handler for screen <=768px
+        // https://www.sitepoint.com/javascript-media-queries/
+        // -jLaz
+
+        if ( matchMedia ) {
+            var toMQ = window.matchMedia( '(max-width: 768px)' );
+            toMQ.addListener( WidthChange );
+            WidthChange( toMQ );
+        }
+
+        // media query change
+        function WidthChange( toMQ ) {
+            if ( toMQ.matches ) {
+
+                // add an active class for lv1 navigation
+
+                lv0LinkParent.on( 'click', function() {
+
+                    if ( $( 'html' ).hasClass( lv1activeClass ) ) {
+                        //
+                    } else {
+                        $( 'html' ).addClass( lv1activeClass );
+                    }
+
+                } );
+
+                // mobile nav close button for lv1
+
+                closeLV1Button.on( 'click', function( event ) {
+
+                    $( 'html' ).removeClass( lv1activeClass );
+
+                    // we cant use .toggle here b/c this leads to problematic behaviour
+                    // so we need to do special things for speacial elements
+
+                    var navList = $( current ).siblings( '.sg-nav-list' );
+
+                    if ( navList.hasClass( 'sg-nav-lv-1' ) ) {
+                        navList.one( 'transitionend', function( event ) {
+
+                            $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
+                            $( navOpenedSelector ).removeClass( activeClass ).removeClass( navOpenedClass );
+
+                        } );
+                    } else {
+                        $( navOpenedSelector + ' + .sg-nav-lv-1' ).one( 'transitionend', function( event ) {
+
+                            $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
+                            $( navOpenedSelector ).removeClass( activeClass ).removeClass( navOpenedClass );
+
+                        } );
+                    }
+
+                } );
+
+            } else {
+                // window width is >=769px
+            }
+
+        }
+
     }
 }( this, SGB ) );
-
-// All the stuff I can't do in vanilla js b/c I'm a noob.
-// REFACTOR THIS!
-// -jLaz
-
-// some navigation magic
-
-var activeClass = 'active';
-var activeSelector = '.' + activeClass;
-
-var navLinkParent = '.js-sg-nav-link-parent';
-var navOpenedClass = 'sg-nav-opened';
-var navOpenedSelector = '.' + navOpenedClass;
-
-var lv0LinkParent = $( '.sg-nav-link-lv-0.js-sg-nav-link-parent' );
-var lv1activeClass = 'nav-lv1-is-active';
-var closeLV1Button = $( '.js-sg-sub-nav-toggle' );
-var navShowItemClass = 'sg-show-item';
-var navShowItemSelector = '.' + navShowItemClass;
-
-var current;
-
-$( document ).ready( function() {
-
-    // highlight active section in navi
-    $( '.js-sg-section' ).mouseenter( function() {
-        var id = $( this ).find( '.js-sg-section-anchor' ).attr( 'id' );
-
-        $( 'a' ).removeClass( activeClass );
-        $( '[href=#' + id + ']' ).addClass( activeClass );
-    } );
-
-} );
-
-// toggle navigation container when we click the menu/close button
-// and also when we click on a nav link
-
-var toggleNavigationContainer = function() {
-    $( 'html' ).toggleClass( 'nav-is-active' );
-};
-
-var addNavigationZIndex = function() {
-    $( 'html' ).addClass( 'nav-z-index' );
-};
-
-var removeNavigationZIndex = function() {
-    $( 'html' ).removeClass( 'nav-z-index' );
-};
-
-var toggleNavigationZIndex = function( event ) {
-    if ( $( 'html' ).hasClass( 'nav-z-index' ) ) {
-        removeNavigationZIndex();
-    } else {
-        $( '.sg-navigation-container' ).one( 'transitionend', function( event ) {
-            addNavigationZIndex();
-        } );
-    }
-};
-
-$( '.js-sg-nav-toggle' ).on( 'click', toggleNavigationContainer );
-$( '.js-sg-nav-toggle' ).on( 'click', toggleNavigationZIndex );
-$( '.sg-nav-link-child' ).on( 'click', toggleNavigationContainer );
-$( '.sg-nav-link-child' ).on( 'click', removeNavigationZIndex );
-
-/**/
-
-$( document ).on( 'click', navLinkParent, function() {
-
-    current = this;
-
-    // this opens the li's, but just the next level
-    $( this ).siblings().find( '> .js-sg-nav-item' ).toggleClass( 'sg-show-item' );
-
-    // adding an extra class b/c the icon toggle is buggy when it comes to multiple levels
-    $( this ).toggleClass( navOpenedClass );
-
-    // detect if nav-text has more than one line and if yes, add class multiline
-    var $navText = $( '.js-sg-nav-text' );
-
-    $navText.each( function() {
-        if ( $( this ).height() > 30 ) {
-            $( this ).parent().addClass( 'multiline' );
-        }
-    } );
-} );
-
-// extra class in action: using this to find all items with mius icons
-// to resolve the bug where lv1 items were still on minus when closed.
-// b/c of that, the next toggle gave them the plus icon but they were then open
-// so it was the opposite way around.
-// -jLaz
-
-$( document ).on( 'click', navOpenedSelector, function() {
-
-    $( this ).removeClass( navOpenedClass );
-    $( this ).parent().find( navOpenedSelector ).removeClass( navOpenedClass );
-    $( this ).parent().find( navShowItemSelector ).removeClass( navShowItemClass );
-
-} );
-
-// media query event handler for screen <=768px
-// https://www.sitepoint.com/javascript-media-queries/
-// -jLaz
-
-if ( matchMedia ) {
-    var toMQ = window.matchMedia( '(max-width: 768px)' );
-    toMQ.addListener( WidthChange );
-    WidthChange( toMQ );
-}
-
-// media query change
-function WidthChange( toMQ ) {
-    if ( toMQ.matches ) {
-
-        // add an active class for lv1 navigation
-
-        lv0LinkParent.on( 'click', function() {
-
-            if ( $( 'html' ).hasClass( lv1activeClass ) ) {
-
-            } else {
-                $( 'html' ).addClass( lv1activeClass );
-            }
-
-        } );
-
-        // mobile nav close button for lv1
-
-        closeLV1Button.on( 'click', function( event ) {
-
-            $( 'html' ).removeClass( lv1activeClass );
-
-            // we cant use .toggle here b/c this leads to problematic behaviour
-            // so we need to do special things for speacial elements
-
-            var navList = $( current ).siblings( '.sg-nav-list' );
-
-            if ( navList.hasClass( 'sg-nav-lv-1' ) ) {
-                navList.one( 'transitionend', function( event ) {
-
-                    $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
-                    $( navOpenedSelector ).removeClass( activeClass ).removeClass( navOpenedClass );
-
-                } );
-            } else {
-                $( navOpenedSelector + ' + .sg-nav-lv-1' ).one( 'transitionend', function( event ) {
-
-                    $( event.target ).find( navShowItemSelector ).removeClass( navShowItemClass );
-                    $( navOpenedSelector ).removeClass( activeClass ).removeClass( navOpenedClass );
-
-                } );
-            }
-
-        } );
-
-    } else {
-        // window width is >=769px
-    }
-
-}
 
