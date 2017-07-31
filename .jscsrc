@@ -19,7 +19,8 @@
     },
     "excludeFiles": [
         "node_modules/**",
-        "src/components/app/vendor/**"
+        "src/components/app/vendor/**",
+        "src/styleguide/js/vendor/**"
     ],
     "requireCapitalizedConstructors": true,
     "fileExtensions": ".js"

@@ -18,7 +18,8 @@ var SGB = window.SGB || {};
             return null;
         }
 
-        return element.parentElement.matches( selector ) ? element.parentElement : getParent( element.parentElement, selector );
+        return element.parentElement.matches( selector ) ? element.parentElement :
+            getParent( element.parentElement, selector );
     }
 
     /**

@@ -36,7 +36,6 @@ var SGB = window.SGB || {};
         function _toggleClass( el, cl ) {
             _hasClass( el, cl ) ? _removeClass( el, cl ) : _addClass( el, cl );
         }
-        /* jshint ignore:end */
 
         // Toggle Navigation container
 
@@ -75,6 +74,8 @@ var SGB = window.SGB || {};
                 } );
             }
         }
+
+        /* jshint ignore:end */
 
         // Bulk toggle options for documentation and source code
         // -jLaz & troth
@@ -359,7 +360,7 @@ $( document ).on( 'click', navOpenedSelector, function() {
 // -jLaz
 
 if ( matchMedia ) {
-    const toMQ = window.matchMedia( '(max-width: 768px)' );
+    var toMQ = window.matchMedia( '(max-width: 768px)' );
     toMQ.addListener( WidthChange );
     WidthChange( toMQ );
 }
