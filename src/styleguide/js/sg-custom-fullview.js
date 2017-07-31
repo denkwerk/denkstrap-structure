@@ -70,14 +70,14 @@ var SGB = window.SGB || {};
         ** -jLaz & troth
         */
 
-        var toggleAllDocBtn = document.getElementById( 'sg-toggle-all-doc' ),
-            allDocBtns = document.getElementsByClassName( 'js-sg-btn-documentation' ),
-            allDocContainer = document.getElementsByClassName( 'sg-documentation-container' );
+        var toggleAllDocBtn = document.querySelector( '#sg-toggle-all-doc' ),
+            allDocBtns = document.querySelectorAll( '.js-sg-btn-documentation' );
+        allDocContainer = document.querySelectorAll( '.sg-documentation-container' );
 
         toggleAllDocBtn.addEventListener( 'click', function() {
             if ( toggleAllDocBtn.checked ) {
                 Array.prototype.forEach.call( allDocBtns, function( button ) {
-                    _addClass( button, 'sg-btn-active');
+                    _addClass( button, 'sg-btn-active' );
                 } );
 
                 Array.prototype.forEach.call( allDocContainer, function( container ) {
@@ -98,9 +98,9 @@ var SGB = window.SGB || {};
             }
         } );
 
-        var toggleAllSourceBtn = document.getElementById( 'sg-toggle-all-source' ),
-            allSourceBtns = document.getElementsByClassName( 'sg-btn-source' ),
-            allSourceContainer = document.getElementsByClassName( 'sg-source-container' );
+        var toggleAllSourceBtn = document.querySelector( '#sg-toggle-all-source' ),
+            allSourceBtns = document.querySelectorAll( '.sg-btn-source' ),
+            allSourceContainer = document.querySelectorAll( '.sg-source-container' );
 
         toggleAllSourceBtn.addEventListener( 'click', function() {
             if ( toggleAllSourceBtn.checked ) {
@@ -126,7 +126,7 @@ var SGB = window.SGB || {};
             }
         } );
 
-        /* 
+        /*
         ** Instagram-Like sticky headers
         ** https://codepen.io/sales/pen/oxqzOe
         ** with modifications (comments)
@@ -192,8 +192,11 @@ var SGB = window.SGB || {};
             } )();
 
             // because we're responsive, we need to update the height value on the sticky headers
-            $( window ).on( 'resize', function() {
-                $( '.js-sticky-header-helper' ).height( $( '.js-sg-section-header' ).height() );
+            window.addEventListener( 'resize', function() {
+                var stickyHeaderHelper = document.querySelector( '.js-sticky-header-helper' )
+                    stickyHeaderHeight =  document.querySelector( '.js-sg-section-header' ).clientHeight;
+
+                stickyHeaderHelper.style.height = stickyHeaderHeight;
             } );
 
             // sticky headers - you can make it happen. You can make it REAL!
@@ -225,7 +228,7 @@ var SGB = window.SGB || {};
             } );
         }
 
-        /* 
+        /*
         ** init iframe resizer
         ** https://github.com/davidjbradshaw/iframe-resizer
         */
@@ -286,14 +289,13 @@ var SGB = window.SGB || {};
 
         } );
 
-        /* 
+        /*
         ** toggle navigation container when we click the menu/close button
         ** and also when we click on a nav link
         */
 
-        var html = document.querySelector( 'html' )
+        var html = document.querySelector( 'html' ),
             zIndexClass = 'nav-z-index';
-
 
         var toggleNavigationContainer = function() {
             _toggleClass( html, 'nav-is-active' );
@@ -338,15 +340,15 @@ var SGB = window.SGB || {};
 
             current = this;
 
-            /* 
+            /*
             ** Open the current next level list.
             */
 
-            var thisSiblingItem = $(this).siblings().find( '> .js-sg-nav-item' );
+            var thisSiblingItem = $( this ).siblings().find( '> .js-sg-nav-item' );
             thisSiblingItem.toggleClass( 'sg-show-item' );
             //_toggleClass( thisSiblingItem, 'sg-show-item' );
 
-            /* 
+            /*
             ** add an extra class b/c the icon toggle is buggy when it comes to multiple levels
             */
 
