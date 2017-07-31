@@ -1,4 +1,4 @@
-{% macro render( element, iframe=true ) -%}
+{% macro render( element, iframe=true, webPath='' ) -%}
     <article class="sg-section js-sg-section bgcolor-1">
 
         <header class="sg-section-header js-sg-section-header" data-sticky-class="fixed">
@@ -78,7 +78,7 @@
         <div class="sg-preview transform-this">            
             
             {% if iframe %}
-                <iframe src="{{ element.iframePath }}" frameborder="0" title="iframe for {{ element.name }}"></iframe>
+                <iframe src="{{ webPath }}{{ element.iframePath }}" frameborder="0" title="iframe for {{ element.name }}"></iframe>
             {% else %}
                 {{ element.content | safe }}
             {% endif %}
