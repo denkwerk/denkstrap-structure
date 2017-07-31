@@ -236,7 +236,7 @@ var SGB = window.SGB || {};
         // init iframe resizer
         // https://github.com/davidjbradshaw/iframe-resizer
 
-        $( 'iframe' ).iFrameResize( {
+        var iframes = iFrameResize( {
             //hide timeout warnings
             warningTimeout: 0,
             // include pos: absolute elements and bigger elements coming in when interacting with sth
@@ -256,7 +256,7 @@ var SGB = window.SGB || {};
                     _recalculateStickies();
                 } );
             }
-        } );
+        }, 'iframe' );
 
     }
 }( this, SGB ) );
