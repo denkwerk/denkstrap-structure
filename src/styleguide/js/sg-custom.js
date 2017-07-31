@@ -6,9 +6,42 @@ var SGB = window.SGB || {};
 
 ( function( w, SGB, undefined ) {
 
+    /**
+     * Get parent element with given selector
+     *
+     * @param {HTMLElement} element
+     * @param {String} selector
+     * @return {HTMLElement|null}
+     */
+    function getParent( element, selector ) {
+        if ( !element.parentElement ) {
+            return null;
+        }
+
+        return element.parentElement.matches( selector ) ? element.parentElement : getParent( element.parentElement, selector );
+    }
+
+    /**
+     * Get all parent elements matching the given selector
+     *
+     * @param {HTMLElement} element
+     * @param {String} selector
+     * @return {HTMLElement[]}
+     */
+    function getParents( element, selector ) {
+        var result = [],
+            parent = getParent( element, selector );
+
+        while ( parent !== null ) {
+            result.push( parent );
+            parent = getParent( parent, selector );
+        }
+
+        return result;
+    }
+
     var doc = w.document,
-        docEl = doc.documentElement,
-        $stickies;
+        docEl = doc.documentElement;
 
     // Replace no-js class with js class
     docEl.className = docEl.className.replace( /no-js/gi, '' );
@@ -24,18 +57,6 @@ var SGB = window.SGB || {};
         // Syntactic sugar for querySelectorAll and event delegates courtesy
         // @paul_irish: https://gist.github.com/paulirish/12fb951a8b893a454b32
         var queryAll = document.querySelectorAll.bind( document );
-
-        Node.prototype.on = window.on = function( name, fn ) {
-            this.addEventListener( name, fn );
-        };
-
-        NodeList.prototype.forEach = Array.prototype.forEach;
-
-        NodeList.prototype.on = NodeList.prototype.addEventListener = function( name, fn ) {
-            this.forEach( function( elem, i ) {
-                elem.on( name, fn );
-            } );
-        };
 
         /* jshint ignore:start */
         // Add functionality to toggle classes on elements
@@ -57,47 +78,31 @@ var SGB = window.SGB || {};
             _hasClass( el, cl ) ? _removeClass( el, cl ) : _addClass( el, cl );
         }
 
-        // recalculate the height of the content of the current sg-section
-        // so that the next sticky header knows its new position
-        // when source code or documentation is toggled.
-        // b/c the function in Instagram-Like sticky headers fires on documend.load
-        // -jLaz & marius
-
-        function _recalculateStickies() {
-            $stickies.each( function() {
-                var $thisSticky = $( this );
-
-                $thisSticky
-                    .data( 'originalPosition', $thisSticky.offset().top )
-                    .data( 'originalHeight', $thisSticky.outerHeight() )
-                    .parent()
-                    .height( $thisSticky.outerHeight() );
-            } );
-        }
-
         /* jshint ignore:end */
 
         // Single toggles for documentation and source code
         // -jLaz
 
         SGB.toggleSingleDocBtn = function() {
-            var button = this,
-                buttonIcon = this.childNodes[ 1 ];
+            var button = this;
 
             _toggleClass( button, 'sg-btn-active' );
 
         };
 
-        queryAll( '.js-sg-btn-documentation' ).on( 'click', SGB.toggleSingleDocBtn );
+        Array.prototype.forEach.call( queryAll( '.js-sg-btn-documentation' ), function( el ) {
+            el.addEventListener( 'click', SGB.toggleSingleDocBtn );
+        } );
 
         SGB.toggleSingleSourceBtn = function() {
-            var button = this,
-                buttonIcon = this.childNodes[ 1 ];
+            var button = this;
 
             _toggleClass( button, 'sg-btn-active' );
         };
 
-        queryAll( '.js-sg-btn-source' ).on( 'click', SGB.toggleSingleSourceBtn );
+        Array.prototype.forEach.call( queryAll( '.js-sg-btn-source' ), function( el ) {
+            el.addEventListener( 'click', SGB.toggleSingleSourceBtn );
+        } );
 
         // toggle active class when we click the documentation or source buttons
         SGB.DocumentationToggleBtn = function() {
@@ -110,8 +115,13 @@ var SGB = window.SGB || {};
             thisContainer.toggleClass( 'sg-active' );
         };
 
-        queryAll( '.js-sg-btn-documentation' ).on( 'click', SGB.DocumentationToggleBtn );
-        queryAll( '.js-sg-btn-source' ).on( 'click', SGB.SourceToggleBtn );
+        Array.prototype.forEach.call( queryAll( '.js-sg-btn-documentation' ), function( el ) {
+            el.addEventListener( 'click', SGB.DocumentationToggleBtn );
+        } );
+
+        Array.prototype.forEach.call( queryAll( '.js-sg-btn-source' ), function( el ) {
+            el.addEventListener( 'click', SGB.SourceToggleBtn );
+        } );
 
         /*!
          * @copyright Copyright (c) 2017 IcoMoon.io
@@ -344,12 +354,22 @@ var SGB = window.SGB || {};
         }() );
 
     }
-}( this, SGB ) );
 
-$( '.js-sg-btn-bgcolor' ).on( 'click', function() {
-    var classes = [ 'sg-section js-sg-section bgcolor-2', 'sg-section js-sg-section bgcolor-3', 'sg-section js-sg-section bgcolor-1' ];
+    var colorClasses = [ 'bgcolor-1', 'bgcolor-2', 'bgcolor-3' ];
 
-    $( this ).parents( '.js-sg-section' ).each( function() {
-        this.className = classes[ ( $.inArray( this.className, classes ) + 1 ) % classes.length ];
+    Array.prototype.forEach.call( document.querySelectorAll( '.js-sg-btn-bgcolor' ), function( el ) {
+        var clickCounter = 0,
+            parents = getParents( el, '.js-sg-section' );
+
+        el.addEventListener( 'click', function( event ) {
+            event.preventDefault();
+
+            Array.prototype.forEach.call( parents, function( el ) {
+                el.classList.remove( colorClasses[ clickCounter ] );
+                el.classList.add( colorClasses[ ( clickCounter + 1 ) % colorClasses.length ] );
+            } );
+
+            clickCounter = ( clickCounter + 1 ) % colorClasses.length;
+        } );
     } );
-} );
+}( this, SGB ) );
