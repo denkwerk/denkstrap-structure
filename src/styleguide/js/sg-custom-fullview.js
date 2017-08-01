@@ -6,9 +6,7 @@ var SGB = window.SGB || {};
 
 ( function( w, SGB, undefined ) {
 
-    var doc = w.document,
-        docEl = doc.documentElement, //html
-        $stickies;
+    var doc = w.document; //html
 
     // Syntactic sugar for querySelectorAll and event delegates courtesy
     // @paul_irish: https://gist.github.com/paulirish/12fb951a8b893a454b32
@@ -68,14 +66,10 @@ var SGB = window.SGB || {};
                 // no sticky headres for firefox
                 // b/c there is a bug with the non-fixed elements and transform
             } else {
-                $stickies.each( function() {
-                    var $thisSticky = $( this );
-
-                    $thisSticky
-                        .data( 'originalPosition', $thisSticky.offset().top )
-                        .data( 'originalHeight', $thisSticky.outerHeight() )
-                        .parent()
-                        .height( $thisSticky.outerHeight() );
+                stickyInfo.forEach( function( info ) {
+                    info.originalHeight = info.el.scrollHeight;
+                    info.originalPosition = info.el.getBoundingClientRect().top;
+                    info.el.parentElement.style.height = info.el.scrollHeight + 'px';
                 } );
             }
         }
@@ -88,8 +82,8 @@ var SGB = window.SGB || {};
         */
 
         var toggleAllDocBtn = document.querySelector( '#sg-toggle-all-doc' ),
-            allDocBtns = document.querySelectorAll( '.js-sg-btn-documentation' );
-        allDocContainer = document.querySelectorAll( '.sg-documentation-container' );
+            allDocBtns = document.querySelectorAll( '.js-sg-btn-documentation' ),
+            allDocContainer = document.querySelectorAll( '.sg-documentation-container' );
 
         toggleAllDocBtn.addEventListener( 'click', function() {
             if ( toggleAllDocBtn.checked ) {
@@ -148,57 +142,57 @@ var SGB = window.SGB || {};
         ** https://codepen.io/sales/pen/oxqzOe
         ** with modifications (comments)
         ** -jLaz
-        */
+        **
+        ** Without jQuery! Bouyah!
+        ** -mariusbuescher
+        **/
 
         if ( navigator.userAgent.toLowerCase().indexOf( 'firefox' ) > -1 ) {
             // no sticky headres for firefox
             // b/c there is a bug with the non-fixed elements and transform
         } else {
 
+            var stickyInfo = [];
+
             var stickyHeaders = ( function() {
-                var $window = $( window );
+                // var $window = $( window );
                 var load = function( stickies ) {
+                    stickyInfo = Array.prototype.map.call( stickies, function( el ) {
+                        var wrapper = document.createElement( 'div' );
+                        wrapper.classList.add( 'js-sticky-header-helper' );
 
-                    if ( typeof stickies === 'object' && stickies instanceof jQuery && stickies.length > 0 ) {
-                        $stickies = stickies.each( function() {
-                            var $thisSticky = $( this ).wrap( '<div class="js-sticky-header-helper" />' );
-                            $thisSticky
-                                .data( 'originalPosition', $thisSticky.offset().top )
-                                .data( 'originalHeight', $thisSticky.outerHeight() )
-                                .parent()
-                                .height( $thisSticky.outerHeight() );
-                        } );
+                        el.parentElement.insertBefore( wrapper, el.parentElement.children[ 0 ] );
+                        wrapper.appendChild( el );
 
-                        $window.off( 'scroll.stickies' ).on( 'scroll.stickies', function() {
-                            _whenScrolling();
-                        } );
-                    }
+                        wrapper.style.height = el.scrollHeight + 'px';
+
+                        return {
+                            el: el,
+                            originalHeight: el.scrollHeight,
+                            originalPosition: el.getBoundingClientRect().top
+                        };
+                    } );
+
+                    window.addEventListener( 'scroll', function() {
+                        _whenScrolling();
+                    } );
                 };
 
                 var _whenScrolling = function() {
-                    $stickies.each( function( i ) {
-                        var $thisSticky = $( this ),
-                            $stickyPosition = $thisSticky.data( 'originalPosition' );
+                    stickyInfo.forEach( function( info, i ) {
+                        var nextSticky = stickyInfo[ i + 1 ];
+                        var nextStickyPosition = info.originalPosition - window.scrollY;
 
-                        if ( $stickyPosition <= $window.scrollTop() ) {
-                            var $nextSticky = $stickies.eq( i + 1 ),
-                                $nextStickyPosition = $nextSticky.data( 'originalPosition' ) -
-                                $thisSticky.data( 'originalHeight' );
-                            $thisSticky.addClass( 'fixed' );
-
-                            if ( $nextSticky.length > 0 && $thisSticky.offset().top >= $nextStickyPosition ) {
-                                $thisSticky.addClass( 'absolute' ).css( 'top', $nextStickyPosition );
+                        if ( nextStickyPosition <= 0 ) {
+                            info.el.classList.add( 'fixed' );
+                            if ( nextSticky.originalPosition - window.scrollY - info.originalHeight < 0 ) {
+                                info.el.style.top =
+                                    ( nextSticky.originalPosition - window.scrollY - info.originalHeight ) + 'px';
+                            } else {
+                                info.el.style.top = null;
                             }
                         } else {
-                            var $prevSticky = $stickies.eq( i - 1 );
-                            $thisSticky.removeClass( 'fixed' );
-
-                            if ( $prevSticky.length > 0 &&
-                                $window.scrollTop() <= $thisSticky.data( 'originalPosition' ) -
-                                    $thisSticky.data( 'originalHeight' ) ) {
-
-                                $prevSticky.removeClass( 'absolute' ).removeAttr( 'style' );
-                            }
+                            info.el.classList.remove( 'fixed' );
                         }
                     } );
                 };
@@ -211,14 +205,13 @@ var SGB = window.SGB || {};
             // because we're responsive, we need to update the height value on the sticky headers
             window.addEventListener( 'resize', function() {
                 var stickyHeaderHelper = document.querySelector( '.js-sticky-header-helper' );
-                stickyHeaderHeight =  document.querySelector( '.js-sg-section-header' ).clientHeight;
 
-                stickyHeaderHelper.style.height = stickyHeaderHeight;
+                stickyHeaderHelper.style.height = document.querySelector( '.js-sg-section-header' ).clientHeight + 'px';
             } );
 
             // sticky headers - you can make it happen. You can make it REAL!
             $( function() {
-                stickyHeaders.load( $( '.js-sg-section-header' ) );
+                stickyHeaders.load( document.querySelectorAll( '.js-sg-section-header' ) );
             } );
 
             // recalculate the sticky headers again after we toggle one of the documentation or source buttons
