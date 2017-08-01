@@ -155,7 +155,6 @@ var SGB = window.SGB || {};
             var stickyInfo = [];
 
             var stickyHeaders = ( function() {
-                // var $window = $( window );
                 var load = function( stickies ) {
                     stickyInfo = Array.prototype.map.call( stickies, function( el ) {
                         var wrapper = document.createElement( 'div' );
@@ -282,23 +281,30 @@ var SGB = window.SGB || {};
         var current;
 
         var activeClass = 'active';
-        var activeSelector = '.' + activeClass;
 
         /*
         ** highlight active section in navigation
+        ** useful???
         */
 
-        $( document ).ready( function() {
+        Array.prototype.forEach.call( document.querySelectorAll( '.js-sg-section' ), function( section ) {
+            section.addEventListener( 'mouseenter', function( event ) {
+                var anchor = event.currentTarget.querySelector( '.js-sg-section-anchor' ),
+                    id = anchor ? anchor.id : null;
 
-            $( '.js-sg-section' ).mouseenter( function() {
-                var id = $( this ).find( '.js-sg-section-anchor' ).attr( 'id' ),
-                    navigationlinks = document.querySelector( '.js-sg-nav-link-child' );
-
-                _removeClass( navigationlinks, activeClass );
-                //_addClass( '[href=#' + id + ']', 'activeClass' );
-                $( '[href=#' + id + ']' ).addClass( activeClass );
+                Array.prototype.forEach.call( document.querySelectorAll( '[href="#' + id + '"]' ), function( link ) {
+                    link.classList.add( activeClass );
+                } );
             } );
 
+            section.addEventListener( 'mouseleave', function( event ) {
+                var anchor = event.currentTarget.querySelector( '.js-sg-section-anchor' ),
+                    id = anchor ? anchor.id : null;
+
+                Array.prototype.forEach.call( document.querySelectorAll( '[href="#' + id + '"]' ), function( link ) {
+                    link.classList.remove( activeClass );
+                } );
+            } );
         } );
 
         /*
