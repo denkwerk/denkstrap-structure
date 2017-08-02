@@ -294,6 +294,7 @@ body {
     // prevent module position fixed elements from thinking out of their box.
     position: relative; 
     padding-top: $sg-unit;
+    text-align: center;
     
     .bgcolor-1 & {
         background: $sg-section-bg-color-1;
@@ -316,6 +317,24 @@ body {
 
 iframe {
     height: 50px;
+    margin: 0 auto;
+    transition: height 0.4s ease, width 0.4s ease;
     width: 100%;
-    transition: height 0.4s ease;
+}
+
+
+.sg-refreshing-modules-modal {
+    &:before {
+        background-color: rgba($sg-white, 0.75);
+        content: 'Refreshing modules for responsive view..';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        z-index: 3000;
+    }
 }

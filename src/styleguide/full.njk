@@ -84,6 +84,41 @@
                                     </label>
                                 </form>
                             </li>
+                            <li class="sg-nav-item js-sg-nav-item">
+                                <h4 class="sg-responsive-toggle-headline">Responsive views</h4>
+                                <div class="sg-responsive-toggle-container">
+                                    <button class="sg-btn-responsive-toggle sg-btn-device-mobile js-sg-btn-responsive-toggle" data-width="320px">
+                                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <use class="sg-icon sg-device-mobile-portrait" xlink:href="#sg-device-mobile-portrait"></use>
+                                        </svg>
+                                        <span class="sg-btn-text sg-sr-only">Mobile View</span>
+                                    </button>
+                                    <button class="sg-btn-responsive-toggle sg-btn-device-tablet-portrait js-sg-btn-responsive-toggle" data-width="768px">
+                                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <use class="sg-icon sg-device-tablet-portrait" xlink:href="#sg-device-tablet-portrait"></use>
+                                        </svg>
+                                        <span class="sg-btn-text sg-sr-only">Tablet View</span>
+                                    </button>
+                                    <button class="sg-btn-responsive-toggle sg-btn-device-tablet-landscape js-sg-btn-responsive-toggle" data-width="1024px">
+                                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <use class="sg-icon sg-device-tablet-portrait" xlink:href="#sg-device-tablet-portrait"></use>
+                                        </svg>
+                                        <span class="sg-btn-text sg-sr-only">Tablet View</span>
+                                    </button>
+                                    <button class="sg-btn-responsive-toggle sg-btn-device-laptop js-sg-btn-responsive-toggle" data-width="1200px">
+                                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <use class="sg-icon sg-device-laptop" xlink:href="#sg-device-laptop"></use>
+                                        </svg>
+                                        <span class="sg-btn-text sg-sr-only">Laptop View</span>
+                                    </button>
+                                    <button class="sg-btn-responsive-toggle sg-btn-device-desktop js-sg-btn-responsive-toggle" data-width="100%">
+                                        <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <use class="sg-icon sg-device-desktop" xlink:href="#sg-device-desktop"></use>
+                                        </svg>
+                                        <span class="sg-btn-text sg-sr-only">Desktop View</span>
+                                    </button>
+                                </div>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -104,6 +139,7 @@
             {% endfor %}
 
         </main>
+
         
         {# if we host this ourselves, we can reduce this to one request b/c we would only need one file #}
         <!--[if gt IE 8]><!-->
@@ -113,7 +149,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-clike.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-javascript.min.js"></script>
         <!--<![endif]-->
-        
+                
         <script type="text/javascript" src="{{ distPath }}/styleguide/js/vendor/iframeResizer.min.js" ></script>
         <script type="text/javascript" src="{{ distPath }}/styleguide/js/sg-custom.js" ></script>
         <script type="text/javascript" src="{{ distPath }}/styleguide/js/sg-custom-fullview.js" ></script>
@@ -121,5 +157,6 @@
         {% for script in footerScripts %}
             <script type="text/javascript" src="{{ script }}"></script>
         {% endfor %}
+
     </body>
 </html>

@@ -222,3 +222,23 @@ button {
 .sg-enhanced .sg-btn-source {
     display: flex;
 }
+
+
+.sg-btn-responsive-toggle {
+    background: transparent;
+    border: 0;
+    width: 45px;
+
+    &:hover,
+    &:focus,
+    &.sg-btn-active {
+        .sg-icon {
+            fill: $sg-btn-text-color-hover;
+        }
+    }
+    
+    // adjusting the mobile icon to fit the line
+    &:first-child {
+        margin-left: -14px;
+    }
+}
