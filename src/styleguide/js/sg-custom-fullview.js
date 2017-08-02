@@ -317,36 +317,38 @@ var SGB = window.SGB || {};
             zIndexClass = 'nav-z-index';
 
         var toggleNavigationContainer = function() {
-            _toggleClass( html, 'nav-is-active' );
+             _toggleClass( html, 'nav-is-active' );
         };
 
-        var addNavigationZIndex = function() {
-            _addClass( html, 'nav-z-index' );
-        };
+        var toggleOpeningClosingClass = function() {
+            if ( _hasClass( html, 'nav-opened' ) ) {
+                _removeClass( html, 'nav-opened' );
+                _addClass( html, 'nav-closing' );
 
-        var removeNavigationZIndex = function() {
-            _removeClass( html, 'nav-z-index' );
-        };
-
-        var toggleNavigationZIndex = function( event ) {
-            if ( _hasClass( html, 'nav-z-index' ) ) {
-                removeNavigationZIndex();
-            } else {
-                //queryAll( '.sg-navigation-container' ).one( 'transitionend', function( event ) {
                 $( '.sg-navigation-container' ).one( 'transitionend', function( event ) {
-                    addNavigationZIndex();
+                    _removeClass( html, 'nav-closing' );
+                    _addClass( html, 'nav-closed' );
+                } );
+                
+            } else {
+                _removeClass( html, 'nav-closed' );
+                _addClass( html, 'nav-opening' );
+
+                $( '.sg-navigation-container' ).one( 'transitionend', function( event ) {
+                    _removeClass( html, 'nav-opening' );
+                    _addClass( html, 'nav-opened' );
                 } );
             }
         };
 
         Array.prototype.forEach.call( queryAll( '.js-sg-nav-toggle' ), function( el ) {
             el.addEventListener( 'click', toggleNavigationContainer );
-            el.addEventListener( 'click', toggleNavigationZIndex );
+            el.addEventListener( 'click', toggleOpeningClosingClass );
         } );
 
         Array.prototype.forEach.call( queryAll( '.js-sg-nav-link-child' ), function( el ) {
             el.addEventListener( 'click', toggleNavigationContainer );
-            el.addEventListener( 'click', removeNavigationZIndex );
+            el.addEventListener( 'click', toggleOpeningClosingClass );
         } );
 
         /**/

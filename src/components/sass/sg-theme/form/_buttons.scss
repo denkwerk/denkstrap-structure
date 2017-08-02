@@ -2,15 +2,13 @@
 ---------------------------------------------------------------------------- */
 
 .sg-button-container {
-    @media screen and (max-width: 768px) {
-        @include clearfix;
-        display: flex;
-        justify-content: flex-end;
-    }
 
     .sg-section-header & {
         @media screen and (max-width: 768px) {
             border-top: 1px solid $sg-content-border-color;
+            @include clearfix;
+            display: flex;
+            justify-content: flex-end;
         }
 
         @media screen and (min-width: 769px) {
@@ -227,18 +225,51 @@ button {
 .sg-btn-responsive-toggle {
     background: transparent;
     border: 0;
-    width: 45px;
+    padding: 0;
+
+    @media screen and (max-width: 768px) {
+        height: 100px;
+        width: 100px;
+    }
+
+    @media screen and (min-width: 769px) {
+        width: 45px;
+    }
+    
+    svg {
+        @media screen and (max-width: 768px) {
+            width: 60px;
+        }
+
+        @media screen and (min-width: 769px) {
+            width: 30px;
+        }
+    }
 
     &:hover,
     &:focus,
     &.sg-btn-active {
-        .sg-icon {
-            fill: $sg-btn-text-color-hover;
+        @media screen and (max-width: 768px) {
+            color: $sg-btn-text-color-mobile-hover;
+        }
+
+        @media screen and (min-width: 769px) {
+            color: $sg-btn-text-color-hover;
+        }
+        
+    }
+
+    &:after {
+        content: attr(data-width);
+        clear: both;
+        display: block;
+
+        @media screen and (max-width: 768px) {
+        }
+
+        @media screen and (min-width: 769px) {
+            font-size: 12px;
         }
     }
-    
-    // adjusting the mobile icon to fit the line
-    &:first-child {
-        margin-left: -14px;
-    }
 }
+

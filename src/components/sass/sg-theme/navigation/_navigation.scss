@@ -132,27 +132,45 @@
     bottom: 0;
     top: 0;
     transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+    visibility: hidden;
     z-index: -1;
 
-    .nav-is-active & {
-        transform: translateX(0);
-    }
-
-    .nav-z-index & {
-        z-index: 1;
-    }
-
     @media screen and (max-width: 768px) {
-        background: $sg-nav-bg-color-mobile;
         height: 100vh;
         transform: translateX(-30%);
         width: 100%;
     }
 
     @media screen and (min-width: 769px) {
-        background: $sg-nav-bg-color;
         transform: translateX(-50%);
         width: $sg-nav-width;
+    }
+
+    .nav-is-active & {
+        transform: translateX(0);
+    }
+    
+    .nav-opening &,
+    .nav-opened &,
+    .nav-closing & {
+        visibility: visible;
+
+        @media screen and (max-width: 768px) {
+            background: $sg-nav-bg-color-mobile;
+        }
+
+        @media screen and (min-width: 769px) {
+            background: $sg-nav-bg-color;
+        }
+    }
+
+    .nav-opened & {
+        z-index: 1;
+        visibility: visible;
+    }
+
+
+    .nav-z-index & {
     }
 }
 
@@ -632,12 +650,29 @@ nav {
         }
     }
 
+    .responsive-toggle-item.sg-show-item {
+        @media screen and (max-width: 667px) {
+            display: none !important;
+        }
+    }
+
     .sg-responsive-toggle-headline {
         font-weight: 400;
+        margin: ($sg-unit / 2) 0;
         padding-left: $sg-unit;
     }
 
     .sg-responsive-toggle-container {
-        padding-left: $sg-unit;
+        padding: 0 ($sg-unit / 2) 0 25px; //25px instead of 30 for visual alignment
+    }
+
+    .sg-mobile-devices {
+        margin-bottom: 10px;
+    }
+
+    .sg-desktop-devices {
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
     }
 }
