@@ -137,7 +137,7 @@
 
     @media screen and (max-width: 768px) {
         height: 100vh;
-        transform: translateX(-30%);
+        transform: translateX(-100%);
         width: 100%;
     }
 
@@ -157,20 +157,18 @@
 
         @media screen and (max-width: 768px) {
             background: $sg-nav-bg-color-mobile;
+            z-index: 1;
         }
 
         @media screen and (min-width: 769px) {
             background: $sg-nav-bg-color;
         }
     }
-
-    .nav-opened & {
-        z-index: 1;
-        visibility: visible;
-    }
-
-
-    .nav-z-index & {
+    
+    @media screen and (min-width: 769px) {
+        .nav-opened & {
+            z-index: 1;
+        }
     }
 }
 

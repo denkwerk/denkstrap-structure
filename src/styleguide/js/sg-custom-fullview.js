@@ -313,8 +313,7 @@ var SGB = window.SGB || {};
         ** and also when we click on a nav link
         */
 
-        var html = document.querySelector( 'html' ),
-            zIndexClass = 'nav-z-index';
+        var html = document.querySelector( 'html' );
 
         var toggleNavigationContainer = function() {
              _toggleClass( html, 'nav-is-active' );
@@ -511,7 +510,7 @@ var SGB = window.SGB || {};
         Array.prototype.forEach.call( queryAll( '.js-sg-btn-responsive-toggle' ), function( el ) {
             el.addEventListener( 'click', changeIframeWidth );
             el.addEventListener( 'click', toggleNavigationContainer );
-            el.addEventListener( 'click', toggleNavigationZIndex );
+            el.addEventListener( 'click', toggleOpeningClosingClass );
         } );
 
     }
