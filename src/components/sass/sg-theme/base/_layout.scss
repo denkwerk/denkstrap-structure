@@ -50,24 +50,36 @@ body {
     position: relative;
     z-index: 0;
     
-    .nav-is-active &,
-    .nav-closing & {
-        animation-duration: 0.5s; 
-        animation-iteration-count: 1;
-        animation-direction: alternate; 
-        animation-timing-function: ease-out; 
-        animation-fill-mode: forwards; 
-        animation-delay: 0s; 
-    } 
+    @media screen and (min-width: 769px) {   
+        .nav-is-active &,
+        .nav-closing & {
+            animation-duration: 0.5s; 
+            animation-iteration-count: 1;
+            animation-direction: alternate; 
+            animation-timing-function: ease-out; 
+            animation-fill-mode: forwards; 
+            animation-delay: 0s; 
+            transform: translateZ(0);
+        } 
 
-    .nav-is-active & {
-        animation-name: blur-this;
+        .nav-is-active & {
+            animation-name: blur-this;
+        }
+
+        .nav-closing & {
+            animation-name: unblur-this;
+        }
     }
-
-    .nav-closing & {
-        animation-name: unblur-this;
+    
+    // no blur for firefox b/c of performance issues
+    @media all and (min--moz-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+        .nav-is-active &,
+        .nav-closing & {
+            animation: none;
+        }
     }
 }
+
 
 .styleguide-full {
     .sg-main {
