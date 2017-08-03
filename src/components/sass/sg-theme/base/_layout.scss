@@ -25,6 +25,23 @@ body {
             
 /* Content
 ---------------------------------------------------------------------------- */
+@keyframes blur-this {
+    0% { 
+        filter: blur(0px);
+    }
+    100% { 
+        filter: blur(2px);
+    }
+}
+
+@keyframes unblur-this {
+    0% { 
+        filter: blur(2px);
+    }
+    100% { 
+        filter: blur(0px);
+    }
+}
 
 .sg-main {
     // prevent module preview content from thinking outside of the box and overlap the nav
@@ -32,6 +49,24 @@ body {
     // prevent navigation overlapping the sections
     position: relative;
     z-index: 0;
+    
+    .nav-is-active &,
+    .nav-closing & {
+        animation-duration: 0.5s; 
+        animation-iteration-count: 1;
+        animation-direction: alternate; 
+        animation-timing-function: ease-out; 
+        animation-fill-mode: forwards; 
+        animation-delay: 0s; 
+    } 
+
+    .nav-is-active & {
+        animation-name: blur-this;
+    }
+
+    .nav-closing & {
+        animation-name: unblur-this;
+    }
 }
 
 .styleguide-full {
@@ -39,6 +74,8 @@ body {
         width: 100%;
     }
 }
+
+
 
 /* -------------------------------------------------------------------------
  SG Sections
