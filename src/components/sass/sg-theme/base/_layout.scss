@@ -95,11 +95,16 @@ body {
 // Section Anchor
 
 .sg-section-anchor {
-    background: $sg-body-bg-color;
     border-bottom: 1px solid $sg-content-border-color;
-    display: block;
+    background: $sg-body-bg-color;
     height: 51px;
+    display: block;
     width: 100%;
+    
+    .styleguide-single & {
+        border: 0;
+        height: 0;
+    }
 }
 
 .sg-header-group {
