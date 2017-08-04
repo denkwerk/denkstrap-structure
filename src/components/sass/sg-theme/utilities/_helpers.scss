@@ -2,18 +2,6 @@
 /* Transform 
 ---------------------------------------------------------------------------- */
 
-/*
-@media screen and (max-width: 768px) {
-    .nav-is-active {
-        .styleguide-full {
-            .transform-this {
-                transform: translateX(100%);
-            }
-        }
-    }    
-}
-*/
-
 @media screen and (min-width: 769px) {
     .transform-this {
         transform: translateX(0);

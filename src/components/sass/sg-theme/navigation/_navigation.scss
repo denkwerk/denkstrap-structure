@@ -521,11 +521,6 @@ nav {
 
             &.sg-nav-opened {
                 background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.6);
-                
-                &:before {
-                    //padding-top: 0;
-                    //transition: padding-top 0.4s ease 0.05s;
-                }
             }
         }
     }    

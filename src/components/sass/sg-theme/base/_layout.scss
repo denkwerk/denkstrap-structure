@@ -94,21 +94,17 @@ body {
  ---------------------------------------------------------------------------- */
 
 .sg-section {
-    // fancy shit
-    /*
+    // fade sections in
     opacity: 0;
     animation: fadeIn ease 1;
     animation-duration: 1s;
     animation-fill-mode: forwards;
     will-change: opacity; 
-    */
 
     @for $i from 1 through 10 {
-        /*
         &:nth-child(#{$i}) {
             animation-delay: #{$i}00ms;
         }
-        */
     }
 }
 
