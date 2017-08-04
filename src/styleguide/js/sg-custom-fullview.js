@@ -245,7 +245,7 @@ var SGB = window.SGB || {};
         ** http://davidjbradshaw.github.io/iframe-resizer/
         */
 
-        var iframes = iFrameResize( {
+        var iframeResize = iFrameResize( {
             //hide timeout warnings
             warningTimeout: 0,
             // include pos: absolute elements and bigger elements coming in when interacting with sth
@@ -316,7 +316,7 @@ var SGB = window.SGB || {};
         var html = document.querySelector( 'html' );
 
         var toggleNavigationContainer = function() {
-             _toggleClass( html, 'nav-is-active' );
+            _toggleClass( html, 'nav-is-active' );
         };
 
         var toggleOpeningClosingClass = function() {
@@ -328,7 +328,7 @@ var SGB = window.SGB || {};
                     _removeClass( html, 'nav-closing' );
                     _addClass( html, 'nav-closed' );
                 } );
-                
+
             } else {
                 _removeClass( html, 'nav-closed' );
                 _addClass( html, 'nav-opening' );
