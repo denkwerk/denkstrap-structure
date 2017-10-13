@@ -5,8 +5,7 @@
       "ignore": ["consecutive-duplicates-with-different-values"]
     }],
     "block-no-empty": true,
-    "property-no-unknown": true,
-    "property-blacklist": ["box-sizing"],
+    "property-no-unknown": false,
     "at-rule-blacklist": ["import"],
     "selector-attribute-operator-blacklist": ["~=", "^=", "|=", "$=", "*="],
     "selector-no-universal": true,

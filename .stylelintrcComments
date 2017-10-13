@@ -19,7 +19,7 @@
     "declaration-block-no-duplicate-properties": [true, {
       "ignore": ["consecutive-duplicates-with-different-values"]
     }],
-    // verschiede Werte der selben property werden erlaubt
+    // verschiedene units der selben aufeinander folgenden property werden (fallback px/rem) erlaubt
 
 
     "empty-rules": 2,                   entspricht
@@ -39,14 +39,14 @@
 
 
     "compatible-vendor-prefixes": false, keine Entsprechung ( stand sowieso auf false )
-    // warnt falls vendor prefix fehlt -> hierf?r haben wir autoprefixer
+    // warnt falls vendor prefix fehlt -> hierfür haben wir autoprefixer
 
 
     "gradients": false,                 keine Entsprechung ( stand sowieso auf false )
-    // rule warns when one vendor-prefixed gradient is used without all of the others -> autoprefixer
+    // rule warns wenn one vendor-prefixed gradient is used without all of the others -> autoprefixer
 
 
-    //"text-indent": false,             keine Entsprechung ( stand sowieso auf false )
+    "text-indent": false,               keine Entsprechung ( stand sowieso auf false )
     // warns when a text-indent is used without the use of direction: ltr
 
 
@@ -57,22 +57,22 @@
     "fallback-colors": false,           keine Entsprechung ( stand sowieso auf false )
 
 
-    "star-property-hack": 2,            keine Entsprechung ( k?nnen wir glaube ich wegfallen lassen da wir ie7 nicht mehr supporten
+    "star-property-hack": 2,            keine Entsprechung ( können wir glaube ich wegfallen lassen da wir ie7 nicht mehr supporten
     // disallow <IE8 Hack *width: 100px;
 
 
-    "underscore-property-hack": 2,      keine Entsprechung ( k?nnen wir glaube ich wegfallen lassen da wir ie7 nicht mehr supporten
+    "underscore-property-hack": 2,      keine Entsprechung ( können wir glaube ich wegfallen lassen da wir ie7 nicht mehr supporten
     // disallow IE7 Hack _width:100px
 
 
-    //"bulletproof-font-face": false,   keine Entsprechung ( k?nnen wir glaube ich wegfallen lassen da )
+    //"bulletproof-font-face": false,   keine Entsprechung ( können wir glaube ich wegfallen lassen da )
     // requires that the first font declared is a .eot file ( 404's in old versions of IE )
 
 
     //Performance
 
-    //font-faces
-    //KEINE ENTSPRECHUNG!!! -> diese Regel wird entfernt
+    font-faces                          keine Entsprechung -> diese Regel wird entfernt
+    // Don't use too many web fonts
 
     //import
     //entspricht
