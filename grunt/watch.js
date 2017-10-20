@@ -17,9 +17,23 @@ module.exports = {
             '<%= srcPath %>**/*.scss'
         ],
         tasks: [
+            'newer:postcss:scsslint',
             'sass:development',
-            'postcss:scss',
-            'postcss:css'
+            'postcss:cssDevelopment'
+        ]
+    },
+
+    js: {
+        options: {
+            event: [ 'added', 'deleted', 'changed' ],
+            atBegin: true
+        },
+        files: [
+            '<%= srcPath %>/components/**/*.js',
+            '!<%= srcPath %>/components/**/*.spec.js'
+        ],
+        tasks: [
+            'copy:js'
         ]
     },
 

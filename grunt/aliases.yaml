@@ -2,10 +2,10 @@ development:
     description: 'Development build task'
     tasks:
         - 'clean:dist'
+        - 'postcss:scsslint'
         - 'sass:development'
-        - 'postcss:scss'
-        - 'postcss:css'
-#        - 'lint'
+        - 'postcss:cssDevelopment'
+        # - 'lint'
         - 'copy:js'
         - 'nunjuckr:development'
 
@@ -19,7 +19,7 @@ production:
     tasks:
         - 'clean:dist'
         - 'sass:production'
-        - 'postcss:autoprefixer'
+        - 'postcss:cssProduction'
         - 'requirejs:production'
         - 'nunjuckr:production'
 
@@ -31,16 +31,20 @@ prod:
 lint:
     description: 'Linting task for development'
     tasks:
+        - 'postcss:scsslint'
         - 'jshint:grunt'
         - 'jscs:grunt'
-        - 'postcss:lintscss'
-        - 'csslint:development'
         - 'jshint:frontend'
         - 'jscs:frontend'
 
 lint_ci:
     description: 'Linting task for the CI server'
     tasks:
-        - 'csslint:production'
         - 'jshint:ci'
         - 'jscs:ci'
+
+default:
+    description: 'Development'
+    tasks:
+        - 'clean:dist'
+        - 'watch'

@@ -13,7 +13,7 @@ module.exports = function( grunt, options ) {
                 mainConfigFile: '<%= srcPath %>components/app/main.js',
                 dir: '<%= distPath %>js',
 
-                fileExclusionRegExp: /\.(njs|scss|gitkeep)/,
+                fileExclusionRegExp: /\.(njs|scss|gitkeep|DS_Store)/,
 
                 findNestedDependencies: true,
                 optimizeAllPluginResources: true,
@@ -35,7 +35,7 @@ module.exports = function( grunt, options ) {
                 mainConfigFile: '<%= srcPath %>components/app/main.js',
                 dir: '<%= distPath %>js',
 
-                fileExclusionRegExp: /\.(njs|scss|gitkeep)/,
+                fileExclusionRegExp: /\.(njs|scss|gitkeep|DS_Store)/,
 
                 findNestedDependencies: true,
                 optimizeAllPluginResources: true,

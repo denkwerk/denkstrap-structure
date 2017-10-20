@@ -1,39 +1,47 @@
 {
-  "extends": "stylelint-config-standard",
+  "extends": "stylelint-config-standard", // https://github.com/stylelint/stylelint-config-standard/blob/master/index.js
   "rules": {
 
 
     // Diskussion zu dem Thema CSSLint -> Stylelint auf github: https://github.com/stylelint/stylelint/issues/1739
+    // Stylelint rules -> https://stylelint.io/user-guide/rules/
 
-    "box-model": false,
+
+    // Possible Errors -----------------------------------------
+
+
+    "box-model": false,                 keine Entsprechung ( stand sowieso auf false )
     // dies gibt eine Warnung wenn auf box padding/border gegeben und nicht "box-sizing: border-box" -> keine Entsprechung
-    // Meiner Meinung nach brauchen wir diese Regel nicht (stand ja sowieso auf false ..)
 
 
     "display-property-grouping": 2      entspricht
     "declaration-block-no-ignored-properties": true
-    // Entsprechung funktioniert laut Author nicht richtig und ist als deprecated eingestuft -> also entfernen ?!
+    // Entsprechung funktioniert laut Author nicht richtig und ist als deprecated eingestuft -> also entfernen !
 
 
-    "duplicate-properties": 2           entspricht
+    "duplicate-properties": 2           entspricht ( stylelint-config-recommended )                                     -> stylelintscssrc
     "declaration-block-no-duplicate-properties": [true, {
       "ignore": ["consecutive-duplicates-with-different-values"]
     }],
     // verschiedene units der selben aufeinander folgenden property werden (fallback px/rem) erlaubt
 
 
-    "empty-rules": 2,                   entspricht
+    "empty-rules": 2,                   entspricht ( stylelint-config-recommended )                                     -> stylelintscssrc
     "block-no-empty": true,
 
 
-    "known-properties": false           entspricht
-    "property-no-unknown": false,
+    "known-properties": false           entspricht  ( stand sowieso auf false )
+    "property-no-unknown": false,       ( stylelint-config-recommended -> true)                                         -> stylelintscssrc
 
 
-    //"adjoining-classes": false,       keine Entsprechung ( stand sowieso auf false )
+
+    // Compatibility -------------------------------------------
 
 
-    "box-sizing": false,                entspricht
+    "adjoining-classes": false,         keine Entsprechung ( stand sowieso auf false )
+
+
+    "box-sizing": false,                entspricht ( stand sowieso auf false )
     "property-blacklist": [],
     // mit dieser Regel kann man properties verbieten, brauchen wir nicht da ebenfalls auf false stand
 
@@ -57,103 +65,163 @@
     "fallback-colors": false,           keine Entsprechung ( stand sowieso auf false )
 
 
-    "star-property-hack": 2,            keine Entsprechung ( können wir glaube ich wegfallen lassen da wir ie7 nicht mehr supporten
+    "star-property-hack": 2,            keine Entsprechung ( lassen wir wegfallen )
     // disallow <IE8 Hack *width: 100px;
 
 
-    "underscore-property-hack": 2,      keine Entsprechung ( können wir glaube ich wegfallen lassen da wir ie7 nicht mehr supporten
+    "underscore-property-hack": 2,      keine Entsprechung ( lassen wir wegfallen )
     // disallow IE7 Hack _width:100px
 
 
-    //"bulletproof-font-face": false,   keine Entsprechung ( können wir glaube ich wegfallen lassen da )
-    // requires that the first font declared is a .eot file ( 404's in old versions of IE )
+    // "bulletproof-font-face": false,   keine Entsprechung ( stand sowieso auf false )
+    // können wir wegfallen lassen da wir ie 6,7,8 nicht supporten
+    // requires that the first font declared is a .eot file ( 404's in IE 6, 7, and 8 )
 
 
-    //Performance
 
-    font-faces                          keine Entsprechung -> diese Regel wird entfernt
-    // Don't use too many web fonts
+    // Performance ---------------------------------------------------
 
-    //import
-    //entspricht
-    "at-rule-blacklist": ["import"],
 
-    //regex-selectors
-    //entspricht
+    "font-faces": false,                keine Entsprechung ( stand sowieso auf false )
+    // Don't use more than 5 web fonts
+
+
+    "import": false,                    entspricht ( stand sowieso auf false )
+    "at-rule-blacklist": [""],          in stylelintscssrc wird jedoch ["debug"] gesetzt                                -> stylelintscssrc
+
+
+    "regex-selectors": false,           entspricht ( stand sowieso auf false )
     "selector-attribute-operator-blacklist": ["~=", "^=", "|=", "$=", "*="],
 
-    //universal-selector ->
-    //entspricht
-    "selector-no-universal": true,
 
-    //unqualified-attributes
-    //KEINE ENTSPRECHUNG!!!
+    "universal-selector": false,        entspricht ( stand sowieso auf false )
+    "selector-no-universal": false,
 
 
-    //zero-units
-    //entspricht
+    "unqualified-attributes": false,    keine Entsprechung ( stand sowieso auf false )
+
+
+    "zero-units": 2,                    entspricht ( stylelint-config-standard )                                        -> stylelintscssrc
     "length-zero-no-unit": true,
 
 
-    //overqualified-elements
-    //shorthand -> Ref: #1735
-    //duplicate-background-images
-    //KEINE ENTSPRECHUNGEN!!!
-
-    //"font-sizes": false, // no more than 10 different sizes
-    //KEINE ENTSPRECHUNGEN!!!
+    "overqualified-elements": 2,        keine Entsprechung ! ( lassen wir wegfallen )
+    Beispiel div.mybox
 
 
-    //"ids": false,
-    //entspricht
-    "selector-no-id": true,
-
-    //"important": false,
-    //entspricht
-    "declaration-no-important": true
-
-    // Accessibility
-    //"outline-none": false,
-
-    // OOCSS
-    //"qualified-headings": false,
-    //"unique-headings": false
-    //KEINE ENTSPRECHUNGEN!!!
+    "shorthand": 2,                     entspricht ( stylelint-config-recommended )                                     -> stylelintscssrc
+    "declaration-block-no-redundant-longhand-properties": true,
+    "ignoreShorthands": ["/regex/", "string"]   ( bestimmte Properties von dieser Regel excluden, da css lint nur padding und margin betraf )
 
 
-    "at-rule-name-space-after": "always",
-    "block-opening-brace-newline-before": "never",
-    "block-opening-brace-newline-after": "always",
-    "block-closing-brace-newline-after": "always",
-    "block-closing-brace-newline-before": "always",
-    "color-hex-length": "short",
-    "color-hex-case": "lower",
-    "color-no-invalid-hex": true,
-    "declaration-bang-space-before": "always",
-    "declaration-bang-space-after": "never",
-    "declaration-block-single-line-max-declarations": 1,
-    "declaration-block-no-shorthand-property-overrides": true,
-    "declaration-colon-space-after": "always",
-    "declaration-block-trailing-semicolon": "always",
-    "function-calc-no-unspaced-operator": true,
-    "function-comma-space-after": "always",
-    "function-url-no-scheme-relative": true,
-    "function-url-quotes": "always",
-    "indentation": 4,
-    "max-nesting-depth": 3,
-    "number-leading-zero": "always",
-    "number-no-trailing-zeros": true,
-    "property-no-vendor-prefix": true,
-    // "selector-no-id": true,
-    "selector-no-qualifying-type": true,
-    "shorthand-property-no-redundant-values": true,
-    "string-quotes": "single",
-    "selector-class-pattern": "^[a-z\\-_0-9]+$",
-    "declaration-property-value-blacklist": { "border": ["none"] },
-    // "at-rule-blacklist": ["debug"],
-    "no-missing-end-of-source-newline": true,
-    "no-duplicate-selectors": true,
-    "declaration-block-semicolon-newline-after": "always",
-    "no-extra-semicolons": true
+    "duplicate-background-images": false, keine Entsprechung ( stand sowieso auf false )
+
+
+
+    // Maintainability & Duplication -------------------------------------
+
+
+    "floats": false,                    keine Entsprechung ( stand sowieso auf false )
+    // warn when more than 10 floats, could throw error with our grid
+
+
+    "font-sizes": false,                keine Entsprechung ( stand sowieso auf false )
+    // no more than 10 different sizes
+
+
+    "ids": false,                       entspricht ( stand sowieso auf false )
+    "selector-no-id": false,
+
+
+    "important": false,                 entspricht ( stand sowieso auf false )
+    // "declaration-no-important": false  in stylelintscssrc wird jedoch true gesetzt                                   -> stylelintscssrc
+
+
+
+    // Accessibility -------------------------------------------------------
+
+
+    "outline-none": false,              keine Entsprechung ( stand sowieso auf false )
+
+
+
+    // OOCSS ---------------------------------------------------------------
+
+
+    "qualified-headings": false,        keine Entsprechung ( stand sowieso auf false )
+
+
+    "unique-headings": false            keine Entsprechung ( stand sowieso auf false )
+
+
+
+
+
+    "at-rule-name-space-after": "always",                       // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+                                                                                                              always-single-line
+
+    "block-closing-brace-newline-after": "always",              // stylistic issue,                         ( stylelint-config-standard )       -> stylelintscssrc
+
+    "block-closing-brace-newline-before": "always",             // stylistic issue, always-multi-line       ( stylelint-config-standard )       -> stylelintscssrc
+
+    "block-opening-brace-newline-before": "never",              // stylistic issue, never gibt es nicht
+
+    "block-opening-brace-newline-after": "always",              // stylistic issue, always-multi-line       ( stylelint-config-standard )       -> stylelintscssrc
+
+    "color-hex-length": "short",                                // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+
+    "color-hex-case": "lower",                                  // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+
+    "color-no-invalid-hex": true,                               // possible error                           ( stylelint-config-recommended )    -> stylelintscssrc
+
+    "declaration-bang-space-before": "always",                  // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+
+    "declaration-bang-space-after": "never",                    // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+
+    "declaration-block-no-shorthand-property-overrides": true,  // possible error                          ( stylelint-config-recommended )    -> stylelintscssrc
+
+    "declaration-block-semicolon-newline-after": "always-multi-line", // stylistic issue                    ( stylelint-config-standard )       -> stylelintscssrc
+
+    "declaration-block-single-line-max-declarations": 1,        // limit feature                            ( stylelint-config-standard )       -> stylelintscssrc
+
+    "declaration-colon-space-after": "always-single-line",      // stylistic issue                          ( stylelint-config-recommended )    -> stylelintscssrc
+
+    "declaration-block-trailing-semicolon": "always",           // limit feature                            ( stylelint-config-standard )       -> stylelintscssrc
+
+    "declaration-property-value-blacklist": { "border": ["none"] }, // limit feature                                                            -> stylelintscssrc
+
+    "function-calc-no-unspaced-operator": true,                 // possible error                           ( stylelint-config-recommended )    -> stylelintscssrc
+
+    "function-comma-space-after": "always",                     // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+                                                                                                              always-single-line
+
+    "function-url-no-scheme-relative": true,                    // limit feature                                                                -> stylelintscssrc
+
+    "function-url-quotes": "always",                            // stylistic issue                                                              -> stylelintscssrc
+
+    "indentation": 4,                                           // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+                                                                                                              2
+
+    "max-nesting-depth": 3,                                     // limit feature                                                                -> stylelintscssrc
+
+    "no-duplicate-selectors": true,                             // possible error                                                               -> stylelintscssrc
+
+    "no-extra-semicolons": true                                 // possible error                           ( stylelint-config-recommended )    -> stylelintscssrc
+
+    "no-missing-end-of-source-newline": true,                   // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+
+    "number-leading-zero": "always",                            // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+
+    "number-no-trailing-zeros": true,                           // stylistic issue                          ( stylelint-config-standard )       -> stylelintscssrc
+
+    "property-no-vendor-prefix": true,                          // limit feature                                                                -> stylelintscssrc
+
+    "selector-class-pattern": "^[a-z\\-_0-9]+$",                // limit feature                                                                -> stylelintscssrc
+
+    "selector-no-qualifying-type": true,                        // limit feature                                                                -> stylelintscssrc
+
+    "shorthand-property-no-redundant-values": true,             // possible error                           ( stylelint-config-recommended )    -> stylelintscssrc
+
+    "string-quotes": "single",                                  // stylistic issue                                                              -> stylelintscssrc
   }
 }
