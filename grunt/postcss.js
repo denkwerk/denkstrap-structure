@@ -15,7 +15,10 @@ module.exports = function( grunt, options ) {
                     require( 'stylelint' )( { configFile: '.stylelintrc' } )
                 ]
             },
-            src: [ '<%= srcPath %>components/**/*.scss' ]
+            src: [
+              '<%= srcPath %>components/**/*.scss',
+              '!<%= srcPath %>components/sass/vendor/**/*.scss'
+            ]
         },
 
         cssDevelopment: {
