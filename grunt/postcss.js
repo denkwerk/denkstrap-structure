@@ -8,25 +8,12 @@
 
 module.exports = function( grunt, options ) {
     return {
-        scsslint: {
-            options: {
-                syntax: require( 'postcss-scss' ),
-                processors: [
-                    require( 'stylelint' )( { configFile: '.stylelintrc' } )
-                ]
-            },
-            src: [
-              '<%= srcPath %>components/**/*.scss',
-              '!<%= srcPath %>components/sass/vendor/**/*.scss'
-            ]
-        },
-
         cssDevelopment: {
             options: {
                 map: true,
                 processors: [
                     require( 'autoprefixer' )( {
-                        browsers: [ 'last 2 versions', 'ie >= 8', 'Firefox >= 12', 'ios >= 7', 'android >= 4' ]
+                        browsers: [ 'last 2 versions', 'ie >= 9', 'Firefox >= 12', 'ios >= 7', 'android >= 4' ]
                     } ),
                     require( 'postcss-inline-svg' ),
                     require( 'postcss-svgo' )

@@ -1,5 +1,3 @@
-/* stylelint-disable */
-
 // Outer indent mixin
 
 @mixin indent-outer(
@@ -14,5 +12,3 @@
     // with pre configuration for outer indent
     @include indent($side, $property, $map, $negative, $offset);
 }
-
-/* stylelint-enable */

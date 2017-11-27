@@ -33,7 +33,6 @@
 ///   width: auto;
 /// }
 
-/* stylelint-disable */
 @function map-get-next($map, $key, $fallback: false, $return: value) {
 
     // Check if map is valid
@@ -84,4 +83,3 @@
     @warn 'No valid map';
     @return $fallback;
 }
-/* stylelint-enable */

@@ -17,7 +17,7 @@ module.exports = {
             '<%= srcPath %>**/*.scss'
         ],
         tasks: [
-            'newer:postcss:scsslint',
+            'newer:stylelint:scss',
             'sass:development',
             'postcss:cssDevelopment'
         ]

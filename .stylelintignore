@@ -1,0 +1,2 @@
+src/components/sass/vendor/**/*.scss
+src/components/sass/mixins/functions/map/**/*.scss
