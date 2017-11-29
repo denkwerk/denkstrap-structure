@@ -18,7 +18,7 @@ in one place.
 
 ## Structure
 
-Four our needs we split all modules into two categories. Similar to the Atomic-Design
+For our needs we split all modules into two categories. Similar to the Atomic-Design
 pattern we try to split the *modules* into seperate, reusable *patterns*. Patterns can be
 used in modules, patterns in patterns and modules in modules. Using modules within
 patterns is not allowed.
