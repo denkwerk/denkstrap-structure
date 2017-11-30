@@ -22,12 +22,22 @@ var ComponentsLoader = require( 'nunjucks' ).Loader.extend( {
 
                 var loadingSrc = '';
                 var file = files.pop();
+                var loadedBaseNames = [];
 
                 while ( file !== undefined  ) {
-                    var componentName = camelcase( file.match( /^[\w\-]+/ )[ 0 ] );
+                    var componentBaseName = camelcase( file.match( /^[\w\-]+/ )[ 0 ] );
+                    var componentName = camelcase( file.match( /([\w\-]+)\.njs$/ )[ 1 ] );
 
-                    loadingSrc += '{% import "' + componentsPath + '/' + file + '" as ' + componentName + ' %}\n';
-                    loadingSrc += '{% set ' + componentName + ' = ' + componentName + ' %}\n';
+                    if ( !~loadedBaseNames.indexOf( componentBaseName ) ) {
+                        loadedBaseNames.push( componentBaseName );
+                        loadingSrc += '{% set ' + componentBaseName + ' = {} %}\n';
+                    }
+
+                    loadingSrc += '{% import "' + componentsPath + '/' + file + '" as ' +
+                        componentBaseName + componentName + ' %}\n';
+                    loadingSrc += '{{ append(' + componentBaseName + ', "' +
+                        componentName + '", ' +
+                        componentBaseName + componentName + ') }}\n';
 
                     file = files.pop();
                 }
