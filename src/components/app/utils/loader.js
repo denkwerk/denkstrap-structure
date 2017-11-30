@@ -223,6 +223,7 @@
          * @param {Object} options.options
          * @param {Array} options.extensions
          * @param {String} options.moduleName
+         * @param {Boolean} options.hasCondition
          * @param {String} options.type
          */
         Loader.prototype.initLocalModule = function( options ) {
@@ -239,6 +240,7 @@
                 element: options.element,
                 options: options.options,
                 moduleName: options.moduleName,
+                hasCondition: options.hasCondition,
                 type: options.type
             } );
         };
@@ -254,6 +256,7 @@
          * @param {Object} options.options
          * @param {Array} options.extensions
          * @param {String} options.moduleName
+         * @param {Boolean} options.hasCondition
          * @return {Module}
          */
         Loader.prototype.initLocalClass = function( options ) {
@@ -261,7 +264,8 @@
                 options.element,
                 options.options,
                 options.moduleName,
-                this.moduleLoaded, options.type
+                !options.hasCondition ? this.moduleLoaded : undefined,
+                options.type
             );
         };
 
@@ -373,6 +377,7 @@
                         options: moduleObject.options,
                         moduleName: source,
                         extensions: extensions,
+                        hasCondition: moduleObject.condition !== null,
                         type: type
                     } );
 

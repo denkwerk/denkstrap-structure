@@ -500,6 +500,42 @@
 
             } );
 
+            it( 'should not let the pending modules counter drop below 0 when a conditional module was loaded', function( done ) {
+                var spy = sinon.spy(),
+                    fakeElement = $( '<div>' +
+                        '<div class="auto-init" data-module="test"></div>' +
+                        '<div class="auto-init" data-module="test" data-priority="true"></div>' +
+                        '<div class="auto-init" data-module="test" data-condition=\'{"test": "test"}\'></div>' +
+                    '</div>' ),
+                    fakeModule = {
+                        ready: function() {}
+                    },
+                    fakeCondition = {
+                        test: function( load, element ) {
+                            load();
+                        }
+                    };
+
+                define( 'test', fakeModule );
+
+                define( 'utils/conditions', fakeCondition );
+
+                require( [ 'utils/loader' ], function( Loader ) {
+                    var loader = new Loader( {
+                        elementScope: fakeElement,
+                        autoInit: false
+                    } );
+
+                    loader.initModules();
+
+                    setTimeout( function() {
+                        expect( loader.pendingModules.minor ).to.be.equal( 0 );
+                        expect( loader.pendingModules.major ).to.be.equal( 0 );
+                        done();
+                    }, 100);
+                } );
+            } );
+
         } );
 
     } );
