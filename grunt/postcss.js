@@ -14,9 +14,7 @@ module.exports = function( grunt, options ) {
                 processors: [
                     require( 'autoprefixer' )( {
                         browsers: [ 'last 2 versions', 'ie >= 9', 'Firefox >= 12', 'ios >= 7', 'android >= 4' ]
-                    } ),
-                    require( 'postcss-inline-svg' ),
-                    require( 'postcss-svgo' )
+                    } )
                 ]
             },
             src: [ '<%= distPath %>css/*.css' ]
@@ -28,9 +26,7 @@ module.exports = function( grunt, options ) {
                 processors: [
                     require( 'autoprefixer' )( {
                         browsers: [ 'last 2 versions', 'ie >= 8', 'Firefox >= 12', 'ios >= 7', 'android >= 4' ]
-                    } ),
-                    require( 'postcss-inline-svg' ),
-                    require( 'postcss-svgo' )
+                    } )
                 ]
             },
             src: [ '<%= distPath %>css/*.css' ]

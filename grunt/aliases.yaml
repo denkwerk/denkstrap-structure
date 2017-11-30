@@ -27,6 +27,17 @@ prod:
     tasks:
         - 'production'
 
+stylesDevelopment:
+    description: 'Build development CSS files'
+    tasks:
+        - 'sass:development'
+        - 'postcss:cssDevelopment'
+
+stylesDev:
+    description: 'Shortcut for stylesDevelopment task'
+    tasks:
+        - 'stylesDevelopment'
+
 lint:
     description: 'Linting task for development'
     tasks:
