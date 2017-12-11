@@ -67,7 +67,7 @@ Additionally you can run the `grunt lint` task to ensure all sources are bug-fre
 There are a few more Documentations:
 - [JavaScript API](docs/javascript_en.md) [[DE](docs/javascript.md)]
 - [Components structure](docs/components.md) [[DE](docs/komponenten.md)]
-- [JavaScript Testing (german)](docs/javascript-testing.md)
+- [JavaScript Testing](docs/javascript-testing_en.md) [[DE](docs/javascript-testing.md)]
 
 ## Node.js dependencies
 

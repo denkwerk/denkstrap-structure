@@ -25,7 +25,7 @@
             text:               'vendor/plugins/text',
 
             // Libraries
-            lodash:             'vendor/lodash.build',
+            lodash:             'vendor/lodash',
 
             // If it is not necessary to support IE8 its recommended to
             // use jQuery 2.X.X
@@ -66,6 +66,15 @@
 
             // Extend with global dependencies
         ], function( config ) {
+
+            // custom require.js error handling
+            require.onError = function( err ) {
+                if ( typeof config.requireError === 'function' ) {
+                    config.requireError( err );
+                } else {
+                    throw err;
+                }
+            };
 
             if ( config.dev ) {
 
