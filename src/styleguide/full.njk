@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{ title }}</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {# https://github.com/sindresorhus/github-markdown-css #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+
+        {# Style Guide Styles #}
+        <link rel="stylesheet" href="{{ webPath }}/css/sg-custom.css">
+        <!--[if lt IE 9]><link rel="stylesheet" href="{{ webPath }}/css/sg-style-old-ie.css"><![endif]-->
+
+        {# patterns & modules styles #}
+        <link rel="stylesheet" href="{{ distPath }}/css/main.css">
+
+        {# prism Syntax Highlighting Styles #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+        {% for script in headerScripts %}
+            <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+    </head>
+    <body class="styleguide-full">
+        
+        {% include "svgmap.njk" %}
+
+        <div class="sg-nav-toggle-container">
+            <button class="sg-nav-toggle-btn sg-nav-toggle js-sg-nav-toggle" title="toggle navigation">
+                <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <use class="sg-icon sg-icon-navicon" xlink:href="#sg-icon-navicon"></use>
+                    <use class="sg-icon sg-icon-close" xlink:href="#sg-icon-close"></use>
+                </svg>
+                <span class="btn-text btn-text-open">Menu</span>
+                <span class="btn-text btn-text-close">Close</span>
+            </button>
+    
+            <button class="sg-nav-toggle-btn sg-sub-nav-toggle js-sg-sub-nav-toggle" title="toggle sub-navigation">
+                <svg viewbox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <use class="sg-icon sg-icon-arrow-left" xlink:href="#sg-icon-arrow-left"></use>
+                </svg>
+                <span class="btn-text">Back</span>
+            </button>
+
+        </div>
+
+        <div class="sg-navigation-container">            
+            <nav class="sg-navigation">
+                
+                {# View Options #}
+                {% include "view-options.njk" %}
+                
+                {# Main Navigation #}
+                {% import "navigation.njk" as nav %}
+                {{ nav.navigation(navigation) }}
+                
+            </nav>
+        </div>
+
+        <main class="sg-main">
+
+            <div class="nav-toggle-helper transform-this"></div>
+
+            {% import "single.njk" as singleView %}
+            {% for element in elements %}
+                {{ singleView.render( element, webPath=webPath ~ '/' ) }}
+            {% endfor %}
+
+        </main>
+
+        
+        {# if we host this ourselves, we can reduce this to one request b/c we would only need one file #}
+        <!--[if gt IE 8]><!-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-markup.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-css.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-clike.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-javascript.min.js"></script>
+        <!--<![endif]-->
+                
+        <script type="text/javascript" src="{{ distPath }}/styleguide/js/vendor/iframeResizer.min.js" ></script>
+        <script type="text/javascript" src="{{ distPath }}/styleguide/js/sg-custom.js" ></script>
+        <script type="text/javascript" src="{{ distPath }}/styleguide/js/sg-custom-fullview.js" ></script>
+
+        {% for script in footerScripts %}
+            <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+
+    </body>
+</html>

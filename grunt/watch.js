@@ -19,7 +19,8 @@ module.exports = {
         tasks: [
             'newer:stylelint:scss',
             'sass:development',
-            'postcss:cssDevelopment'
+            'postcss:cssDevelopment',
+            'sass:styleguide'
         ]
     },
 

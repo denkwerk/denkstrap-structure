@@ -1,0 +1,275 @@
+/* Section Buttons
+---------------------------------------------------------------------------- */
+
+.sg-button-container {
+
+    .sg-section-header & {
+        @media screen and (max-width: 768px) {
+            border-top: 1px solid $sg-content-border-color;
+            @include clearfix;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        @media screen and (min-width: 769px) {
+            float: right;
+            border-left: 1px solid $sg-content-border-color;
+        }
+    }
+}
+
+.sg-btn {
+    background: $sg-btn-bg-color;
+    border: 0;
+    border-right: 1px solid $sg-content-border-color;
+    color: $sg-btn-text-color;
+    float: left;
+    font-size: 16px; // For older browsers
+    font-size: 1rem;
+    line-height: 50px;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    width: 50px;
+
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover,
+    &:focus {
+        background: $sg-btn-bg-color-hover;
+        outline: 0;
+
+        i {
+            color: $sg-btn-text-color-hover;
+        }
+    }
+
+    &:last-child {
+        border: 0;
+    }
+
+    &.sg-btn-active {
+        outline: 0;
+    }
+
+    i,
+    i:before {
+        height: 14px;
+        width: 14px;
+    }
+
+    i {
+        &:before {
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: '';
+            display: block;
+        }
+    }
+}
+
+.sg-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}
+
+.sg-btn {
+    svg {
+        width: 14px;
+    }
+
+    use,
+    path {
+        fill: $sg-btn-text-color;
+    }
+
+    &:hover,
+    &.sg-btn-active {
+        use,
+        path {
+            fill: $sg-btn-text-color-hover;
+        }
+    }
+
+    // btn show documentation
+    &.sg-btn-documentation {
+        svg {
+            width: 16px;
+        }
+    }
+
+    // btn show source code
+    &.sg-btn-source {
+        svg {
+            height: 24px;
+            margin-left: 5px;
+            width: 24px;
+        }
+
+        &.sg-btn-active {
+            svg {
+                margin-left: 0;
+            }
+        }
+    }
+
+    // btn back to top
+    &.sg-btn-top {
+        svg {
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    // btn back to full styleguide
+    &.sg-btn-back {
+        svg {
+            height: 18px;
+            width: 20px;
+        }
+    }
+
+    // btn close
+    .sg-icon-close {
+        display: none;
+    }
+
+    &.sg-btn-active {
+        .sg-icon-close {
+            display: block;
+        }
+    }
+
+    &.sg-btn-documentation.sg-btn-active {
+        .sg-icon-comment {
+            display: none;
+        }
+
+        svg {
+            height: 14px;
+            width: 14px;
+        }
+    }
+
+    &.sg-btn-source.sg-btn-active {
+        .sg-icon-code {
+            display: none;
+        }
+
+        svg {
+            height: 14px;
+            width: 14px;
+        }
+    }
+
+    // btn change bg color
+    &.sg-btn-bgcolor {
+        svg {
+            width: 16px;
+        }
+    }
+}
+
+// Safari fix for icons in buttons (weren't centered)
+button {
+    i {
+        width: 100%;
+    }
+}
+
+// we want to replace and modify some buttons depending on the view
+.styleguide-full {
+    .sg-btn-back {
+        display: none;
+    }
+
+    .sg-btn-expand {
+        @media screen and (max-width: 768px) {
+            border-left: 1px solid $sg-content-border-color;
+        }
+    }
+}
+
+.styleguide-single {
+    .sg-btn-expand,
+    .sg-btn-top {
+        display: none;
+    }
+
+    .sg-btn-back {
+        @media screen and (max-width: 768px) {
+            border-left: 1px solid $sg-content-border-color;
+        }
+    }
+
+    .sg-btn-source {
+        @media screen and (max-width: 768px) {
+            border: 0;
+        }
+    }
+}
+
+// we don't want display: block here
+.sg-enhanced .sg-btn-source {
+    display: flex;
+}
+
+
+.sg-btn-responsive-toggle {
+    background: transparent;
+    border: 0;
+    padding: 0;
+
+    @media screen and (max-width: 768px) {
+        height: 100px;
+        width: 100px;
+    }
+
+    @media screen and (min-width: 769px) {
+        width: 45px;
+    }
+    
+    svg {
+        @media screen and (max-width: 768px) {
+            width: 60px;
+        }
+
+        @media screen and (min-width: 769px) {
+            width: 30px;
+        }
+    }
+
+    &:hover,
+    &:focus,
+    &.sg-btn-active {
+        @media screen and (max-width: 768px) {
+            color: $sg-btn-text-color-mobile-hover;
+        }
+
+        @media screen and (min-width: 769px) {
+            color: $sg-btn-text-color-hover;
+        }
+        
+    }
+
+    &:after {
+        content: attr(data-width);
+        clear: both;
+        display: block;
+
+        @media screen and (max-width: 768px) {
+        }
+
+        @media screen and (min-width: 769px) {
+            font-size: 12px;
+        }
+    }
+}
+

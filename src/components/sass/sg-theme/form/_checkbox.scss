@@ -1,0 +1,71 @@
+/* Custom checkboxes
+---------------------------------------------------------------------------- */
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+
+    // label
+
+    + label {
+        position: relative;
+        padding-left: 1.95em;
+        cursor: pointer;
+    }
+
+    // checkbox default
+
+    + label:before {
+        background: $sg-white;
+        border: 1px solid $sg-grey;
+        content: '';
+        height: 16px;
+        margin-top: 2px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 16px;
+    }
+
+    // checkbox checked
+
+    + label svg {
+        color: $sg-primary-color;
+        content: '';
+        height: 14px;
+        position: absolute;
+        left: 2px;
+        top: 3px;
+        transition: all 0.2s ease;
+        width: 12px;
+    }
+
+    // checkbox disabled
+
+    &:disabled {
+        + label:before,
+        + label svg,
+        + label {
+            opacity: 0.5;
+        }
+
+        + label {
+            cursor: not-allowed;
+        }
+    }
+}
+
+[type="checkbox"]:not(:checked) {
+    + label svg {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+[type="checkbox"]:checked {
+    + label svg {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% for script in headerScripts %}
+            <script type="text/javascript" src="{{ script }}"></script>
+        {% endfor %}
+    </head>
+
+    <body class="styleguide-single">
+
+        {{ element.content | safe }}
+        
+        <script type="text/javascript" src="{{ distPath }}/styleguide/js/vendor/iframeResizer.contentWindow.min.js" ></script>
+        
+        <script>
+        // pull only main.css file from parent (full.njk) 
+        // to prevent file being loaded x times (one for each iframe)
+        // https://stackoverflow.com/questions/19858217/how-to-apply-css-to-inner-iframe-element-through-parent-window-css-class
+        window.onload = function() {
+            Array.prototype.forEach.call(window.parent.document.querySelectorAll('link[href*="main.css"]'), 
+            function(link) {
+                var newLink = document.createElement("link");
+                newLink.rel  = link.rel;
+                newLink.href = link.href;
+                document.head.appendChild(newLink);
+            });
+        };
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,671 @@
+/* -------------------------------------------------------------------------
+ Navigation Toggle
+ ---------------------------------------------------------------------------- */
+
+.sg-nav-toggle-container {
+    height: 50px;
+    position: fixed;
+    z-index: 2100;
+    width: $sg-nav-width;
+
+    .nav-is-active & {
+        @media screen and (max-width: 768px) {
+            display: flex;
+            width: 100%;
+        }
+    }
+}
+
+.sg-nav-toggle-btn {
+    background: $sg-btn-bg-color;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 16px;
+    font-size: 1rem;
+    height: 50px;
+    padding: 0 ($sg-unit / 2);
+    text-decoration: none;
+    z-index: 1100;
+    
+    svg {
+        width: 14px;
+    }
+
+    .btn-text {
+        margin-left: 5px;
+    }
+
+    &:hover,
+    &:focus {
+        color: $sg-btn-text-color-hover;
+        cursor: pointer;
+        outline: 0;
+    }
+
+    .nav-is-active & {
+        color: $sg-btn-text-color-inverted;
+
+        @media screen and (max-width: 768px) {
+            width: 50%;
+        }
+        
+        &:hover,
+        &:focus {
+            @media screen and (max-width: 768px) {
+                color: $sg-btn-text-color-mobile-hover;
+            }
+
+            @media screen and (min-width: 769px) {
+                color: $sg-btn-text-color-hover;
+            }
+        }
+    }
+}
+
+.sg-nav-toggle {
+    color: $sg-btn-text-color;
+        
+    .sg-icon-close,
+    .btn-text-close {
+        display: none;
+    }
+
+    .nav-is-active & {
+        svg {
+            width: 12px;
+        }
+
+        .sg-icon-navicon,
+        .btn-text-open {
+            display: none;
+        }
+
+        .sg-icon-close,
+        .btn-text-close {
+            display: flex;
+        }
+    }
+}
+
+.sg-sub-nav-toggle {
+    @media screen and (max-width: 768px) {
+        border-left: 1px solid rgba($sg-white, 0.2);
+        display: none;
+        
+        svg {
+            width: 16px;
+        }
+        
+        .nav-is-active.nav-lv1-is-active & {
+            display: flex;
+        }
+    }
+
+    @media screen and (min-width: 769px) {
+        display: none;
+    }
+}
+
+.nav-toggle-helper {
+    background: $sg-body-bg-color;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1200;
+
+    .nav-is-active & {
+        top: -50px;
+    }
+}
+
+/* -------------------------------------------------------------------------
+ Navigation Container
+ ---------------------------------------------------------------------------- */
+
+.sg-navigation-container {
+    overflow: hidden;
+    padding-top: 51px;
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+    visibility: hidden;
+    z-index: -1;
+
+    @media screen and (max-width: 768px) {
+        height: 100vh;
+        transform: translateX(-100%);
+        width: 100%;
+    }
+
+    @media screen and (min-width: 769px) {
+        transform: translateX(-50%);
+        width: $sg-nav-width;
+    }
+
+    .nav-is-active & {
+        transform: translateX(0);
+    }
+    
+    .nav-opening &,
+    .nav-opened &,
+    .nav-closing & {
+        visibility: visible;
+
+        @media screen and (max-width: 768px) {
+            background: $sg-nav-bg-color-mobile;
+            z-index: 1;
+        }
+
+        @media screen and (min-width: 769px) {
+            background: $sg-nav-bg-color;
+        }
+    }
+    
+    @media screen and (min-width: 769px) {
+        .nav-opened & {
+            z-index: 1;
+        }
+    }
+}
+
+.sg-navigation {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 100px;
+    width: 100%;
+
+    @media screen and (max-width: 768px) {
+        .nav-is-active & {
+            color: $sg-nav-text-color-mobile;
+        }
+    }
+
+    @media screen and (min-width: 769px) {
+        font-size: 14px;
+    }
+}
+
+/* -------------------------------------------------------------------------
+ Navigation Lists
+ ---------------------------------------------------------------------------- */
+
+/* general
+---------------------------------------------------------------------------- */
+
+nav {
+    @extend %font;
+}
+
+.sg-nav-list,
+.sg-nav-item {
+    margin: 0;
+    padding: 0;
+}
+
+// List
+
+.sg-nav-list {
+    @media screen and (max-width: 768px) {
+        color: $sg-nav-text-color-mobile;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 769px) {
+        color: $sg-nav-text-color;
+    }
+}
+
+// Item
+
+.sg-nav-item {
+    list-style: none;
+    
+    @media screen and (min-width: 769px) {
+        $navPadding: 13px;
+        
+        // pading for lv0 links
+        &.sg-nav-item-lv-0 {
+            > .sg-nav-link {
+                padding-left: $navPadding;
+            }
+        }
+
+        &.sg-nav-item-lv-1 {
+            // padding for lv1 links
+            padding-left: calc(#{$navPadding} * 2 + 6px);
+            
+            // do some magic for vull-width links
+            .sg-nav-link {
+                margin-left: -100%;
+                padding-left: 100%;
+            }
+            
+            // padding for all the other level links
+            .sg-nav-item {
+                padding-left: calc(#{$navPadding} + 6px);
+            }
+        }
+    }
+}
+
+.sg-nav-link-parent + .sg-nav-list .sg-nav-item {
+    display: none;
+}
+
+.sg-show-item {
+    display: list-item !important;
+}
+
+// Link
+
+.sg-nav-link {
+    cursor: pointer;
+    display: block;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    margin: 0;
+    padding: 0 ($sg-unit / 2) 0 0;
+    text-transform: capitalize;
+
+    @media screen and (min-width: 769px) {
+        &:hover {
+            background: $sg-nav-bg-color-parent-hover;
+            color: $sg-nav-text-color-parent-hover;
+        }
+    }
+
+    &.multiline {
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+}
+
+.sg-nav-link,
+.sg-options form {
+    @media screen and (max-width: 768px) {
+        min-height: $sg-unit * 1.5;
+    }
+
+    @media screen and (min-width: 769px) {
+        min-height: $sg-unit;
+    }
+}
+
+.sg-nav-link-child { // a tag
+    text-decoration: none;
+    font-weight: 200;
+
+    @media screen and (max-width: 768px) {
+        color: $sg-nav-text-color-link-mobile;
+    }
+
+    @media screen and (min-width: 769px) {
+        color: $sg-nav-text-color-link;
+    }
+
+    &:hover,
+    &:focus {
+        @media screen and (max-width: 768px) {
+            background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
+            color: $sg-nav-text-color-link-mobile-hover;
+        }
+
+        @media screen and (min-width: 769px) {
+            background: $sg-nav-bg-color-link-hover;
+            color: $sg-nav-text-color-link-hover;
+        }
+    }
+
+    &.active {
+        @media screen and (max-width: 768px) {
+            background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
+            color: $sg-nav-text-color-link-mobile-hover;
+        }
+
+        @media screen and (min-width: 769px) {
+            background: $sg-nav-bg-color-link-active;
+            color: $sg-nav-text-color-link-active;
+        }
+    }
+
+    &:visited {
+        @media screen and (max-width: 768px) {
+            color: $sg-nav-text-color-link-mobile;
+        }
+
+        @media screen and (min-width: 769px) {
+            color: $sg-nav-text-color-link;
+        }
+
+        &:hover,
+        &:focus {
+            @media screen and (max-width: 768px) {
+                background: rgba($sg-nav-bg-color-link-mobile-hover, 0.2);
+                color: $sg-nav-text-color-link-mobile-hover;
+            }
+
+            @media screen and (min-width: 769px) {
+                background: $sg-nav-bg-color-link-hover;
+                color: $sg-nav-text-color-link-hover;
+            }
+        }
+    }
+}
+
+// Icon
+
+.sg-nav-link {
+    @media screen and (max-width: 768px) {
+        padding-left: 13px;
+    }
+    
+    svg {
+        height: 13px;
+        width: 15px;
+    }
+
+    .sg-icon-minus {
+        display: none;
+    }
+
+    &.sg-nav-opened {
+        .sg-icon-minus {
+            display: block;
+        }
+
+        .sg-icon-plus {
+            display: none;
+        }
+    }
+
+    &.sg-nav-link-lv-0 {
+        svg {
+            margin-top: -2px;
+        }
+    }
+}
+
+// on.click h3.sg-nav-link-lv-0 js detects if .sg-nav-text is > $sg-unit (30px)
+// if yes, the container gets .multiline and we can reset the align-items: center;
+// for the icon so that it always stays on top.
+// -jLaz
+@media screen and (min-width: 769px) {
+    .multiline {
+        svg {
+            align-self: flex-start;
+            margin-top: 3px;
+        }
+    }
+}
+
+// Text
+
+.sg-nav-text {
+    line-height: 1.4;
+    display: block;
+}
+
+
+/* Lv 0 specific
+---------------------------------------------------------------------------- */
+
+.sg-nav-lv-0 {
+    @media screen and (min-width: 769px) {
+        border-top: 1px solid $sg-nav-border-color;
+    }
+    
+    &:last-child {
+        @media screen and (max-width: 768px) {
+            margin-bottom: 50px;
+        }
+    }
+}
+
+.sg-nav-item-lv-0 {
+    @media screen and (min-width: 769px) {
+        border-bottom: 1px solid $sg-nav-border-color;
+    }
+}
+
+.sg-nav-link-lv-0 {
+    font-size: 1.25em;
+    min-height: 50px;
+
+    @media screen and (max-width: 768px) {
+        background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
+        margin-bottom: 1px;
+        padding-left: 13px; // even with navigation-toggle
+        position: relative;
+        transition: background 0.4s ease;
+        width: 100%;
+            
+        &.sg-nav-opened {
+            background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.6);
+                       
+            .sg-nav-text {
+                white-space: nowrap;
+            }
+        }
+    }
+
+    &:before {
+        content: '';
+        display: block;
+
+        @media screen and (max-width: 768px) {
+            padding-top: $sg-unit * 4;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav-is-active {
+        .sg-nav-link-lv-0 {
+             svg {
+                margin-left: 0;
+                transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+            }
+        }
+    }
+
+    .nav-is-active.nav-lv1-is-active {
+        .sg-nav-link-lv-0 { 
+            svg {
+                margin-left: 20%;
+                transition: margin-left 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+            }
+        }
+    }
+}
+
+/* Lv 1 specific
+---------------------------------------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    .sg-nav-lv-1 {
+        background: $sg-nav-bg-color-mobile;
+        height: 100%;
+        position: absolute;
+        top: 51px;
+        transform: translateX(-100%);
+        transition: transform 0.5s cubic-bezier(0.75, 0.02, 0.5, 1);
+        width: 100%;
+        z-index: 1;
+        will-change: transform; 
+    }
+
+    .nav-lv1-is-active .sg-nav-link-lv-0.sg-nav-opened + .sg-nav-lv-1 {
+        transform: translateX(0);
+    }
+
+    .sg-nav-link-lv-1 {
+        margin-bottom: 1px;
+        position: relative;
+        width: 100%;
+        
+        &.sg-nav-link-parent {
+            background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
+
+            &:before {
+                content: '';
+                display: block;
+                padding-top: $sg-unit * 4;
+                transition: padding-top 0.4s ease;
+            }
+
+            &.sg-nav-opened {
+                background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.6);
+            }
+        }
+    }    
+}
+
+
+/* Lv 2 specific
+---------------------------------------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    .sg-nav-link-lv-2 {
+        &.sg-nav-link-parent {
+            background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
+            padding-left: 32px;
+
+            &:before { 
+                padding-top: 45px;
+            }
+            
+            &.sg-nav-opened {
+                background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.4);
+            }
+        }
+    }
+
+    .sg-nav-item-lv-2:not(.sg-nav-level-parent) {
+        padding-left: 19px;
+    }
+}
+
+
+/* LV 3 specific
+---------------------------------------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    .sg-nav-lv-3 {
+        padding-left: 19px;
+    }
+
+    .sg-nav-item-lv-3 {
+        padding-left: 19px;
+    }
+}
+
+
+
+
+/* Nav item spacing magic
+---------------------------------------------------------------------------- */
+
+.sg-nav-link-parent .sg-nav-text {
+    margin-left: 3px;
+}
+
+@media screen and (min-width: 769px) {
+    // margin-bottom for last li with containing li
+    .sg-nav-level-parent:last-child {
+        margin-bottom: $sg-unit / 2;
+    }
+
+    // margin-bottom for every link in the last li where there is no next level
+    .sg-nav-item:not(.sg-nav-level-parent):last-child > .sg-nav-link-child {
+        margin-bottom: $sg-unit / 2;
+    }
+    
+}
+
+// margin-top for every li that contains next levels hat follows a no-next-level li
+.sg-nav-item:not(.sg-nav-level-parent) + .sg-nav-level-parent {
+    margin-top: $sg-unit / 2;
+}
+
+
+/* -------------------------------------------------------------------------
+ Navigation Bulk Toggle options
+ ---------------------------------------------------------------------------- */
+
+.sg-options {
+    .sg-nav-link-lv-0 {
+        @media screen and (max-width: 768px) {
+            padding-left: 13px; // even with navigation-toggle
+
+            &:before {
+                padding-top: $sg-unit * 4;
+            }
+        }
+    }
+    
+    .sg-nav-lv-1 {        
+        .sg-nav-item:last-child {
+            padding-bottom: $sg-unit / 2;
+        }
+    }
+
+    form {
+        padding-left: $sg-unit;
+        
+        @media screen and (max-width: 768px) {
+            background: rgba($sg-nav-bg-color-parent-mobile-hover, 0.2);
+        }
+
+        &:before {
+            content: '';
+            display: block;
+        
+            @media screen and (max-width: 768px) {
+                padding-top: $sg-unit * 4;
+            }
+        }
+    }
+
+    form,
+    label {
+        width: 100%;
+    }
+
+    label {
+        svg {
+            margin-left: 0;
+        }
+    }
+
+    .responsive-toggle-item.sg-show-item {
+        @media screen and (max-width: 667px) {
+            display: none !important;
+        }
+    }
+
+    .sg-responsive-toggle-headline {
+        font-weight: 400;
+        margin: ($sg-unit / 2) 0;
+        padding-left: $sg-unit;
+    }
+
+    .sg-responsive-toggle-container {
+        padding: 0 ($sg-unit / 2) 0 25px; //25px instead of 30 for visual alignment
+    }
+
+    .sg-mobile-devices {
+        margin-bottom: 10px;
+    }
+
+    .sg-desktop-devices {
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+    }
+}

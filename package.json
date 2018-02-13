@@ -47,6 +47,7 @@
     "jshint": "2.8.0",
     "load-grunt-config": "0.17.2",
     "node-sass-globbing": "0.0.23",
+    "npm-dw-styleguide": "^1.4.5",
     "nunjucks": "^2.4.2",
     "postcss-scss": "^1.0.2",
     "requirejs": "2.1.20",

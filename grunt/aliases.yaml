@@ -70,3 +70,12 @@ default:
     tasks:
         - 'clean:dist'
         - 'watch'
+
+
+styleguide:
+    description: 'styleguide generation'
+    tasks:
+        - 'dev'
+        - 'dw-styleguide'
+        - 'copy:styleguide'
+        - 'sass:styleguide'

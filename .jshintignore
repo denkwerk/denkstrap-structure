@@ -1,2 +1,3 @@
 src/**/app/vendor/**/*
+src/styleguide/js/vendor/**/*
 node_modules/
