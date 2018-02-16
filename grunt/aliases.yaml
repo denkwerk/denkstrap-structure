@@ -76,6 +76,5 @@ styleguide:
     description: 'styleguide generation'
     tasks:
         - 'dev'
-        - 'dw-styleguide'
-        - 'copy:styleguide'
         - 'sass:styleguide'
+        - 'dw-styleguide'

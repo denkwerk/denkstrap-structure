@@ -13,16 +13,17 @@ module.exports = {
             '!**/*.spec.js'
         ],
         dest: '<%= distPath %>js/'
-    },
-    styleguide: {
-        expand: true,
-        cwd: '<%= srcPath %>styleguide',
-        src: [
-            '**/*.js',
-            '**/*.svg',
-            '!**/*.spec.js'
-        ],
-        dest: '<%= distPath %>styleguide/'
-    }
+    }//,
+    // org Js files from node_modules folder are taken
+    // styleguide: {
+    //     expand: true,
+    //     cwd: '<%= srcPath %>styleguide',
+    //     src: [
+    //         '**/*.js',
+    //         '**/*.svg',
+    //         '!**/*.spec.js'
+    //     ],
+    //     dest: '<%= distPath %>styleguide/'
+    // }
 
 };

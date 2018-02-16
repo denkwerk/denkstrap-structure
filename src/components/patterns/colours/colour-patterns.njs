@@ -1,3 +1,120 @@
+<!--
+never put styleguide css in your content css,
+try to use your content styles,
+or use inline styles like this.
+-->
+
+
+<style>
+    .styleguide__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .styleguide__list:after {
+        content: ' ';
+        /* 1 */
+        display: block;
+        clear: both;
+    }
+    @media screen and (min-width: 481px) {
+        .styleguide__list {
+            margin: 0 15px;
+        }
+    }
+    .styleguide__element {
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        box-sizing: border-box;
+        padding: 5px;
+    }
+    @media screen and (max-width: 480px) {
+        .styleguide__element {
+            margin: 15px;
+        }
+    }
+    @media screen and (min-width: 481px) {
+        .styleguide__element {
+            float: left;
+            min-height: 170px;
+            margin: 7.5px;
+        }
+    }
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+        .styleguide__element {
+            width: calc(50% - 7.5px);
+        }
+        .styleguide__element:nth-child(2n+1) {
+            margin-left: 0;
+        }
+        .styleguide__element:nth-child(2n+2) {
+            margin-right: 0;
+        }
+    }
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .styleguide__element {
+            width: calc(100% / 3 - 11px);
+        }
+        .styleguide__element:nth-child(3n+1) {
+            margin-left: 0;
+        }
+        .styleguide__element:nth-child(3n+3) {
+            margin-right: 0;
+        }
+    }
+    @media screen and (min-width: 1025px) and (max-width: 1299px) {
+        .styleguide__element {
+            width: calc(100% / 4 - 11.5px);
+        }
+        .styleguide__element:nth-child(4n+1) {
+            margin-left: 0;
+        }
+        .styleguide__element:nth-child(4n+4) {
+            margin-right: 0;
+        }
+    }
+    @media screen and (min-width: 1300px) {
+        .styleguide__element {
+            width: calc(100% / 6 - 12.5px);
+        }
+        .styleguide__element:nth-child(6n+1) {
+            margin-left: 0;
+        }
+        .styleguide__element:nth-child(6n+6) {
+            margin-right: 0;
+        }
+    }
+    .styleguide__colorbox {
+        border: 1px solid transparent;
+        border-radius: 2px;
+        color: #ffffff;
+        display: block;
+        height: 70px;
+    }
+    .styleguide__definition--info {
+        font-weight: 600;
+    }
+    .styleguide__definition {
+        color: #000000;
+        font-size: 14px;
+        list-style: none;
+        margin: 0.5em 0;
+        padding: 0;
+    }
+    .sg-subtitle {
+        border-bottom: 1px solid gray;
+        font-size: 1em;
+        font-weight: 400;
+        line-height: 1.4;
+        margin: 0 15px 15px;
+        padding-bottom: 5px;
+        text-transform: capitalize;
+    }
+    .sg-subtitle:not(:first-child) {
+        margin-top: 10px;
+    }
+</style>
+
 <h3 class="sg-subtitle">Main Colors</h3>
 <ul class="styleguide__list">
     <li class="styleguide__element">
@@ -20,7 +137,7 @@
         </ul>
         <ul class="styleguide__definition styleguide__definition--usage">
             <li>Desktop Nav bg</li>
-            <li>Mobile Nav active </li>
+            <li>Mobile Nav active</li>
             <li>Module Section bg</li>
         </ul>
     </li>

@@ -1,3 +1,6 @@
+// copy of node_modules/npm-dw-styleguide/sg-theme/utilities/_variables.scss
+// customize your own colors here
+
 /* Variables */
 
 $sg-white:             #fefefe;
@@ -7,10 +10,9 @@ $sg-grey:              #ddd;
 $sg-dark-grey:         #ccc;
 $sg-darker-grey:       #999;
 $sg-darkest-grey:      #444;
-$sg-black:             #333; 
+$sg-black:             #333;
 
 $sg-green:             #48c876;
-
 
 $sg-primary-color:             $sg-green;
 $sg-secondary-color:           $sg-black;
@@ -51,7 +53,6 @@ $sg-nav-text-color-link-active:            $sg-nav-text-color;
 $sg-nav-text-color-link-mobile:            $sg-nav-text-color-mobile;
 $sg-nav-text-color-link-mobile-hover:      $sg-nav-text-color-mobile;
 
-
 $sg-btn-bg-color:                   transparent;
 $sg-btn-bg-color-hover:             transparent;
 $sg-btn-text-color:                 $sg-text-color;
@@ -59,10 +60,8 @@ $sg-btn-text-color-inverted:        $sg-text-color-inverted;
 $sg-btn-text-color-hover:           $sg-primary-color;
 $sg-btn-text-color-mobile-hover:    $sg-text-color;
 
-
 $sg-unit:              30px;
 $sg-nav-width:         300px;
-
 
 $sg-section-bg-color-1: $sg-body-bg-color;
 $sg-section-bg-color-2: $sg-grey;

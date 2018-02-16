@@ -1,11 +1,12 @@
+//node_modules/npm-dw-styleguide/src/css/sg-style
+@import '../../../../node_modules/npm-dw-styleguide/src/css/sg-style/utilities/variables';
+// overwrites default variables
 @import 'utilities/variables';
-@import 'utilities/helpers';
+@import '../../../../node_modules/npm-dw-styleguide/src/css/sg-style/utilities/helpers';
+@import '../../../../node_modules/npm-dw-styleguide/src/css/sg-style/typography/typography';
+@import '../../../../node_modules/npm-dw-styleguide/src/css/sg-style/base/*';
+@import 'base/*';
+@import '../../../../node_modules/npm-dw-styleguide/src/css/sg-style/navigation/navigation';
+@import '../../../../node_modules/npm-dw-styleguide/src/css/sg-style/form/*';
+@import '../../../../node_modules/npm-dw-styleguide/src/css/sg-style/misc/*';
 
-@import 'typography/typography';
-
-@import 'base/layout';
-
-@import 'navigation/navigation';
-
-@import 'form/buttons';
-@import 'form/checkbox';

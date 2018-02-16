@@ -1,4 +1,4 @@
-// Config (variables, breakpoints, maps) 
+// Config (variables, breakpoints, maps)
 @import 'config/**/*';
 
 // Mixins
@@ -10,24 +10,8 @@
 // Helper styles
 @import 'helper/**/*';
 
-
 // Pattern styles
 @import '../patterns/**/*';
 
 // Module styles
 @import '../modules/**/*';
-
-
-.sg-subtitle {
-    border-bottom: 1px solid $sg-content-border-color;
-    font-size: 1em;
-    font-weight: 400;
-    line-height: 1.4;
-    margin: 0 15px 15px;
-    padding-bottom: 5px;
-    text-transform: capitalize;
-
-    &:not(:first-child) {
-        margin-top: $sg-unit;
-    }
-}
