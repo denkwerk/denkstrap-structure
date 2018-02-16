@@ -3,6 +3,8 @@ module.exports = function( grunt, options ) {
         styleguide: {
             options: {
                 inputPath: '<%= distPath %>tmp',
+                inputPagesPath: '<%= distPath %>pages',
+                outputPagesPath: 'pages',
                 outputPath: '<%= distPath %>styleguide',
                 docPath: '<%= srcPath %>components',
                 webPath: '/styleguide',

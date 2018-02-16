@@ -76,5 +76,6 @@ styleguide:
     description: 'styleguide generation'
     tasks:
         - 'dev'
+        - 'nunjuckr:production'
         - 'sass:styleguide'
         - 'dw-styleguide'
