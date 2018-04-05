@@ -6,8 +6,8 @@
 {% block pageTitle %}Example page{% endblock %}
 
 {% block content %}
-    page:example.html
-    <h1>This is a simple example of a nunjucks template</h1>
+    page:test/test-2.html
+    <h1>/test/test-2/ This is a simple example of a nunjucks template</h1>
 
     <p style="height: 100vh;">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum repudiandae esse dolores quos minus perspiciatis laboriosam magni ipsum, optio sed quae aliquid sequi consectetur eaque vel, est ducimus similique illum. Debitis ea dolorum temporibus doloremque ratione, nesciunt aspernatur. Velit saepe dicta ipsa minus iusto odit ex, obcaecati temporibus, sint deserunt.

@@ -43,7 +43,8 @@ module.exports = {
             '<%= srcPath %>components/**/*.njs'
         ],
         tasks: [
-            'nunjuckr:development'
+            'nunjuckr:development',
+            'dw-styleguide'
         ],
         options: {
             atBegin: true

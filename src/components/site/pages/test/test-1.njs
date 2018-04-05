@@ -6,7 +6,7 @@
 {% block pageTitle %}Example page{% endblock %}
 
 {% block content %}
-    page:example.html
+    page:test/test-1.html
     <h1>This is a simple example of a nunjucks template</h1>
 
     <p style="height: 100vh;">
