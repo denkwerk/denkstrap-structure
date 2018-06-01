@@ -500,7 +500,8 @@
 
             } );
 
-            it( 'should not let the pending modules counter drop below 0 when a conditional module was loaded', function( done ) {
+            it( 'should not let the pending modules counter drop below 0 when a conditional module was loaded',
+                function( done ) {
                 var spy = sinon.spy(),
                     fakeElement = $( '<div>' +
                         '<div class="auto-init" data-module="test"></div>' +
@@ -532,7 +533,7 @@
                         expect( loader.pendingModules.minor ).to.be.equal( 0 );
                         expect( loader.pendingModules.major ).to.be.equal( 0 );
                         done();
-                    }, 100);
+                    }, 100 );
                 } );
             } );
 
